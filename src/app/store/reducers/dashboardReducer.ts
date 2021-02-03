@@ -5,6 +5,14 @@ export interface CounterState {
     counter: number
 }
 
+export interface UserData{
+    stateUserData: any;
+}
+
+export const userDataInitialState: UserData= {
+    stateUserData: {}
+}
+
 export const initialState: CounterState= {
     counter: 0
 }
@@ -19,6 +27,14 @@ const counterReducer = createReducer(initialState, on(actions.incrementAct, stat
     })
 ))
 
+const updateUserDataReducer = createReducer(userDataInitialState, on(actions.updateUserDataAct, (state, {data}) =>({
+    stateUserData : data
+})))
+
 export function createCounterReducer(state: CounterState, action: Action){
     return counterReducer(state, action)
+}
+
+export function createUserDataStateReducer(state: UserData, action: Action){
+    return updateUserDataReducer(state, action);
 }

@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { CounterState, UserData } from '../store/reducers/dashboardReducer';
+import * as actions from '../store/actions/dashboardAction'
+import * as CounterSelector from "../store/selectors/counterSelector";
+
 
 @Component({
   selector: 'app-insurance-tiles',
@@ -7,18 +13,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InsuranceTilesComponent implements OnInit {
 
-  constructor() { }
+  userData$ : Observable<any>;  
+constructor(private store: Store<UserData>) {
 
+  this.userData$  = store.pipe(select(CounterSelector.selectUserData));
+ }
 
   ngOnInit(): void {
   }
 
   handleCardClick(){
-    console.log("Card Clicked");
+    this.userData$.subscribe((data)=>{
+      console.log("new state data : " + data);   
+    })
+   
   }
 
   calculatePremium(){
-      
+
   }
 
 }

@@ -14,7 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatBadgeModule} from '@angular/material/badge';
 import { FooterComponent } from './footer/footer.component';
-import { createCounterReducer } from './store/reducers/dashboardReducer'
+import { createCounterReducer,createUserDataStateReducer } from './store/reducers/dashboardReducer'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
@@ -44,6 +44,7 @@ import { HeaderCardsComponent } from './header-cards/header-cards.component';
     MatToolbarModule,
     MatBadgeModule,
     StoreModule.forRoot({"counterState" : createCounterReducer}),
+    StoreModule.forRoot({"userDataState" : createUserDataStateReducer}),
     StoreDevtoolsModule.instrument(),
     MatSlideToggleModule,
     MatCardModule,

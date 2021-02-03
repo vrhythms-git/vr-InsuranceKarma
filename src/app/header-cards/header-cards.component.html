@@ -36,9 +36,9 @@
             <p style="font: bold;margin-bottom: 20%;  color: #8D91A7;align-items: center;">State</p>
               
             
-            <mat-select [(value)]="selected1">
+            <mat-select placeholder="State">
           
-              <mat-option value="California">California</mat-option>
+              <!-- <mat-option value="California">California</mat-option>
               <mat-option value="New York">New York</mat-option>
               <mat-option value="Florida">Florida</mat-option>
               <mat-option value="Illinois">Illinois</mat-option>
@@ -53,8 +53,12 @@
               <mat-option value="Texas">Texas</mat-option>
               <mat-option value="Virginia">Virginia</mat-option>
             </mat-select>
-            
-        
+             -->
+         <!-- (onSelectionChange)="change($event)" -->
+             <mat-option (onSelectionChange)="handleStateChange($event)" *ngFor="let states of masterData.data" [value]="states">
+                {{ states.state }}
+              </mat-option>
+            </mat-select>
           </mat-card>
       
       </div>
@@ -65,7 +69,7 @@
             <p style="font: bold;  color: #8D91A7;margin-bottom: 20%;align-items: center;">Income</p>
               
             
-            <mat-select [(value)]="selected" style="font: bold; margin-bottom: 25px;">
+            <mat-select [(value)]="selected"  style="font: bold; margin-bottom: 25px;">
         
               <mat-option value="30k-40k">30k-40k</mat-option>
               <mat-option value="40k-50k">40k-50k</mat-option>
