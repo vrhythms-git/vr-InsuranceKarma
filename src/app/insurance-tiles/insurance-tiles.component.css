@@ -1,0 +1,59 @@
+
+
+/* .mat-slide-toggle.mat-checked
+.mat-slide-toggle-thumb{
+    background-color: blue!important;
+}
+
+
+.flex-container {background: #fff; padding: 0px 0 0 0; }
+mat-card {display: flex; flex-direction: column; justify-content: space-between;min-height: 130px; padding: 6px!important;}
+mat-card-content {margin-left: 10px; margin-bottom: 0px;}
+mat-card-subtitle {font-size: 3vh}
+mat-card-title {position: relative;}
+
+.menuicon{
+    color:blue;
+} */
+  
+
+
+
+
+.mat-slide-toggle.mat-checked
+.mat-slide-toggle-thumb{
+    background-color: blue!important;
+}
+
+
+.flex-container {background: #fff; padding: 0px 0 0 0; }
+mat-card {display: flex; flex-direction: column; justify-content: space-between;min-height: 130px; padding: 6px!important;}
+mat-card-content {margin-left: 10px; margin-bottom: 0px;}
+mat-card-subtitle {font-size: 3vh}
+mat-card-title {position: relative;}
+
+.menuicon{
+    color:blue;
+}
+p{
+    font-size: large;
+    font-weight: bold;
+}
+#homeInsurance{
+    border-left: 40px solid #5243AA;
+}
+.mat-accent .mat-slider-thumb-label {
+    background-color: lightblue;
+}
+  
+
+.Row {
+    display: table;
+    width: 100%; /*Optional*/
+    table-layout: fixed; /*Optional*/
+    border-spacing: 10px; /*Optional*/
+}
+.Column {
+    display: table-cell;
+    background-color: red; /*Optional*/
+}

@@ -1,0 +1,166 @@
+
+<div class="container-fluid">
+ 
+    <div class="row" style="justify-content:center;" style="background-color:  #ccfffd;justify-content: center;">
+      <div class="col-sm-2 col-md-2 col-lg-1 col-xl-1 " style=" margin:30px;">
+          <mat-card style="text-align: center;width: 140px;
+          height: 100px;background-color: white; "  >
+        
+            <p style="align-self: center; color: #8D91A7;align-items: center; "> Age</p>
+              
+            
+            <button style="float: right;color: #339FFB;width: 20px;background-color:white; "
+             (click)="increment()" mat-icon-button aria-label="Example icon button with a addition icon">
+        <mat-icon>addition</mat-icon>
+      </button>
+  
+      <button style="float: left;color: #339FFB;width: 20px;background-color:white;"
+       (click)="decrement()" mat-icon-button aria-label="Example icon button with a remove icon">
+        <mat-icon>remove</mat-icon>
+      </button>
+  
+  
+      <p  style="margin-top: 20%;font-size: 110%;">35-40</p>
+            
+        
+          </mat-card>
+      
+      </div>
+  
+  
+      <div class="col-sm-2 col-md-2 col-lg-1 col-xl-1  " style="margin:30px;">
+          
+          <mat-card style="text-align: center;width: 140px;
+          height: 100px; "  >
+        
+            <p style="font: bold;margin-bottom: 20%;  color: #8D91A7;align-items: center;">State</p>
+              
+            
+            <mat-select [(value)]="selected1">
+          
+              <mat-option value="California">California</mat-option>
+              <mat-option value="New York">New York</mat-option>
+              <mat-option value="Florida">Florida</mat-option>
+              <mat-option value="Illinois">Illinois</mat-option>
+              <mat-option value="Iowa">Washington</mat-option>
+              <mat-option value="Michigan">California</mat-option>
+              <mat-option value="Minnesota">Minnesota</mat-option>
+              <mat-option value="Newjursy">Newjursy</mat-option>
+              <mat-option value="Missouri">Missouri</mat-option>
+              <mat-option value="North Carolina">North Carolina</mat-option>
+              <mat-option value="Ohio">Ohio</mat-option>
+              <mat-option value="Pennsylvania">Pennsylvania</mat-option>
+              <mat-option value="Texas">Texas</mat-option>
+              <mat-option value="Virginia">Virginia</mat-option>
+            </mat-select>
+            
+        
+          </mat-card>
+      
+      </div>
+      <div class="col-sm-3 col-md-2 col-lg-1 col-xl-1  " style="margin:30px;">
+          <mat-card style="text-align: center;width: 140px;
+          height: 100px;; "  >
+        
+            <p style="font: bold;  color: #8D91A7;margin-bottom: 20%;align-items: center;">Income</p>
+              
+            
+            <mat-select [(value)]="selected" style="font: bold; margin-bottom: 25px;">
+        
+              <mat-option value="30k-40k">30k-40k</mat-option>
+              <mat-option value="40k-50k">40k-50k</mat-option>
+              <mat-option value="50k-60k">50k-60k</mat-option>
+              <mat-option value="60k-70k">60k-70k</mat-option>
+              <mat-option value="70k-80k">70k-80k</mat-option>
+              <mat-option value="80k-90k">80k-90k</mat-option>
+              <mat-option value="90k-100k">90k-100k</mat-option>
+            </mat-select>
+            
+        
+          </mat-card>
+      </div>
+      <div class="col-sm-3 col-md-2 col-lg-1 col-xl-1  " style="margin:30px;">
+        <mat-card style="text-align: center;width: 140px;
+        height: 100px;background-color: white; "  >
+      
+          <p style="align-self: center; color: #8D91A7;align-items: center; ">Dependants</p>
+            
+          
+          <button style="float: right;color: #339FFB;width: 20px;background-color:white; " (click)="increment1()"
+    mat-icon-button aria-label="Example icon button with a addition icon">
+      <mat-icon>addtion</mat-icon>
+    </button>
+  
+    <button style="float: left;color: #339FFB;width: 20px;background-color:white;" (click)="decrement1()"
+     mat-icon-button aria-label="Example icon button with a remove icon">
+      <mat-icon>remove</mat-icon>
+    </button>
+  
+  
+            
+            <p  style="margin-top: 20%;font-size: 110%;">{{counter1}}</p>
+      
+        </mat-card>
+      </div>
+      <div class="col-sm-3 col-md-2 col-lg-1 col-xl-1  " style="margin:30px;">
+          <mat-card style="text-align: center;width: 140px;
+          height: 100px;; "  >
+        
+            <p style="font: bold;margin-bottom: 20%; color: #8D91A7; align-items: center;">Status</p>
+              
+            
+            <mat-select [(value)]="selected2">
+       
+              <mat-option value="Married">Married</mat-option>
+              <mat-option value="Unmarried">Unmarried</mat-option>
+              
+            </mat-select>
+            
+        
+          </mat-card>
+      </div>
+      <div class="col-sm-3 col-md-2 col-lg-1 col-xl-1  " style="margin:30px;">
+          <mat-card style="text-align: center;width: 140px;
+          height: 100px;; "  >
+        
+            <p style="font: bold; margin-bottom: 20%; color: #8D91A7;">Occupation</p>
+              
+            
+              
+      <mat-select [(value)]="selected3">
+        
+        <mat-option value="Employed">Employed</mat-option>
+        <mat-option value="Self-Employed">Self-Employed</mat-option>
+        <mat-option value="Student">Student</mat-option>
+        <mat-option value="Retired">Retired</mat-option>
+        
+      </mat-select>
+            
+        
+          </mat-card>
+      </div>
+      <div class="col-sm-3 col-md-2 col-lg-1 col-xl-1  " style="margin:30px;">
+        <mat-card style="text-align: center;width: 140px;
+        height: 100px;background-color: white; "  >
+      
+          <p style="align-self: center; color: #8D91A7;align-items: center; ">Automobiles</p>
+            
+          
+          <button style="float: right;color: #339FFB;width: 20px;background-color:white; " (click)="increment2()"
+    mat-icon-button aria-label="Example icon button with a addition icon">
+      <mat-icon>addtion</mat-icon>
+    </button>
+  
+    <button style="float: left;color: #339FFB;width: 20px;background-color:white;" (click)="decrement2()"
+     mat-icon-button aria-label="Example icon button with a remove icon">
+      <mat-icon>remove</mat-icon>
+    </button>
+  
+  
+            
+            <p  style="margin-top: 20%;font-size: 110%;">{{counter2}}</p>
+      
+        </mat-card>
+      </div>
+    </div>
+  </div>
