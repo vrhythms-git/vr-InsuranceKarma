@@ -17,7 +17,7 @@
                     </mat-card>
                 </div> -->
 
-    <div class="row col-md-12 pt-2 pb-2" id="homeInsurance" style="background-color: white; margin: 0">
+    <div class="row col-md-12 pt-2 pb-2 homeInsurance" id="homeInsurance" style="background-color: white; margin: 0">
         <div class="col-md-5 row">
             <mat-icon class="col-1" style="margin-left: -60px; color: white;align-self: center;">home</mat-icon>
             <div class="col-md-11 ml-5">
@@ -36,32 +36,32 @@
             <div class="col-11">
                 <div class="row">
                     <span class="col-3 text-right">Dwelling </span>
-                    <mat-slider class="col-8" min="300000" max="800000" value="100000" step="100000" thumbLabel
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'Dwelling'})" min="300000" max="800000" value="100000" step="100000" thumbLabel
                         tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-3 text-right">Other Structure </span>
-                    <mat-slider class="col-8" min="30000" max="80000" value="10000" step="10000" thumbLabel
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'OtherStructure'})" min="30000" max="80000" value="10000" step="10000" thumbLabel
                         tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-3 text-right">Personal Property </span>
-                    <mat-slider class="col-8" min="210000" max="310000" value="210000" step="20000" thumbLabel
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'PersonalProperty'})" min="210000" max="310000" value="210000" step="20000" thumbLabel
                         tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-3 text-right">Loss of use </span>
-                    <mat-slider class="col-8" min="60000" max="110000" value="20000" step="10000" thumbLabel
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'LossOfUse'})" min="60000" max="110000" value="20000" step="10000" thumbLabel
                         tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-3 text-right">Personal Liability </span>
-                    <mat-slider class="col-8" min="100000" max="600000" value="100000" step="100000" thumbLabel
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'PersonalLiability'})" min="100000" max="600000" value="100000" step="100000" thumbLabel
                         tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-3 text-right">Medical </span>
-                    <mat-slider class="col-8" min="2000" max="7000" step="1000" value="2000" thumbLabel
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'Medical'})" min="2000" max="7000" step="1000" value="2000" thumbLabel
                         tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
@@ -69,12 +69,12 @@
                 </div>
             </div>
             <div class="col-1">
-                <mat-icon class="ml-auto">clear</mat-icon>
+                <button class="ml-auto" (click)="clearCard($event)" style="border:none;"><mat-icon>clear</mat-icon></button>
             </div>
         </div>
     </div>
 
-    <div id="lifeInsCardID" (click)="handleCardClick()" class="col-md flex-container m-1" fxLayout="row" style="border-left: 35px solid rgb(21, 247, 171);">
+    <div id="lifeInsurance" (click)="handleCardClick($event)" class="col-md flex-container m-1" fxLayout="row" style="border-left: 35px solid rgb(21, 247, 171);">
         <mat-card>
             <mat-icon class="ml-auto menuicon">menu</mat-icon>
             <mat-icon class="" style="margin-left: -40px; color:white;" aria-hidden="false" aria-label="Example home icon">favorite</mat-icon>
