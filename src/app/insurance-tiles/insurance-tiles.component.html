@@ -38,32 +38,33 @@
             <div class="col-11">
                 <div class="row">
                     <span class="col-3 text-right">Dwelling </span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'Dwelling'})" min="300000" max="800000" value="100000"
-                        step="100000" thumbLabel tickInterval="1"></mat-slider>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'Dwelling'})" min="{{sliderVariableValues.dwelling_min}}" max="{{sliderVariableValues.dwelling_max}}" value="{{sliderVariableValues.dwelling}}"
+                        step="{{(sliderVariableValues.personalLiability_max - sliderVariableValues.dwelling_min)/ 5 }}" thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-3 text-right">Other Structure </span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'OtherStructure'})" min="30000" max="80000" value="10000"
-                        step="10000" thumbLabel tickInterval="1"></mat-slider>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'OtherStructure'})" min="{{sliderVariableValues.otherStructure_min}}" max="{{sliderVariableValues.otherStructure_max}}" value="{{sliderVariableValues.otherStructure}}"
+                        step="{{(sliderVariableValues.otherStructure_max - sliderVariableValues.otherStructure_min) / 5}}" thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-3 text-right">Personal Property </span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'PersonalProperty'})" min="210000" max="310000" value="210000"
-                        step="20000" thumbLabel tickInterval="1"></mat-slider>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'PersonalProperty'})" min="{{sliderVariableValues.personalProperty_min}}" max="{{sliderVariableValues.personalProperty_max}}" value="{{sliderVariableValues.personalProperty}}"
+                        step="{{(sliderVariableValues.personalProperty_max - sliderVariableValues.personalProperty_min)/5}}" thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-3 text-right">Loss of use </span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'LossOfUse'})" min="60000" max="110000" value="20000" step="10000"
-                        thumbLabel tickInterval="1"></mat-slider>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'LossOfUse'})" min="{{sliderVariableValues.lossOfUse_min}}" max="{{sliderVariableValues.lossOfUse_max}}" value={{sliderVariableValues.lossOfUse}}
+                     step="{{(sliderVariableValues.lossOfUse_max - sliderVariableValues.lossOfUse_min)/5}}" thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-3 text-right">Personal Liability </span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'PersonalLiability'})" min="100000" max="600000" value="100000"
-                        step="100000" thumbLabel tickInterval="1"></mat-slider>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'PersonalLiability'})" min="{{sliderVariableValues.personalLiability_min}}" max="{{sliderVariableValues.personalLiability_max}}" value="{{sliderVariableValues.personalLiability}}"
+                        step="{{(sliderVariableValues.personalLiability_max - sliderVariableValues.personalLiability_min) / 5}}" thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-3 text-right">Medical </span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'Medical'})" min="2000" max="7000" step="1000" value="2000"
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'Medical'})" min="{{sliderVariableValues.medical_min}}" max="{{sliderVariableValues.medical_max}}" 
+                    step="{{(sliderVariableValues.medical_max - sliderVariableValues.medical_min)/5}}" value="{{sliderVariableValues.medical}}"
                         thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">

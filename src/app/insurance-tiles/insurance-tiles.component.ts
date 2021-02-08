@@ -27,7 +27,34 @@ export class InsuranceTilesComponent implements OnInit {
   hideLifeCard: boolean = true;
   showLifeCard: boolean = false;
   hideAutoCard: boolean = true;
-  showAutoCard: boolean = true;
+  showAutoCard: boolean = false;
+
+  sliderVariableValues = {
+    
+    dwelling : 100000,
+    dwelling_min: 100000,
+    dwelling_max: 500000,
+    
+    otherStructure_min:10000,
+    otherStructure:10000,
+    otherStructure_max:10000, 
+
+    personalProperty_min:210000,
+    personalProperty:210000,
+    personalProperty_max:210000,
+
+    lossOfUse_min:10000,
+    lossOfUse:10000,
+    lossOfUse_max:10000,
+
+    personalLiability_min:100000,
+    personalLiability:100000,
+    personalLiability_max:100000,
+
+    medical_min:2000,
+    medical:2000,
+    medical_max:2000
+  }
 
   constructor(private store: Store<UserData>, private ikservice: IKServices) {
 
@@ -37,6 +64,38 @@ export class InsuranceTilesComponent implements OnInit {
     this.homedivId = $(document.getElementById('homeInsurance'));
     this.lifedivId = $(document.getElementById('lifeInsurance'));
     this.autodivId = $(document.getElementById('autoInsurance'));
+
+   this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data)=>{
+
+      if(data!=undefined && data!={}){
+        //console.log("Subscription Event Occured.... with data" + JSON.stringify(data));
+        this.sliderVariableValues.dwelling_min = data.dwelling_default,
+        this.sliderVariableValues.dwelling = data.dwelling_default,
+        this.sliderVariableValues.dwelling_max = data.dwelling_default + 500000,
+
+        this.sliderVariableValues.otherStructure_min = (parseInt(data.dwelling_default) * 0.10)
+        this.sliderVariableValues.otherStructure = (parseInt(data.dwelling_default) * 0.10)
+        this.sliderVariableValues.otherStructure_max = (parseInt(data.dwelling_default) * 0.10) + 50000
+        
+        this.sliderVariableValues.personalProperty_min = (parseInt(data.dwelling_default) * 0.70)
+        this.sliderVariableValues.personalProperty = (parseInt(data.dwelling_default) * 0.70)
+        this.sliderVariableValues.personalProperty_max = (parseInt(data.dwelling_default) * 0.70) + 100000
+
+        this.sliderVariableValues.lossOfUse_min = (parseInt(data.dwelling_default) * 0.20)
+        this.sliderVariableValues.lossOfUse = (parseInt(data.dwelling_default) * 0.20)
+        this.sliderVariableValues.lossOfUse_max = (parseInt(data.dwelling_default) * 0.20) + 50000
+
+        this.sliderVariableValues.personalLiability_min = data.dwelling_default
+        this.sliderVariableValues.personalLiability = data.dwelling_default
+        this.sliderVariableValues.personalLiability_max = data.dwelling_default + 500000
+
+        this.sliderVariableValues.medical_min = 2000
+        this.sliderVariableValues.medical = 2000
+        this.sliderVariableValues.medical_max = 7000
+
+        //console.log("Calculated data is : " + JSON.stringify(this.sliderVariableValues));
+      }
+    });
 
   }
 
@@ -81,12 +140,18 @@ export class InsuranceTilesComponent implements OnInit {
 }
 
   onInputChange({ event, id }) {
-    console.log(event.value);
+    //console.log(event.value);
     if (id == "Dwelling") {
-      this.SliderData["DwellingValue"] = event.value;
+      this.SliderData["dwelling"] = event.value;
+            //this.sliderVariableValues.dwelling = data.dwelling_default,
+            this.sliderVariableValues.otherStructure = (parseInt(event.value) * 0.10) 
+            this.sliderVariableValues.personalProperty = (parseInt(event.value) * 0.70)
+            this.sliderVariableValues.lossOfUse = (parseInt(event.value) * 0.20)
+            this.sliderVariableValues.personalLiability = event.value
+            console.log("New Data is :: " + JSON.stringify(this.sliderVariableValues))
     }
     else if (id == "otherStructure") {
-      this.SliderData["OtherStructureValue"] = event.value;
+      this.SliderData["otherStructure"] = event.value;
     }
     else if (id == "PersonalProperty") {
       this.SliderData["personalProperty"] = event.value;
