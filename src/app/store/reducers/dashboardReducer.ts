@@ -5,15 +5,23 @@ export interface CounterState {
     counter: number
 }
 
-export interface UserData{
+export interface UserData {
     stateUserData: any;
 }
 
-export const userDataInitialState: UserData= {
+export interface CalculatedPremium {
+    newPremiumData: any;
+}
+
+export const userDataInitialState: UserData = {
     stateUserData: {}
 }
 
-export const initialState: CounterState= {
+export const CalculatedPremiumInitialState: CalculatedPremium = {
+    newPremiumData: 0
+}
+
+export const initialState: CounterState = {
     counter: 0
 }
 
@@ -23,18 +31,37 @@ const counterReducer = createReducer(initialState, on(actions.incrementAct, stat
 })),
     on(actions.decrementAct, state => ({
         ...state,
-        counter : state.counter - 1
+        counter: state.counter - 1
     })
-))
+    ))
 
-const updateUserDataReducer = createReducer(userDataInitialState, on(actions.updateUserDataAct, (state, {data}) =>({
-    stateUserData : data
-})))
+const updateUserDataReducer = createReducer(userDataInitialState,
+    on(actions.updateUserDataAct, (state,  {data} ) => temp(state, data)),
+)
 
-export function createCounterReducer(state: CounterState, action: Action){
+function temp(state, data){
+
+    console.log("state is :" + JSON.stringify(data))
+    return ({
+        stateUserData: data
+    })
+}
+
+const updateNewPremiumDataReducer = createReducer(CalculatedPremiumInitialState,
+    on(actions.newPremiumDataAct, (state, { newPremiumData }) => ({
+        // ...state,
+        newPremiumData: newPremiumData
+    }))
+    )
+
+export function createCounterReducer(state: CounterState, action: Action) {
     return counterReducer(state, action)
 }
 
-export function createUserDataStateReducer(state: UserData, action: Action){
+export function createUserDataStateReducer(state: UserData, action: Action) {
     return updateUserDataReducer(state, action);
+}
+
+export function createNewPremiumDataStateReducer(state: CalculatedPremium, action: Action) {
+    return updateNewPremiumDataReducer(state, action);
 }

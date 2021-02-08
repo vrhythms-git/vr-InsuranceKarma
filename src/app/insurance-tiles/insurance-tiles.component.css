@@ -30,13 +30,16 @@ mat-card-title {position: relative;}
 .menuicon{
     color:blue;
 }
+span{
+    margin-top: 2%;
+}
 p{
     font-size: large;
     font-weight: bold;
 }
-#homeInsurance{
+/* #homeInsurance{
     border-left: 40px solid #5243AA;
-}
+} */
 .mat-accent .mat-slider-thumb-label {
     background-color: lightblue;
 }

@@ -6,6 +6,25 @@ import * as actions from '../store/actions/dashboardAction'
 import * as CounterSelector from "../store/selectors/counterSelector";
 import { IKServices } from "../services/app.service"
 
+
+
+
+interface Occupation {
+  value: string;
+  viewValue: string;
+}
+
+interface Status {
+  value: string;
+  viewValue: string;
+}
+
+interface Income {
+  value: string;
+  viewValue: string;
+}
+
+
 @Component({
   selector: 'app-header-cards',
   templateUrl: './header-cards.component.html',
@@ -15,11 +34,16 @@ export class HeaderCardsComponent implements OnInit {
 
 userData$ : Observable<any>;  
 constructor(private store: Store<UserData>, private services: IKServices) {
-
-  this.userData$  = store.pipe(select(CounterSelector.selectUserData));
  }
 
+ keyPress(event: any) {
+  const pattern = /[0-9\+\-\ ]/;
 
+  let inputChar = String.fromCharCode(event.charCode);
+  if (event.keyCode != 5 && !pattern.test(inputChar)) {
+    event.preventDefault();
+  }
+}
 
 masterData:any = {}
 
@@ -34,44 +58,121 @@ this.services.getMasterData().subscribe((data) =>{
 
   }
 
+prevValue = ""; 
+
   handleStateChange(event){
-     // let value = event.source.value; 
-      this.store.dispatch(actions.updateUserDataAct({data: event.source.value}));
+
+    if(event.isUserInput == false) return;
+    let payloadToDispatch = {data: event.source.value}
+    this.store.dispatch(actions.updateUserDataAct(payloadToDispatch));
+      
   }
 
-  selected1 = 'New York';
-  selected = '60k-70k';
-  selected2 = 'Married';
-  selected3 = 'Service'
+  age = [
+    {name: '16-25' },
+    {name: '26-35' },
+    {name: '35-45'},
+    {name: '45-55'},
+    {name: '55-65'}
+];
+  
+dependents = [
+  {name: '1' },
+  {name: '2' },
+  {name: '3'},
+  {name: '4'},
+  {name: '5'}
+];
 
-  public counter : number = 1;
-  public counter1 : number = 1;
-  public counter2 : number = 1;
-    increment(){
+
+automobile=[
+  {value: '1' },
+  {value: '2' },
+  {value: '3'},
+  {value: '4'},
+  {value: '5'}
+];
+
+
+Occupations: Occupation[] = [
+  {value: '0', viewValue: 'Employed'},
+  {value: '1', viewValue: 'Self-Employed'},
+  {value: '2', viewValue: 'Student'},
+  {value: '3', viewValue: 'Retired'}
+];
+
+selectedOccupation = this.Occupations[0].value;
+
+
+Stat: Status[] = [
+  {value: '0', viewValue: 'Married'},
+  {value: '1', viewValue: 'UnMarried'},
+  
+];
+selectedStatus= this.Stat[0].value;
+
+Incomes: Income[] = [
+  {value: '0', viewValue: '30k-40k'},
+  {value: '1', viewValue: '41k-50k'},
+  {value: '2', viewValue: '51k-60k'},
+  {value: '3', viewValue: '61k-70k'},
+  {value: '4', viewValue: '71k-80k'},
+  {value: '5', viewValue: '81k-90k'}
+];
+selectedIncome = this.Incomes[0].value;
+
+
+  public counter : number = 0;
+  public counter1 : number = 0;
+  public counter2 : number = 0;
+    ageincrement(){
       this.counter += 1;
+      if(this.counter>=this.age.length)
+      {
+        this.counter = 0;
+      }
+     
+
     }
     
-    decrement(){
+    agedecrement(){
+      if(this.counter==0){
+        this.counter=5;
+      }
       this.counter -= 1;
     }
 
 
-    increment1(){
+    depedentincrement(){
       this.counter1 += 1;
+      if(this.counter1==this.dependents.length)
+      {
+        this.counter1 = 0 ;
+      }
+      
     }
     
-    decrement1(){
+    depedentdecrement(){
+      if(this.counter1==0){
+        this.counter1=5;
+      }
       this.counter1 -= 1;
     }
 
-    increment2(){
+    automobileincrement(){
       this.counter2 += 1;
+      if(this.counter2>=this. automobile.length)
+      {
+        this.counter2 = 0 ;
+      }
     }
     
-    decrement2(){
+    automobiledecrement(){
+      if(this.counter2==0){
+        this.counter2=5;
+      }
       this.counter2 -= 1;
     }
 
-    
     
 }

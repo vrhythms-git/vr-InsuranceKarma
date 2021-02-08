@@ -27,15 +27,16 @@ export class IKServices {
         return this.http.get(`${this._baseUrl}/getMasterData`);
     }
 
-    getBrowseCategoeries() {
-        console.log(`calling getBrowseCategoeries()`)
-        let headerObj = new HttpHeaders({
-            'Authorization': localStorage.getItem('cormUserTokenId')!,
-            'Content-Type': 'application/json'
-        });
-        return this.http.get(`${this._baseUrl}/browseCategories`, { headers: headerObj });
-    }
 
+    postInsuranceData(payloadJson: any){
+        console.log('postInsuranceData() called.')
+
+        let headerObj = new HttpHeaders({
+            'Content-Type' : 'application/json'
+          });
+    
+        return this.http.post<any>(`${this._baseUrl}/getPremium`, payloadJson,{ headers: headerObj });
+    }
 
     // createUser(data:any): Observable<IUser[]> {
 

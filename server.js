@@ -54,10 +54,13 @@ app.get('/getMasterData', function (req, res) {
 
 
 app.post('/getPremium',function(req, res){
-    console.log("getMasterData called with data " + JSON.stringify(req.data));
+    console.log("getPremium called with data " + JSON.stringify(req.body));
     try {
-        
+        dbConnection.calculatePremium(req.body).then((data)=>{
+            res.send(data);
+            res.end();
+        })
     } catch (error) {
-        
+        console.log('Error in getPremium as : ' + error)
     }    
 });
