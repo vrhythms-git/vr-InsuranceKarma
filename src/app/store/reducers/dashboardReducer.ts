@@ -6,7 +6,7 @@ export interface CounterState {
 }
 
 export interface UserData {
-    stateUserData: any;
+    data: any;
 }
 
 export interface CalculatedPremium {
@@ -14,7 +14,7 @@ export interface CalculatedPremium {
 }
 
 export const userDataInitialState: UserData = {
-    stateUserData: {}
+    data: {}
 }
 
 export const CalculatedPremiumInitialState: CalculatedPremium = {
@@ -36,16 +36,17 @@ const counterReducer = createReducer(initialState, on(actions.incrementAct, stat
     ))
 
 const updateUserDataReducer = createReducer(userDataInitialState,
-    on(actions.updateUserDataAct, (state,  {data} ) => temp(state, data)),
+    on(actions.updateUserDataAct, (state,  {data} ) => ({
+        ...state,
+        data: data
+    })),
 )
 
-function temp(state, data){
+// function temp(state, data){
 
-    console.log("state is :" + JSON.stringify(data))
-    return ({
-        stateUserData: data
-    })
-}
+//     //console.log("state is :" + JSON.stringify(data))
+   
+// }
 
 const updateNewPremiumDataReducer = createReducer(CalculatedPremiumInitialState,
     on(actions.newPremiumDataAct, (state, { newPremiumData }) => ({

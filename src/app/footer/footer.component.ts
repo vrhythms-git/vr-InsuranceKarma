@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { CalculatedPremium } from '../store/reducers/dashboardReducer';
+import { CalculatedPremium, UserData } from '../store/reducers/dashboardReducer';
 import * as selectors from "../store/selectors/counterSelector";
 
 @Component({
@@ -12,12 +12,27 @@ import * as selectors from "../store/selectors/counterSelector";
 export class FooterComponent implements OnInit {
 
   newPremiumData$: Observable<any>;
-  constructor(private store: Store<CalculatedPremium>) {
+  constructor(private store: Store<UserData>) {
 
-    this.newPremiumData$ = store.pipe(select(selectors.selectNewPremiumData));
-   }
 
-  ngOnInit(): void {
+
   }
+  newPremium = 0;
+  ngOnInit(): void {
 
+    setInterval(()=>{
+    let subscribed = this.store.pipe(select(selectors.selectUserData)).subscribe((data) => {
+     // console.log('New Premium Data from ngrx in footer is ' + JSON.stringify(data))
+      if (data != undefined && data != {}) {
+        try{
+        this.newPremium = data.calculatedPremium.data.newPremium;
+      }catch(e){
+
+      }finally{
+       // subscribed.unsubscribe()
+      }
+      }
+    })
+  },500)
+  }
 }

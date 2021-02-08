@@ -5,7 +5,6 @@ import { CounterState, UserData } from '../store/reducers/dashboardReducer';
 import * as actions from '../store/actions/dashboardAction'
 import * as CounterSelector from "../store/selectors/counterSelector";
 import { IKServices } from "../services/app.service";
-//declare var $: any;
 import * as $ from "jquery";
 
 
@@ -104,15 +103,7 @@ export class InsuranceTilesComponent implements OnInit {
   }
 
   calculatePremium() {
-    //this.InsuranceData = ({type:this.insuranceType,sliderData:this.SliderData});
-    // console.log("insurance data: " + JSON.stringify(this.InsuranceData))
-
-      //this.userData$ = 
-    //   this.userData$.subscribe((data) => {
-    //   console.log("new state data : " + JSON.stringify(data));
-    // })
-
-    this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data)=>{
+    let subscription =  this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data)=>{
 
       console.log("Data is :" + JSON.stringify(data))
 
@@ -120,7 +111,7 @@ export class InsuranceTilesComponent implements OnInit {
       let payloadJSON = {
         data: {
           'insuranceType': 'home',
-          'premium': 370,
+          'premium': data.Premium,
           'insuranceData': this.SliderData
         }
       }
@@ -131,7 +122,9 @@ export class InsuranceTilesComponent implements OnInit {
         let newState = JSON.parse(JSON.stringify(data)) 
         newState.calculatedPremium = res
         console.log('Calculated premium new state is: ' + JSON.stringify(newState))
-        this.store.dispatch(actions.updateUserDataAct(newState));
+        this.store.dispatch(actions.updateUserDataAct({data : newState}));
+       // this.footer.populateUI()
+        subscription.unsubscribe();
       });
     }
 

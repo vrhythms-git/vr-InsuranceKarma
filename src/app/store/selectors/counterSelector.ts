@@ -7,7 +7,7 @@ export const selectCounter = createSelector(selectCounterState, (counterState: C
 
 
 export const selectUserDataState = createFeatureSelector('userDataState');
-export const selectUserData = createSelector(selectUserDataState, (userDataState: UserData) => userDataState.stateUserData);
+export const selectUserData = createSelector(selectUserDataState, (userDataState: UserData) => userDataState.data);
 
 export const selectNewPremiumState = createFeatureSelector('newPremiumState');
 export const selectNewPremiumData = createSelector(selectNewPremiumState, (newPremiumState: CalculatedPremium) => newPremiumState.newPremiumData);

@@ -1,11 +1,11 @@
-<div class="container-fluid p-1 row flex-md-row hidden-md-up" fxFlexAlign="stretch" style="margin:0">
+<div class="container-fluid p-1 row flex-md-row" fxFlexAlign="stretch" style="margin:0;">
 
     <!-- ******************** Home Insurance ********************* -->
-    <div class="col-md flex-container m-1" fxLayout="row">
+    <div class="col-md flex-container mt-1 ml-2 mr-2" fxLayout="row">
         <div [hidden]="showHomeCard" id="homeInsurance" (click)="handleCardClick($event)" style="border-left: 40px solid cyan;">
             <mat-card>
                 <mat-icon class="ml-auto menuicon">menu</mat-icon>
-                <mat-icon style="margin-left: -40px; color:white;" aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+                <mat-icon style="margin-left: -33px; color:white;" aria-hidden="false" aria-label="Example home icon">home</mat-icon>
                 <mat-card-header>
                     <mat-card-subtitle>Home Insurance</mat-card-subtitle>
                     <mat-card-title>Coverage:$300,000</mat-card-title>
@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <div class="col-md-12 row p-2" id="homeInsurance" [hidden]="hideHomeCard" style="background-color: white;margin:0;border-left: 40px solid cyan;">
+    <div class="col-md-12 row p-2 m-2" id="homeInsurance" [hidden]="hideHomeCard" style="background-color: white;margin:0;border-left: 40px solid cyan;">
         <div class="col-md-5 row">
             <mat-icon class="col-1" style="margin-left: -55px; color: white;align-self: center;">home</mat-icon>
             <div class="col-md-11 ml-5">
@@ -79,11 +79,11 @@
     </div>
 
     <!-- **************************** Life Insurance **************************  -->
-    <div class="col-md flex-container m-1" fxLayout="row">
+    <div class="col-md flex-container mt-1 ml-2 mr-2" fxLayout="row">
         <div [hidden]="showLifeCard" id="lifeInsurance" (click)="handleCardClick($event)" style="border-left: 40px solid #5243AA;">
             <mat-card>
                 <mat-icon class="ml-auto menuicon">menu</mat-icon>
-                <mat-icon class="" style="margin-left: -40px; color:white;" aria-hidden="false" aria-label="Example home icon">favorite</mat-icon>
+                <mat-icon class="" style="margin-left: -33px; color:white;" aria-hidden="false" aria-label="Example home icon">favorite</mat-icon>
                 <mat-card-header>
                     <mat-card-subtitle>Life Insurance</mat-card-subtitle>
                     <mat-card-title>Coverage:$250,000</mat-card-title>
@@ -96,7 +96,7 @@
             </mat-card>
         </div>
     </div>
-    <div class="col-md-12 row p-2" id="lifeInsurance" [hidden]="hideLifeCard" style="background-color: white;margin:0;border-left: 40px solid #5243AA;">
+    <div class="col-md-12 row p-2 m-2" id="lifeInsurance" [hidden]="hideLifeCard" style="background-color: white;margin:0;border-left: 40px solid #5243AA;">
         <div class="col-md-5 row">
             <mat-icon class="col-1" style="margin-left: -55px; color: white;align-self: center;">favorite</mat-icon>
             <div class="col-md-11 ml-5">
@@ -151,11 +151,11 @@
     </div>
 
     <!-- **************************** Auto Insurance ********************** -->
-    <div class="col-md flex-container m-1" fxLayout="row">
-        <div [hidden]="showAutoCard" id="autoInsurance" (click)="handleCardClick($event)" style="border-left: 40px solid orange;">
+    <div class="col-md flex-container mt-1 ml-2 mr-2" fxLayout="row">
+        <div [hidden]="showHomeCard" id="autoInsurance" (click)="handleCardClick($event)" style="border-left: 40px solid orange;">
             <mat-card>
                 <mat-icon class="ml-auto menuicon">menu</mat-icon>
-                <mat-icon style="margin-left: -40px; color:white;" aria-hidden="false" aria-label="Example home icon">directions_car</mat-icon>
+                <mat-icon style="margin-left: -33px; color:white;" aria-hidden="false" aria-label="Example home icon">directions_car</mat-icon>
                 <mat-card-header>
                     <mat-card-subtitle>Car Insurance</mat-card-subtitle>
                     <mat-card-title>Coverage:$300,000</mat-card-title>
@@ -168,7 +168,7 @@
             </mat-card>
         </div>
     </div>
-    <div class="col-md-12 row p-2" id="autoInsurance" [hidden]="hideAutoCard" style="background-color: white;margin:0;border-left: 40px solid orange;">
+    <div class="col-md-12 row p-2 m-2" id="autoInsurance" [hidden]="hideAutoCard" style="background-color: white;margin:0;border-left: 40px solid orange;">
         <div class="col-md-5 row">
             <mat-icon class="col-1" style="margin-left: -55px; color: white;align-self: center;">directions_car</mat-icon>
             <div class="col-md-11 ml-5">
@@ -226,10 +226,10 @@
 <!-- ******************* Disabled Cards ************************** -->
 
 <div class="row p-1" style="margin:0; pointer-events: none;opacity: 0.6; ">
-    <div class="col-md flex-container m-1" fxLayout="row" style="border-left: 35px solid green;">
+    <div class="col-md flex-container mt-1 ml-2 mr-2" fxLayout="row" style="border-left: 40px solid green;">
         <mat-card>
             <mat-icon class="ml-auto menuicon">menu</mat-icon>
-            <mat-icon class="" style="margin-left: -40px; color:white;" aria-hidden="false" aria-label="Example home icon">pets</mat-icon>
+            <mat-icon class="" style="margin-left: -33px; color:white;" aria-hidden="false" aria-label="Example home icon">pets</mat-icon>
             <mat-card-header>
                 <mat-card-subtitle>Pet Insurance</mat-card-subtitle>
                 <mat-card-title>Coverage:$5,000</mat-card-title>
@@ -242,10 +242,10 @@
         </mat-card>
     </div>
 
-    <div class="col-md col-sm-4 flex-container m-1" fxLayout="row" fxFlexAlign="stretch" style="border-left: 35px solid rgb(253, 164, 179);flex: 1">
+    <div class="col-md col-sm-4 flex-container mt-1 ml-2 mr-2" fxLayout="row" fxFlexAlign="stretch" style="border-left: 40px solid rgb(253, 164, 179);flex: 1">
         <mat-card>
             <mat-icon class="ml-auto menuicon">menu</mat-icon>
-            <mat-icon class="" style="margin-left: -40px; color:white;" aria-hidden="false" aria-label="Example home icon">directions_boat</mat-icon>
+            <mat-icon class="" style="margin-left: -33px; color:white;" aria-hidden="false" aria-label="Example home icon">directions_boat</mat-icon>
             <mat-card-header>
                 <mat-card-subtitle>Boat Insurance</mat-card-subtitle>
                 <mat-card-title>Coverage:$50,000</mat-card-title>
@@ -257,10 +257,10 @@
             <mat-slide-toggle class="ml-auto"></mat-slide-toggle>
         </mat-card>
     </div>
-    <div class="col-md col-sm-4 flex-container m-1" fxLayout="row" fxFlexAlign="stretch" style="border-left: 35px solid grey;">
+    <div class="col-md col-sm-4 flex-container mt-1 ml-2 mr-2" fxLayout="row" fxFlexAlign="stretch" style="border-left: 40px solid grey;">
         <mat-card>
             <mat-icon class="ml-auto menuicon">menu</mat-icon>
-            <mat-icon class="" style="margin-left: -40px; color:white;" aria-hidden="false" aria-label="Example home icon">school</mat-icon>
+            <mat-icon class="" style="margin-left: -33px; color:white;" aria-hidden="false" aria-label="Example home icon">school</mat-icon>
             <mat-card-header>
                 <mat-card-subtitle>Education</mat-card-subtitle>
                 <mat-card-title>Coverage:$50,000</mat-card-title>
