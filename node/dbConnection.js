@@ -21,17 +21,28 @@ async function getInsuraceMasterData() {
         }
         var dbo = db.db("IK_DB");
         var query = {};
+        let response = {}
         dbo.collection("ik_home_ins_master_data").find(query).toArray(function (err, result) {
           if (err) {
             resolve(queryExecuionFailedErrorJSON);
           }
+          response.states = result;
+          db.close();
+        });
+        dbo.collection("ik_life_ins_master_data").find(query).toArray(function (err, result) {
+          if (err) {
+            resolve(queryExecuionFailedErrorJSON);
+          }
+          response.age = result;
+
           resolve({
             status: "success",
-            data: result
+            data: response
           })
 
           db.close();
         });
+
       });
 
     } catch (error) {
@@ -61,7 +72,7 @@ async function calculatePremium(inputJson) {
 
               //console.log(JSON.stringify(result));
               let resJson = {}; 
-                resJson.newPremium = premiumCalculation.calculatePremium(inputJson, result); 
+                resJson.newPremium = premiumCalculation.calculateHomePremium(inputJson, result); 
                 //Scenario 1
                 
                 resJson.insight = "Good chances of claim settlement";
@@ -85,6 +96,30 @@ async function calculatePremium(inputJson) {
               db.close();
             });
           });
+        }
+        case "life": {
+          MongoClient.connect(url, function (err, db) {
+            if (err) reject(queryExecuionFailedErrorJSON);
+            var dbo = db.db("IK_DB");
+            var query = { product: inputJson.data.insuranceType };
+            console.log("Executing query:" + JSON.stringify(query))
+            dbo.collection("ik_parameter_data").find(query).toArray(function (err, result) {
+              if (err) {
+                resolve(queryExecuionFailedErrorJSON);
+              }
+
+              let resJson = {}; 
+                resJson.newPremium = premiumCalculation.calculateLifePremium(inputJson, result); 
+
+              resolve({
+                status: "success",
+                data: resJson
+              })
+
+              db.close();
+            });
+          });
+
         }
       }
 

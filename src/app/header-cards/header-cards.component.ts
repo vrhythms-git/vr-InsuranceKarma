@@ -47,7 +47,7 @@ export class HeaderCardsComponent implements OnInit {
       let currZip = parseInt(($('#zipCodeInputField').val()))
       console.log('User input zip code is:' + currZip);
       if(currZip < 99999 && currZip > 10000){
-      var stateData = this.masterData.data.filter((item) => {
+      var stateData = this.masterData.data.states.filter((item) => {
         return currZip >= item.zipcode_min && currZip <= item.zipcode_max
       })
       if (stateData.length == 0)
@@ -68,7 +68,7 @@ export class HeaderCardsComponent implements OnInit {
     console.log("In ngOnInit of header-cards.component.")
     this.services.getMasterData().subscribe((data) => {
       if (data["status"] == "success") {
-        this.masterData = data;
+        this.masterData = data["states"];
       }
     })
 
