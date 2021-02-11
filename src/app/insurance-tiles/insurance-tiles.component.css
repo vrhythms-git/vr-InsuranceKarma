@@ -21,10 +21,10 @@ mat-slide-toggle-thumb{
 
 
 .flex-container {background: #fff; padding: 0px 0 0 0; }
-mat-card {display: flex; flex-direction: column; justify-content: space-between;min-height: 130px; padding: 4px!important;}
-mat-card-content {margin-left: 10px; margin-bottom: 0px;margin-top: -5px;}
-mat-card-subtitle {font-size: 3vh; margin-bottom: 6px;margin-top: -10px}
-mat-card-title {position: relative; margin-bottom: 0px}
+mat-card {display: flex; flex-direction: column; justify-content: space-between; padding: 4px!important;}
+mat-card-content {margin-left: 10px; margin-bottom: 0px;margin-top: -5px;color:white}
+mat-card-subtitle {font-size: 3vh; margin-bottom: 6px;margin-top: -28%}
+mat-card-title {position: relative; margin-bottom: 0px;color:white}
 
 .menuicon{
     color:blue;
@@ -38,6 +38,7 @@ span{
 p{
     font-size: large;
     font-weight: bold;
+    color:white;
 }
 /* #homeInsurance{
     border-left: 40px solid #5243AA;
@@ -45,7 +46,10 @@ p{
 .mat-accent .mat-slider-thumb-label {
     background-color: lightblue;
 }
-  
+.mat-card {
+    font-family: poppins;
+    border-radius: 0%;
+}
 .Row {
     display: table;
     width: 100%; /*Optional*/

@@ -1,11 +1,96 @@
-<div class="container-fluid p-1 row flex-md-row" fxFlexAlign="stretch" style="margin:0;">
+<div class="container">
+<div class="row">
+    <!-- **************************** Life Insurance **************************  -->
+    
+    <div class="col-md flex-container mt-1 ml-2 mr-2" fxLayout="row">
+        <div [hidden]="showLifeCard" id="lifeInsurance" (click)="handleCardClick($event)" style="border-left: 40px solid #37BC9B ;">
+            <mat-card style="background-color: #48CFAD; box-shadow: none;">
+                <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
+                <mat-icon class="" style="margin-left: -37px; color:white;margin-top: 15%" aria-hidden="false" aria-label="Example home icon">favorite</mat-icon>
+                <mat-card-header>
+                    <mat-card-subtitle>Life Insurance</mat-card-subtitle>
+                    <mat-card-title>Coverage:$250,000</mat-card-title>
+                    <mat-card-title>Premium:$3,200</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    --no change
+                </mat-card-content>
+                <mat-slide-toggle class="ml-auto"></mat-slide-toggle>
+            </mat-card>
+        </div>
+    </div>
+    <div class="col-md-12 row m-2" id="lifeInsurance" [hidden]="hideLifeCard" style="background-color: white;margin:0;border-left: 40px solid #37BC9B;">
+        <div class="col-md-5 row">
+            <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">favorite</mat-icon>
+            <div class="col-md-11 ml-1" style="background-color: #48CFAD">
+                <h2 style="color: grey;">Life Insurance</h2>
+                <span>OLD</span>
+                <p>Coverage: $50,000</p>
+                <p>Premium: $3,200</p>
+                <span>NEW</span>
+                <p>Coverage: $50,000</p>
+                <p>Premium: $3,200</p>
+                <span class="pl-5">--no change</span>
+                <h5 style="color:red">REMOVE COVERAGE >></h5>
+            </div>
+        </div>
+        <div class="col-md-7 row ml-4">
+            <div class="col-11">
+                <div class="row">
+                    <span class="col-3 text-right">Death Benefit</span>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'DeathBenefit', type:'life'})" min="250000" max="1000000" value="250000"
+                        step="250000" thumbLabel tickInterval="1"></mat-slider>
+                </div>
+                <div class="row">
+                    <span class="col-3 text-right">Current Debit</span>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'CurrentDebit',type:'life'})" min="180000" max="240000" value="180000"
+                        step="10000" thumbLabel tickInterval="1"></mat-slider>
+                </div>
+                <div class="row">
+                    <span class="col-3 text-right">Child Education Fund</span>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'ChildEducationFund',type:'life'})" min="10000" max="50000" value="10000"
+                        step="10000" thumbLabel tickInterval="1"></mat-slider>
+                </div>
+                <div class="row">
+                    <span class="col-3 text-right">Funeral Spend </span>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'funeralSpend',type:'life'})" min="250" max="2500" value="250"
+                        step="500" thumbLabel tickInterval="1"></mat-slider>
+                </div>
+                <div class="row">
+                    <span class="col-3 text-right">Retirement Age </span>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'RetirementAge',type:'life'})" min="10" max="50" value="10"
+                        step="5" thumbLabel tickInterval="1"></mat-slider>
+                </div>
+                <div class="row">
+                    <span class="col-3 text-right">Annual Income </span>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'AnnualIncome',type:'life'})" min="10000" max="50000"
+                        value="10000" step="5000" thumbLabel tickInterval="1"></mat-slider>
+                </div>
+
+                <div class="row">
+                    <span class="col-3 text-right">Replacement Income </span>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'ReplacementIncome',type:'life'})" min="1" max="5" value="1"
+                        step="1" thumbLabel tickInterval="1"></mat-slider>
+                </div>
+
+                <div class="row">
+                    <button class="btn btn-info ml-auto mr-5" (click)="calculatePremium()">Calculate Premium</button>
+                </div>
+            </div>
+            <div class="col-1">
+                <button class="ml-auto" (click)="closecard()" style="border:none;background-color: white">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- ******************** Home Insurance ********************* -->
     <div class="col-md flex-container mt-1 ml-2 mr-2" fxLayout="row">
-        <div [hidden]="showHomeCard" id="homeInsurance" (click)="handleCardClick($event)" style="border-left: 40px solid cyan;">
-            <mat-card>
-                <mat-icon class="ml-auto menuicon">menu</mat-icon>
-                <mat-icon style="margin-left: -33px; color:white;" aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+        <div [hidden]="showHomeCard" id="homeInsurance" (click)="handleCardClick($event)" style="border-left: 40px solid #4A89DC;">
+            <mat-card style="background-color: #5D9CEC; box-shadow:none;">
+                <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
+                <mat-icon style="margin-left: -33px; color:white;margin-top: 15%" aria-hidden="false" aria-label="Example home icon">home</mat-icon>
                 <mat-card-header>
                     <mat-card-subtitle>Home Insurance</mat-card-subtitle>
                     <mat-card-title>Coverage:$300,000</mat-card-title>
@@ -19,10 +104,10 @@
         </div>
     </div>
 
-    <div class="col-md-12 row p-2 m-2" id="homeInsurance" [hidden]="hideHomeCard" style="background-color: white;margin:0;border-left: 40px solid cyan;">
+    <div class="col-md-12 row m-2" id="homeInsurance" [hidden]="hideHomeCard" style="background-color: white;margin:0;border-left: 40px solid #4A89DC;">
         <div class="col-md-5 row">
-            <mat-icon class="col-1" style="margin-left: -55px; color: white;align-self: center;">home</mat-icon>
-            <div class="col-md-11 ml-5">
+            <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">home</mat-icon>
+            <div class="col-md-11 ml-1" style="background-color:#5D9CEC ">
                 <h2 style="color: grey;">Home Owners</h2>
                 <span>OLD</span>
                 <p>Coverage: $300,000</p>
@@ -38,36 +123,43 @@
             <div class="col-11">
                 <div class="row">
                     <span class="col-3 text-right">Dwelling </span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'Dwelling'})" min="{{sliderVariableValues.dwelling_min}}" max="{{sliderVariableValues.dwelling_max}}" value="{{sliderVariableValues.dwelling}}"
-                        step="{{(sliderVariableValues.personalLiability_max - sliderVariableValues.dwelling_min)/ 5 }}" thumbLabel tickInterval="1"></mat-slider>
-                </div>
-                <div class="row">
-                    <span class="col-3 text-right">Other Structure </span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'OtherStructure'})" min="{{sliderVariableValues.otherStructure_min}}" max="{{sliderVariableValues.otherStructure_max}}" value="{{sliderVariableValues.otherStructure}}"
-                        step="{{(sliderVariableValues.otherStructure_max - sliderVariableValues.otherStructure_min) / 5}}" thumbLabel tickInterval="1"></mat-slider>
-                </div>
-                <div class="row">
-                    <span class="col-3 text-right">Personal Property </span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'PersonalProperty'})" min="{{sliderVariableValues.personalProperty_min}}" max="{{sliderVariableValues.personalProperty_max}}" value="{{sliderVariableValues.personalProperty}}"
-                        step="{{(sliderVariableValues.personalProperty_max - sliderVariableValues.personalProperty_min)/5}}" thumbLabel tickInterval="1"></mat-slider>
-                </div>
-                <div class="row">
-                    <span class="col-3 text-right">Loss of use </span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'LossOfUse'})" min="{{sliderVariableValues.lossOfUse_min}}" max="{{sliderVariableValues.lossOfUse_max}}" value={{sliderVariableValues.lossOfUse}}
-                     step="{{(sliderVariableValues.lossOfUse_max - sliderVariableValues.lossOfUse_min)/5}}" thumbLabel tickInterval="1"></mat-slider>
-                </div>
-                <div class="row">
-                    <span class="col-3 text-right">Personal Liability </span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'PersonalLiability'})" min="{{sliderVariableValues.personalLiability_min}}" max="{{sliderVariableValues.personalLiability_max}}" value="{{sliderVariableValues.personalLiability}}"
-                        step="{{(sliderVariableValues.personalLiability_max - sliderVariableValues.personalLiability_min) / 5}}" thumbLabel tickInterval="1"></mat-slider>
-                </div>
-                <div class="row">
-                    <span class="col-3 text-right">Medical </span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'Medical'})" min="{{sliderVariableValues.medical_min}}" max="{{sliderVariableValues.medical_max}}" 
-                    step="{{(sliderVariableValues.medical_max - sliderVariableValues.medical_min)/5}}" value="{{sliderVariableValues.medical}}"
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'Dwelling',type:'home'})" min="{{sliderVariableValues.dwelling_min}}"
+                        max="{{sliderVariableValues.dwelling_max}}" value="{{sliderVariableValues.dwelling}}" step="{{(sliderVariableValues.personalLiability_max - sliderVariableValues.dwelling_min)/ 5 }}"
                         thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
+                    <span class="col-3 text-right">Other Structure </span>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'OtherStructure',type:'home'})" min="{{sliderVariableValues.otherStructure_min}}"
+                        max="{{sliderVariableValues.otherStructure_max}}" value="{{sliderVariableValues.otherStructure}}" step="{{(sliderVariableValues.otherStructure_max - sliderVariableValues.otherStructure_min) / 5}}"
+                        thumbLabel tickInterval="1"></mat-slider>
+                </div>
+                <div class="row">
+                    <span class="col-3 text-right">Personal Property </span>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'PersonalProperty',type:'home'})" min="{{sliderVariableValues.personalProperty_min}}"
+                        max="{{sliderVariableValues.personalProperty_max}}" value="{{sliderVariableValues.personalProperty}}"
+                        step="{{(sliderVariableValues.personalProperty_max - sliderVariableValues.personalProperty_min)/5}}"
+                        thumbLabel tickInterval="1"></mat-slider>
+                </div>
+                <div class="row">
+                    <span class="col-3 text-right">Loss of use </span>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'LossOfUse',type:'home'})" min="{{sliderVariableValues.lossOfUse_min}}"
+                        max="{{sliderVariableValues.lossOfUse_max}}" value={{sliderVariableValues.lossOfUse}} step="{{(sliderVariableValues.lossOfUse_max - sliderVariableValues.lossOfUse_min)/5}}"
+                        thumbLabel tickInterval="1"></mat-slider>
+                </div>
+                <div class="row">
+                    <span class="col-3 text-right">Personal Liability </span>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'PersonalLiability',type:'home'})" min="{{sliderVariableValues.personalLiability_min}}"
+                        max="{{sliderVariableValues.personalLiability_max}}" value="{{sliderVariableValues.personalLiability}}"
+                        step="{{(sliderVariableValues.personalLiability_max - sliderVariableValues.personalLiability_min) / 5}}"
+                        thumbLabel tickInterval="1"></mat-slider>
+                </div>
+                <div class="row">
+                    <span class="col-3 text-right">Medical </span>
+                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'Medical',type:'home'})" min="{{sliderVariableValues.medical_min}}"
+                        max="{{sliderVariableValues.medical_max}}" step="{{(sliderVariableValues.medical_max - sliderVariableValues.medical_min)/5}}"
+                        value="{{sliderVariableValues.medical}}" thumbLabel tickInterval="1"></mat-slider>
+                </div>
+                <div class="row">
                     <button class="btn btn-info ml-auto mr-5" (click)="calculatePremium()">Calculate Premium</button>
                 </div>
             </div>
@@ -79,86 +171,15 @@
         </div>
     </div>
 
-    <!-- **************************** Life Insurance **************************  -->
-    <div class="col-md flex-container mt-1 ml-2 mr-2" fxLayout="row">
-        <div [hidden]="showLifeCard" id="lifeInsurance" (click)="handleCardClick($event)" style="border-left: 40px solid #5243AA;">
-            <mat-card>
-                <mat-icon class="ml-auto menuicon">menu</mat-icon>
-                <mat-icon class="" style="margin-left: -33px; color:white;" aria-hidden="false" aria-label="Example home icon">favorite</mat-icon>
-                <mat-card-header>
-                    <mat-card-subtitle>Life Insurance</mat-card-subtitle>
-                    <mat-card-title>Coverage:$250,000</mat-card-title>
-                    <mat-card-title>Premium:$3,200</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    --no change
-                </mat-card-content>
-                <mat-slide-toggle class="ml-auto"></mat-slide-toggle>
-            </mat-card>
-        </div>
-    </div>
-    <div class="col-md-12 row p-2 m-2" id="lifeInsurance" [hidden]="hideLifeCard" style="background-color: white;margin:0;border-left: 40px solid #5243AA;">
-        <div class="col-md-5 row">
-            <mat-icon class="col-1" style="margin-left: -55px; color: white;align-self: center;">favorite</mat-icon>
-            <div class="col-md-11 ml-5">
-                <h2 style="color: grey;">Life Insurance</h2>
-                <span>OLD</span>
-                <p>Coverage: $50,000</p>
-                <p>Premium: $3,200</p>
-                <span>NEW</span>
-                <p>Coverage: $50,000</p>
-                <p>Premium: $3,200</p>
-                <span class="pl-5">--no change</span>
-                <h5 style="color:red">REMOVE COVERAGE >></h5>
-            </div>
-        </div>
-        <div class="col-md-7 row ml-4">
-            <div class="col-11">
-                <div class="row">
-                    <span class="col-3 text-right">Bodily Injury Liability</span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'BodilyInjuryLability'})" min="300000" max="800000" value="100000"
-                        step="100000" thumbLabel tickInterval="1"></mat-slider>
-                </div>
-                <div class="row">
-                    <span class="col-3 text-right">Property Damage Liability</span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'PropertyDamageLiability'})" min="30000" max="80000" value="10000"
-                        step="10000" thumbLabel tickInterval="1"></mat-slider>
-                </div>
-                <div class="row">
-                    <span class="col-3 text-right">Comprehensive And Collision </span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'ComprehensiveAndCollision'})" min="210000" max="310000"
-                        value="210000" step="20000" thumbLabel tickInterval="1"></mat-slider>
-                </div>
-                <div class="row">
-                    <span class="col-3 text-right">Personal Injury Protection </span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'PersonalInjuryProtection'})" min="60000" max="110000"
-                        value="20000" step="10000" thumbLabel tickInterval="1"></mat-slider>
-                </div>
-                <div class="row">
-                    <span class="col-3 text-right">Uninsured/Underinsured Motorist </span>
-                    <mat-slider class="col-8" (input)="onInputChange({event:$event,id:'Uninsured/UnderinsuredMotorist'})" min="100000" max="600000"
-                        value="100000" step="100000" thumbLabel tickInterval="1"></mat-slider>
-                </div>
-                <div class="row">
-                    <button class="btn btn-info ml-auto mr-5" (click)="calculatePremium()">Calculate Premium</button>
-                </div>
-            </div>
-            <div class="col-1">
-                <button class="ml-auto" (click)="closecard()" style="border:none;background-color: white">
-                    <mat-icon>close</mat-icon>
-                </button>
-            </div>
-        </div>
-    </div>
 
     <!-- **************************** Auto Insurance ********************** -->
     <div class="col-md flex-container mt-1 ml-2 mr-2" fxLayout="row">
-        <div [hidden]="showAutoCard" id="autoInsurance" (click)="handleCardClick($event)" style="border-left: 40px solid orange;">
-            <mat-card>
-                <mat-icon class="ml-auto menuicon">menu</mat-icon>
-                <mat-icon style="margin-left: -33px; color:white;" aria-hidden="false" aria-label="Example home icon">directions_car</mat-icon>
+        <div [hidden]="showAutoCard" id="autoInsurance" (click)="handleCardClick($event)" style="border-left: 40px solid #FCBB42;">
+            <mat-card style="background-color: #FFCE54; box-shadow:none;">
+                <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
+                <mat-icon style="margin-left: -33px; color:white;margin-top: 15%" aria-hidden="false" aria-label="Example home icon">directions_car</mat-icon>
                 <mat-card-header>
-                    <mat-card-subtitle>Car Insurance</mat-card-subtitle>
+                    <mat-card-subtitle>Auto Insurance</mat-card-subtitle>
                     <mat-card-title>Coverage:$300,000</mat-card-title>
                     <mat-card-title>Premium:$1,100</mat-card-title>
                 </mat-card-header>
@@ -169,10 +190,10 @@
             </mat-card>
         </div>
     </div>
-    <div class="col-md-12 row p-2 m-2" id="autoInsurance" [hidden]="hideAutoCard" style="background-color: white;margin:0;border-left: 40px solid orange;">
+    <div class="col-md-12 row m-2" id="autoInsurance" [hidden]="hideAutoCard" style="background-color: white;margin:0;border-left: 40px solid #FCBB42;">
         <div class="col-md-5 row">
-            <mat-icon class="col-1" style="margin-left: -55px; color: white;align-self: center;">directions_car</mat-icon>
-            <div class="col-md-11 ml-5">
+            <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">directions_car</mat-icon>
+            <div class="col-md-11 ml-1" style="background-color:#FFCE54">
                 <h2 style="color: grey;">Auto Insurance</h2>
                 <span>OLD</span>
                 <p>Coverage: $50,000</p>
@@ -226,11 +247,11 @@
 
 <!-- ******************* Disabled Cards ************************** -->
 
-<div class="row p-1" style="margin:0; pointer-events: none;opacity: 0.6; ">
-    <div class="col-md flex-container mt-1 ml-2 mr-2" fxLayout="row" style="border-left: 40px solid green;">
-        <mat-card>
-            <mat-icon class="ml-auto menuicon">menu</mat-icon>
-            <mat-icon class="" style="margin-left: -33px; color:white;" aria-hidden="false" aria-label="Example home icon">pets</mat-icon>
+<div class="row" style=" opacity: 0.5; ">
+    <div class="col-md flex-container mt-1 ml-2 mr-2" fxLayout="row" style="border-left: 40px solid #8CC152;">
+        <mat-card style="background-color: #A0D468; box-shadow:none;">
+            <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
+            <mat-icon class="" style="margin-left: -33px; color:white;margin-top: 15%" aria-hidden="false" aria-label="Example home icon">pets</mat-icon>
             <mat-card-header>
                 <mat-card-subtitle>Pet Insurance</mat-card-subtitle>
                 <mat-card-title>Coverage:$5,000</mat-card-title>
@@ -243,10 +264,10 @@
         </mat-card>
     </div>
 
-    <div class="col-md col-sm-4 flex-container mt-1 ml-2 mr-2" fxLayout="row" fxFlexAlign="stretch" style="border-left: 40px solid rgb(253, 164, 179);flex: 1">
-        <mat-card>
-            <mat-icon class="ml-auto menuicon">menu</mat-icon>
-            <mat-icon class="" style="margin-left: -33px; color:white;" aria-hidden="false" aria-label="Example home icon">directions_boat</mat-icon>
+    <div class="col-md col-sm-4 flex-container mt-1 ml-2 mr-2" fxLayout="row" fxFlexAlign="stretch" style="border-left: 40px solid #3BAFDA;flex: 1">
+        <mat-card style="background-color: #4FC1E9; box-shadow:none;">
+            <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
+            <mat-icon class="" style="margin-left: -33px; color:white;margin-top: 15%" aria-hidden="false" aria-label="Example home icon">directions_boat</mat-icon>
             <mat-card-header>
                 <mat-card-subtitle>Boat Insurance</mat-card-subtitle>
                 <mat-card-title>Coverage:$50,000</mat-card-title>
@@ -258,12 +279,12 @@
             <mat-slide-toggle class="ml-auto"></mat-slide-toggle>
         </mat-card>
     </div>
-    <div class="col-md col-sm-4 flex-container mt-1 ml-2 mr-2" fxLayout="row" fxFlexAlign="stretch" style="border-left: 40px solid grey;">
-        <mat-card>
-            <mat-icon class="ml-auto menuicon">menu</mat-icon>
-            <mat-icon class="" style="margin-left: -33px; color:white;" aria-hidden="false" aria-label="Example home icon">school</mat-icon>
+    <div class="col-md col-sm-4 flex-container mt-1 ml-2 mr-2" fxLayout="row" fxFlexAlign="stretch" style="border-left: 40px solid #967ADC;">
+        <mat-card style="background-color: #AC92EC; box-shadow:none;">
+            <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
+            <mat-icon class="" style="margin-left: -33px; color:white;margin-top: 15%" aria-hidden="false" aria-label="Example home icon">vpn_keys</mat-icon>
             <mat-card-header>
-                <mat-card-subtitle>Education</mat-card-subtitle>
+                <mat-card-subtitle>Renters Insurance</mat-card-subtitle>
                 <mat-card-title>Coverage:$50,000</mat-card-title>
                 <mat-card-title>Premium:$1,300</mat-card-title>
             </mat-card-header>
@@ -273,6 +294,6 @@
             <mat-slide-toggle class="ml-auto"></mat-slide-toggle>
         </mat-card>
     </div>
-    <!-- </div> -->
+    </div>
 
 </div>

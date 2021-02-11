@@ -68,7 +68,7 @@ export class HeaderCardsComponent implements OnInit {
     console.log("In ngOnInit of header-cards.component.")
     this.services.getMasterData().subscribe((data) => {
       if (data["status"] == "success") {
-        this.masterData = data["states"];
+        this.masterData = data;
       }
     })
 

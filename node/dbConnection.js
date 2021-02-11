@@ -71,21 +71,21 @@ async function calculatePremium(inputJson) {
               }
 
               //console.log(JSON.stringify(result));
-              let resJson = {}; 
-                resJson.newPremium = premiumCalculation.calculateHomePremium(inputJson, result); 
-                //Scenario 1
-                
-                resJson.insight = "Good chances of claim settlement";
-                resJson.risk = "Low"
+              let resJson = {};
+              resJson.newPremium = premiumCalculation.calculateHomePremium(inputJson, result);
+              //Scenario 1
 
-                if(inputJson.data.insuranceData.personalLiability > inputJson.data.insuranceData.dwelling){
-                  resJson.insight = "Personal Property is much higher than actual dwelling cost. Low chances of claim settlement";
-                  resJson.risk = "High"
-                }
+              resJson.insight = "Good chances of claim settlement";
+              resJson.risk = "Low"
 
-                
-                //Scenario 2
-             //   if(inputJson.data.insuranceData.dwelling)
+              if (inputJson.data.insuranceData.personalLiability > inputJson.data.insuranceData.dwelling) {
+                resJson.insight = "Personal Property is much higher than actual dwelling cost. Low chances of claim settlement";
+                resJson.risk = "High"
+              }
+
+
+              //Scenario 2
+              //   if(inputJson.data.insuranceData.dwelling)
 
 
               resolve({
@@ -96,6 +96,7 @@ async function calculatePremium(inputJson) {
               db.close();
             });
           });
+          break;
         }
         case "life": {
           MongoClient.connect(url, function (err, db) {
@@ -108,8 +109,8 @@ async function calculatePremium(inputJson) {
                 resolve(queryExecuionFailedErrorJSON);
               }
 
-              let resJson = {}; 
-                resJson.newPremium = premiumCalculation.calculateLifePremium(inputJson, result); 
+              let resJson = {};
+              resJson.newPremium = premiumCalculation.calculateLifePremium(inputJson, result);
 
               resolve({
                 status: "success",
@@ -119,7 +120,7 @@ async function calculatePremium(inputJson) {
               db.close();
             });
           });
-
+          break;
         }
       }
 

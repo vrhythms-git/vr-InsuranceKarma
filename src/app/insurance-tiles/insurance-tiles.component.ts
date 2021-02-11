@@ -30,30 +30,30 @@ export class InsuranceTilesComponent implements OnInit {
   showAutoCard: boolean = false;
 
   sliderVariableValues = {
-    
-    dwelling : 100000,
+
+    dwelling: 100000,
     dwelling_min: 100000,
     dwelling_max: 500000,
-    
-    otherStructure_min:10000,
-    otherStructure:10000,
-    otherStructure_max:10000, 
 
-    personalProperty_min:210000,
-    personalProperty:210000,
-    personalProperty_max:210000,
+    otherStructure_min: 10000,
+    otherStructure: 10000,
+    otherStructure_max: 10000,
 
-    lossOfUse_min:10000,
-    lossOfUse:10000,
-    lossOfUse_max:10000,
+    personalProperty_min: 210000,
+    personalProperty: 210000,
+    personalProperty_max: 210000,
 
-    personalLiability_min:100000,
-    personalLiability:100000,
-    personalLiability_max:100000,
+    lossOfUse_min: 10000,
+    lossOfUse: 10000,
+    lossOfUse_max: 10000,
 
-    medical_min:2000,
-    medical:2000,
-    medical_max:2000
+    personalLiability_min: 100000,
+    personalLiability: 100000,
+    personalLiability_max: 100000,
+
+    medical_min: 2000,
+    medical: 2000,
+    medical_max: 2000
   }
 
   constructor(private store: Store<UserData>, private ikservice: IKServices) {
@@ -65,18 +65,18 @@ export class InsuranceTilesComponent implements OnInit {
     this.lifedivId = $(document.getElementById('lifeInsurance'));
     this.autodivId = $(document.getElementById('autoInsurance'));
 
-   this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data)=>{
+    this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
 
-      if(data!=undefined && data!={}){
+      if (data != undefined && data != {}) {
         //console.log("Subscription Event Occured.... with data" + JSON.stringify(data));
         this.sliderVariableValues.dwelling_min = data.dwelling_default,
-        this.sliderVariableValues.dwelling = data.dwelling_default,
-        this.sliderVariableValues.dwelling_max = data.dwelling_default + 500000,
+          this.sliderVariableValues.dwelling = data.dwelling_default,
+          this.sliderVariableValues.dwelling_max = data.dwelling_default + 500000,
 
-        this.sliderVariableValues.otherStructure_min = (parseInt(data.dwelling_default) * 0.10)
+          this.sliderVariableValues.otherStructure_min = (parseInt(data.dwelling_default) * 0.10)
         this.sliderVariableValues.otherStructure = (parseInt(data.dwelling_default) * 0.10)
         this.sliderVariableValues.otherStructure_max = (parseInt(data.dwelling_default) * 0.10) + 50000
-        
+
         this.sliderVariableValues.personalProperty_min = (parseInt(data.dwelling_default) * 0.70)
         this.sliderVariableValues.personalProperty = (parseInt(data.dwelling_default) * 0.70)
         this.sliderVariableValues.personalProperty_max = (parseInt(data.dwelling_default) * 0.70) + 100000
@@ -129,73 +129,118 @@ export class InsuranceTilesComponent implements OnInit {
       this.hideHomeCard = true;
       this.showHomeCard = false;
     }
-    else if (this.insuranceType == this.lifedivId[0].id){
+    else if (this.insuranceType == this.lifedivId[0].id) {
       this.hideLifeCard = true;
       this.showLifeCard = false;
     }
-    else if (this.insuranceType == this.autodivId[0].id){
+    else if (this.insuranceType == this.autodivId[0].id) {
       this.hideAutoCard = true;
       this.showAutoCard = false;
     }
-}
+  }
 
-  onInputChange({ event, id }) {
-    //console.log(event.value);
-    if (id == "Dwelling") {
-      this.SliderData["dwelling"] = event.value;
-            //this.sliderVariableValues.dwelling = data.dwelling_default,
-            this.sliderVariableValues.otherStructure = (parseInt(event.value) * 0.10) 
-            this.sliderVariableValues.personalProperty = (parseInt(event.value) * 0.70)
-            this.sliderVariableValues.lossOfUse = (parseInt(event.value) * 0.20)
-            this.sliderVariableValues.personalLiability = event.value
-            console.log("New Data is :: " + JSON.stringify(this.sliderVariableValues))
+  onInputChange({ event, id, type }) {
+    console.log(event.value);
+    switch (type) {
+      case 'home': {
+        if (id == "Dwelling") {
+          this.SliderData["dwelling"] = event.value;
+          //this.sliderVariableValues.dwelling = data.dwelling_default,
+          this.sliderVariableValues.otherStructure = (parseInt(event.value) * 0.10)
+          this.sliderVariableValues.personalProperty = (parseInt(event.value) * 0.70)
+          this.sliderVariableValues.lossOfUse = (parseInt(event.value) * 0.20)
+          this.sliderVariableValues.personalLiability = event.value
+          console.log("New Data is :: " + JSON.stringify(this.sliderVariableValues))
+        }
+        else if (id == "otherStructure") {
+          this.SliderData["otherStructure"] = event.value;
+        }
+        else if (id == "PersonalProperty") {
+          this.SliderData["personalProperty"] = event.value;
+        }
+        else if (id == "PersonalLiability") {
+          this.SliderData["personalLiability"] = event.value;
+        }
+        else if (id == "LossOfUse") {
+          this.SliderData["lossOfUse"] = event.value;
+        }
+        else if (id == "Medical") {
+          this.SliderData["medical"] = event.value;
+        }
+        break;
+      }
+      case 'life': {
+        switch (id) {
+          case 'DeathBenefit': {
+            this.SliderData.deathBenefit = event.value;
+            break;
+          }
+          case 'CurrentDebit': {
+            this.SliderData.currentDebit = event.value;
+            break;
+          }
+          case 'ChildEducationFund': {
+            this.SliderData.childEducationFund = event.value;
+            break;
+          }
+          case 'FuneralSpend': {
+            this.SliderData.funeralSpend = event.value;
+            break;
+          }
+          case 'RetirementAge': {
+            this.SliderData.retirementAge = event.value;
+            break;
+          }
+          case 'AnnualIncome': {
+            this.SliderData.annualIncome = event.value;
+            break;
+          }
+          case 'ReplacementIncome': {
+            this.SliderData.replacementIncome = event.value;
+            break;
+          }
+        }
+        break;
+      }
     }
-    else if (id == "otherStructure") {
-      this.SliderData["otherStructure"] = event.value;
-    }
-    else if (id == "PersonalProperty") {
-      this.SliderData["personalProperty"] = event.value;
-    }
-    else if (id == "PersonalLiability") {
-      this.SliderData["personalLiability"] = event.value;
-    }
-    else if (id == "LossOfUse") {
-      this.SliderData["lossOfUse"] = event.value;
-    }
-    else if (id == "Medical") {
-      this.SliderData["medical"] = event.value;
-    }
+
   }
 
   calculatePremium() {
-    let subscription =  this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data)=>{
 
+    // to populate slider min values in payload JSON.
+    this.SliderData.otherStructure = this.sliderVariableValues.otherStructure;
+    this.SliderData.personalProperty = this.sliderVariableValues.personalProperty;
+    this.SliderData.personalLiability = this.sliderVariableValues.personalLiability;
+    this.SliderData.lossOfUse_min = this.sliderVariableValues.lossOfUse_min;
+
+    let subscription = this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
       console.log("Data is :" + JSON.stringify(data))
 
-      if(data !=undefined && data!= {}){
-      let payloadJSON = {
-        data: {
-          'insuranceType': 'home',
-          'premium': data.Premium,
-          'insuranceData': this.SliderData
+      if (data != undefined && data != {}) {
+        let payloadJSON = {
+          data: {
+            'insuranceType': 'home',
+            'premium': data.Premium,
+            'insuranceData': this.SliderData
+          }
         }
-      }
-     console.log("Json payload for /getPremium is: " + JSON.stringify(payloadJSON))
+        console.log("Json payload for /getPremium is: " + JSON.stringify(payloadJSON))
 
-      
-      this.ikservice.postInsuranceData(payloadJSON).subscribe((res) => {
-        let newState = JSON.parse(JSON.stringify(data)) 
-        newState.calculatedPremium = res
-        console.log('Calculated premium new state is: ' + JSON.stringify(newState))
-        this.store.dispatch(actions.updateUserDataAct({data : newState}));
-       // this.footer.populateUI()
-        subscription.unsubscribe();
-      });
-    }
+
+        this.ikservice.postInsuranceData(payloadJSON).subscribe((res) => {
+          let newState = JSON.parse(JSON.stringify(data))
+          newState.calculatedPremium = res
+          console.log('Calculated premium new state is: ' + JSON.stringify(newState))
+          this.store.dispatch(actions.updateUserDataAct({ data: newState }));
+          // this.footer.populateUI()
+          subscription.unsubscribe();
+        });
+      }
 
     })
 
-    
+
   }
 
   clearCard(event) {
