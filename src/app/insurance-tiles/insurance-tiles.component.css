@@ -187,4 +187,25 @@ p{
     }
 } 
 
+.padleft{
+  padding-left: 1%;
+}
+
+.matcardstyle{
+  box-shadow: none; 
+  height: 100%;
+}
+.matdividerstyle
+{
+  position: relative;
+  background-color:white;
+  height: 2px;
+}
+.maticonstyle
+{
+  margin-left: -33px; 
+  color:white;
+  margin-top: 15%;
+}
+
 

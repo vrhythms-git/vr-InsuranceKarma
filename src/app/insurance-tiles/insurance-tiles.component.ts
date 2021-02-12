@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CounterState, UserData } from '../store/reducers/dashboardReducer';
@@ -76,14 +76,18 @@ export class InsuranceTilesComponent implements OnInit {
   HiddenMatCardCar: boolean = true;
   isCardOpened: boolean = false;
   mode: string;
-
+  toggleSlideLife: boolean = true;
+  toggleSlideHome: boolean = true;
+  toggleSlideAuto: boolean = true;
+  @ViewChild("home") home: ElementRef;
 
   // formatter = new Intl.NumberFormat('en-US', {
   //   style: 'currency',
   //   currency: 'USD',
   //   minimumFractionDigits: 2
   // })
-  
+
+
 
   sliderVariableValues = {
 
@@ -114,11 +118,11 @@ export class InsuranceTilesComponent implements OnInit {
 
   constructor(private store: Store<UserData>, private ikservice: IKServices) {
 
- // this.stateData$ =  this.store.pipe(select(CounterSelector.selectUserData))
-this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => (this.stateData$ = storeData));
+    // this.stateData$ =  this.store.pipe(select(CounterSelector.selectUserData))
+    this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => (this.stateData$ = storeData));
   }
 
- // stateData : Observable;
+  // stateData : Observable;
 
   ngOnInit(): void {
     this.mode = "collapseHomeCard";
@@ -128,11 +132,11 @@ this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => (
     this.lifedivId = $(document.getElementById('lifeInsurance'));
     this.autodivId = $(document.getElementById('autoInsurance'));
 
-   this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+    this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
 
-     // this.stateData = data
+      // this.stateData = data
       if (data != undefined && data != {}) {
-       // console.log("Subscription Event Occured.... with data" + JSON.stringify(data));
+        // console.log("Subscription Event Occured.... with data" + JSON.stringify(data));
         this.sliderVariableValues.dwelling_min = data.dwelling_default,
           this.sliderVariableValues.dwelling = data.dwelling_default,
           this.sliderVariableValues.dwelling_max = data.dwelling_default + 500000,
@@ -164,24 +168,22 @@ this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => (
   }
 
 
+  showCard(event) {
 
-  handleCardClick(event) {
-    //this.store.select('userDataState')
-    this.insuranceType = event.currentTarget.id;
-    if (event.currentTarget.id == this.homedivId[0].id && this.isCardOpened == false) {
+    if (event.id == "homeInsuranceId" && this.isCardOpened == false && this.toggleSlideHome) {
       $(document.getElementsByClassName("homeIns")).removeClass("col-md-4 col-md-12 first second third");
       $(document.getElementsByClassName("lifeIns")).removeClass("col-md-4 col-md-12 first second third");
       $(document.getElementsByClassName("carIns")).removeClass("col-md-4 col-md-12 second first third");
 
-      $(document.getElementsByClassName("homeIns")).addClass("col-md-12 first");
+      $(document.getElementsByClassName("homeIns")).addClass("col-md-12 first fade-in");
       $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 second fade-in");
       $(document.getElementsByClassName("carIns")).addClass("col-md-4 third fade-in");
-      $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth fade-in");
+      $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth");
+      $(document.getElementsByClassName("boatIns")).addClass("col-md-4 fifth");
+      $(document.getElementsByClassName("rentIns")).addClass("col-md-4 sixth");
+
 
       this.mode = this.mode == 'collapseHomeCard' ? 'expandHomeCard' : 'expandHomeCard';
-      // if (this.HiddenMatCardHome) {
-      //   this.HiddenMatCardHome = false;
-      // }
       this.isCardOpened = true;
 
       this.hideHomeCard = false;
@@ -189,43 +191,39 @@ this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => (
       this.hideBoatCard = true;
       this.hideRentCard = true;
     }
-    else if (event.currentTarget.id == this.lifedivId[0].id && this.isCardOpened == false) {
+    else if (event.id == "lifeInsuranceId" && this.isCardOpened == false && this.toggleSlideLife) {
       $(document.getElementsByClassName("homeIns")).removeClass("col-md-4 col-md-12 first second third");
       $(document.getElementsByClassName("lifeIns")).removeClass("col-md-4 col-md-12 first second third");
       $(document.getElementsByClassName("carIns")).removeClass("col-md-4 col-md-12 second first third");
 
-      $(document.getElementsByClassName("lifeIns")).addClass("col-md-12 first");
-      $(document.getElementsByClassName("homeIns")).addClass("col-md-4 second fade-in");
-      $(document.getElementsByClassName("carIns")).addClass("col-md-4 third fade-in");
-      $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth fade-in");
+      $(document.getElementsByClassName("lifeIns")).addClass("col-md-12 first fade-in");
+      $(document.getElementsByClassName("homeIns")).addClass("col-md-4 second");
+      $(document.getElementsByClassName("carIns")).addClass("col-md-4 third");
+      $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth");
+      $(document.getElementsByClassName("boatIns")).addClass("col-md-4 fifth");
+      $(document.getElementsByClassName("rentIns")).addClass("col-md-4 sixth");
 
       this.mode = this.mode == 'collapseLifeCard' ? 'expandLifeCard' : 'expandLifeCard';
-      // if (this.HiddenMatCardLife) {
-      //   this.HiddenMatCardLife = false;
-      // }
       this.isCardOpened = true;
-
       this.hideLifeCard = false;
       this.showLifeCard = true;
       this.hideBoatCard = true;
       this.hideRentCard = true;
     }
-    else if (event.currentTarget.id == this.autodivId[0].id && this.isCardOpened == false) {
+    else if (event.id == "carInsuranceId" && this.isCardOpened == false && this.toggleSlideAuto) {
       $(document.getElementsByClassName("homeIns")).removeClass("col-md-4 col-md-12 first second third");
       $(document.getElementsByClassName("lifeIns")).removeClass("col-md-4 col-md-12 first second third");
       $(document.getElementsByClassName("carIns")).removeClass("col-md-4 col-md-12 second first third");
 
-      $(document.getElementsByClassName("carIns")).addClass("col-md-12 first");
-      $(document.getElementsByClassName("homeIns")).addClass("col-md-4 second fade-in");
-      $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 third fade-in");
-      $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth fade-in");
+      $(document.getElementsByClassName("carIns")).addClass("col-md-12 first fade-in");
+      $(document.getElementsByClassName("homeIns")).addClass("col-md-4 second");
+      $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 third");
+      $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth");
+      $(document.getElementsByClassName("boatIns")).addClass("col-md-4 fifth");
+      $(document.getElementsByClassName("rentIns")).addClass("col-md-4 sixth");
 
       this.mode = this.mode == 'collapseCarCard' ? 'expandCarCard' : 'expandCarCard';
-      // if (this.HiddenMatCardCar) {
-      //   this.HiddenMatCardCar = false;
-      // }
       this.isCardOpened = true;
-
       this.hideAutoCard = false;
       this.showAutoCard = true;
       this.hideBoatCard = true;
@@ -238,31 +236,30 @@ this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => (
     //   $(document.getElementById('homeInsurance')).removeClass('col-md-4');
     //   $(document.getElementById('homeInsurance')).addClass('col-md-12');
     // })
+    //this.store.select('userDataState')
+    //this.insuranceType = event.currentTarget.id;
+    //event.currentTarget.id == this.homedivId[0].id
   }
 
-  closecard() {
-    if (this.insuranceType == this.homedivId[0].id) {
+  closeCard(event) {
+    if (event.id == "homeInsuranceId") {
       this.mode = this.mode == 'collapseHomeCard' ? 'expandHomeCard' : 'collapseHomeCard';
-
       this.isCardOpened = false;
-
       this.hideHomeCard = true;
       this.showHomeCard = false;
       this.hideBoatCard = false;
       this.hideRentCard = false;
     }
-    else if (this.insuranceType == this.lifedivId[0].id) {
+    else if (event.id == "lifeInsuranceId") {
       this.mode = this.mode == 'collapseLifeCard' ? 'expandHomeCard' : 'collapseLifeCard';
-
       this.isCardOpened = false;
       this.hideLifeCard = true;
       this.showLifeCard = false;
       this.hideBoatCard = false;
       this.hideRentCard = false;
     }
-    else if (this.insuranceType == this.autodivId[0].id) {
+    else if (event.id == "carInsuranceId") {
       this.mode = this.mode == 'collapseCarCard' ? 'expandCarCard' : 'collapseCarCard';
-
       this.isCardOpened = false;
       this.hideAutoCard = true;
       this.showAutoCard = false;
@@ -278,8 +275,6 @@ this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => (
     $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth");
     $(document.getElementsByClassName("boatIns")).addClass("col-md-4 fifth");
     $(document.getElementsByClassName("rentIns")).addClass("col-md-4 sixth");
-
-
   }
 
   onInputChange({ event, id, type }) {
@@ -474,24 +469,38 @@ this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => (
       if (data != undefined && data != {}) {
         let prevState = JSON.parse(JSON.stringify(data))
 
-        switch(action){
-          case 'add' : {
+        switch (action) {
+          case 'add': {
             prevState.totalPremium = prevState.totalPremium + premium;
             prevState.enabledCards
-          break;
+            break;
           }
-          case 'sub' : {
+          case 'sub': {
             prevState.totalPremium = prevState.totalPremium - premium;
             break;
           }
 
         }
-    //this.store.dispatch(actions.updateUserDataAct({ data: json }));
+        //this.store.dispatch(actions.updateUserDataAct({ data: json }));
       }
     });
     subscribed.unsubscribe();
   }
 
+
+  OnInsuanceSlideToggle({ insuranceType, event }) {
+    if (insuranceType == "Home") {
+      this.toggleSlideHome = event.checked;
+    }
+    if (insuranceType == "Life") {
+      this.toggleSlideLife = event.checked;
+    }
+    if (insuranceType == "Auto") {
+      this.toggleSlideAuto = event.checked;
+    }
+  }
+
+  /*
   OnInsuanceSlideToggle({ insuranceType, event }) {
     switch (insuranceType) {
       case 'pet': {
@@ -542,7 +551,7 @@ this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => (
       }
     }
   }
-
+*/
   clearCard(event) {
     $(document.getElementsByClassName("homeInsurance")).removeClass("col-md-12");
     $(document.getElementsByClassName("homeInsurance")).addClass("col-md-4");

@@ -54,6 +54,10 @@ export class HeaderCardsComponent implements OnInit {
         alert("please provide valid zip")
         else{
           console.log('Found state from provided zip as :' + JSON.stringify(stateData[0]))
+          this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => this.userData$);
+          this.userData$.subscribe((data)=>{
+            let index = data.cards.findIndex(std=> std.id === 200);
+          }) 
           this.store.dispatch(actions.updateUserDataAct({data : stateData[0]}));
         }
       }
