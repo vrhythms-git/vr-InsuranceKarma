@@ -47,8 +47,8 @@ function calculateHomePremium(userData, parametersJSON) {
     function calculateLifePremium(userData, parametersJSON) {
         console.log("calculateLifePremium called...")
         let default_premium = userData.data.premium
-        let whole_life_insurance = userData.data.deathBenefit;
-        let term_insurance = userData.data.deathBenefit;
+        let whole_life_insurance = 0;
+        let term_insurance = 0;
             
         console.log('****************************** life Insurance Premium Calculations ******************************************')
         console.log('Life default premium is : ' + default_premium + '  and death benefit is : ' + userData.data.deathBenefit);
@@ -63,7 +63,7 @@ function calculateHomePremium(userData, parametersJSON) {
                 case 'child education fund': {
     
                     term_insurance = term_insurance + (default_premium + (parametersJSON[i].factor1 * parametersJSON[i].factor2))
-                    console.log('child education fund:' + (default_premium + (parametersJSON[i].factor1 * parametersJSON[i].factor3)))
+                    console.log('child education fund:' + (default_premium + (parametersJSON[i].factor1 * parametersJSON[i].factor2)))
                     break;
                 }
                 case 'funeral spend':
@@ -88,10 +88,10 @@ function calculateHomePremium(userData, parametersJSON) {
                     break;
                 }
             }
-            console.log("Whole life insurance is : " + whole_life_insurance.toFixed(0) +" and Term isnsurance is :  "+ term_insurance.toFixed(0));
+            console.log("Whole life insurance is : " + whole_life_insurance +" and Term isnsurance is :  "+ term_insurance);
             return {    
-                whole_life_insurance: whole_life_insurance.toFixed(0),
-                term_insurance: term_insurance.toFixed(0)
+                whole_life_insurance: whole_life_insurance,
+                term_insurance: term_insurance
             }
         }
 

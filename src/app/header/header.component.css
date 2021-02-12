@@ -3,15 +3,17 @@
 }
 
 .brand {
-    color: #435aff;
+    color: white;
     letter-spacing: 1px;
     font-size: xx-large;
     text-shadow: 1px 1px gray;
 }
 
 .com-appbar {
-    background-color: white;
+    /* background-color: white; */   
+    background-image: linear-gradient(to right, #2C83A3 , #3BAFDA);      
     box-shadow: 1px 2px 4px gray;
+    font-family: poppins;
 }
 
 .avatar {

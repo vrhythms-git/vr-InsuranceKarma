@@ -1,6 +1,6 @@
-<div class="container">
-
-  <div class="row col-md-12">
+<div class="container mt-1">
+<div style="padding-left:1%;margin-right: -8%">
+  <div class="row col-md-12" style="padding:0;">
     <div class="col-sm col-md col-lg-1 col-xl-1 " style="margin-right: 30px">
       <mat-card style="padding : 0px;width: 140px; background-color: white">
         <div class="p-1 text-center" style="background-color:#AAB2BD;">
@@ -9,13 +9,13 @@
           font-family: poppins;">Age</p>
         </div>
         <button style="float: left;color: #339FFB;width: 0px;vertical-align: middle;
-          background-color:white; border-color:transparent;align-self:flex-start;margin-right: 10%; " (click)="agedecrement()"
+          background-color:white; border-color:transparent;align-self:flex-start;margin-right: 10%; " (click)="agedecrement($event)"
           mat-icon-button aria-label="Example icon button with a remove icon">
           <mat-icon style="margin-top: 10px"> remove</mat-icon>
         </button>
 
         <button style="float: right;color: #339FFB;width: 0px;
-          background-color:white;border-color:transparent; margin-right: 15%; " (click)="ageincrement()" mat-icon-button
+          background-color:white;border-color:transparent; margin-right: 15%; " (click)="ageincrement($event)" mat-icon-button
           aria-label="Example icon button with a addition icon">
           <mat-icon style="margin-top: 10px">addition</mat-icon>
         </button>
@@ -89,13 +89,13 @@
           </div>
 
         <button style="float: right;color: #339FFB;width: 0px;margin-right: 20%;
-        background-color:white; border-color: white;border-color:transparent;margin-top: 10px " (click)="depedentincrement()" mat-icon-button
+        background-color:white; border-color: white;border-color:transparent;margin-top: 10px " (click)="depedentincrement($event)" mat-icon-button
           aria-label="Example icon button with a addition icon">
           <mat-icon>addtion</mat-icon>
         </button>
 
         <button style="float: left;color: #339FFB;width: 0px;
-  background-color:white; border-color: white;border-color:transparent;margin-top: 10px" (click)="depedentdecrement()" mat-icon-button aria-label="Example icon button with a remove icon">
+  background-color:white; border-color: white;border-color:transparent;margin-top: 10px" (click)="depedentdecrement($event)" mat-icon-button aria-label="Example icon button with a remove icon">
           <mat-icon>remove</mat-icon>
         </button>
 
@@ -136,7 +136,7 @@
         </mat-select>
       </mat-card>
     </div>
-    <div class="col-sm col-md col-lg-1 col-xl-1  " style=" margin-left:30px;margin-right: 30px">
+    <div class="col-sm col-md col-lg-1 col-xl-1  " style="margin-left:30px;">
       <mat-card style="text-align: center;width: 140px;padding: 0%;">
 
       <div class="p-1 text-center" style="background-color:#AAB2BD;">
@@ -145,13 +145,13 @@
         font-family: poppins;">Automobiles</p>
         </div>
         <button style="float: right;color: #339FFB;width: 20px;
-        background-color:white; border-color: white;border-color:transparent;margin-right: 20%;margin-top: 10px" (click)="automobileincrement()"
+        background-color:white; border-color: white;border-color:transparent;margin-right: 20%;margin-top: 10px" (click)="automobileincrement($event)"
           mat-icon-button aria-label="Example icon button with a addition icon">
           <mat-icon>addtion</mat-icon>
         </button>
 
         <button style="float: left;color: #339FFB;width: 20px;
-  background-color:white; border-color: white;border-color:transparent;margin-top: 10px" (click)="automobiledecrement()" mat-icon-button
+  background-color:white; border-color: white;border-color:transparent;margin-top: 10px" (click)="automobiledecrement($event)" mat-icon-button
           aria-label="Example icon button with a remove icon">
           <mat-icon>remove</mat-icon>
         </button>
@@ -161,4 +161,5 @@
       </mat-card>
     </div>
   </div>
+</div>
 </div>

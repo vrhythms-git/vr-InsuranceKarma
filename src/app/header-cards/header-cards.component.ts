@@ -57,9 +57,11 @@ export class HeaderCardsComponent implements OnInit {
           this.store.dispatch(actions.updateUserDataAct({data : stateData[0]}));
         }
       }
-    }
-    
+    } 
   }
+
+    
+  
 
   masterData: any = {}
 
@@ -85,10 +87,8 @@ export class HeaderCardsComponent implements OnInit {
   }
 
  age = [
-    {name: '25-35' },
-    {name: '36-45'},
-    {name: '46-55'},
-    {name: '56-65'}
+    {name: '35-45'},
+    {name: '45-55'}
 ];
 
   dependents = [
@@ -140,51 +140,154 @@ export class HeaderCardsComponent implements OnInit {
   public counter: number = 0;
   public counter1: number = 0;
   public counter2: number = 0;
-  ageincrement() {
+  
+  tempCounter = false;
+  ageValueChange(counter) {
+
+    let subscription =  this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data)=>{
+      
+      if(this.tempCounter == false){
+      console.log("In ageValueChange with store data :: " + JSON.stringify(data))
+      this.tempCounter = true;
+       let ageData = JSON.parse(JSON.stringify(data))
+       let ageBracket = this.age[counter].name
+
+       let AgeBracketData = this.masterData.data.age.filter((item)=>{
+         return (item["Age "].replaceAll(" ","") == ageBracket );
+       })
+        ageData.age = AgeBracketData;
+        this.store.dispatch(actions.updateUserDataAct({data : ageData}));
+      }
+      //subscription.unsubscribe();
+    }) 
+    subscription.unsubscribe();
+  }
+  
+
+  dependentValueChange(counter) {
+    let subscription =  this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data)=>{
+
+      var dependentValue = this.dependents[counter].name;
+      console.log("Data is :" + JSON.stringify(data))
+
+        console.log('New dependent value is: ' + JSON.stringify(dependentValue))
+        this.store.dispatch(actions.updateUserDataAct({data : dependentValue}));
+       
+        //subscription.unsubscribe();
+    }) 
+  }
+
+  automobileValueChange(counter) {
+    let subscription =  this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data)=>{
+
+      var automobileValue = this.automobile[counter].value;
+      console.log("Data is :" + JSON.stringify(data))
+
+        console.log('New automobile value is: ' + JSON.stringify(automobileValue))
+        this.store.dispatch(actions.updateUserDataAct({data : automobileValue}));
+       
+       // subscription.unsubscribe();
+    }) 
+  }
+
+  ageincrement(event :any) {
+    this.tempCounter = false
+   // console.log("ageincrement called...")
     this.counter += 1;
     if (this.counter >= this.age.length) {
       this.counter = 0;
     }
-
-
+    this.ageValueChange(this.counter);
   }
 
-  agedecrement() {
+  agedecrement(event :any) {
+    this.tempCounter = false
+    //console.log("agedecrement called...")
     if (this.counter == 0) {
-      this.counter = 5;
+      this.counter = 2;
     }
     this.counter -= 1;
+   this.ageValueChange(this.counter);
   }
 
 
-  depedentincrement() {
+  depedentincrement(event :any) {
+
     this.counter1 += 1;
     if (this.counter1 == this.dependents.length) {
       this.counter1 = 0;
     }
-
+    this.dependentValueChange(this.counter1);
   }
 
-  depedentdecrement() {
+  depedentdecrement(event :any) {
+
     if (this.counter1 == 0) {
       this.counter1 = 5;
     }
     this.counter1 -= 1;
+
+    this.dependentValueChange(this.counter1);
   }
 
-  automobileincrement() {
+  automobileincrement(event :any) {
+
     this.counter2 += 1;
     if (this.counter2 >= this.automobile.length) {
       this.counter2 = 0;
     }
+
+    this.automobileValueChange(this.counter2);
   }
 
-  automobiledecrement() {
+  automobiledecrement(event :any) {
+
     if (this.counter2 == 0) {
       this.counter2 = 5;
     }
     this.counter2 -= 1;
+
+    this.automobileValueChange(this.counter2);
   }
 
+  incomeDropdown(value){
+    let subscription =  this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data)=>{
+
+      var incomeValue = this.Incomes[value].viewValue;
+      console.log("Data is :" + JSON.stringify(data))
+
+        console.log('New income value is: ' + JSON.stringify(incomeValue));
+        this.store.dispatch(actions.updateUserDataAct({data : incomeValue}));
+       
+        subscription.unsubscribe();
+    }) 
+  }
+
+  statusDropdown(value){
+    let subscription =  this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data)=>{
+
+      var statusValue = this.Stat[value].viewValue;
+      console.log("Data is :" + JSON.stringify(data))
+
+        console.log('New status value is: ' + JSON.stringify(statusValue));
+        this.store.dispatch(actions.updateUserDataAct({data : statusValue}));
+       
+        subscription.unsubscribe();
+    }) 
+  }
+
+  occupationDropdown(value){
+    let subscription =  this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data)=>{
+
+      var occupationValue = this.Occupations[value].viewValue;
+      console.log("Data is :" + JSON.stringify(data))
+
+        console.log('New status value is: ' + JSON.stringify(occupationValue));
+        this.store.dispatch(actions.updateUserDataAct({data : occupationValue}));
+       
+        subscription.unsubscribe();
+    }) 
+  }
+  
 
 }

@@ -6,12 +6,51 @@ import * as actions from '../store/actions/dashboardAction'
 import * as CounterSelector from "../store/selectors/counterSelector";
 import { IKServices } from "../services/app.service";
 import * as $ from "jquery";
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
   selector: 'app-insurance-tiles',
   templateUrl: './insurance-tiles.component.html',
-  styleUrls: ['./insurance-tiles.component.css']
+  styleUrls: ['./insurance-tiles.component.css'],
+  animations: [
+    trigger('slideInOutHome', [
+      state('expandHomeCard', style({
+        height: '290px',
+        width: '1070px'
+      })),
+      state('collapseHomeCard', style({
+        height: '0px',
+        width: '0px'
+      })),
+      transition('expandHomeCard => collapseHomeCard', animate('1000ms')),// ease-in-out')),
+      transition('collapseHomeCard => expandHomeCard', animate('1000ms')) // ease-in-out'))
+    ]),
+    trigger('slideInOutLife', [
+      state('expandLifeCard', style({
+        height: '290px',
+        width: '1070px'
+      })),
+      state('collapseLifeCard', style({
+        height: '0px',
+        width: '0px'
+      })),
+      transition('expandLifeCard => collapseLifeCard', animate('1000ms')),// ease-in-out')),
+      transition('collapseLifeCard => expandLifeCard', animate('1000ms')) // ease-in-out'))
+    ]),
+    trigger('slideInOutCar', [
+      state('expandCarCard', style({
+        height: '300px',
+        width: '1070px'
+      })),
+      state('collapseCarCard', style({
+        height: '0px',
+        width: '0px'
+      })),
+      transition('expandCarCard => collapseCarCard', animate('1000ms')),// ease-in-out')),
+      transition('collapseCarCard => expandCarCard', animate('1000ms')) // ease-in-out'))
+    ])
+  ]
 })
 export class InsuranceTilesComponent implements OnInit {
 
@@ -28,6 +67,16 @@ export class InsuranceTilesComponent implements OnInit {
   showLifeCard: boolean = false;
   hideAutoCard: boolean = true;
   showAutoCard: boolean = false;
+
+  hidePetCard: boolean = false;
+  hideBoatCard: boolean = false;
+  hideRentCard: boolean = false;
+  HiddenMatCardHome: boolean = true;
+  HiddenMatCardLife: boolean = true;
+  HiddenMatCardCar: boolean = true;
+  isCardOpened: boolean = false;
+  mode: string;
+
 
   sliderVariableValues = {
 
@@ -61,6 +110,9 @@ export class InsuranceTilesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.mode = "collapseHomeCard";
+    this.mode = "collapseLifeCard";
+    this.mode = "collapseCarCard";
     this.homedivId = $(document.getElementById('homeInsurance'));
     this.lifedivId = $(document.getElementById('lifeInsurance'));
     this.autodivId = $(document.getElementById('autoInsurance'));
@@ -99,21 +151,73 @@ export class InsuranceTilesComponent implements OnInit {
 
   }
 
-  handleCardClick(event) {
 
+
+   handleCardClick(event) {
     //this.store.select('userDataState')
     this.insuranceType = event.currentTarget.id;
-    if (event.currentTarget.id == this.homedivId[0].id) {
+    if (event.currentTarget.id == this.homedivId[0].id && this.isCardOpened == false) {
+      $(document.getElementsByClassName("homeIns")).removeClass("col-md-4 col-md-12 first second third");
+      $(document.getElementsByClassName("lifeIns")).removeClass("col-md-4 col-md-12 first second third");
+      $(document.getElementsByClassName("carIns")).removeClass("col-md-4 col-md-12 second first third");
+
+      $(document.getElementsByClassName("homeIns")).addClass("col-md-12 first");
+      $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 second fade-in");
+      $(document.getElementsByClassName("carIns")).addClass("col-md-4 third fade-in");
+      $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth fade-in"); 
+
+      this.mode = this.mode == 'collapseHomeCard' ? 'expandHomeCard' : 'expandHomeCard';
+      // if (this.HiddenMatCardHome) {
+      //   this.HiddenMatCardHome = false;
+      // }
+      this.isCardOpened = true;
+
       this.hideHomeCard = false;
       this.showHomeCard = true;
+      this.hideBoatCard = true;
+      this.hideRentCard = true;
     }
-    else if (event.currentTarget.id == this.lifedivId[0].id) {
+    else if (event.currentTarget.id == this.lifedivId[0].id && this.isCardOpened == false) {
+      $(document.getElementsByClassName("homeIns")).removeClass("col-md-4 col-md-12 first second third");
+      $(document.getElementsByClassName("lifeIns")).removeClass("col-md-4 col-md-12 first second third");
+      $(document.getElementsByClassName("carIns")).removeClass("col-md-4 col-md-12 second first third");
+
+      $(document.getElementsByClassName("lifeIns")).addClass("col-md-12 first");
+      $(document.getElementsByClassName("homeIns")).addClass("col-md-4 second fade-in");
+      $(document.getElementsByClassName("carIns")).addClass("col-md-4 third fade-in");
+      $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth fade-in"); 
+
+      this.mode = this.mode == 'collapseLifeCard' ? 'expandLifeCard' : 'expandLifeCard';
+      // if (this.HiddenMatCardLife) {
+      //   this.HiddenMatCardLife = false;
+      // }
+      this.isCardOpened = true;
+
       this.hideLifeCard = false;
       this.showLifeCard = true;
+      this.hideBoatCard = true;
+      this.hideRentCard = true;
     }
-    else if (event.currentTarget.id == this.autodivId[0].id) {
+    else if (event.currentTarget.id == this.autodivId[0].id && this.isCardOpened == false) {
+      $(document.getElementsByClassName("homeIns")).removeClass("col-md-4 col-md-12 first second third");
+      $(document.getElementsByClassName("lifeIns")).removeClass("col-md-4 col-md-12 first second third");
+      $(document.getElementsByClassName("carIns")).removeClass("col-md-4 col-md-12 second first third");
+
+      $(document.getElementsByClassName("carIns")).addClass("col-md-12 first");
+      $(document.getElementsByClassName("homeIns")).addClass("col-md-4 second fade-in");
+      $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 third fade-in"); 
+      $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth fade-in"); 
+      
+      this.mode = this.mode == 'collapseCarCard' ? 'expandCarCard' : 'expandCarCard';
+      // if (this.HiddenMatCardCar) {
+      //   this.HiddenMatCardCar = false;
+      // }
+      this.isCardOpened = true;
+
       this.hideAutoCard = false;
       this.showAutoCard = true;
+      this.hideBoatCard = true;
+      this.hideRentCard = true;
     }
     // this.userData$.subscribe((data) => {
     //   console.log("new state data : " + JSON.stringify(data));
@@ -126,17 +230,44 @@ export class InsuranceTilesComponent implements OnInit {
 
   closecard() {
     if (this.insuranceType == this.homedivId[0].id) {
+      this.mode = this.mode == 'collapseHomeCard' ? 'expandHomeCard' : 'collapseHomeCard';
+     
+      this.isCardOpened = false;
+
       this.hideHomeCard = true;
       this.showHomeCard = false;
+      this.hideBoatCard = false;
+      this.hideRentCard = false;
     }
-    else if (this.insuranceType == this.lifedivId[0].id) {
+    else if (this.insuranceType == this.lifedivId[0].id){
+      this.mode = this.mode == 'collapseLifeCard' ? 'expandHomeCard' : 'collapseLifeCard';
+  
+      this.isCardOpened = false;
       this.hideLifeCard = true;
       this.showLifeCard = false;
+      this.hideBoatCard = false;
+      this.hideRentCard = false;
     }
-    else if (this.insuranceType == this.autodivId[0].id) {
+    else if (this.insuranceType == this.autodivId[0].id){
+      this.mode = this.mode == 'collapseCarCard' ? 'expandCarCard' : 'collapseCarCard';
+     
+      this.isCardOpened = false;
       this.hideAutoCard = true;
       this.showAutoCard = false;
+      this.hideBoatCard = false;
+      this.hideRentCard = false;
     }
+    $(document.getElementsByClassName("homeIns")).removeClass("col-md-12 first second third");
+    $(document.getElementsByClassName("lifeIns")).removeClass("col-md-12 first second third");
+    $(document.getElementsByClassName("carIns")).removeClass("col-md-12 second first third");
+    $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 first");
+    $(document.getElementsByClassName("homeIns")).addClass("col-md-4 second");
+    $(document.getElementsByClassName("carIns")).addClass("col-md-4 third");
+    $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth"); 
+    $(document.getElementsByClassName("boatIns")).addClass("col-md-4 fifth"); 
+    $(document.getElementsByClassName("rentIns")).addClass("col-md-4 sixth"); 
+
+
   }
 
   onInputChange({ event, id, type }) {
@@ -202,43 +333,125 @@ export class InsuranceTilesComponent implements OnInit {
         }
         break;
       }
-    }
+      case 'auto': {
 
-  }
+        switch (id) {
 
-  calculatePremium() {
-
-    // to populate slider min values in payload JSON.
-    this.SliderData.otherStructure = this.sliderVariableValues.otherStructure;
-    this.SliderData.personalProperty = this.sliderVariableValues.personalProperty;
-    this.SliderData.personalLiability = this.sliderVariableValues.personalLiability;
-    this.SliderData.lossOfUse_min = this.sliderVariableValues.lossOfUse_min;
-
-    let subscription = this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
-      console.log("Data is :" + JSON.stringify(data))
-
-      if (data != undefined && data != {}) {
-        let payloadJSON = {
-          data: {
-            'insuranceType': 'home',
-            'premium': data.Premium,
-            'insuranceData': this.SliderData
+          case 'BodilyInjuryLability': {
+            this.SliderData.bodilyInjuryLability = event.value;
+            break;
+          }
+          case 'PropertyDamageLiability': {
+            this.SliderData.propertyDamageLiability = event.value;
+            break;
+          }
+          case 'ComprehensiveAndCollision': {
+            this.SliderData.comprehensiveAndCollision = event.value;
+            break;
+          }
+          case 'PersonalInjuryProtection': {
+            this.SliderData.personalInjuryProtection = event.value;
+            break;
+          }
+          case 'Uninsured/UnderinsuredMotorist': {
+            this.SliderData.uninsuredOrUnderinsuredMotorist = event.value;
+            break;
           }
         }
-        console.log("Json payload for /getPremium is: " + JSON.stringify(payloadJSON))
-
-
-        this.ikservice.postInsuranceData(payloadJSON).subscribe((res) => {
-          let newState = JSON.parse(JSON.stringify(data))
-          newState.calculatedPremium = res
-          console.log('Calculated premium new state is: ' + JSON.stringify(newState))
-          this.store.dispatch(actions.updateUserDataAct({ data: newState }));
-          // this.footer.populateUI()
-          subscription.unsubscribe();
-        });
       }
+        break;
+    }
+    console.log("Sllider data is : " + JSON.stringify(this.SliderData));
+  }
 
-    })
+  calculatePremium({ insuranceType }) {
+
+    switch (insuranceType) {
+
+      case 'home': {
+        // to populate slider min values in payload JSON.
+        this.SliderData.otherStructure_min = this.sliderVariableValues.otherStructure_min;
+        this.SliderData.personalProperty_min = this.sliderVariableValues.personalProperty_min;
+        this.SliderData.personalLiability_min = this.sliderVariableValues.personalLiability_min;
+        this.SliderData.lossOfUse_min = this.sliderVariableValues.lossOfUse_min;
+
+        let subscription = this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+          console.log("Data is :" + JSON.stringify(data))
+
+          if (data != undefined && data != {}) {
+            let payloadJSON = {
+              data: {
+                'insuranceType': 'home',
+                'premium': data.Premium,
+                'insuranceData': this.SliderData
+              }
+            }
+            console.log("Json payload for /getPremium is: " + JSON.stringify(payloadJSON))
+
+
+            this.ikservice.postInsuranceData(payloadJSON).subscribe((res) => {
+              let newState = JSON.parse(JSON.stringify(data))
+              newState.calculatedPremium = res
+              console.log('Calculated premium new state is: ' + JSON.stringify(newState))
+              this.store.dispatch(actions.updateUserDataAct({ data: newState }));
+              // this.footer.populateUI()
+              subscription.unsubscribe();
+            });
+          }
+
+        });
+        break;
+      }
+      case 'life': {
+
+        this.SliderData.deathBenefit_min = 250000;
+        this.SliderData.currentDebit_min = 180000;
+        this.SliderData.childEducationFund_min = 50000
+        this.SliderData.funeralSpend = 2500;
+        this.SliderData.retirementAge = 50;
+        this.SliderData.annualIncome = 50000;
+        this.SliderData.replacementIncome = 5;
+
+        let subscription = this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+          console.log("Data is :" + JSON.stringify(data))
+
+          if (data != undefined && data != {}) {
+
+            if(this.SliderData.deathBenefit == undefined || this.SliderData.deathBenefit == 0)
+                     this.SliderData.deathBenefit = 250000;
+
+            let ageBracketPrem = data.age.filter((item) => {
+              return item['Death Benefit'] == this.SliderData.deathBenefit
+            })
+
+
+            let payloadJSON = {
+              data: {
+                'insuranceType': 'life',
+                'premium': ageBracketPrem[0].Premium,
+                'deathBenefit': this.SliderData.deathBenefit,
+                'insuranceData': this.SliderData
+              }
+            }
+            console.log("Json payload for /getPremium is: " + JSON.stringify(payloadJSON))
+
+
+            this.ikservice.postInsuranceData(payloadJSON).subscribe((res) => {
+              let newState = JSON.parse(JSON.stringify(data))
+              newState.calculatedLifePremium = res
+              console.log('Calculated premium new state is: ' + JSON.stringify(newState))
+              this.store.dispatch(actions.updateUserDataAct({ data: newState }));
+              // this.footer.populateUI()
+              subscription.unsubscribe();
+            });
+          }
+
+        });
+        break;
+      }
+    }
+
+
 
 
   }

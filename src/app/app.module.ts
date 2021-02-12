@@ -19,7 +19,7 @@ import { createCounterReducer,createUserDataStateReducer, createNewPremiumDataSt
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
-
+import {MatDividerModule} from '@angular/material/divider';
 
 import { InsuranceTilesComponent } from './insurance-tiles/insurance-tiles.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -52,7 +52,8 @@ import { HeaderCardsComponent } from './header-cards/header-cards.component';
     MatCardModule,
     MatSelectModule,
     MatSliderModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

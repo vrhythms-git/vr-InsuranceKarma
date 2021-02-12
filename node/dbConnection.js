@@ -29,7 +29,8 @@ async function getInsuraceMasterData() {
           response.states = result;
           db.close();
         });
-        dbo.collection("ik_life_ins_master_data").find(query).toArray(function (err, result) {
+        let sortQuery = {"Premium" : 1}
+        dbo.collection("ik_life_ins_master_data").find(query).sort(sortQuery).toArray(function (err, result) {
           if (err) {
             resolve(queryExecuionFailedErrorJSON);
           }
