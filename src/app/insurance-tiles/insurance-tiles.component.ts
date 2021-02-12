@@ -54,7 +54,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class InsuranceTilesComponent implements OnInit {
 
-  userData$: Observable<any>;
+  stateData$: Observable<any>;
   InsuranceData: any;
   SliderData: any = {};
   insuranceType: any;
@@ -77,6 +77,13 @@ export class InsuranceTilesComponent implements OnInit {
   isCardOpened: boolean = false;
   mode: string;
 
+
+  // formatter = new Intl.NumberFormat('en-US', {
+  //   style: 'currency',
+  //   currency: 'USD',
+  //   minimumFractionDigits: 2
+  // })
+  
 
   sliderVariableValues = {
 
@@ -107,7 +114,11 @@ export class InsuranceTilesComponent implements OnInit {
 
   constructor(private store: Store<UserData>, private ikservice: IKServices) {
 
+ // this.stateData$ =  this.store.pipe(select(CounterSelector.selectUserData))
+this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => (this.stateData$ = storeData));
   }
+
+ // stateData : Observable;
 
   ngOnInit(): void {
     this.mode = "collapseHomeCard";
@@ -117,10 +128,11 @@ export class InsuranceTilesComponent implements OnInit {
     this.lifedivId = $(document.getElementById('lifeInsurance'));
     this.autodivId = $(document.getElementById('autoInsurance'));
 
-    this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+   this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
 
+     // this.stateData = data
       if (data != undefined && data != {}) {
-        //console.log("Subscription Event Occured.... with data" + JSON.stringify(data));
+       // console.log("Subscription Event Occured.... with data" + JSON.stringify(data));
         this.sliderVariableValues.dwelling_min = data.dwelling_default,
           this.sliderVariableValues.dwelling = data.dwelling_default,
           this.sliderVariableValues.dwelling_max = data.dwelling_default + 500000,
@@ -153,7 +165,7 @@ export class InsuranceTilesComponent implements OnInit {
 
 
 
-   handleCardClick(event) {
+  handleCardClick(event) {
     //this.store.select('userDataState')
     this.insuranceType = event.currentTarget.id;
     if (event.currentTarget.id == this.homedivId[0].id && this.isCardOpened == false) {
@@ -164,7 +176,7 @@ export class InsuranceTilesComponent implements OnInit {
       $(document.getElementsByClassName("homeIns")).addClass("col-md-12 first");
       $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 second fade-in");
       $(document.getElementsByClassName("carIns")).addClass("col-md-4 third fade-in");
-      $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth fade-in"); 
+      $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth fade-in");
 
       this.mode = this.mode == 'collapseHomeCard' ? 'expandHomeCard' : 'expandHomeCard';
       // if (this.HiddenMatCardHome) {
@@ -185,7 +197,7 @@ export class InsuranceTilesComponent implements OnInit {
       $(document.getElementsByClassName("lifeIns")).addClass("col-md-12 first");
       $(document.getElementsByClassName("homeIns")).addClass("col-md-4 second fade-in");
       $(document.getElementsByClassName("carIns")).addClass("col-md-4 third fade-in");
-      $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth fade-in"); 
+      $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth fade-in");
 
       this.mode = this.mode == 'collapseLifeCard' ? 'expandLifeCard' : 'expandLifeCard';
       // if (this.HiddenMatCardLife) {
@@ -205,9 +217,9 @@ export class InsuranceTilesComponent implements OnInit {
 
       $(document.getElementsByClassName("carIns")).addClass("col-md-12 first");
       $(document.getElementsByClassName("homeIns")).addClass("col-md-4 second fade-in");
-      $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 third fade-in"); 
-      $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth fade-in"); 
-      
+      $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 third fade-in");
+      $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth fade-in");
+
       this.mode = this.mode == 'collapseCarCard' ? 'expandCarCard' : 'expandCarCard';
       // if (this.HiddenMatCardCar) {
       //   this.HiddenMatCardCar = false;
@@ -231,7 +243,7 @@ export class InsuranceTilesComponent implements OnInit {
   closecard() {
     if (this.insuranceType == this.homedivId[0].id) {
       this.mode = this.mode == 'collapseHomeCard' ? 'expandHomeCard' : 'collapseHomeCard';
-     
+
       this.isCardOpened = false;
 
       this.hideHomeCard = true;
@@ -239,18 +251,18 @@ export class InsuranceTilesComponent implements OnInit {
       this.hideBoatCard = false;
       this.hideRentCard = false;
     }
-    else if (this.insuranceType == this.lifedivId[0].id){
+    else if (this.insuranceType == this.lifedivId[0].id) {
       this.mode = this.mode == 'collapseLifeCard' ? 'expandHomeCard' : 'collapseLifeCard';
-  
+
       this.isCardOpened = false;
       this.hideLifeCard = true;
       this.showLifeCard = false;
       this.hideBoatCard = false;
       this.hideRentCard = false;
     }
-    else if (this.insuranceType == this.autodivId[0].id){
+    else if (this.insuranceType == this.autodivId[0].id) {
       this.mode = this.mode == 'collapseCarCard' ? 'expandCarCard' : 'collapseCarCard';
-     
+
       this.isCardOpened = false;
       this.hideAutoCard = true;
       this.showAutoCard = false;
@@ -263,9 +275,9 @@ export class InsuranceTilesComponent implements OnInit {
     $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 first");
     $(document.getElementsByClassName("homeIns")).addClass("col-md-4 second");
     $(document.getElementsByClassName("carIns")).addClass("col-md-4 third");
-    $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth"); 
-    $(document.getElementsByClassName("boatIns")).addClass("col-md-4 fifth"); 
-    $(document.getElementsByClassName("rentIns")).addClass("col-md-4 sixth"); 
+    $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth");
+    $(document.getElementsByClassName("boatIns")).addClass("col-md-4 fifth");
+    $(document.getElementsByClassName("rentIns")).addClass("col-md-4 sixth");
 
 
   }
@@ -417,8 +429,8 @@ export class InsuranceTilesComponent implements OnInit {
 
           if (data != undefined && data != {}) {
 
-            if(this.SliderData.deathBenefit == undefined || this.SliderData.deathBenefit == 0)
-                     this.SliderData.deathBenefit = 250000;
+            if (this.SliderData.deathBenefit == undefined || this.SliderData.deathBenefit == 0)
+              this.SliderData.deathBenefit = 250000;
 
             let ageBracketPrem = data.age.filter((item) => {
               return item['Death Benefit'] == this.SliderData.deathBenefit
@@ -449,11 +461,86 @@ export class InsuranceTilesComponent implements OnInit {
         });
         break;
       }
+      case 'auto': {
+
+        break;
+      }
     }
+  }
+
+  updateTotalPremiumInStore(premium, enabledCard, action) {
+
+    let subscribed = this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+      if (data != undefined && data != {}) {
+        let prevState = JSON.parse(JSON.stringify(data))
+
+        switch(action){
+          case 'add' : {
+            prevState.totalPremium = prevState.totalPremium + premium;
+            prevState.enabledCards
+          break;
+          }
+          case 'sub' : {
+            prevState.totalPremium = prevState.totalPremium - premium;
+            break;
+          }
+
+        }
+    //this.store.dispatch(actions.updateUserDataAct({ data: json }));
+      }
+    });
+    subscribed.unsubscribe();
+  }
+
+  OnInsuanceSlideToggle({ insuranceType, event }) {
+    switch (insuranceType) {
+      case 'pet': {
+
+        let subscribed = this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+          if (data != undefined && data != {}) {
+            if (event.checked == true) {
 
 
+            } else if (event.checked == false) {
 
 
+            }
+          }
+          //   let json = JSON.parse(JSON.stringify(data))
+          //   json.petIncCard = {
+          //     coverage  : 5000,
+          //     premium: 130
+          //   }
+
+
+          //  this.store.dispatch(actions.updateUserDataAct({ data: json }));
+          // }
+        });
+        subscribed.unsubscribe();
+        break;
+      }
+      case 'boat': {
+
+
+        //subscribed.unsubscribe();
+        break;
+      }
+      case 'renters': {
+        let subscribed = this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+          if (data != undefined && data != {}) {
+            let json = JSON.parse(JSON.stringify(data))
+            json.rentersIncCard = {
+              coverage: 50000,
+              premium: 1300
+            }
+            this.store.dispatch(actions.updateUserDataAct({ data: json }));
+          }
+        });
+        subscribed.unsubscribe();
+
+        break;
+      }
+    }
   }
 
   clearCard(event) {

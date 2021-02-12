@@ -17,4 +17,106 @@
 }
 mat-card{
     padding: 0%;
+    
+}
+#div{
+    margin-left:2.3%;
+    margin-right:2.3%
+}
+.mat{
+    padding : 0px;
+    width: 140px; 
+    background-color: white;
+    text-align: center;
+ 
+}
+.topP{
+    padding:5%;
+     margin:0%;
+     color: white;
+      font-weight: bold;
+          font-size: medium;
+          font-family: poppins;
+}
+
+#bottomP{
+font-size:larger;
+margin-left: 16%; 
+text-align: center;
+font-weight: bolder;
+padding: 11%
+}
+.buttonsub{
+    float: left;
+    color: #339FFB;
+    width: 0%;
+    vertical-align: middle;
+    background-color:white; 
+    border-color:transparent;
+    align-self:flex-start;
+    margin-right: 10%; 
+}
+.buttonadd{
+    float: right;
+    color: #339FFB;
+    width: 0%;
+    background-color:white;
+    border-color:transparent; 
+    margin-right: 15%; 
+}
+.buttonsub1{
+    float: left;
+    color: #339FFB;
+    width: 0%;
+  background-color:white; 
+  border-color: white;
+  border-color:transparent;
+  margin-top: 8%
+}
+.buttonadd1{
+float: right; 
+ color: #339FFB; 
+  width: 0%; 
+   margin-right: 20%;
+background-color:white; 
+ border-color: white;  
+ border-color:transparent;  
+ margin-top: 8%
+
+
+}
+#dropdown{
+    justify-content: center;
+    font-weight: bold;
+    font-size: larger;
+    margin-top: 11%;
+ margin-bottom: 11%;
+}
+.zip{
+    width: 80%;
+    border-color: white;
+    text-align: center;
+    border-color: transparent;
+    margin:9%;outline:none;
+     border-block-end-color:black;
+     font-weight: bold;
+     font-size: large;
+}
+
+#zipHeaderCard,
+#incomeHeaderCard,
+#dependentHeaderCard,
+#statusHeaderCard,
+#occupationHeaderCard
+{
+    margin-right: 3.5%;
+    margin-left: 1.5%;
+}
+#ageHeaderCard{
+    margin-right: 3%;
+    margin-left: 1%;
+}
+
+#automobileHeaderCard{
+    margin-left: 1%;;
 }

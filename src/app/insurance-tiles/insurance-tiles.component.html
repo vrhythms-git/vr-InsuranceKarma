@@ -7,9 +7,9 @@
                     <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
                     <mat-icon class="" style="margin-left: -37px; color:white;margin-top: 15%" aria-hidden="false" aria-label="Example home icon">favorite</mat-icon>
                     <mat-card-header>
-                        <mat-card-subtitle>Life Insurance</mat-card-subtitle>
-                        <mat-card-title>Coverage:$250,000</mat-card-title>
-                        <mat-card-title>Premium:$3,200</mat-card-title>
+                        <mat-card-subtitle>{{stateData$.cards[0].name}} Insurance</mat-card-subtitle>
+                        <mat-card-title>Coverage:${{stateData$.cards[0].coverage}}</mat-card-title>
+                        <mat-card-title>Premium:${{stateData$.cards[0].premium}}</mat-card-title>
                     </mat-card-header>
                     <mat-divider style="position: relative;background-color:rgb(58, 5, 5);height: 2px;"></mat-divider>
                     <mat-card-content>
@@ -24,10 +24,10 @@
             <div class="col-md-5 row">
                 <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">favorite</mat-icon>
                 <div class="col-md-11 ml-1" style="background-color: #48CFAD">
-                    <h2 style="color: grey;">Life Insurance</h2>
+                    <h2 style="color: grey;">{{stateData$.cards[0].name}} Insurance</h2>
                     <!-- <span>OLD</span> -->
-                    <p>Coverage: $50,000</p>
-                    <p>Premium: $3,200</p>
+                    <p>Coverage: ${{stateData$.cards[0].coverage}}</p>
+                    <p>Premium: ${{stateData$.cards[0].premium}}</p>
                     <!-- <span>NEW</span>
                 <p>Coverage: $50,000</p>
                 <p>Premium: $3,200</p> -->
@@ -97,9 +97,9 @@
                     <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
                     <mat-icon style="margin-left: -33px; color:white;margin-top: 15%" aria-hidden="false" aria-label="Example home icon">home</mat-icon>
                     <mat-card-header>
-                        <mat-card-subtitle>Home Insurance</mat-card-subtitle>
-                        <mat-card-title>Coverage:$300,000</mat-card-title>
-                        <mat-card-title>Premium:$1,100</mat-card-title>
+                        <mat-card-subtitle>{{stateData$.cards[1].name}} Insurance</mat-card-subtitle>
+                        <mat-card-title>Coverage:${{stateData$.cards[1].coverage}}</mat-card-title>
+                        <mat-card-title>Premium:${{stateData$.cards[1].premium}}</mat-card-title>
                     </mat-card-header>
                     <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
                     <mat-card-content>
@@ -114,10 +114,10 @@
             <div class="col-md-5 row">
                 <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">home</mat-icon>
                 <div class="col-md-11 ml-1" style="background-color:#5D9CEC ">
-                    <h2 style="color: grey;">Home Owners</h2>
+                    <h2 style="color: grey;">{{stateData$.cards[1].name}} Owners</h2>
                     <!-- <span>OLD</span> -->
-                    <p>Coverage: $300,000</p>
-                    <p>Premium: $1,100</p>
+                    <p>Coverage: ${{stateData$.cards[1].coverage}}</p>
+                    <p>Premium: ${{stateData$.cards[1].premium}}</p>
                     <!-- <span>NEW</span>
                 <p>Coverage: $300,000</p>
                 <p>Premium: $1,100</p> -->
@@ -190,9 +190,9 @@
                     <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
                     <mat-icon style="margin-left: -33px; color:white;margin-top: 15%" aria-hidden="false" aria-label="Example home icon">directions_car</mat-icon>
                     <mat-card-header>
-                        <mat-card-subtitle>Auto Insurance</mat-card-subtitle>
-                        <mat-card-title>Coverage:$300,000</mat-card-title>
-                        <mat-card-title>Premium:$1,100</mat-card-title>
+                        <mat-card-subtitle>{{stateData$.cards[2].name}} Insurance</mat-card-subtitle>
+                        <mat-card-title>Coverage:${{stateData$.cards[2].coverage}}</mat-card-title>
+                        <mat-card-title>Premium:${{stateData$.cards[2].premium}}</mat-card-title>
                     </mat-card-header>
                     <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
                     <mat-card-content>
@@ -207,10 +207,10 @@
             <div class="col-md-5 row">
                 <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">directions_car</mat-icon>
                 <div class="col-md-11 ml-1" style="background-color:#FFCE54">
-                    <h2 style="color: grey;">Auto Insurance</h2>
+                    <h2 style="color: grey;">{{stateData$.cards[2].name}} Insurance</h2>
                     <!-- <span>OLD</span> -->
-                    <p>Coverage: $50,000</p>
-                    <p>Premium: $3,200</p>
+                    <p>Coverage: ${{stateData$.cards[2].coverage}}</p>
+                    <p>Premium: ${{stateData$.cards[2].premium}}</p>
                     <!-- <span>NEW</span>
                 <p>Coverage: $50,000</p>
                 <p>Premium: $3,200</p> -->
@@ -276,7 +276,7 @@
                 <mat-card-content>
                     --no change
                 </mat-card-content>
-                <mat-slide-toggle class="ml-auto"></mat-slide-toggle>
+                <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'pet', event: $event})" class="ml-auto"></mat-slide-toggle>
             </mat-card>
         </div>
         </div>
@@ -295,7 +295,7 @@
                 <mat-card-content>
                     --no change
                 </mat-card-content>
-                <mat-slide-toggle class="ml-auto"></mat-slide-toggle>
+                <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'boat', event: $event})" class="ml-auto"></mat-slide-toggle>
             </mat-card>
         </div>
         </div>
@@ -314,7 +314,7 @@
                 <mat-card-content>
                     --no change
                 </mat-card-content>
-                <mat-slide-toggle class="ml-auto"></mat-slide-toggle>
+                <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'renter', event: $event})" class="ml-auto"></mat-slide-toggle>
             </mat-card>
             </div>
         </div>

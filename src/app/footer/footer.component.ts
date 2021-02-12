@@ -21,6 +21,9 @@ export class FooterComponent implements OnInit {
   //= 0;
 
   prevHomeIns = 1100;
+  prevLifeIns = 3200;
+  prevAutoIns = 1100;
+  
   WithoutHome = 4300;
   chart_lifePer = parseInt(((3200 / 5400) * 100).toString())
   chart_homePer = parseInt(((1100 / 5400) * 100).toString())

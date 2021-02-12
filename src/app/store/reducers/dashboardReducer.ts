@@ -14,7 +14,53 @@ export interface CalculatedPremium {
 }
 
 export const userDataInitialState: UserData = {
-    data: {}
+    data: {
+        cards : [
+            {
+                key : 'life',
+                name : 'Life',
+                isEnabled : true,
+                premium: 3200,
+                coverage: 250000
+            },
+            {
+                key : 'home',
+                name : 'Home',
+                isEnabled : true,
+                premium: 1100,
+                coverage: 300000 
+            },
+            {
+                key : 'auto',
+                name : 'Auto',
+                isEnabled : true,
+                premium: 1100,
+                coverage: 300000
+            },
+            {
+                key : 'pet',
+                name : 'Pet',
+                isEnabled : false,
+                premium: 130,
+                coverage: 5000
+            },
+            {
+                key : 'boat',
+                name : 'Boat',
+                isEnabled : false,
+                premium: 1300,
+                coverage: 50000
+            },
+            {
+                key : 'renters',
+                name : 'Life',
+                isEnabled : false,
+                premium: 1300,
+                coverage: 50000
+            }
+        ],
+        totalPremium : 5400
+    }
 }
 
 export const CalculatedPremiumInitialState: CalculatedPremium = {
