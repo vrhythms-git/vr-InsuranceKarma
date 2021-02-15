@@ -1,24 +1,26 @@
 
-   
+
 <div class="container mt-1 mb-5">
         <!-- **************************** Life Insurance **************************  -->
 
-        <div class="col-md-4 flex-container mt-1 lifeIns padleft" fxLayout="row">
-            <div [hidden]="showLifeCard" id="lifeInsurance" style="border-left: 40px solid #37BC9B ;">
+        <div div  class="col-md-4 flex-container mt-1 lifeIns padleft" fxLayout="row">
+            <div  [hidden]="showLifeCard" id="lifeInsurance" style="border-left: 40px solid #37BC9B ;">
                 <mat-card clas="matcardstyle" style="background-color: #48CFAD;">
                     <div (click)="showCard({id:'lifeInsuranceId', event: $event})">
                     <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">favorite</mat-icon>
                     <mat-card-header>
-                        <mat-card-subtitle>{{stateData$.cards[0].name}} Insurance</mat-card-subtitle>
-                        <mat-card-title>Coverage:${{stateData$.cards[0].coverage}}</mat-card-title>
-                        <mat-card-title>Premium:${{stateData$.cards[0].premium}}</mat-card-title>
+                      
+                            <mat-card-subtitle *ngIf="isDataAvailable">{{stateData$?.cards[0].name}} Insurance</mat-card-subtitle>
+                        
+                        <mat-card-title *ngIf="isDataAvailable" >Coverage:${{stateData$.cards[0].coverage}}</mat-card-title>
+                        <mat-card-title *ngIf="isDataAvailable" >Premium:${{stateData$.cards[0].premium}}</mat-card-title>
                     </mat-card-header>
                     <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
                     <mat-card-content>
                         --no change
                     </mat-card-content>
                     </div>
-                    <mat-slide-toggle checked (change)="OnInsuanceSlideToggle({insuranceType:'Life', event: $event})" class="ml-auto"></mat-slide-toggle>
+                    <mat-slide-toggle checked (change)="OnInsuanceSlideToggle({insuranceType:'life', event: $event})" class="ml-auto"></mat-slide-toggle>
                 </mat-card>
             </div>
         </div>
@@ -27,13 +29,11 @@
             <div class="col-md-5 row">
                 <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">favorite</mat-icon>
                 <div class="col-md-11 ml-1" style="background-color: #48CFAD">
-                    <h2 style="color: grey;">{{stateData$.cards[0].name}} Insurance</h2>
-                    <!-- <span>OLD</span> -->
-                    <p>Coverage: ${{stateData$.cards[0].coverage}}</p>
-                    <p>Premium: ${{stateData$.cards[0].premium}}</p>
-                    <!-- <span>NEW</span>
-                <p>Coverage: $50,000</p>
-                <p>Premium: $3,200</p> -->
+                    <h2 *ngIf="isDataAvailable" style="color: grey;">{{stateData$?.cards[0].name}} Insurance</h2>
+                 
+                    <p *ngIf="isDataAvailable">Coverage: ${{stateData$?.cards[0].coverage}}</p>
+                    <p *ngIf="isDataAvailable">Premium: ${{stateData$?.cards[0].premium}}</p>
+                
                     <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
                     <span class="pl-3" style="color: white">--no change</span>
                     <div class="ml-auto text-right">
@@ -100,16 +100,16 @@
                     <div (click)="showCard({id:'homeInsuranceId', event: $event})">
                     <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">home</mat-icon>
                     <mat-card-header>
-                        <mat-card-subtitle>{{stateData$.cards[1].name}} Insurance</mat-card-subtitle>
-                        <mat-card-title>Coverage:${{stateData$.cards[1].coverage}}</mat-card-title>
-                        <mat-card-title>Premium:${{stateData$.cards[1].premium}}</mat-card-title>
+                        <mat-card-subtitle *ngIf="isDataAvailable">{{stateData$?.cards[1].name}} Insurance</mat-card-subtitle>
+                        <mat-card-title *ngIf="isDataAvailable">Coverage:${{stateData$?.cards[1].coverage}}</mat-card-title>
+                        <mat-card-title *ngIf="isDataAvailable">Premium:${{stateData$?.cards[1].premium}}</mat-card-title>
                     </mat-card-header>
                     <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
                     <mat-card-content>
                         --no change
                     </mat-card-content>
                     </div>
-                    <mat-slide-toggle checked (change)="OnInsuanceSlideToggle({insuranceType:'Home', event: $event})" class="ml-auto"></mat-slide-toggle>
+                    <mat-slide-toggle checked (change)="OnInsuanceSlideToggle({insuranceType:'home', event: $event})" class="ml-auto"></mat-slide-toggle>
                 </mat-card>
             </div>
         </div>
@@ -118,13 +118,11 @@
             <div class="col-md-5 row">
                 <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">home</mat-icon>
                 <div class="col-md-11 ml-1" style="background-color:#5D9CEC ">
-                    <h2 style="color: grey;">{{stateData$.cards[1].name}} Owners</h2>
-                    <!-- <span>OLD</span> -->
-                    <p>Coverage: ${{stateData$.cards[1].coverage}}</p>
-                    <p>Premium: ${{stateData$.cards[1].premium}}</p>
-                    <!-- <span>NEW</span>
-                <p>Coverage: $300,000</p>
-                <p>Premium: $1,100</p> -->
+                    <h2 style="color: grey;" *ngIf="isDataAvailable">{{stateData$?.cards[1].name}} Owners</h2>
+                  
+                    <p *ngIf="isDataAvailable">Coverage: ${{stateData$?.cards[1].coverage}}</p>
+                    <p *ngIf="isDataAvailable">Premium: ${{stateData$?.cards[1].premium}}</p>
+             
                     <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
                     <span class="pl-3" style="color: white">--no change</span>
                     <div class="ml-auto text-right">
@@ -194,16 +192,16 @@
                     <div (click)="showCard({id:'carInsuranceId', event: $event})">
                     <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">directions_car</mat-icon>
                     <mat-card-header>
-                        <mat-card-subtitle>{{stateData$.cards[2].name}} Insurance</mat-card-subtitle>
-                        <mat-card-title>Coverage:${{stateData$.cards[2].coverage}}</mat-card-title>
-                        <mat-card-title>Premium:${{stateData$.cards[2].premium}}</mat-card-title>
+                        <mat-card-subtitle *ngIf="isDataAvailable">{{stateData$?.cards[2].name}} Insurance</mat-card-subtitle>
+                        <mat-card-title *ngIf="isDataAvailable">Coverage:${{stateData$?.cards[2].coverage}}</mat-card-title>
+                        <mat-card-title *ngIf="isDataAvailable">Premium:${{stateData$?.cards[2].premium}}</mat-card-title>
                     </mat-card-header>
                     <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
                     <mat-card-content>
                         --no change
                     </mat-card-content>
                     </div>
-                    <mat-slide-toggle checked (change)="OnInsuanceSlideToggle({insuranceType:'Auto', event: $event})" class="ml-auto"></mat-slide-toggle>
+                    <mat-slide-toggle checked (change)="OnInsuanceSlideToggle({insuranceType:'auto', event: $event})" class="ml-auto"></mat-slide-toggle>
                 </mat-card>
             </div>
         </div>
@@ -212,13 +210,11 @@
             <div class="col-md-5 row">
                 <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">directions_car</mat-icon>
                 <div class="col-md-11 ml-1" style="background-color:#FFCE54">
-                    <h2 style="color: grey;">{{stateData$.cards[2].name}} Insurance</h2>
-                    <!-- <span>OLD</span> -->
-                    <p>Coverage: ${{stateData$.cards[2].coverage}}</p>
-                    <p>Premium: ${{stateData$.cards[2].premium}}</p>
-                    <!-- <span>NEW</span>
-                <p>Coverage: $50,000</p>
-                <p>Premium: $3,200</p> -->
+                    <h2 style="color: grey;" *ngIf="isDataAvailable" >{{stateData$?.cards[2].name}} Insurance</h2>
+                 
+                    <p *ngIf="isDataAvailable">Coverage: ${{stateData$?.cards[2].coverage}}</p>
+                    <p *ngIf="isDataAvailable">Premium: ${{stateData$?.cards[2].premium}}</p>
+               
                     <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
                     <span class="pl-3" style="color:white;">--no change</span>
                     <div class="ml-auto text-right">

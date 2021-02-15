@@ -8,7 +8,6 @@ import { IKServices } from "../services/app.service";
 import * as $ from "jquery";
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
-
 @Component({
   selector: 'app-insurance-tiles',
   templateUrl: './insurance-tiles.component.html',
@@ -119,12 +118,28 @@ export class InsuranceTilesComponent implements OnInit {
   constructor(private store: Store<UserData>, private ikservice: IKServices) {
 
     // this.stateData$ =  this.store.pipe(select(CounterSelector.selectUserData))
-    this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => (this.stateData$ = storeData));
+    //(this.stateData$ = storeData));
   }
 
   // stateData : Observable;
 
+  isDataAvailable= false;
+
   ngOnInit(): void {
+
+    // setTimeout(()=>{
+    this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => {
+
+      if (storeData != undefined && storeData != {})
+        this.stateData$ = storeData
+        this.isDataAvailable = true; 
+      //this.stateData$ =  JSON.parse(JSON.stringify(storeData))
+
+    }
+
+    );
+    //},100)
+
     this.mode = "collapseHomeCard";
     this.mode = "collapseLifeCard";
     this.mode = "collapseCarCard";
@@ -487,16 +502,44 @@ export class InsuranceTilesComponent implements OnInit {
     subscribed.unsubscribe();
   }
 
+  isToggle = false;
 
   OnInsuanceSlideToggle({ insuranceType, event }) {
-    if (insuranceType == "Home") {
+    this.isToggle = false;
+    if (insuranceType == "home") {
       this.toggleSlideHome = event.checked;
     }
-    if (insuranceType == "Life") {
+    if (insuranceType == "life") {
       this.toggleSlideLife = event.checked;
     }
-    if (insuranceType == "Auto") {
+    if (insuranceType == "auto") {
       this.toggleSlideAuto = event.checked;
+    }
+
+    if (event.checked == true) {
+
+      this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+        if (this.isToggle == false) {
+          let index = data.cards.findIndex(obj => obj.key == insuranceType);
+          let prevState = JSON.parse(JSON.stringify(data))
+          prevState.cards[index].isEnabled = true
+          this.store.dispatch(actions.updateUserDataAct({ data: prevState }));
+          this.isToggle = true;
+        }
+      });
+      // subscribedStore.unsubscribe()
+    } else if (event.checked == false) {
+
+      this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+        if (this.isToggle == false) {
+          let index = data.cards.findIndex(obj => obj.key == insuranceType);
+          let prevState = JSON.parse(JSON.stringify(data))
+          prevState.cards[index].isEnabled = false
+          this.store.dispatch(actions.updateUserDataAct({ data: prevState }));
+          this.isToggle = true;
+        }
+      });
+
     }
   }
 
