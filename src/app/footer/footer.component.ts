@@ -18,12 +18,12 @@ export class FooterComponent implements OnInit {
 
   isDataAvailable = false;
   constructor(private store: Store<UserData>) {
-    this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData =>{
-    if(storeData!=undefined || storeData!= {}){ 
-      this.stateData$ = storeData
-      this.isDataAvailable = true;
-    }
-    } );
+    this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => {
+      if (storeData != undefined || storeData != {}) {
+        this.stateData$ = storeData
+        this.isDataAvailable = true;
+      }
+    });
   }
   //= 0;
 
@@ -48,9 +48,24 @@ export class FooterComponent implements OnInit {
     WithoutHome = 4300;
     this.store.pipe(select(selectors.selectUserData)).subscribe((data) => {
 
-     // console.log('Evnt occured.....')
+      // console.log('Evnt occured.....')
       if (data != undefined && data != {}) {
-        
+
+
+        $('#chartHeaderID').children().remove();
+        $('#chartBarsID').children().remove();
+        for (let i = 0; i < data.cards.length; i++) {
+
+          if (data.cards[i].isEnabled == true) {
+            $('#chartHeaderID').append(`<th>${data.cards[i].name}</th>`);
+      
+            $('#chartBarsID')
+              .append(`<td style="width: ${data.cards[i].percentOutOfTotPremium}%; height: 1.7rem; background-color: ${data.cards[i].color}; ">${data.cards[i].percentOutOfTotPremium}%</td>`)
+          }
+
+
+        }
+
         //   try {
         //     try {
         //       this.newPremium = (this.WithoutHome + parseInt(data.calculatedHomePremium.data.newPremium));

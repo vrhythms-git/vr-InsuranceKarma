@@ -21,42 +21,52 @@ export const userDataInitialState: UserData = {
                 name : 'Life',
                 isEnabled : true,
                 premium: 3200,
-                coverage: 250000
+                coverage: 250000,
+                percentOutOfTotPremium : parseInt(((3200 / 5400) * 100).toString()),
+                color: '#298D74'
             },
             {
                 key : 'home',
                 name : 'Home',
                 isEnabled : true,
                 premium: 1100,
-                coverage: 300000 
+                coverage: 300000, 
+                percentOutOfTotPremium : parseInt(((1100 / 5400) * 100).toString()),
+                color : '#3867A5'
             },
             {
                 key : 'auto',
                 name : 'Auto',
                 isEnabled : true,
                 premium: 1100,
-                coverage: 300000
+                coverage: 300000,
+                percentOutOfTotPremium  : parseInt(((1100 / 5400) * 100).toString()),
+                color: '#BD8C32'
             },
             {
                 key : 'pet',
                 name : 'Pet',
                 isEnabled : false,
                 premium: 130,
-                coverage: 5000
+                coverage: 5000,
+                color: '#69913E'
             },
             {
                 key : 'boat',
                 name : 'Boat',
                 isEnabled : false,
                 premium: 1300,
-                coverage: 50000
+                coverage: 50000,
+                color: '#2C83A3'
+
             },
             {
                 key : 'renters',
                 name : 'Life',
                 isEnabled : false,
                 premium: 1300,
-                coverage: 50000
+                coverage: 50000,
+                color:'#715CA5'
             }
         ],
         totalPremium : 5400

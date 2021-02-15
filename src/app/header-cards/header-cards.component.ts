@@ -64,7 +64,7 @@ export class HeaderCardsComponent implements OnInit {
               prevState.cards[index].state_name = stateData[0].states
               this.store.dispatch(actions.updateUserDataAct({ data: prevState }));
               this.isTotalPremiumCalculated = false;
-              this.calculateTotalPremium()
+              this.calculateTotalPremium(index, stateData[0].Premium);
               
             }
           });
@@ -76,7 +76,7 @@ export class HeaderCardsComponent implements OnInit {
   }
 
   isTotalPremiumCalculated = false;
-  calculateTotalPremium() {
+  calculateTotalPremium(cardIndex, premium) {
     this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
       let totalPrem = 0;
       if (this.isTotalPremiumCalculated == false) {
@@ -88,21 +88,42 @@ export class HeaderCardsComponent implements OnInit {
 
         let prevStateData = JSON.parse(JSON.stringify(data))
         prevStateData.totalPremium = totalPrem;
+       // prevStateData.cards[cardIndex].percentOutOfTotPremium = parseInt(((premium / totalPrem) * 100).toString()) 
+       prevStateData = this.reCalculatePercentages(prevStateData)
         this.store.dispatch(actions.updateUserDataAct({ data: prevStateData }));
       }
 
     });
   }
 
+  reCalculatePercentages(prevStateData){
+
+    let totalPremium = prevStateData.totalPremium;
+
+    for (let i = 0; i < prevStateData.cards.length; i++) {
+      if (prevStateData.cards[i].isEnabled == true)
+      prevStateData.cards[i].percentOutOfTotPremium =  parseInt(((prevStateData.cards[i].premium / totalPremium) * 100).toString())
+    }
+
+    return prevStateData;
+  }
 
   masterData: any = {}
 
   ngOnInit(): void {
 
     console.log("In ngOnInit of header-cards.component.")
-    this.services.getMasterData().subscribe((data) => {
-      if (data["status"] == "success") {
-        this.masterData = data;
+    this.services.getMasterData().subscribe((resData) => {
+      if (resData["status"] == "success") {
+        this.masterData = resData;
+       // let appMasterData= {};
+      
+          // this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+          //     let prevState = JSON.parse(JSON.stringify(data));
+          //     prevState.masterData.stateData = resData["data"].states; 
+          //     prevState.masterData.ageData = resData["data"].age;
+          //     this.store.dispatch(actions.updateUserDataAct({data : prevState}));
+          // });
       }
     })
 
@@ -194,10 +215,15 @@ export class HeaderCardsComponent implements OnInit {
         ageData.cards[index].premium = AgeBracketData[0].Premium
         ageData.cards[index].coverage = AgeBracketData[0]["Death Benefit"]
         ageData.cards[index].age = ageBracket
+        ageData.selectedAgeBracket  = this.masterData.data.age.filter((item) => {
+          return (item["Age "].replaceAll(" ", "") == ageBracket);
+        })
 
-        this.store.dispatch(actions.updateUserDataAct({ data: ageData }));
+      this.store.dispatch(actions.updateUserDataAct({ data: ageData }));
+
         this.isTotalPremiumCalculated = false;
-        this.calculateTotalPremium()
+        this.calculateTotalPremium(index, AgeBracketData[0].Premium);
+        // this.calculateTotalPremium()
       }
       //subscription.unsubscribe();
     })

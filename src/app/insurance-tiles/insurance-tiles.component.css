@@ -187,6 +187,20 @@ p{
     }
 } 
 
+.inactiveGrey{
+  opacity: 0.3;
+  color: grey;
+}
+
+/deep/ .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: green;
+}
+
+/deep/ .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: white;
+}
+
+
 .padleft{
   padding-left: 1%;
 }
@@ -206,6 +220,12 @@ p{
   margin-left: -33px; 
   color:white;
   margin-top: 15%;
+}
+
+.container1 {  
+  display: grid;  
+  grid-template-columns: 1fr;  
+  /* grid-template-rows: 50px 50px;   */
 }
 
 
