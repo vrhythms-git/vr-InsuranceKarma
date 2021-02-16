@@ -412,13 +412,13 @@ export class InsuranceTilesComponent implements OnInit {
     });
   }
 
-  reCalculatePercentages(prevStateData){
+  reCalculatePercentages(prevStateData) {
 
     let totalPremium = prevStateData.totalPremium;
 
     for (let i = 0; i < prevStateData.cards.length; i++) {
       if (prevStateData.cards[i].isEnabled == true)
-      prevStateData.cards[i].percentOutOfTotPremium =  parseInt(((prevStateData.cards[i].premium / totalPremium) * 100).toString())
+        prevStateData.cards[i].percentOutOfTotPremium = parseInt(((prevStateData.cards[i].premium / totalPremium) * 100).toString())
     }
 
     return prevStateData;
@@ -449,23 +449,23 @@ export class InsuranceTilesComponent implements OnInit {
                 'insuranceData': this.SliderData
               }
             }
-           // console.log("Json payload for /getPremium is: " + JSON.stringify(payloadJSON))
-           this.updateTotalPremiumInStore(payloadJSON, 'home', data) 
+            // console.log("Json payload for /getPremium is: " + JSON.stringify(payloadJSON))
+            this.updateTotalPremiumInStore(payloadJSON, 'home', data)
 
-           let totalPrem = 0;
-           if (this.isTotalPremiumCalculated == false) {
-             this.isTotalPremiumCalculated = true;
-             for (let i = 0; i < data.cards.length; i++) {
-               if (data.cards[i].isEnabled == true)
-                 totalPrem = totalPrem + data.cards[i].premium
-             }
-     
-             let prevStateData = JSON.parse(JSON.stringify(data))
-             prevStateData.totalPremium = totalPrem;
-             prevStateData = this.reCalculatePercentages(prevStateData)
-            // prevStateData.cards[index].percentOutOfTotPremium = parseInt(((data.cards[index].premium / totalPrem) * 100).toString()) 
-             this.store.dispatch(actions.updateUserDataAct({ data: prevStateData }));
-           }
+            let totalPrem = 0;
+            if (this.isTotalPremiumCalculated == false) {
+              this.isTotalPremiumCalculated = true;
+              for (let i = 0; i < data.cards.length; i++) {
+                if (data.cards[i].isEnabled == true)
+                  totalPrem = totalPrem + data.cards[i].premium
+              }
+
+              let prevStateData = JSON.parse(JSON.stringify(data))
+              prevStateData.totalPremium = totalPrem;
+              prevStateData = this.reCalculatePercentages(prevStateData)
+              // prevStateData.cards[index].percentOutOfTotPremium = parseInt(((data.cards[index].premium / totalPrem) * 100).toString()) 
+              this.store.dispatch(actions.updateUserDataAct({ data: prevStateData }));
+            }
 
           }
 
@@ -505,9 +505,9 @@ export class InsuranceTilesComponent implements OnInit {
                 'insuranceData': this.SliderData
               }
             }
-           // console.log("Json payload for /getPremium is: " + JSON.stringify(payloadJSON))
+            // console.log("Json payload for /getPremium is: " + JSON.stringify(payloadJSON))
 
-            this.updateTotalPremiumInStore(payloadJSON, 'life', data) 
+            this.updateTotalPremiumInStore(payloadJSON, 'life', data)
 
             let totalPrem = 0;
             if (this.isTotalPremiumCalculated == false) {
@@ -516,11 +516,11 @@ export class InsuranceTilesComponent implements OnInit {
                 if (data.cards[i].isEnabled == true)
                   totalPrem = totalPrem + data.cards[i].premium
               }
-      
+
               let prevStateData = JSON.parse(JSON.stringify(data))
               prevStateData.totalPremium = totalPrem;
               prevStateData = this.reCalculatePercentages(prevStateData)
-             // prevStateData.cards[index].percentOutOfTotPremium = parseInt(((ageBracketPrem[0].Premium / totalPrem) * 100).toString()) 
+              // prevStateData.cards[index].percentOutOfTotPremium = parseInt(((ageBracketPrem[0].Premium / totalPrem) * 100).toString()) 
               this.store.dispatch(actions.updateUserDataAct({ data: prevStateData }));
             }
 
@@ -545,26 +545,37 @@ export class InsuranceTilesComponent implements OnInit {
     }
   }
 
-
+  insight = '';
 
   async updateTotalPremiumInStore(payloadJSON, insuranceType, prevState) {
 
 
     let index = prevState.cards.findIndex(obj => obj.key == insuranceType)
-   await this.ikservice.postInsuranceData(payloadJSON).subscribe((res) => {
+    await this.ikservice.postInsuranceData(payloadJSON).subscribe((res) => {
       this.tempFlag = true;
       let newState = JSON.parse(JSON.stringify(prevState))
       newState.cards[index].premium = res.data.newPremium
       newState.cards[index].insight = res.data.insight
       newState.cards[index].risk = res.data.risk
+
+      let totalPrem = 0;
+      for (let i = 0; i < prevState.cards.length; i++) {
+        if (prevState.cards[i].isEnabled == true)
+          totalPrem = totalPrem + prevState.cards[i].premium
+      }
+
+      newState.totalPremium = totalPrem;
+
       newState = this.reCalculatePercentages(newState)
-     // newState.cards[index].percentOutOfTotPremium  =  parseInt((( res.data.newPremium / newState.totalPremium) * 100).toString())
+      // newState.cards[index].percentOutOfTotPremium  =  parseInt((( res.data.newPremium / newState.totalPremium) * 100).toString())
       if (res.data.risk == 'medium' || res.data.risk == 'high')
         newState.cards[index].notification = true
       else
         newState.cards[index].notification = false
 
       // console.log('Calculated premium new state is: ' + JSON.stringify(newState))
+     // if( res.data.risk == 'high')
+      this.insight = res.data.insight;
       this.store.dispatch(actions.updateUserDataAct({ data: newState }));
       // this.footer.populateUI()
       // subscription.unsubscribe();
@@ -578,14 +589,66 @@ export class InsuranceTilesComponent implements OnInit {
 
   OnInsuanceSlideToggle({ insuranceType, event }) {
     this.isToggle = false;
-    if (insuranceType == "home") {
-      this.toggleSlideHome = event.checked;
-    }
+    // if (insuranceType == "home") {
+    //   this.toggleSlideHome = event.checked;
+    // }
+    // if (insuranceType == "life") {
+    //   this.toggleSlideLife = event.checked;
+    // }
+    // if (insuranceType == "auto") {
+    //   this.toggleSlideAuto = event.checked;
+    // }
+
     if (insuranceType == "life") {
       this.toggleSlideLife = event.checked;
+      if (this.toggleSlideLife) {
+        $(document.getElementsByClassName("lifeIns")).removeClass("inactiveGrey");
+      }
+      else {
+        $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 inactiveGrey");
+      }
+    }
+    if (insuranceType == "home") {
+      this.toggleSlideHome = event.checked;
+      if (this.toggleSlideHome) {
+        $(document.getElementsByClassName("homeIns")).removeClass("inactiveGrey");
+      }
+      else {
+        $(document.getElementsByClassName("homeIns")).addClass("col-md-4 inactiveGrey");
+      }
     }
     if (insuranceType == "auto") {
       this.toggleSlideAuto = event.checked;
+      if (this.toggleSlideAuto) {
+        $(document.getElementsByClassName("carIns")).removeClass("inactiveGrey");
+      }
+      else {
+        $(document.getElementsByClassName("carIns")).addClass("col-md-4 inactiveGrey");
+      }
+    }
+    if (insuranceType == "pet") {
+      if (event.checked) {
+        $(document.getElementsByClassName("petIns")).removeClass("inactiveGrey");
+      }
+      else {
+        $(document.getElementsByClassName("petIns")).addClass("col-md-4 inactiveGrey");
+      }
+    }
+    if (insuranceType == "boat") {
+      if (event.checked) {
+        $(document.getElementsByClassName("boatIns")).removeClass("inactiveGrey");
+      }
+      else {
+        $(document.getElementsByClassName("boatIns")).addClass("col-md-4 inactiveGrey");
+      }
+    }
+    if (insuranceType == "renters") {
+      if (event.checked) {
+        $(document.getElementsByClassName("rentIns")).removeClass("inactiveGrey");
+      }
+      else {
+        $(document.getElementsByClassName("rentIns")).addClass("col-md-4 inactiveGrey");
+      }
     }
 
     if (event.checked == true) {
@@ -600,7 +663,7 @@ export class InsuranceTilesComponent implements OnInit {
           for (let i = 0; i < data.cards.length; i++) {
             if (prevState.cards[i].isEnabled == true)
               totalPrem = totalPrem + data.cards[i].premium
- 
+
           }
 
           prevState.totalPremium = totalPrem;
@@ -625,7 +688,7 @@ export class InsuranceTilesComponent implements OnInit {
 
 
           prevState.totalPremium = totalPrem;
-          prevState =  this.reCalculatePercentages(prevState)
+          prevState = this.reCalculatePercentages(prevState)
           this.store.dispatch(actions.updateUserDataAct({ data: prevState }));
           this.isToggle = true;
         }

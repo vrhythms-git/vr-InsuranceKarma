@@ -41,6 +41,18 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
 
+  setInterval(()=>{
+
+   var suscribed =  this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => {
+      if (storeData != undefined || storeData != {}) {
+        this.stateData$ = storeData
+        this.isDataAvailable = true;
+      }
+    });
+    suscribed.unsubscribe()
+
+  },200)
+
     //this.newPremium = 0;
     let WithoutHome = 4300;
 
