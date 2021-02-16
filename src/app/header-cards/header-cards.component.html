@@ -1,36 +1,29 @@
-<div class="container mt-1">
-<div style="margin-right: -9%" >
-  <div class="row col-md-12" style="padding:0; ">
-    <div id="ageHeaderCard" class="col-sm col-md col-lg-1 col-xl-1 ">
-      <mat-card class="mat">
-        <div class="p-1 text-center" style="background-color:#AAB2BD;">
-          <p class="topP">Age</p>
-        </div>
-        <button class="buttonsub" (click)="agedecrement($event)"
-          mat-icon-button aria-label="Example icon button with a remove icon">
-          <mat-icon style="margin-top: 10px"> remove</mat-icon>
-        </button>
+<div class="container-md container-sm">
+    <div class="row" style="justify-content: space-between;margin-left:5px;padding:0;margin-right: 2px">
+      <div id="ageHeaderCard" class="col-sm col-md" >
+        <mat-card class="mat">
+          <div class="p-1 text-center mat-div">
+            <p class="topP">Age</p>
+          </div>
+          <button class="buttonsub" (click)="agedecrement($event)" mat-icon-button>
+            <mat-icon style="margin-top: 10px;margin-left:-5px;"> remove</mat-icon>
+          </button>
 
-        <button class="buttonadd" (click)="ageincrement($event)" mat-icon-button
-          aria-label="Example icon button with a addition icon">
-          <mat-icon style="margin-top: 10px">addition</mat-icon>
-        </button>
+          <button class="buttonadd" (click)="ageincrement($event)" mat-icon-button >
+            <mat-icon style="margin-top: 10px">addition</mat-icon>
+          </button>
+          <p class="p-3" id="bottomP">{{age[counter].name}}</p>
+        </mat-card>
+      </div>
 
-        <p class="p-3" id="bottomP">{{age[counter].name}}</p>
+      <div id="zipHeaderCard" class="col-sm col-md">
 
-      </mat-card>
-    </div>
-
-    <div id="zipHeaderCard" class="col-sm col-md col-lg-1 col-xl-1  ">
-
-      <mat-card class="mat">
-        <div class="p-1 text-center" style="background-color:#AAB2BD;">
-          <p class="topP">Zip Code</p>
-        </div>
-        <input type="text" id="zipCodeInputField" (keypress)="keyPress($event)" style="width: 80%;border-color: white;text-align: center;
-          border-color: transparent; margin:9%;outline:none;border-block-end-color:black;font-weight: bold;font-size: large;"
-          maxlength="5" minlength="5">
-        <!--<mat-select placeholder="State">
+        <mat-card class="mat">
+          <div class="p-1 text-center mat-div">
+            <p class="topP">Zip Code</p>
+          </div>
+          <input type="text" class="zip" id="zipCodeInputField" (keypress)="keyPress($event)" >
+          <!--<mat-select placeholder="State">
         
             <mat-option value="California">California</mat-option>
             <mat-option value="New York">New York</mat-option>
@@ -55,92 +48,83 @@
           
           </mat-select>
         -->
-      </mat-card>
+        </mat-card>
 
-    </div>
-    <div id="incomeHeaderCard" class="col-sm col-md col-lg-1 col-xl-1">
-      <mat-card class="mat">
-        <div class="p-1 text-center" style="background-color:#AAB2BD;">
-          <p class="topP">Income</p>
-        </div>
-        <mat-select class="text-center" id="dropdown" [(value)]="selectedIncome">
+      </div>
+      <div id="incomeHeaderCard" class="col-sm col-md">
+        <mat-card class="mat">
+          <div class="p-1 text-center mat-div">
+            <p class="topP">Income</p>
+          </div>
+          <mat-select class="text-center incomeTextStyle" id="dropdown" [(value)]="selectedIncome">
 
-          <mat-option *ngFor="let Income of Incomes" [value]="Income.value">
-            {{Income.viewValue}}
-          </mat-option>
-        </mat-select>
-      </mat-card>
-    </div>
-    <div id="dependentHeaderCard" class="col-sm col-md col-lg-1 col-xl-1  ">
-      <mat-card class="mat">
-        <div class="p-1 text-center" style="background-color:#AAB2BD;">
-          <p class="topP">Dependants</p>
+            <mat-option *ngFor="let Income of Incomes" [value]="Income.value">
+             <span  class="incomeTextStyle"> {{Income.viewValue}}</span>
+            </mat-option>
+          </mat-select>
+        </mat-card>
+      </div>
+      <div id="dependentHeaderCard" class="col-sm col-md">
+        <mat-card class="mat">
+          <div class="p-1 text-center mat-div">
+            <p class="topP">Dependants</p>
           </div>
           <button class="buttonsub1" (click)="depedentdecrement($event)" mat-icon-button aria-label="Example icon button with a remove icon">
-                  <mat-icon>remove</mat-icon>
-                </button>
+            <mat-icon>remove</mat-icon>
+          </button>
 
-        <button class="buttonadd1" (click)="depedentincrement($event)" mat-icon-button
-          aria-label="Example icon button with a addition icon">
-          <mat-icon>addtion</mat-icon>
-        </button>
+          <button class="buttonadd1" (click)="depedentincrement($event)" mat-icon-button aria-label="Example icon button with a addition icon">
+            <mat-icon>addtion</mat-icon>
+          </button>
+          <p class="p-3" id="bottomP">{{dependents[counter1].name}}</p>
 
-       
-
-        <p class="p-3" id="bottomP">{{dependents[counter1].name}}</p>
-
-      </mat-card>
-    </div>
-    <div id="statusHeaderCard" class="col-sm col-md col-lg-1 col-xl-1 ">
-      <mat-card class="mat">
-        <div class="p-1 text-center" style="background-color:#AAB2BD;">
-          <p class="topP">Status</p>
+        </mat-card>
+      </div>
+      <div id="statusHeaderCard" class="col-sm col-md">
+        <mat-card class="mat">
+          <div class="p-1 text-center mat-div">
+            <p class="topP">Status</p>
           </div>
-        <mat-select [(value)]="selectedStatus" id="dropdown">
-          <mat-option *ngFor="let Status of Stat" [value]="Status.value">
-            {{Status.viewValue}}
-          </mat-option>
+          <mat-select [(value)]="selectedStatus" id="dropdown">
+            <mat-option *ngFor="let Status of Stat" [value]="Status.value">
+              {{Status.viewValue}}
+            </mat-option>
+          </mat-select>
 
-        </mat-select>
+        </mat-card>
+      </div>
+      <div id="occupationHeaderCard" class="col-sm col-md">
+        <mat-card class="mat">
 
-      </mat-card>
-    </div>
-    <div id="occupationHeaderCard" class="col-sm col-md col-lg-1 col-xl-1  ">
-      <mat-card class="mat">
-
-        <div class="p-1 text-center" style="background-color:#AAB2BD;">
-          <p class="topP">Occupation</p> 
+          <div class="p-1 text-center mat-div">
+            <p class="topP">Occupation</p>
           </div>
-        <mat-select [(value)]="selectedOccupation" id="dropdown">
-          <mat-option *ngFor="let Occupation of Occupations" [value]="Occupation.value">
-            {{Occupation.viewValue}}
-          </mat-option>
-        </mat-select>
-      </mat-card>
+          <mat-select [(value)]="selectedOccupation" id="dropdown">
+            <mat-option *ngFor="let Occupation of Occupations" [value]="Occupation.value">
+              {{Occupation.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-card>
+      </div>
+      
+      <div id="automobileHeaderCard" class="col-sm col-md">
+        <mat-card class="mat">
+
+          <div class="p-1 text-center mat-div">
+            <p class="topP">Automobiles</p>
+          </div>
+
+          <button class="buttonsub1" (click)="automobiledecrement($event)" mat-icon-button aria-label="Example icon button with a remove icon">
+            <mat-icon>remove</mat-icon>
+          </button>
+
+          <button class="buttonadd1" (click)="automobileincrement($event)" mat-icon-button aria-label="Example icon button with a addition icon">
+            <mat-icon>addtion</mat-icon>
+          </button>
+
+          <p class="p-3" id="bottomP">{{automobile[counter2].value}}</p>
+
+        </mat-card>
+      </div>
     </div>
-    <div id="automobileHeaderCard" class="col-sm col-md col-lg-1 col-xl-1  ">
-      <mat-card style="text-align: center;width: 140px;padding: 0%;">
-
-      <div class="p-1 text-center" style="background-color:#AAB2BD;">
-        <p class="topP">Automobiles</p>
-        </div>
-
-        <button class="buttonsub1" (click)="automobiledecrement($event)" mat-icon-button
-                aria-label="Example icon button with a remove icon">
-                <mat-icon>remove</mat-icon>
-              </button>
-
-        <button class="buttonadd1"  (click)="automobileincrement($event)"
-          mat-icon-button aria-label="Example icon button with a addition icon">
-          <mat-icon>addtion</mat-icon>
-        </button>
-
-        
-
-        <p class="p-3" id="bottomP">{{automobile[counter2].value}}</p>
-
-      </mat-card>
-    </div>
-  </div>
-</div>
 </div>

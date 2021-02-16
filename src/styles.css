@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; background-color: #ccfffd; overflow-y: hidden; }
+html, body { height: 100%; background-color: #E6E9ED; }
 body { margin: 0; }
 
 
@@ -8,3 +8,8 @@ body { margin: 0; }
     font-family: poppins;
     src: url(assets/Poppins/Poppins-Regular.ttf);
   }
+
+  /* @font-face {
+    font-family: poppins;
+    src: url(assets/Poppins/Poppins-Regular.ttf);
+  } */

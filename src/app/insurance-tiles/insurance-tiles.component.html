@@ -1,23 +1,23 @@
-<br>
-
 <div class="container1">
 <div style="padding-left: 9.3%;">
 
     <!-- **************************** Life Insurance **************************  -->
-    <div [@slideInOutLife]="mode" class="col-md-12 row largeCardFont lifeIns" id="lifeInsurance" [hidden]="hideLifeCard"
+    <div [@slideInOutLife]="mode" class="col-md-12 row largeCardFont lifeIns cardShadow" id="lifeInsurance" [hidden]="hideLifeCard"
         style="background-color: white;border-left: 40px solid #37BC9B;">
-        <div class="col-md-12 row justify-content-center" [hidden]="false" style="background-color: red;color:white;">Notification</div>
+        <!--<div class="col-md-12 row justify-content-center" [hidden]="false" style="background-color: red;color:white;">Notification</div>-->
         <div class="col-md-5 row">
             <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">favorite</mat-icon>
-            <div class="col-md-11 ml-1" style="background-color: #48CFAD; height: 270px;">
+            <div class="col-md-11 ml-1" style="background-color: #48CFAD; height:100%;">
                 <h2 *ngIf="isDataAvailable" style="color: grey;">{{stateData$?.cards[0].name}} Insurance</h2>
-
-                <p *ngIf="isDataAvailable">Coverage: ${{stateData$?.cards[0].coverage}}</p>
-                <p *ngIf="isDataAvailable">Premium: ${{stateData$?.cards[0].premium}}</p>
-
+                <span>NEW</span>
+                <p *ngIf="isDataAvailable">Coverage: &nbsp; ${{stateData$?.cards[0].coverage}}</p>
+                <p *ngIf="isDataAvailable">Premium: &nbsp; ${{stateData$?.cards[0].premium}}</p>
+                <span>OLD</span>
+                <p>Coverage: $50,000</p>
+                <p>Premium: $3,200</p>
                 <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
                 <span class="pl-3" style="color: white">--no change</span>
-                <button class="btn btn-danger btn-sm" style="color:white;position: absolute; bottom: 4%;left:25%;"
+                <button class="btn btn-danger btn-sm" style="color:white;position: absolute; bottom: 4%;left:40%;"
                     (click)="closeCard({id:'lifeInsuranceId', event: $event})">Remove Coverage</button>
             </div>
         </div>
@@ -79,21 +79,23 @@
 <div style="padding-left: 10.3%;">
 
     <!-- ******************** Home Insurance ********************* -->
-    <div [@slideInOutHome]="mode" class="col-md-12 row largeCardFont homeIns" id="homeInsurance" [hidden]="hideHomeCard"
+    <div [@slideInOutHome]="mode" class="col-md-12 row largeCardFont homeIns cardDimentions" id="homeInsurance" [hidden]="hideHomeCard"
         style="background-color: white;margin:0;border-left: 40px solid #4A89DC;">
-        <div class="col-md-12 row justify-content-center border border rounded" style="background-color: white;color:black;">{{insight}}</div>
+        <!-- <div class="col-md-12 row justify-content-center border border rounded" style="background-color: white;color:black;">{{insight}}</div> -->
         <div class="col-md-5 row">
             <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">home</mat-icon>
             <div class="col-md-11 ml-1" style="background-color:#5D9CEC ">
                 <h2 style="color: grey;" *ngIf="isDataAvailable">{{stateData$?.cards[1].name}} Owners</h2>
-
+                <span>NEW</span>
                 <p *ngIf="isDataAvailable">Coverage: ${{stateData$?.cards[1].coverage}}</p>
                 <p *ngIf="isDataAvailable">Premium: ${{stateData$?.cards[1].premium}}</p>
-
+                <span>OLD</span>
+                <p>Coverage: $300,000</p>
+                <p>Premium: $1,100</p>
                 <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
                 <span class="pl-3" style="color: white">--no change</span>
                 <button class="btn btn-danger btn-sm" (click)="closeCard({id:'homeInsuranceId', event: $event})"
-                    style="color:white; position: absolute; bottom: 4%;left: 25%">Remove Coverage</button>
+                    style="color:white; position: absolute; bottom: 4%;left: 40%">Remove Coverage</button>
             </div>
         </div>
         <div class="col-md-7 row ml-4">
@@ -165,21 +167,23 @@
     </div>
 
     <!-- **************************** Auto Insurance ********************** -->
-    <div [@slideInOutCar]="mode" class="col-md-12 row largeCardFont carIns" style="padding-left: 1%;" id="autoInsurance"
-        [hidden]="hideAutoCard" style="background-color: white;margin:0;border-left: 40px solid #FCBB42;">
-        <div class="col-md-12 row justify-content-center" style="background-color: red;color:white;">Notification</div>
+    <div [@slideInOutCar]="mode" class="col-md-12 row largeCardFont carIns cardDimentions" style="padding-left: 1%;" id="autoInsurance"
+        [hidden]="hideAutoCard" style="background-color: white;margin:0;border-left: 40px solid #967ADC;">
+       <!-- <div class="col-md-12 row justify-content-center" style="background-color: red;color:white;">Notification</div>-->
         <div class="col-md-5 row">
             <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">directions_car
             </mat-icon>
-            <div class="col-md-11 ml-1" style="background-color:#FFCE54">
+            <div class="col-md-11 ml-1" style="background-color:#AC92EC">
                 <h2 style="color: grey;" *ngIf="isDataAvailable">{{stateData$?.cards[2].name}} Insurance</h2>
-
+                <span>NEW</span>
                 <p *ngIf="isDataAvailable">Coverage: ${{stateData$?.cards[2].coverage}}</p>
                 <p *ngIf="isDataAvailable">Premium: ${{stateData$?.cards[2].premium}}</p>
-
+                <span>OLD</span>
+                <p>Coverage: $50,000</p>
+                <p>Premium: $3,200</p>
                 <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
                 <span class="pl-3" style="color:white;">--no change</span>
-                <button class="btn btn-danger btn-sm" style="color:white ;position: absolute; bottom: 4%;left:25%;"
+                <button class="btn btn-danger btn-sm" style="color:white ;position: absolute; bottom: 8%;left:40%;"
                     (click)="closeCard({id:'carInsuranceId', event: $event})">Remove Coverage</button>
             </div>
         </div>
@@ -237,8 +241,8 @@
 <div class="container mt-1 mb-5">
     <!-- **************************** Life Insurance **************************  -->
     <div div class="col-md-4 flex-container mt-1 lifeIns padleft" fxLayout="row">
-        <div [hidden]="showLifeCard" id="lifeInsurance" style="border-left: 40px solid #37BC9B ;">
-            <mat-card clas="matcardstyle" style="background-color: #48CFAD;">
+        <div [hidden]="showLifeCard" class="roundleft cardDimentions" id="lifeInsurance" style="border-left: 40px solid #37BC9B ;">
+            <mat-card class="matcardstyle round" style="background-color: #48CFAD;">
                 <div (click)="showCard({id:'lifeInsuranceId', event: $event})">
                     <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">favorite
                     </mat-icon>
@@ -247,9 +251,9 @@
                         <mat-card-subtitle *ngIf="isDataAvailable">{{stateData$?.cards[0].name}} Insurance
                         </mat-card-subtitle>
 
-                        <mat-card-title *ngIf="isDataAvailable">Coverage:${{stateData$.cards[0].coverage}}
+                        <mat-card-title *ngIf="isDataAvailable">Coverage:&nbsp;${{stateData$.cards[0].coverage}}
                         </mat-card-title>
-                        <mat-card-title *ngIf="isDataAvailable">Premium:${{stateData$.cards[0].premium}}
+                        <mat-card-title *ngIf="isDataAvailable">Premium:&nbsp;${{stateData$.cards[0].premium}}
                         </mat-card-title>
                     </mat-card-header>
                     <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
@@ -266,16 +270,16 @@
 
     <!-- ******************** Home Insurance ********************* -->
     <div class="col-md-4 flex-container mt-1 homeIns padleft" fxLayout="row">
-        <div [hidden]="showHomeCard" id="homeInsurance" style="border-left: 40px solid #4A89DC;">
-            <mat-card class="matcardstyle" style="background-color: #5D9CEC;">
+        <div [hidden]="showHomeCard" class="roundleft cardDimentions" id="homeInsurance" style="border-left: 40px solid #4A89DC;">
+            <mat-card class="matcardstyle round" style="background-color: #5D9CEC;">
                 <div (click)="showCard({id:'homeInsuranceId', event: $event})">
                     <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">home</mat-icon>
                     <mat-card-header>
                         <mat-card-subtitle *ngIf="isDataAvailable">{{stateData$?.cards[1].name}} Insurance
                         </mat-card-subtitle>
-                        <mat-card-title *ngIf="isDataAvailable">Coverage:${{stateData$?.cards[1].coverage}}
+                        <mat-card-title *ngIf="isDataAvailable">Coverage:&nbsp;${{stateData$?.cards[1].coverage}}
                         </mat-card-title>
-                        <mat-card-title *ngIf="isDataAvailable">Premium:${{stateData$?.cards[1].premium}}
+                        <mat-card-title *ngIf="isDataAvailable">Premium:&nbsp;${{stateData$?.cards[1].premium}}
                         </mat-card-title>
                     </mat-card-header>
                     <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
@@ -289,20 +293,19 @@
         </div>
     </div>
 
-
     <!-- **************************** Auto Insurance ********************** -->
     <div class="col-md-4 flex-container mt-1 carIns padleft" fxLayout="row">
-        <div [hidden]="showAutoCard" id="autoInsurance" style="border-left: 40px solid #FCBB42;">
-            <mat-card class="matcardstyle" style="background-color: #FFCE54;">
+        <div [hidden]="showAutoCard" class="roundleft cardDimentions" id="autoInsurance" style="border-left: 40px solid #967ADC;">
+            <mat-card class="matcardstyle round" style="background-color: #AC92EC;">
                 <div (click)="showCard({id:'carInsuranceId', event: $event})">
                     <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">directions_car
                     </mat-icon>
                     <mat-card-header>
                         <mat-card-subtitle *ngIf="isDataAvailable">{{stateData$?.cards[2].name}} Insurance
                         </mat-card-subtitle>
-                        <mat-card-title *ngIf="isDataAvailable">Coverage:${{stateData$?.cards[2].coverage}}
+                        <mat-card-title *ngIf="isDataAvailable">Coverage:&nbsp;${{stateData$?.cards[2].coverage}}
                         </mat-card-title>
-                        <mat-card-title *ngIf="isDataAvailable">Premium:${{stateData$?.cards[2].premium}}
+                        <mat-card-title *ngIf="isDataAvailable">Premium:&nbsp;${{stateData$?.cards[2].premium}}
                         </mat-card-title>
                     </mat-card-header>
                     <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
@@ -318,16 +321,16 @@
 
 
     <!-- ******************* Disabled Cards ************************** -->
-    <div class="col-md-4 flex-container mt-1 petIns" fxLayout="row" style="padding-left:1%;padding-right: 0%;">
-        <div [hidden]="hidePetCard" style="border-left: 40px solid #8CC152;">
-            <mat-card class="matcardstyle" style="background-color: #A0D468;">
+    <div class="col-md-4 flex-container mt-1 petIns" fxLayout="row" style="padding-left:2%; padding-top: 1.5%;padding-right: 0%;">
+        <div class="roundleft " [hidden]="hidePetCard" style="border-left: 40px solid #8CC152;">
+            <mat-card class="matcardstyle round" style="background-color: #A0D468;">
                 <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
                 <mat-icon style="margin-left: -33px; color:white;margin-top: 15%" aria-hidden="false"
                     aria-label="Example home icon">pets</mat-icon>
                 <mat-card-header>
                     <mat-card-subtitle>Pet Insurance</mat-card-subtitle>
-                    <mat-card-title>Coverage:$5,000</mat-card-title>
-                    <mat-card-title>Premium:$130</mat-card-title>
+                    <mat-card-title>Coverage:&nbsp;$5,000</mat-card-title>
+                    <mat-card-title>Premium:&nbsp;$130</mat-card-title>
                 </mat-card-header>
                 <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
                 <mat-card-content>
@@ -339,16 +342,16 @@
         </div>
     </div>
 
-    <div class="col-md-4 flex-container mt-1 boatIns" fxLayout="row" style="padding-left:1%;padding-right: 0%;">
-        <div [hidden]="hideBoatCard" style="border-left: 40px solid #3BAFDA;">
-            <mat-card class="matcardstyle" style="background-color: #4FC1E9;">
+    <div class="col-md-4  cardDimentions flex-container mt-1 boatIns" fxLayout="row" style="padding-left:2%; padding-top: 1.5%;padding-right: 0%;">
+        <div [hidden]="hideBoatCard" class="roundleft cardDimentions" style="border-left: 40px solid #3BAFDA;">
+            <mat-card class="matcardstyle round" style="background-color: #4FC1E9;">
                 <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
-                <mat-icon class="" style="margin-left: -33px; color:white;margin-top: 15%" aria-hidden="false"
+                <mat-icon class="" style="margin-left: -33px; color:white;margin-top: 16%" aria-hidden="false"
                     aria-label="Example home icon">directions_boat</mat-icon>
                 <mat-card-header>
                     <mat-card-subtitle>Boat Insurance</mat-card-subtitle>
-                    <mat-card-title>Coverage:$50,000</mat-card-title>
-                    <mat-card-title>Premium:$1,300</mat-card-title>
+                    <mat-card-title>Coverage:&nbsp;$50,000</mat-card-title>
+                    <mat-card-title>Premium:&nbsp;$1,300</mat-card-title>
                 </mat-card-header>
                 <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
                 <mat-card-content>
@@ -360,22 +363,22 @@
         </div>
     </div>
 
-    <div class="col-md-4 flex-container mt-1 rentIns" fxLayout="row" style="padding-left:1%;padding-right: 0%;">
-        <div [hidden]="hideRentCard" style="border-left: 40px solid #967ADC;">
-            <mat-card style="background-color: #AC92EC; box-shadow:none; height: 100%;">
+    <div class="col-md-4 cardDimentions flex-container mt-1 rentIns" fxLayout="row" style="padding-left:2%; padding-top: 1.5%;padding-right: 0%;">
+        <div [hidden]="hideRentCard" class="roundleft cardDimentions" style="border-left: 40px solid #FCBB42;">
+            <mat-card class="round" style="background-color: #FFCE54; box-shadow:none; height: 100%;">
                 <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
-                <mat-icon class="" style="margin-left: -33px; color:white;margin-top: 15%" aria-hidden="false"
+                <mat-icon class="" style="margin-left: -33px; color:white;margin-top: 17.5%" aria-hidden="false"
                     aria-label="Example home icon">vpn_keys</mat-icon>
                 <mat-card-header>
                     <mat-card-subtitle>Renters Insurance</mat-card-subtitle>
-                    <mat-card-title>Coverage:$50,000</mat-card-title>
-                    <mat-card-title>Premium:$1,300</mat-card-title>
+                    <mat-card-title>Coverage:&nbsp;$50,000</mat-card-title>
+                    <mat-card-title>Premium:&nbsp;$1,300</mat-card-title>
                 </mat-card-header>
                 <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
                 <mat-card-content>
                     --no change
                 </mat-card-content>
-                <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'renter', event: $event})"
+                <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'renters', event: $event})"
                     class="ml-auto"></mat-slide-toggle>
             </mat-card>
         </div>

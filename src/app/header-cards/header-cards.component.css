@@ -1,122 +1,158 @@
-.example-card {
+/* .example-card {
     width: 120px;
     height: 50px;
     background-color: rgb(242, 245, 247);
-    /* margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px; */
     justify-content: flex-start;
     align-content: center;
     align-items: center;
     text-align: center;
-}
-.background{
+} */
+
+/* mat-option .mat-select-value{
+    color:blue;
+} */
+
+/* .background{
     background-color: red;
     height: 50%;
+} */
+
+:host ::ng-deep .mat-select-value-text {
+    color : rgb(44, 131, 163) !important;
+    font-family: poppins;
+    font-size: 18px;
+    letter-spacing: 0.18px;
 }
-mat-card{
-    padding: 0%;
-    
+
+:host ::ng-deep .mat-select-arrow {
+    color: #CCD1D9;
 }
-#div{
+
+/* .incomeTextStyle {
+    font-weight: bolder;
+    color: #4A89DC;
+} */
+
+.mat-div {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-color: #AAB2BD;
+}
+
+/* #div{
     margin-left:2.3%;
     margin-right:2.3%
-}
-.mat{
-    padding : 0px;
-    width: 140px; 
+} */
+
+.mat {
+    margin-left: 18px;
+    margin-right: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /* margin: 18px; */
+    padding: 0px;
+    /* width: 120px;  */
+    height: 90px!important;
     background-color: white;
     text-align: center;
- 
-}
-.topP{
-    padding:5%;
-     margin:0%;
-     color: white;
-      font-weight: bold;
-          font-size: medium;
-          font-family: poppins;
+    border-radius: 6px;
+    box-shadow: 4px 4px 10px rgba(191, 191, 191, 0.75);
+    font-family: poppins;
 }
 
-#bottomP{
-font-size:larger;
-margin-left: 16%; 
-text-align: center;
-font-weight: bolder;
-padding: 11%
+.topP {
+    padding: 5%;
+    margin: 0%;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: poppins;
+    letter-spacing: 0.18px;
 }
-.buttonsub{
+
+#bottomP {
+    font-size: larger;
+    margin-left: 15%;
+    text-align: center;
+    font-weight: bolder;
+    padding: 8%;
+    color : rgb(44, 131, 163);
+}
+
+.buttonsub {
     float: left;
-    color: #339FFB;
+    color: #CCD1D9;
     width: 0%;
     vertical-align: middle;
-    background-color:white; 
-    border-color:transparent;
-    align-self:flex-start;
-    margin-right: 10%; 
+    background-color: white;
+    border-color: transparent;
+    align-self: flex-start;
+    margin-right: 10%;
 }
-.buttonadd{
+
+.buttonadd {
     float: right;
-    color: #339FFB;
+    color: #CCD1D9;
     width: 0%;
-    background-color:white;
-    border-color:transparent; 
-    margin-right: 15%; 
+    background-color: white;
+    border-color: transparent;
+    margin-right: 15%;
 }
-.buttonsub1{
+
+.buttonsub1 {
     float: left;
-    color: #339FFB;
+    color: #CCD1D9;
     width: 0%;
-  background-color:white; 
-  border-color: white;
-  border-color:transparent;
-  margin-top: 8%
+    background-color: white;
+    border-color: white;
+    border-color: transparent;
+    margin-top: 8%
 }
-.buttonadd1{
-float: right; 
- color: #339FFB; 
-  width: 0%; 
-   margin-right: 20%;
-background-color:white; 
- border-color: white;  
- border-color:transparent;  
- margin-top: 8%
 
-
+.buttonadd1 {
+    float: right;
+    color: #CCD1D9;
+    width: 0%;
+    margin-right: 20%;
+    background-color: white;
+    border-color: white;
+    border-color: transparent;
+    margin-top: 8%
 }
-#dropdown{
+
+#dropdown {
     justify-content: center;
     font-weight: bold;
     font-size: larger;
     margin-top: 11%;
- margin-bottom: 11%;
+    margin-bottom: 11%;
+    color : rgb(44, 131, 163);
 }
-.zip{
+
+.zip {
     width: 80%;
-    border-color: white;
-    text-align: center;
     border-color: transparent;
-    margin:9%;outline:none;
-     border-block-end-color:black;
-     font-weight: bold;
-     font-size: large;
+    text-align: center;
+    margin: 9%;
+    outline: none;
+    border-block-end-color: #CCD1D9;
+    font-weight: bold;
+    font-size: large;
+    color:rgb(44, 131, 163);
 }
 
-#zipHeaderCard,
-#incomeHeaderCard,
-#dependentHeaderCard,
-#statusHeaderCard,
-#occupationHeaderCard
-{
-    margin-right: 3.5%;
-    margin-left: 1.5%;
-}
-#ageHeaderCard{
-    margin-right: 3%;
-    margin-left: 1%;
+mat-select .mat-select-value {
+    color: blue;
 }
 
-#automobileHeaderCard{
-    margin-left: 1%;;
+#zipHeaderCard, #incomeHeaderCard, #dependentHeaderCard, #statusHeaderCard, #occupationHeaderCard {
+    padding: 0%;
+}
+
+#ageHeaderCard {
+    padding: 0%
+}
+
+#automobileHeaderCard {
+    padding: 0%
 }

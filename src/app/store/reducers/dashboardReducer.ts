@@ -106,7 +106,7 @@ const updateUserDataReducer = createReducer(userDataInitialState,
 
 const updateNewPremiumDataReducer = createReducer(CalculatedPremiumInitialState,
     on(actions.newPremiumDataAct, (state, { newPremiumData }) => ({
-        // ...state,
+        ...state,
         newPremiumData: newPremiumData
     }))
     )
