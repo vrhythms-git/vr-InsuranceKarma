@@ -2,21 +2,22 @@
 <div style="padding-left: 9.3%;">
 
     <!-- **************************** Life Insurance **************************  -->
-    <div [@slideInOutLife]="mode" class="col-md-12 row largeCardFont lifeIns cardShadow" id="lifeInsurance" [hidden]="hideLifeCard"
+    <div [@slideInOutLife]="mode" class="col-md-12 row largeCardFont lifeIns cardShadow round" id="lifeInsurance" [hidden]="hideLifeCard"
         style="background-color: white;border-left: 40px solid #37BC9B;">
         <!--<div class="col-md-12 row justify-content-center" [hidden]="false" style="background-color: red;color:white;">Notification</div>-->
         <div class="col-md-5 row">
             <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">favorite</mat-icon>
             <div class="col-md-11 ml-1" style="background-color: #48CFAD; height:100%;">
-                <h2 *ngIf="isDataAvailable" style="color: grey;">{{stateData$?.cards[0].name}} Insurance</h2>
+                <h2 *ngIf="isDataAvailable" style="margin-top: 10px; margin-bottom: 0px; color: #298D74; font-family: 'poppins';">{{stateData$?.cards[0].name}} Insurance</h2>
                 <span>NEW</span>
-                <p *ngIf="isDataAvailable">Coverage: &nbsp; ${{stateData$?.cards[0].coverage}}</p>
-                <p *ngIf="isDataAvailable">Premium: &nbsp; ${{stateData$?.cards[0].premium}}</p>
-                <span>OLD</span>
-                <p>Coverage: $50,000</p>
-                <p>Premium: $3,200</p>
-                <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
-                <span class="pl-3" style="color: white">--no change</span>
+                <br>
+                <span class="largeCardFontStyle" *ngIf="isDataAvailable">Coverage: &nbsp; ${{stateData$?.cards[0].coverage}}</span><br>
+                <span class="largeCardFontStyle" *ngIf="isDataAvailable">Premium: &nbsp; ${{stateData$?.cards[0].premium}}</span><br><br>
+                <span >OLD</span><br>
+                <span class="largeCardFontStyle">Coverage: $50,000</span><br>
+                <span class="largeCardFontStyle">Premium: $3,200</span><br>
+                <mat-divider style="position: relative;background-color:white;height: 2px;margin-top: 20px;"></mat-divider>
+                <span class="pl-3" style="color: white;">--no change</span>
                 <button class="btn btn-danger btn-sm" style="color:white;position: absolute; bottom: 4%;left:40%;"
                     (click)="closeCard({id:'lifeInsuranceId', event: $event})">Remove Coverage</button>
             </div>

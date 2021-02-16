@@ -5,6 +5,15 @@ mat-card-content {margin-left: 10px; margin-bottom: 0px;color:white;margin-top: 
 mat-card-subtitle {font-size: 3vh;margin-top: -28%;font-size: 18px;letter-spacing: 0.32px;}
 mat-card-title {position: relative; margin-bottom: 0px;color:white;font-size: 18px;letter-spacing: 0.18px;}
 
+
+.largeCardFontStyle{
+  font-family: 'poppins';
+  font-size: 18px;
+  letter-spacing: 0.32px;
+  font-size: large;
+  /* font-weight: bold; */
+  color:white;
+}
 /* .cardDimentions{
   
 

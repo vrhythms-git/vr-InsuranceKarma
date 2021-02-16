@@ -15,8 +15,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   animations: [
     trigger('slideInOutLife', [
       state('expandLifeCard', style({
-        height: '290px',
-        width: '88.5%'
+        // height: '290px',
+        // width: '88.5%'
+        height: '100%',
+        width: '90%'
       })),
       state('collapseLifeCard', style({
         height: '0px',
