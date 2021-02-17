@@ -14,13 +14,17 @@
                 <span class="largeCardFontStyle" *ngIf="isDataAvailable">Coverage: &nbsp; ${{stateData$?.cards[0].coverage}}</span><br>
                 <span class="largeCardFontStyle" *ngIf="isDataAvailable">Premium: &nbsp; ${{stateData$?.cards[0].premium}}</span><br><br>
                 <span >OLD</span><br>
-                <span class="largeCardFontStyle">Coverage: $50,000</span><br>
-                <span class="largeCardFontStyle">Premium: $3,200</span><br>
+                <span class="largeCardFontStyle" *ngIf="isDataAvailable"> Coverage: &nbsp; ${{stateData$?.cards[0].oldCoverage}}</span><br>
+                <span class="largeCardFontStyle" *ngIf="isDataAvailable"> Premium:&nbsp; ${{stateData$?.cards[0].oldPremium}}</span><br>
                 <mat-divider style="position: relative;background-color:white;height: 2px;margin-top: 20px;"></mat-divider>
-                <span class="pl-3" style="color: white;">--no change</span>
+                <span class="pl-3" style="color: white;" *ngIf="isDataAvailable"> 
+                    {{getChangeFormattedText(stateData$?.cards[0].oldNewPremChangeInPercent,stateData$?.cards[0].oldNewPremChangeInValue)}}
+                    <!-- {{stateData$?.cards[0].oldNewPremChangeInPercent}} ? --no change : ${{stateData$?.cards[0].oldNewPremChangeInPercent}} 
+                    --no change -->
+                </span>
                 <button class="btn btn-danger btn-sm" style="color:white;position: absolute; bottom: 4%;left:40%;"
                     (click)="closeCard({id:'lifeInsuranceId', event: $event})">Remove Coverage</button>
-            </div>
+            </div>"
         </div>
         <div class="col-md-7 row ml-4">
             <div class="col-12">

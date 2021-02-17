@@ -1,3 +1,4 @@
+import { ParsedEvent } from "@angular/compiler"
 import { Action, createReducer, on } from "@ngrx/store"
 import * as actions from "../actions/dashboardAction"
 
@@ -15,61 +16,104 @@ export interface CalculatedPremium {
 
 export const userDataInitialState: UserData = {
     data: {
-        cards : [
+        cards: [
             {
-                key : 'life',
-                name : 'Life',
-                isEnabled : true,
+                key: 'life',
+                name: 'Life',
+                isEnabled: true,
                 premium: 3200,
                 coverage: 250000,
-                percentOutOfTotPremium : parseInt(((3200 / 5400) * 100).toString()),
-                color: '#298D74'
+                percentOutOfTotPremium: parseInt(((3200 / 5400) * 100).toString()),
+                color: '#298D74',
+                oldCoverage: 250000,
+                oldPremium: 3200,
+                oldNewPremChangeInPercent: parseInt((((3200 - 3200) / 3200) * 100).toString()),
+                oldNewPremChangeInValue: 3200 - 3200
             },
             {
-                key : 'home',
-                name : 'Home',
-                isEnabled : true,
-                premium: 1100,
-                coverage: 300000, 
-                percentOutOfTotPremium : parseInt(((1100 / 5400) * 100).toString()),
-                color : '#3867A5'
-            },
-            {
-                key : 'auto',
-                name : 'Auto',
-                isEnabled : true,
+                key: 'home',
+                name: 'Home',
+                isEnabled: true,
                 premium: 1100,
                 coverage: 300000,
-                percentOutOfTotPremium  : parseInt(((1100 / 5400) * 100).toString()),
-                color: '#BD8C32'
+                percentOutOfTotPremium: parseInt(((1100 / 5400) * 100).toString()),
+                color: '#3867A5',
+                oldCoverage: 300000,
+                oldPremium: 1100,
+                oldNewPremChangeInPercent: parseInt((((1100 - 1100) / 1100) * 100).toString()),
+                oldNewPremChangeInValue: 1100 - 1100
             },
             {
-                key : 'pet',
-                name : 'Pet',
-                isEnabled : false,
+                key: 'auto',
+                name: 'Auto',
+                isEnabled: true,
+                premium: 1100,
+                coverage: 300000,
+                percentOutOfTotPremium: parseInt(((1100 / 5400) * 100).toString()),
+                color: '#BD8C32',
+                oldCoverage: 300000,
+                oldPremium: 1100,
+                oldNewPremChangeInPercent: parseInt((((1100 - 1100) / 1100) * 100).toString()),
+                oldNewPremChangeInValue: 1100 - 1100
+            },
+            {
+                key: 'pet',
+                name: 'Pet',
+                isEnabled: false,
                 premium: 130,
                 coverage: 5000,
-                color: '#69913E'
+                color: '#69913E',
+                oldCoverage: 5000,
+                oldPremium: 130,
+                oldNewPremChangeInPercent: parseInt((((130 - 130) / 130) * 100).toString()),
+                oldNewPremChangeInValue: 130 - 130
             },
             {
-                key : 'boat',
-                name : 'Boat',
-                isEnabled : false,
+                key: 'boat',
+                name: 'Boat',
+                isEnabled: false,
                 premium: 1300,
                 coverage: 50000,
-                color: '#2C83A3'
+                color: '#2C83A3',
+                oldCoverage: 50000,
+                oldPremium: 1300,
 
             },
             {
-                key : 'renters',
-                name : 'Life',
-                isEnabled : false,
+                key: 'renters',
+                name: 'Life',
+                isEnabled: false,
                 premium: 1300,
                 coverage: 50000,
-                color:'#715CA5'
+                color: '#715CA5',
+                oldCoverage: 50000,
+                oldPremium: 1300,
             }
         ],
-        totalPremium : 5400
+        selectedAgeBracket: [
+            {
+              "_id": "6018fc2a57065f3c046d0160",
+              "product": "life",
+              "Age ": "45 - 55",
+              "Death Benefit": 250000,
+              "Premium": 7000
+            },
+            {
+              "_id": "6018fc2a57065f3c046d0162",
+              "product": "life",
+              "Age ": "45 - 55",
+              "Death Benefit": 500000,
+              "Premium": 14000
+            },
+            {
+              "_id": "6018fc2a57065f3c046d0164",
+              "product": "life",
+              "Age ": "45 - 55",
+              "Death Benefit": 1000000,
+              "Premium": 27800
+            }
+          ],
+        totalPremium: 5400
     }
 }
 
@@ -92,8 +136,7 @@ const counterReducer = createReducer(initialState, on(actions.incrementAct, stat
     ))
 
 const updateUserDataReducer = createReducer(userDataInitialState,
-    on(actions.updateUserDataAct, (state,  {data} ) => ({
-        ...state,
+    on(actions.updateUserDataAct, (state, { data }) => ({
         data: data
     })),
 )
@@ -101,7 +144,7 @@ const updateUserDataReducer = createReducer(userDataInitialState,
 // function temp(state, data){
 
 //     //console.log("state is :" + JSON.stringify(data))
-   
+
 // }
 
 const updateNewPremiumDataReducer = createReducer(CalculatedPremiumInitialState,
@@ -109,7 +152,7 @@ const updateNewPremiumDataReducer = createReducer(CalculatedPremiumInitialState,
         ...state,
         newPremiumData: newPremiumData
     }))
-    )
+)
 
 export function createCounterReducer(state: CounterState, action: Action) {
     return counterReducer(state, action)
