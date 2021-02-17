@@ -1,8 +1,26 @@
+/* .example-card {
+    width: 120px;
+    height: 50px;
+    background-color: rgb(242, 245, 247);
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+} */
+
+/* mat-option .mat-select-value{
+    color:blue;
+} */
+
+/* .background{
+    background-color: red;
+    height: 50%;
+} */
 
 :host ::ng-deep .mat-select-value-text {
     color : rgb(44, 131, 163) !important;
     font-family: poppins;
-    font-size: 18px;
+    font-size: 15px;
     letter-spacing: 0.18px;
 }
 
@@ -34,7 +52,7 @@
     /* margin: 18px; */
     padding: 0px;
     /* width: 120px;  */
-    height: 90px!important;
+    height: 90px;
     background-color: white;
     text-align: center;
     border-radius: 6px;
@@ -53,11 +71,12 @@
 }
 
 #bottomP {
-    font-size: larger;
-    margin-left: 15%;
-    text-align: center;
-    font-weight: bolder;
-    padding: 8%;
+    font-size: 15px;
+    /* margin-left: 13%; */
+    /* text-align: center; */
+    justify-content: center;
+    font-weight: bold;
+    /* padding: 8%; */
     color : rgb(44, 131, 163);
 }
 
@@ -105,7 +124,7 @@
 #dropdown {
     justify-content: center;
     font-weight: bold;
-    font-size: larger;
+    font-size: 15px;
     margin-top: 11%;
     margin-bottom: 11%;
     color : rgb(44, 131, 163);
@@ -119,12 +138,8 @@
     outline: none;
     border-block-end-color: #CCD1D9;
     font-weight: bold;
-    font-size: large;
+    font-size: 16px;
     color:rgb(44, 131, 163);
-}
-
-mat-select .mat-select-value {
-    color: blue;
 }
 
 #zipHeaderCard, #incomeHeaderCard, #dependentHeaderCard, #statusHeaderCard, #occupationHeaderCard {

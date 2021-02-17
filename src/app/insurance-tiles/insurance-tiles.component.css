@@ -2,7 +2,7 @@
 .flex-container { padding: 0px 0 0 0; }
 mat-card {display: flex; flex-direction: column; justify-content: space-between; padding: 4px!important;}
 mat-card-content {margin-left: 10px; margin-bottom: 0px;color:white;margin-top: 3%;}
-mat-card-subtitle {font-size: 3vh;margin-top: -28%;font-size: 18px;letter-spacing: 0.32px;}
+mat-card-subtitle {font-size: 3vh;margin-top: -35%;font-size: 18px;letter-spacing: 0.32px;}
 mat-card-title {position: relative; margin-bottom: 0px;color:white;font-size: 18px;letter-spacing: 0.18px;}
 
 
@@ -13,6 +13,10 @@ mat-card-title {position: relative; margin-bottom: 0px;color:white;font-size: 18
   font-size: large;
   /* font-weight: bold; */
   color:white;
+}
+
+.divider{
+  position: relative!important;background-color:white;height: 2px;width: 90% !important;left: 12px!important;
 }
 /* .cardDimentions{
   
@@ -130,11 +134,11 @@ p{
   }
 
   :host ::ng-deep .max1 .mat-slider-thumb {
-    background-color: #FCBB42;
+    background-color: #AC92EC;
     transform: scale(0) !important;   
   }
   :host ::ng-deep .max1 .mat-slider-thumb-label {
-    background-color: #FCBB42;
+    background-color: #AC92EC;
     transform: rotate(45deg) !important;
     border-radius: 50% 50% 0 !important;
     width: 10px;
@@ -148,7 +152,7 @@ p{
     margin-top: -20px;
 }
 :host ::ng-deep .max1 .mat-slider-track-fill {
-    background-color: #FCBB42;
+    background-color: #AC92EC;
   }
   :host ::ng-deep .max1  .mat-slider-wrapper {
     top: 18px;
@@ -161,7 +165,6 @@ p{
   :host ::ng-deep .max1 .mat-slider-track-fill {
     height: 100%;
   }
-
   :host ::ng-deep.mat-slider-horizontal {
     height: 33px;
   }
@@ -224,6 +227,7 @@ p{
 
 .padleft{
   padding-left: 2%;
+  cursor: pointer; 
 }
 
 .matcardstyle{
@@ -242,11 +246,13 @@ p{
   color:white;
   margin-top: 15%; */
   margin-left: -36px;
-  color: white;
+  /* color: white; */
   z-index: 1;
   overflow: visible;
   position: relative;
-  margin-top: 15%;
+  margin-top: 20%;
+  height:25px;
+  width:25px;
 }
 
 .container1 {  
@@ -273,3 +279,23 @@ p{
   border-top-left-radius : 6px;
   border-bottom-left-radius : 6px;
 }
+
+.biglifeCardstyle {
+  padding-left: 9.7%;
+  padding-right: 10.2%;
+}
+.bighomeAutostyle{
+padding-left: 10.6%;
+padding-right: 9.4%;
+}
+
+@media (max-width:1024px){
+.biglifeCardstyle {
+  padding-left: 5.9%;
+  padding-right: 6.2%;
+}
+.bighomeAutostyle{
+padding-left: 6.6%;
+padding-right: 5.4%;
+}
+} 

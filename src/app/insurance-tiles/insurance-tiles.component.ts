@@ -17,8 +17,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
       state('expandLifeCard', style({
         // height: '290px',
         // width: '88.5%'
-        height: '100%',
-        width: '90%'
+        height: '*',
+        width: '*'
       })),
       state('collapseLifeCard', style({
         height: '0px',
@@ -29,8 +29,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ]),
     trigger('slideInOutHome', [
       state('expandHomeCard', style({
-        height: '290px',
-        width: '89.7%'
+         height: '290px',
+         width: '88.5%'
       })),
       state('collapseHomeCard', style({
         height: '0px',
@@ -41,8 +41,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ]),
     trigger('slideInOutCar', [
       state('expandCarCard', style({
-        height: '300px',
-        width: '89.7%'
+        height: '*',
+        width: '*'
       })),
       state('collapseCarCard', style({
         height: '0px',
@@ -593,7 +593,7 @@ export class InsuranceTilesComponent implements OnInit {
         this.callFlag = true;
         let newState = JSON.parse(JSON.stringify(prevState))
         if (insuranceType == 'life')
-          newState.cards[index].premium = res.data.newPremium.whole_life_insurance + res.data.newPremium.term_insurance
+          newState.cards[index].premium = res.data.newPremium.whole_life_insurance //+ res.data.newPremium.term_insurance
         else
           newState.cards[index].premium = res.data.newPremium
 
