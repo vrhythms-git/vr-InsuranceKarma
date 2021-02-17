@@ -117,6 +117,29 @@ export class InsuranceTilesComponent implements OnInit {
     medical_max: 2000
   }
 
+  sliderAutoVariableValues = {
+
+    bodilyInjuryLability_min: 20000,
+    bodilyInjuryLability: 20000,
+    bodilyInjuryLability_max: 120000,
+
+    propertyDamageLiability_min: 20000,
+    propertyDamageLiability: 20000,
+    propertyDamageLiability_max: 120000,
+
+    comprehensiveAndCollision_min: 750,
+    comprehensiveAndCollision: 750,
+    comprehensiveAndCollision_max: 3250,
+
+    personalInjuryProtection_min: 2000,
+    personalInjuryProtection: 2000,
+    personalInjuryProtection_max: 7000,
+
+    uninsuredOrUnderinsuredMotorist_min: 0,
+    uninsuredOrUnderinsuredMotorist: 0,
+    uninsuredOrUnderinsuredMotorist_max: 300000
+  }
+
   constructor(private store: Store<UserData>, private ikservice: IKServices) {
 
     // this.stateData$ =  this.store.pipe(select(CounterSelector.selectUserData))
@@ -193,7 +216,7 @@ export class InsuranceTilesComponent implements OnInit {
 
     if (percentage == 0)
       return "--no change";
-    else return `${value}  ${(percentage)}%`
+    else return `${value}  (${percentage}%)`
   }
 
   showCard(event) {
@@ -311,14 +334,6 @@ export class InsuranceTilesComponent implements OnInit {
       case 'home': {
         if (id == "Dwelling") {
           this.SliderData["dwelling"] = event.value;
-          //this.sliderVariableValues.dwelling = data.dwelling_default,
-          /*
-          this.sliderVariableValues.otherStructure = (parseInt(event.value) * 0.10)
-          this.sliderVariableValues.personalProperty = (parseInt(event.value) * 0.70)
-          this.sliderVariableValues.lossOfUse = (parseInt(event.value) * 0.20)
-          this.sliderVariableValues.personalLiability = event.value
-        */
-          console.log("New Data is :: " + JSON.stringify(this.sliderVariableValues))
         }
         else if (id == "otherStructure") {
           this.SliderData["otherStructure"] = event.value;
@@ -414,7 +429,6 @@ export class InsuranceTilesComponent implements OnInit {
 
         let prevStateData = JSON.parse(JSON.stringify(data))
         prevStateData.totalPremium = totalPrem;
-        //prevStateData.cards[cardIndex].percentOutOfTotPremium = parseInt(((premium / totalPrem) * 100).toString()) 
         prevStateData = this.reCalculatePercentages(prevStateData)
         this.store.dispatch(actions.updateUserDataAct({ data: prevStateData }));
       }
@@ -436,11 +450,12 @@ export class InsuranceTilesComponent implements OnInit {
 
   tempFlag = false;
   tempFlag2 = false;
+  tempFlag3 = false;
   calculatePremium({ insuranceType }) {
-    this.tempFlag = false;
     switch (insuranceType) {
 
       case 'home': {
+        this.tempFlag = false;
         // to populate slider min values in payload JSON.
         this.SliderData.dwelling_min = this.sliderVariableValues.dwelling_min;
         this.SliderData.otherStructure_min = this.sliderVariableValues.otherStructure_min;
@@ -449,37 +464,25 @@ export class InsuranceTilesComponent implements OnInit {
         this.SliderData.lossOfUse_min = this.sliderVariableValues.lossOfUse_min;
         this.SliderData.medical_min = this.sliderVariableValues.medical_min;
 
-        let subscription = this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+        this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
           //console.log("Data is :" + JSON.stringify(data))
 
           let index = data.cards.findIndex(obj => obj.key == 'home')
 
+          let dwelling_default = this.SliderData.dwelling
           if (this.tempFlag == false) {
+            this.tempFlag = true
+            if (this.SliderData.dwelling == undefined || this.SliderData.dwelling == 0)
+              dwelling_default = data.cards[index].coverage
+
             let payloadJSON = {
               data: {
                 'insuranceType': 'home',
-                'premium': data.cards[index].premium,
+                'premium': data.cards[index].defaultPremium,
                 'insuranceData': this.SliderData
               }
             }
-            // console.log("Json payload for /getPremium is: " + JSON.stringify(payloadJSON))
-            this.updateTotalPremiumInStore(payloadJSON, 'home', data, 300000)
-
-            let totalPrem = 0;
-            if (this.isTotalPremiumCalculated == false) {
-              this.isTotalPremiumCalculated = true;
-              for (let i = 0; i < data.cards.length; i++) {
-                if (data.cards[i].isEnabled == true)
-                  totalPrem = totalPrem + data.cards[i].premium
-              }
-
-              let prevStateData = JSON.parse(JSON.stringify(data))
-              prevStateData.totalPremium = totalPrem;
-              prevStateData = this.reCalculatePercentages(prevStateData)
-              // prevStateData.cards[index].percentOutOfTotPremium = parseInt(((data.cards[index].premium / totalPrem) * 100).toString()) 
-              this.store.dispatch(actions.updateUserDataAct({ data: prevStateData }));
-            }
-
+            this.updateTotalPremiumInStore(payloadJSON, 'home', data, dwelling_default)
           }
 
         });
@@ -491,60 +494,72 @@ export class InsuranceTilesComponent implements OnInit {
         this.SliderData.deathBenefit_min = 250000;
         this.SliderData.currentDebit_min = 180000;
         this.SliderData.childEducationFund_min = 50000
-        this.SliderData.funeralSpend = 2500;
-        this.SliderData.retirementAge = 50;
-        this.SliderData.annualIncome = 50000;
-        this.SliderData.replacementIncome = 5;
+        this.SliderData.funeralSpend_min = 2500;
+        this.SliderData.retirementAge_min = 50;
+        this.SliderData.annualIncome_min = 50000;
+        this.SliderData.replacementIncome_min = 5;
 
-        let subscription = this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
-         // console.log("Data is :" + JSON.stringify(data))
+        this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
 
           let index = data.cards.findIndex(obj => obj.key == 'life')
-          if(this.tempFlag2 == false){
+          if (this.tempFlag2 == false) {
             this.tempFlag2 = true;
-          if (data != undefined && data != {}) {
+            if (data != undefined && data != {}) {
 
-            if (this.SliderData.deathBenefit == undefined || this.SliderData.deathBenefit == 0)
-              this.SliderData.deathBenefit = 250000;
+              if (this.SliderData.deathBenefit == undefined || this.SliderData.deathBenefit == 0)
+                this.SliderData.deathBenefit = 250000;
 
-            let ageBracketPrem = data.selectedAgeBracket.filter((item) => {
-              return item['Death Benefit'] == this.SliderData.deathBenefit
-            })
+              let ageBracketPrem = data.selectedAgeBracket.filter((item) => {
+                return item['Death Benefit'] == this.SliderData.deathBenefit
+              })
 
 
-            let payloadJSON = {
-              data: {
-                'insuranceType': 'life',
-                'premium': ageBracketPrem[0].Premium,
-                'deathBenefit': this.SliderData.deathBenefit,
-                'insuranceData': this.SliderData
+              let payloadJSON = {
+                data: {
+                  'insuranceType': 'life',
+                  'premium': ageBracketPrem[0].Premium,
+                  'deathBenefit': this.SliderData.deathBenefit,
+                  'insuranceData': this.SliderData
+                }
               }
+              this.updateTotalPremiumInStore(payloadJSON, 'life', data, this.SliderData.deathBenefit)
             }
-            // console.log("Json payload for /getPremium is: " + JSON.stringify(payloadJSON))
-
-            this.updateTotalPremiumInStore(payloadJSON, 'life', data, this.SliderData.deathBenefit)
-
-            // let totalPrem = 0;
-            // if (this.isTotalPremiumCalculated == false) {
-            //   this.isTotalPremiumCalculated = true;
-            //   for (let i = 0; i < data.cards.length; i++) {
-            //     if (data.cards[i].isEnabled == true)
-            //       totalPrem = totalPrem + data.cards[i].premium
-            //   }
-
-              //let prevStateData = JSON.parse(JSON.stringify(data))
-             // prevStateData.totalPremium = totalPrem;
-            //  prevStateData = this.reCalculatePercentages(prevStateData)
-             // this.store.dispatch(actions.updateUserDataAct({ data: prevStateData }));
-           // }
-          
           }
-        }
 
         });
         break;
       }
       case 'auto': {
+        this.tempFlag3 = false;
+        // to populate slider min values in payload JSON.
+        this.SliderData.bodilyInjuryLability_min = this.sliderAutoVariableValues.bodilyInjuryLability_min;
+        this.SliderData.propertyDamageLiability_min = this.sliderAutoVariableValues.propertyDamageLiability_min
+        this.SliderData.comprehensiveAndCollision_min = this.sliderAutoVariableValues.comprehensiveAndCollision_min
+        this.SliderData.personalInjuryProtection_min = this.sliderAutoVariableValues.personalInjuryProtection_min
+        this.SliderData.uninsuredOrUnderinsuredMotorist_min = this.sliderAutoVariableValues.uninsuredOrUnderinsuredMotorist_min
+
+        this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+
+          let index = data.cards.findIndex(obj => obj.key == 'auto')
+          if (this.tempFlag3 == false) {
+            this.tempFlag3 = true;
+            let bodilyInjuryLability = this.SliderData.bodilyInjuryLability;
+            if (bodilyInjuryLability == 0 || this.SliderData.bodilyInjuryLability == undefined)
+              bodilyInjuryLability == this.SliderData.propertyDamageLiability_min;
+
+            let payloadJSON = {
+              data: {
+                'insuranceType': 'auto',
+                'premium': data.cards[index].defaultPremium,
+                'insuranceData': this.SliderData
+              }
+            }
+
+            this.updateTotalPremiumInStore(payloadJSON, 'auto', data, bodilyInjuryLability)
+          }
+
+        });
+
 
         break;
       }
@@ -553,33 +568,35 @@ export class InsuranceTilesComponent implements OnInit {
 
   insight = '';
 
-  reCalculateTotalPremium(stateJson){
+  reCalculateTotalPremium(stateJson) {
 
     let totalPrem = 0;
 
-        for (let i = 0; i < 6; i++) {
-          if (stateJson.cards[i].isEnabled == true)
-          totalPrem = totalPrem + stateJson.cards[i].premium
-        }
+    for (let i = 0; i < 6; i++) {
+      if (stateJson.cards[i].isEnabled == true)
+        totalPrem = totalPrem + stateJson.cards[i].premium
+    }
 
-        stateJson.totalPremium = totalPrem;
-        return stateJson;
+    stateJson.totalPremium = totalPrem;
+    return stateJson;
 
   }
 
-callFlag = false;
-   updateTotalPremiumInStore(payloadJSON, insuranceType, prevState, newCoverage) {
+  callFlag = false;
+
+  updateTotalPremiumInStore(payloadJSON, insuranceType, prevState, newCoverage) {
 
     this.callFlag = false;
     let index = prevState.cards.findIndex(obj => obj.key == insuranceType)
-     this.ikservice.postInsuranceData(payloadJSON).subscribe((res) => {
+    this.ikservice.postInsuranceData(payloadJSON).subscribe((res) => {
       if (this.callFlag == false) {
         this.callFlag = true;
         let newState = JSON.parse(JSON.stringify(prevState))
-        if(insuranceType == 'home')
-        newState.cards[index].premium = res.data.newPremium
+        if (insuranceType == 'life')
+          newState.cards[index].premium = res.data.newPremium.whole_life_insurance + res.data.newPremium.term_insurance
         else
-        newState.cards[index].premium = res.data.newPremium.whole_life_insurance
+          newState.cards[index].premium = res.data.newPremium
+
 
         newState.cards[index].insight = res.data.insight
         newState.cards[index].risk = res.data.risk
@@ -588,7 +605,7 @@ callFlag = false;
         newState.cards[index].coverage = newCoverage
 
         newState.cards[index].oldNewPremChangeInPercent = parseInt((((newState.cards[index].premium - newState.cards[index].oldPremium) / newState.cards[index].oldPremium) * 100).toString())
-       
+
         newState.cards[index].oldNewPremChangeInValue = newState.cards[index].oldPremium - newState.cards[index].premium
 
         if (res.data.risk == 'medium' || res.data.risk == 'high')
@@ -596,14 +613,11 @@ callFlag = false;
         else
           newState.cards[index].notification = false
 
-        // console.log('Calculated premium new state is: ' + JSON.stringify(newState))
-        // if( res.data.risk == 'high')
         this.insight = res.data.insight;
         newState = this.reCalculateTotalPremium(newState)
         newState = this.reCalculatePercentages(newState)
         this.store.dispatch(actions.updateUserDataAct({ data: newState }));
-        // this.footer.populateUI()
-        // subscription.unsubscribe();
+
       }
     });
 
@@ -614,15 +628,6 @@ callFlag = false;
 
   OnInsuanceSlideToggle({ insuranceType, event }) {
     this.isToggle = false;
-    // if (insuranceType == "home") {
-    //   this.toggleSlideHome = event.checked;
-    // }
-    // if (insuranceType == "life") {
-    //   this.toggleSlideLife = event.checked;
-    // }
-    // if (insuranceType == "auto") {
-    //   this.toggleSlideAuto = event.checked;
-    // }
 
     if (insuranceType == "life") {
       this.toggleSlideLife = event.checked;
@@ -722,58 +727,6 @@ callFlag = false;
     }
   }
 
-  /*
-  OnInsuanceSlideToggle({ insuranceType, event }) {
-    switch (insuranceType) {
-      case 'pet': {
-
-        let subscribed = this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
-          if (data != undefined && data != {}) {
-            if (event.checked == true) {
-
-
-            } else if (event.checked == false) {
-
-
-            }
-          }
-          //   let json = JSON.parse(JSON.stringify(data))
-          //   json.petIncCard = {
-          //     coverage  : 5000,
-          //     premium: 130
-          //   }
-
-
-          //  this.store.dispatch(actions.updateUserDataAct({ data: json }));
-          // }
-        });
-        subscribed.unsubscribe();
-        break;
-      }
-      case 'boat': {
-
-
-        //subscribed.unsubscribe();
-        break;
-      }
-      case 'renters': {
-        let subscribed = this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
-          if (data != undefined && data != {}) {
-            let json = JSON.parse(JSON.stringify(data))
-            json.rentersIncCard = {
-              coverage: 50000,
-              premium: 1300
-            }
-            this.store.dispatch(actions.updateUserDataAct({ data: json }));
-          }
-        });
-        subscribed.unsubscribe();
-
-        break;
-      }
-    }
-  }
-*/
   clearCard(event) {
     $(document.getElementsByClassName("homeInsurance")).removeClass("col-md-12");
     $(document.getElementsByClassName("homeInsurance")).addClass("col-md-4");

@@ -19,9 +19,7 @@
                 <mat-divider style="position: relative;background-color:white;height: 2px;margin-top: 20px;"></mat-divider>
                 <span class="pl-3" style="color: white;" *ngIf="isDataAvailable"> 
                     {{getChangeFormattedText(stateData$?.cards[0].oldNewPremChangeInPercent,stateData$?.cards[0].oldNewPremChangeInValue)}}
-                    <!-- {{stateData$?.cards[0].oldNewPremChangeInPercent}} ? --no change : ${{stateData$?.cards[0].oldNewPremChangeInPercent}} 
-                    --no change -->
-                </span>
+                    </span>
                 <button class="btn btn-danger btn-sm" style="color:white;position: absolute; bottom: 4%;left:40%;"
                     (click)="closeCard({id:'lifeInsuranceId', event: $event})">Remove Coverage</button>
             </div>"
@@ -48,7 +46,7 @@
                 <div class="row">
                     <span class="col-4 text-right">Funeral Spend </span>
                     <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'FuneralSpend',type:'life'})"
-                        min="250" max="2500" value="250" step="500" thumbLabel tickInterval="1"></mat-slider>
+                        min="2500" max="2500" value="250    0" step="500" thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-4 text-right">Retirement Age </span>
@@ -95,10 +93,12 @@
                 <p *ngIf="isDataAvailable">Coverage: ${{stateData$?.cards[1].coverage}}</p>
                 <p *ngIf="isDataAvailable">Premium: ${{stateData$?.cards[1].premium}}</p>
                 <span>OLD</span>
-                <p>Coverage: $300,000</p>
-                <p>Premium: $1,100</p>
+                <p *ngIf="isDataAvailable">Coverage: &nbsp; ${{stateData$?.cards[1].oldCoverage}}</p>
+                <p *ngIf="isDataAvailable">Premium: &nbsp; ${{stateData$?.cards[1].oldPremium}}</p>
                 <mat-divider style="position: relative;background-color:white;height: 2px;"></mat-divider>
-                <span class="pl-3" style="color: white">--no change</span>
+                <span class="pl-3" style="color: white;" *ngIf="isDataAvailable"> 
+                    {{getChangeFormattedText(stateData$?.cards[1].oldNewPremChangeInPercent,stateData$?.cards[1].oldNewPremChangeInValue)}}
+                    </span>
                 <button class="btn btn-danger btn-sm" (click)="closeCard({id:'homeInsuranceId', event: $event})"
                     style="color:white; position: absolute; bottom: 4%;left: 40%">Remove Coverage</button>
             </div>

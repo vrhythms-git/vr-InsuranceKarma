@@ -28,7 +28,8 @@ export const userDataInitialState: UserData = {
                 oldCoverage: 250000,
                 oldPremium: 3200,
                 oldNewPremChangeInPercent: parseInt((((3200 - 3200) / 3200) * 100).toString()),
-                oldNewPremChangeInValue: 3200 - 3200
+                oldNewPremChangeInValue: 3200 - 3200,
+                defaultPremium:3200
             },
             {
                 key: 'home',
@@ -41,7 +42,8 @@ export const userDataInitialState: UserData = {
                 oldCoverage: 300000,
                 oldPremium: 1100,
                 oldNewPremChangeInPercent: parseInt((((1100 - 1100) / 1100) * 100).toString()),
-                oldNewPremChangeInValue: 1100 - 1100
+                oldNewPremChangeInValue: 1100 - 1100,
+                defaultPremium:1100
             },
             {
                 key: 'auto',
@@ -54,7 +56,8 @@ export const userDataInitialState: UserData = {
                 oldCoverage: 300000,
                 oldPremium: 1100,
                 oldNewPremChangeInPercent: parseInt((((1100 - 1100) / 1100) * 100).toString()),
-                oldNewPremChangeInValue: 1100 - 1100
+                oldNewPremChangeInValue: 1100 - 1100,
+                defaultPremium:1100
             },
             {
                 key: 'pet',
@@ -66,7 +69,8 @@ export const userDataInitialState: UserData = {
                 oldCoverage: 5000,
                 oldPremium: 130,
                 oldNewPremChangeInPercent: parseInt((((130 - 130) / 130) * 100).toString()),
-                oldNewPremChangeInValue: 130 - 130
+                oldNewPremChangeInValue: 130 - 130,
+                defaultPremium:130
             },
             {
                 key: 'boat',
@@ -77,7 +81,6 @@ export const userDataInitialState: UserData = {
                 color: '#2C83A3',
                 oldCoverage: 50000,
                 oldPremium: 1300,
-
             },
             {
                 key: 'renters',

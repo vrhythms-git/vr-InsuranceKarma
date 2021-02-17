@@ -73,7 +73,7 @@ async function calculatePremium(inputJson) {
 
               //console.log(JSON.stringify(result));
               let resJson = {};
-              resJson.newPremium = premiumCalculation.calculateHomePremium(inputJson, result);
+              resJson.newPremium = parseInt(premiumCalculation.calculateHomePremium(inputJson, result));
               //Scenario 1
 
               resJson.insight = "Good chances of claim settlement";
@@ -123,6 +123,32 @@ async function calculatePremium(inputJson) {
           });
           break;
         }
+
+        case 'auto':{
+
+          MongoClient.connect(url, function (err, db) {
+            if (err) reject(queryExecuionFailedErrorJSON);
+            var dbo = db.db("IK_DB");
+            var query = { product: inputJson.data.insuranceType };
+            console.log("Executing query:" + JSON.stringify(query))
+            dbo.collection("ik_parameter_data").find(query).toArray(function (err, result) {
+              if (err) {
+                resolve(queryExecuionFailedErrorJSON);
+              }
+
+              let resJson = {};
+              resJson.newPremium = premiumCalculation.calculateAutoPremium(inputJson, result);
+
+              resolve({
+                status: "success",
+                data: resJson
+              })
+
+              db.close();
+            });
+          });
+
+        } 
       }
 
     } catch (error) {
