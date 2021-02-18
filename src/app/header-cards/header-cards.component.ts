@@ -32,6 +32,9 @@ export class HeaderCardsComponent implements OnInit {
 
   userData$: Observable<any>;
   constructor(private store: Store<UserData>, private services: IKServices) {
+    // this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+    //   let state = JSON 
+    // });
   }
 
   isStateDataSet = false;
@@ -67,6 +70,12 @@ export class HeaderCardsComponent implements OnInit {
               prevState.default_home_dwelling = stateData[0].dwelling_default;
               prevState.default_home_premium = stateData[0].Premium;
               prevState.default_home_coverage = stateData[0].dwelling_default;
+
+              //Change for auto card
+              let index2 = data.cards.findIndex(obj => obj.key == 'auto');
+              prevState.cards[index2].premium = stateData[0].auto_premium
+              prevState.cards[index2].coverage = 50000
+
 
               // End change
               this.store.dispatch(actions.updateUserDataAct({ data: prevState }));

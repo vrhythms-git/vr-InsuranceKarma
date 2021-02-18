@@ -41,8 +41,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ]),
     trigger('slideInOutCar', [
       state('expandCarCard', style({
-        height: '*',
-        width: '*'
+        height: '290px',
+        width: '100%'
       })),
       state('collapseCarCard', style({
         height: '0px',
@@ -119,7 +119,7 @@ export class InsuranceTilesComponent implements OnInit {
 
   sliderAutoVariableValues = {
 
-    bodilyInjuryLability_min: 20000,
+    bodilyInjuryLability_min: 50000,
     bodilyInjuryLability: 20000,
     bodilyInjuryLability_max: 120000,
 
@@ -478,6 +478,7 @@ export class InsuranceTilesComponent implements OnInit {
               data: {
                 'insuranceType': 'home',
                 'premium': data.default_home_premium,
+                'stateName' : data.cards[index].state_name,
                 'insuranceData': this.SliderData
               }
             }
@@ -544,12 +545,16 @@ export class InsuranceTilesComponent implements OnInit {
             this.tempFlag3 = true;
             let bodilyInjuryLability = this.SliderData.bodilyInjuryLability;
             if (bodilyInjuryLability == 0 || this.SliderData.bodilyInjuryLability == undefined)
-              bodilyInjuryLability == this.SliderData.propertyDamageLiability_min;
+              bodilyInjuryLability = this.SliderData.propertyDamageLiability_min;
+
+              let homeIndex = data.cards.findIndex(obj => obj.key == 'home');
+
 
             let payloadJSON = {
               data: {
                 'insuranceType': 'auto',
                 'premium': data.cards[index].defaultPremium,
+                'stateName' : data.cards[homeIndex].state_name,
                 'insuranceData': this.SliderData
               }
             }
@@ -614,7 +619,8 @@ export class InsuranceTilesComponent implements OnInit {
 
         this.insight = res.data.insight;
         newState = this.reCalculateTotalPremium(newState)
-        //newState.oldNewTotalPremChangeInPercent =  parseInt((((newState.totalPremium - newState.oldTotalPremium) / newState.oldTotalPremium) * 100).toString())
+        newState.oldNewTotalPremChangeInPercent =  parseInt((((newState.totalPremium - newState.oldTotalPremium) / newState.oldTotalPremium) * 100).toString())
+        newState.oldNewTotalPremChangeInValue = newState.totalPremium - newState.oldTotalPremium;
         newState = this.reCalculatePercentages(newState)
         this.store.dispatch(actions.updateUserDataAct({ data: newState }));
 
@@ -682,45 +688,32 @@ export class InsuranceTilesComponent implements OnInit {
     }
 
     if (event.checked == true) {
-
+      
       this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
         if (this.isToggle == false) {
+          this.isToggle = true;
           let index = data.cards.findIndex(obj => obj.key == insuranceType);
           let prevState = JSON.parse(JSON.stringify(data))
           prevState.cards[index].isEnabled = true
-
-          let totalPrem = 0;
-          for (let i = 0; i < data.cards.length; i++) {
-            if (prevState.cards[i].isEnabled == true)
-              totalPrem = totalPrem + data.cards[i].premium
-
-          }
-
-          prevState.totalPremium = totalPrem;
+          prevState = this.reCalculateTotalPremium(prevState)
           prevState = this.reCalculatePercentages(prevState)
           this.store.dispatch(actions.updateUserDataAct({ data: prevState }));
-          this.isToggle = true;
+        
         }
       });
-      // subscribedStore.unsubscribe()
-    } else if (event.checked == false) {
-
+    }
+    if (event.checked == false) {
+      
       this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
         if (this.isToggle == false) {
+          this.isToggle = true;
           let index = data.cards.findIndex(obj => obj.key == insuranceType);
           let prevState = JSON.parse(JSON.stringify(data))
           prevState.cards[index].isEnabled = false
-          let totalPrem = 0;
-          for (let i = 0; i < data.cards.length; i++) {
-            if (prevState.cards[i].isEnabled == true)
-              totalPrem = totalPrem + data.cards[i].premium
-          }
-
-
-          prevState.totalPremium = totalPrem;
+         prevState = this.reCalculateTotalPremium(prevState)
           prevState = this.reCalculatePercentages(prevState)
           this.store.dispatch(actions.updateUserDataAct({ data: prevState }));
-          this.isToggle = true;
+        
         }
       });
 
