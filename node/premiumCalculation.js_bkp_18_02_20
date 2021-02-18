@@ -212,105 +212,66 @@ function calculateLifePremium(userData, parametersJSON) {
 
 
 function calculateAutoPremium(userData, parametersJSON) {
-    console.log("calculateAutoPremium called...")
+    console.log("calculateAutoPremium called...");
     console.log("User Data :: " + JSON.stringify(userData))
     let default_premium = userData.data.premium
     let auto_premium = default_premium;
 
     console.log('****************************** Auto Insurance Premium Calculations ******************************************')
     console.log('Auto default premium is : ' + default_premium);
-    for (let i = 0; i < parametersJSON.length; i++)
-        switch (parametersJSON[i].category) {
 
-            case 'current debt': {
-                let slots = calculateSlots(userData.data.insuranceData.currentDebit_min, userData.data.insuranceData.currentDebit, parametersJSON[i].factor2)
-                //term_insurance = term_insurance + (default_premium + (parametersJSON[i].factor1 * parametersJSON[i].factor2))
-                term_insurance = term_insurance + (default_premium * slots * parametersJSON[i].factor3)
-                term_insurance = term_insurance + calculateSlotPremium(userData.data.insuranceData.currentDebit_min,
-                    userData.data.insuranceData.currentDebit,
-                    parametersJSON[i].factor2,
-                    10,
-                    default_premium
-                )
+    // Bodily Injury liability
+    auto_premium = auto_premium + calculateSlotPremium(userData.data.insuranceData.bodilyInjuryLability_min,
+        userData.data.insuranceData.bodilyInjuryLability,
+        20000,
+        5,
+        auto_premium
+    );
 
-                console.log('current debt:' + (default_premium * slots * parametersJSON[i].factor3));
-                console.log('current debt:' + term_insurance);
+    console.log('Bodily injury:' + auto_premium);
 
-                break;
-            }
-            case 'child education fund': {
 
-                let slots = calculateSlots(userData.data.insuranceData.childEducationFund_min, userData.data.insuranceData.childEducationFund, parametersJSON[i].factor2)
+    // Property damage liability
+    auto_premium = auto_premium + calculateSlotPremium(userData.data.insuranceData.propertyDamageLiability_min,
+        userData.data.insuranceData.propertyDamageLiability,
+        20000,
+        5,
+        auto_premium
+    );
 
-                //term_insurance = term_insurance + (default_premium + (parametersJSON[i].factor1 * parametersJSON[i].factor2))
-                term_insurance = term_insurance + (default_premium * slots * parametersJSON[i].factor3)
-                term_insurance = term_insurance + calculateSlotPremium(userData.data.insuranceData.childEducationFund_min,
-                    userData.data.insuranceData.childEducationFund,
-                    parametersJSON[i].factor2,
-                    5,
-                    default_premium
-                )
+    console.log('Property damage:' + auto_premium);
 
-                console.log('child education fund:' + (default_premium * slots * parametersJSON[i].factor3))
-                break;
-            }
-            case 'funeral spend':
-                {
-                    let slots = calculateSlots(userData.data.insuranceData.funeralSpend_min, userData.data.insuranceData.funeralSpend, parametersJSON[i].factor2)
+       // Comprehensive and collision
+       auto_premium = auto_premium + calculateSlotPremium(userData.data.insuranceData.comprehensiveAndCollision_min,
+        userData.data.insuranceData.comprehensiveAndCollision,
+        500,
+        1,
+        auto_premium
+    );
+    console.log('Collision:' + auto_premium);
 
-                    //term_insurance = term_insurance + (default_premium + (parametersJSON[i].factor1 * parametersJSON[i].factor2))
-                    term_insurance = term_insurance + (default_premium * slots * parametersJSON[i].factor3)
-                    term_insurance = term_insurance + calculateSlotPremium(userData.data.insuranceData.funeralSpend_min,
-                        userData.data.insuranceData.funeralSpend,
-                        parametersJSON[i].factor2,
-                        2,
-                        default_premium
-                    )
 
-                    console.log('funeral spend:' + (default_premium * slots * parametersJSON[i].factor3))
-                    break;
-                }
-            // case 'retirement age': {
-            //     total = total + (default_premium + parametersJSON[i].factor1)
-            //     console.log('retirement age:' + (default_premium + parametersJSON[i].factor1))
-            //     break;
-            // }
-            case 'Annual Income you want to leave for nominee': {
-                let slots = calculateSlots(userData.data.insuranceData.annualIncome_min, userData.data.insuranceData.annualIncome, parametersJSON[i].factor2)
+      // Personal injury protection
+      auto_premium = auto_premium + calculateSlotPremium(userData.data.insuranceData.personalInjuryProtection_min,
+        userData.data.insuranceData.personalInjuryProtection,
+        1000,
+        1,
+        auto_premium
+    );    
+    console.log('Personal injury:' + auto_premium);
 
-                //whole_life_insurance = whole_life_insurance + ( default_premium + (parametersJSON[i].factor1 * parametersJSON[i].factor2))
-                whole_life_insurance = whole_life_insurance + (default_premium * slots * parametersJSON[i].factor3)
-                whole_life_insurance = whole_life_insurance + calculateSlotPremium(userData.data.insuranceData.annualIncome_min,
-                    userData.data.insuranceData.annualIncome,
-                    parametersJSON[i].factor2,
-                    10,
-                    default_premium
-                )
 
-                console.log('Annual Income you want to leave for nominee:' + (default_premium * slots * parametersJSON[i].factor3))
-                break;
-            }
-            case 'How many years do you want the replacement income or emergency fund to last?': {
-                let slots = calculateSlots(userData.data.insuranceData.replacementIncome_min, userData.data.insuranceData.replacementIncome, 1)
+     // Uninsured/Underinsured motorist bodily injury
+     auto_premium = auto_premium + calculateSlotPremium(userData.data.insuranceData.uninsuredOrUnderinsuredMotorist_min,
+        userData.data.insuranceData.uninsuredOrUnderinsuredMotorist,
+        50000,
+        2,
+        auto_premium
+    );    
+    console.log('Uninsured motorist:' + auto_premium);
+    console.log('Total auto premium: ' + auto_premium)
 
-                //whole_life_insurance = whole_life_insurance + default_premium
-                whole_life_insurance = whole_life_insurance + (default_premium * slots * parametersJSON[i].factor3)
-                whole_life_insurance = whole_life_insurance + calculateSlotPremium(userData.data.insuranceData.replacementIncome_min,
-                    userData.data.insuranceData.replacementIncome,
-                    1, //parametersJSON[i].factor2,
-                    5,
-                    default_premium
-                )
-
-                console.log('How many years do you want the replacement income or emergency fund to last?' + (default_premium * slots * parametersJSON[i].factor3))
-                break;
-            }
-        }
-    console.log("Whole life insurance is : " + whole_life_insurance + " and Term isnsurance is :  " + term_insurance);
-    return {
-        whole_life_insurance: whole_life_insurance,
-        term_insurance: term_insurance
-    }
+    return auto_premium.toFixed(0)
 }
 
 
@@ -340,6 +301,7 @@ function calculateSlots(minValue, currentValue, slot) {
     return parseInt(numberOfSlots);
 }
 
+/*
 
 function calculateAutoPremium(userData, parametersJSON){
 console.log("********* Auto Data ******");
@@ -347,6 +309,7 @@ console.log(JSON.stringify(userData))
     return userData.data.premium
 
 }
+*/
 
 module.exports = {
     calculateHomePremium,

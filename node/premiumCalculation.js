@@ -113,6 +113,8 @@ function calculateLifePremium(userData, parametersJSON) {
     let default_premium = userData.data.premium
     let whole_life_insurance = default_premium;
     let term_insurance = default_premium;
+    let new_term_benefit = userData.data.deathBenefit;
+    let new_whole_life_benefit = userData.data.deathBenefit;
 
     console.log('****************************** life Insurance Premium Calculations ******************************************')
     console.log('Life default premium is : ' + default_premium + '  and death benefit is : ' + userData.data.deathBenefit);
@@ -128,7 +130,13 @@ function calculateLifePremium(userData, parametersJSON) {
                     parametersJSON[i].factor2,
                     10,
                     default_premium
-                )
+                );
+
+                if (userData.data.insuranceData.currentDebit != undefined && userData.data.insuranceData.currentDebit != null) {
+                    new_term_benefit = new_term_benefit + userData.data.insuranceData.currentDebit;
+                }else {
+                    new_term_benefit = new_term_benefit + userData.data.insuranceData.currentDebit_min;
+                }
 
                 console.log('current debt:' + (default_premium * slots * parametersJSON[i].factor3));
                 console.log('current debt:' + term_insurance);
@@ -146,7 +154,14 @@ function calculateLifePremium(userData, parametersJSON) {
                     parametersJSON[i].factor2,
                     5,
                     default_premium
-                )
+                );
+
+                if (userData.data.insuranceData.childEducationFund != undefined && userData.data.insuranceData.childEducationFund != null) {
+                    new_term_benefit = new_term_benefit + userData.data.insuranceData.childEducationFund;
+                }else {
+                    new_term_benefit = new_term_benefit + userData.data.insuranceData.childEducationFund_min;
+                }
+
 
                 console.log('child education fund:' + (default_premium * slots * parametersJSON[i].factor3))
                 break;
@@ -163,6 +178,14 @@ function calculateLifePremium(userData, parametersJSON) {
                         2,
                         default_premium
                     )
+
+                    if (userData.data.insuranceData.funeralSpend != undefined && userData.data.insuranceData.funeralSpend != null) {
+                        new_term_benefit = new_term_benefit + userData.data.insuranceData.funeralSpend;
+                    }
+                    else {
+                        new_term_benefit = new_term_benefit + userData.data.insuranceData.funeralSpend_min;
+                    }
+    
 
                     console.log('funeral spend:' + (default_premium * slots * parametersJSON[i].factor3))
                     break;
@@ -184,6 +207,9 @@ function calculateLifePremium(userData, parametersJSON) {
                     default_premium
                 )
 
+                new_whole_life_benefit = new_whole_life_benefit + userData.data.insuranceData.annualIncome_min;
+
+
                 console.log('Annual Income you want to leave for nominee:' + (default_premium * slots * parametersJSON[i].factor3))
                 break;
             }
@@ -199,14 +225,21 @@ function calculateLifePremium(userData, parametersJSON) {
                     default_premium
                 )
 
+                new_whole_life_benefit = new_whole_life_benefit + userData.data.insuranceData.replacementIncome_min;
+
                 console.log('How many years do you want the replacement income or emergency fund to last?' + (default_premium * slots * parametersJSON[i].factor3))
                 break;
             }
         }
     console.log("Whole life insurance is : " + whole_life_insurance + " and Term isnsurance is :  " + term_insurance);
+    console.log("Whole life Benefit is : " + new_whole_life_benefit + " and Term Benefit is :  " + new_term_benefit);
+
     return {
         whole_life_insurance: whole_life_insurance,
-        term_insurance: term_insurance
+        term_insurance: term_insurance,
+        whole_life_benefit : new_whole_life_benefit,
+        term_benefit : new_term_benefit
+
     }
 }
 
