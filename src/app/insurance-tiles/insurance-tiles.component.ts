@@ -30,7 +30,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     trigger('slideInOutHome', [
       state('expandHomeCard', style({
          height: '290px',
-         width: '88.5%'
+         width: '100%'
       })),
       state('collapseHomeCard', style({
         height: '0px',
@@ -180,30 +180,29 @@ export class InsuranceTilesComponent implements OnInit {
       if (data != undefined && data != {}) {
 
         let index = data.cards.findIndex(obj => obj.key == 'home')
-        let dwelling_default = data.cards[index].coverage
-        // console.log("Subscription Event Occured.... with data" + JSON.stringify(data));
+        let dwelling_default = data.default_home_dwelling
         this.sliderVariableValues.dwelling_min = dwelling_default,
-          //this.sliderVariableValues.dwelling = dwelling_default,
+          this.sliderVariableValues.dwelling = dwelling_default,
           this.sliderVariableValues.dwelling_max = dwelling_default + 500000,
 
           this.sliderVariableValues.otherStructure_min = (parseInt(dwelling_default) * 0.10)
-        //this.sliderVariableValues.otherStructure = (parseInt(dwelling_default) * 0.10)
+        this.sliderVariableValues.otherStructure = (parseInt(dwelling_default) * 0.10)
         this.sliderVariableValues.otherStructure_max = (parseInt(dwelling_default) * 0.10) + 50000
 
         this.sliderVariableValues.personalProperty_min = (parseInt(dwelling_default) * 0.70)
-        //this.sliderVariableValues.personalProperty = (parseInt(dwelling_default) * 0.70)
+        this.sliderVariableValues.personalProperty = (parseInt(dwelling_default) * 0.70)
         this.sliderVariableValues.personalProperty_max = (parseInt(dwelling_default) * 0.70) + 100000
 
         this.sliderVariableValues.lossOfUse_min = (parseInt(dwelling_default) * 0.20)
-        //this.sliderVariableValues.lossOfUse = (parseInt(dwelling_default) * 0.20)
+        this.sliderVariableValues.lossOfUse = (parseInt(dwelling_default) * 0.20)
         this.sliderVariableValues.lossOfUse_max = (parseInt(dwelling_default) * 0.20) + 50000
 
         this.sliderVariableValues.personalLiability_min = dwelling_default
-        //this.sliderVariableValues.personalLiability = dwelling_default
+        this.sliderVariableValues.personalLiability = dwelling_default
         this.sliderVariableValues.personalLiability_max = dwelling_default + 500000
 
         this.sliderVariableValues.medical_min = 2000
-        //this.sliderVariableValues.medical = 2000
+        this.sliderVariableValues.medical = 2000
         this.sliderVariableValues.medical_max = 7000
 
         //console.log("Calculated data is : " + JSON.stringify(this.sliderVariableValues));
@@ -216,7 +215,7 @@ export class InsuranceTilesComponent implements OnInit {
 
     if (percentage == 0)
       return "--no change";
-    else return `${value}  (${percentage}%)`
+    else return `$${value}  (${percentage}%)`
   }
 
   showCard(event) {
@@ -478,7 +477,7 @@ export class InsuranceTilesComponent implements OnInit {
             let payloadJSON = {
               data: {
                 'insuranceType': 'home',
-                'premium': data.cards[index].defaultPremium,
+                'premium': data.default_home_premium,
                 'insuranceData': this.SliderData
               }
             }
@@ -600,13 +599,13 @@ export class InsuranceTilesComponent implements OnInit {
 
         newState.cards[index].insight = res.data.insight
         newState.cards[index].risk = res.data.risk
-        newState.cards[index].oldPremium = prevState.cards[index].premium
-        newState.cards[index].oldCoverage = prevState.cards[index].coverage
+        //newState.cards[index].oldPremium = prevState.cards[index].premium
+        //newState.cards[index].oldCoverage = prevState.cards[index].coverage
         newState.cards[index].coverage = newCoverage
 
         newState.cards[index].oldNewPremChangeInPercent = parseInt((((newState.cards[index].premium - newState.cards[index].oldPremium) / newState.cards[index].oldPremium) * 100).toString())
 
-        newState.cards[index].oldNewPremChangeInValue = newState.cards[index].oldPremium - newState.cards[index].premium
+        newState.cards[index].oldNewPremChangeInValue = newState.cards[index].premium - newState.cards[index].oldPremium;
 
         if (res.data.risk == 'medium' || res.data.risk == 'high')
           newState.cards[index].notification = true
@@ -615,6 +614,7 @@ export class InsuranceTilesComponent implements OnInit {
 
         this.insight = res.data.insight;
         newState = this.reCalculateTotalPremium(newState)
+        //newState.oldNewTotalPremChangeInPercent =  parseInt((((newState.totalPremium - newState.oldTotalPremium) / newState.oldTotalPremium) * 100).toString())
         newState = this.reCalculatePercentages(newState)
         this.store.dispatch(actions.updateUserDataAct({ data: newState }));
 

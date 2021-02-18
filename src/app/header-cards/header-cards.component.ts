@@ -62,6 +62,13 @@ export class HeaderCardsComponent implements OnInit {
               prevState.cards[index].premium = stateData[0].Premium
               prevState.cards[index].coverage = stateData[0].dwelling_default
               prevState.cards[index].state_name = stateData[0].states
+
+              // Start change (Rahul sir 18-2-20)
+              prevState.default_home_dwelling = stateData[0].dwelling_default;
+              prevState.default_home_premium = stateData[0].Premium;
+              prevState.default_home_coverage = stateData[0].dwelling_default;
+
+              // End change
               this.store.dispatch(actions.updateUserDataAct({ data: prevState }));
               this.isTotalPremiumCalculated = false;
               this.calculateTotalPremium(index, stateData[0].Premium);
@@ -219,6 +226,11 @@ export class HeaderCardsComponent implements OnInit {
           return (item["Age "].replaceAll(" ", "") == ageBracket);
         })
 
+        // Start change (Rahul sir 18-2-20)
+        ageData.default_life_premium = AgeBracketData[0].Premium;
+        ageData.default_life_coverage = AgeBracketData[0]["Death Benefit"];
+        // End change
+
       this.store.dispatch(actions.updateUserDataAct({ data: ageData }));
 
         this.isTotalPremiumCalculated = false;
@@ -284,7 +296,7 @@ export class HeaderCardsComponent implements OnInit {
     if (this.counter1 == this.dependents.length) {
       this.counter1 = 0;
     }
-    this.dependentValueChange(this.counter1);
+    //this.dependentValueChange(this.counter1);
   }
 
   depedentdecrement(event: any) {
@@ -294,7 +306,7 @@ export class HeaderCardsComponent implements OnInit {
     }
     this.counter1 -= 1;
 
-    this.dependentValueChange(this.counter1);
+    //this.dependentValueChange(this.counter1);
   }
 
   automobileincrement(event: any) {
@@ -304,7 +316,7 @@ export class HeaderCardsComponent implements OnInit {
       this.counter2 = 0;
     }
 
-    this.automobileValueChange(this.counter2);
+    //this.automobileValueChange(this.counter2);
   }
 
   automobiledecrement(event: any) {
@@ -314,7 +326,7 @@ export class HeaderCardsComponent implements OnInit {
     }
     this.counter2 -= 1;
 
-    this.automobileValueChange(this.counter2);
+    //this.automobileValueChange(this.counter2);
   }
 
   incomeDropdown(value) {

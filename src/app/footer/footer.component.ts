@@ -60,10 +60,11 @@ export class FooterComponent implements OnInit {
     WithoutHome = 4300;
     this.store.pipe(select(selectors.selectUserData)).subscribe((data) => {
 
+
+
       // console.log('Evnt occured.....')
       if (data != undefined && data != {}) {
-
-
+        
         $('#chartHeaderID').children().remove();
         $('#chartBarsID').children().remove();
         for (let i = 0; i < data.cards.length; i++) {

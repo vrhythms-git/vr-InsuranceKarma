@@ -2,18 +2,19 @@
     <div class="container" style="padding: 1.8%">
     <div class="d-flex flex-row" style="margin-top: -3%" >
         <div class="col-md-8" style="margin-top: 25px;" *ngIf="isDataAvailable"> 
-            <span style="font-size: 34px;" >Annual Premium:</span>&nbsp;<span  style="font-size: 34px; font-weight: 600;"> ${{stateData$?.totalPremium}}</span>
-            <!-- &nbsp; <span style="font-size: 20px; font-weight: 600; opacity: 0.6;"> +34% </span>
-            &nbsp; <span>+1,300</span> -->
+            <span style="font-size: 34px;" >Annual Premium:</span>&nbsp;<span  style="font-size: 34px; font-weight: 600;"> ${{stateData$?.totalPremium|number:'2.'}}</span>
+            &nbsp; <span style="font-size: 20px; font-weight: 600; opacity: 0.6;"> +34% </span>
+            &nbsp; <span>+1,300</span>
         </div>
         <div class="col-md-4">
-            <button class="btn btn-info btn-lg" style="float:right; width:100%;margin-top: 10px">Get More Insights > </button>
+            <button class="btn btn-info btn-lg getMoreInsightBtn">Get More Insights > </button>
         </div>
     </div>
     <!-- <hr><br> -->
     <mat-divider class="ml-3" style="position: relative; background-color: #AAB2BD; margin-top:1%;height:1px;"></mat-divider>
-    <div class="container" style="bottom: 0; position: fixed;width: 100%;">
-        <table id="chartID" style="text-align: center;">
+    <div class="">
+    <div class="container" style="bottom: 0; position: fixed;width: 100%;margin-left: -15px;">
+        <table id="chartID" class="container-fluid" style="text-align: center;">
             <tr id="chartHeaderID">
 
                 <!-- <th>Pet</th> -->
@@ -23,7 +24,7 @@
             </tr>
 
         </table>
-
+</div>
     </div>
 </div>
 </div>

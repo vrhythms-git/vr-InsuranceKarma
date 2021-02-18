@@ -34,7 +34,8 @@ height: 50%;
     color:blue;
 }
 mat-slide-toggle{
-    margin-top: -10px;
+    /* margin-top: -10px; */
+    margin-right: 6%;
 }
 span{
     margin-top: 2%;

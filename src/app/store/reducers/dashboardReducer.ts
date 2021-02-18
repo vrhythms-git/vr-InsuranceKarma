@@ -50,10 +50,10 @@ export const userDataInitialState: UserData = {
                 name: 'Auto',
                 isEnabled: true,
                 premium: 1100,
-                coverage: 300000,
+                coverage: 50000,
                 percentOutOfTotPremium: parseInt(((1100 / 5400) * 100).toString()),
                 color: '#BD8C32',
-                oldCoverage: 300000,
+                oldCoverage: 50000,
                 oldPremium: 1100,
                 oldNewPremChangeInPercent: parseInt((((1100 - 1100) / 1100) * 100).toString()),
                 oldNewPremChangeInValue: 1100 - 1100,
@@ -116,7 +116,10 @@ export const userDataInitialState: UserData = {
               "Premium": 27800
             }
           ],
-        totalPremium: 5400
+        totalPremium: 5400,
+        oldTotalPremium: 5400,
+        oldNewTotalPremChangeInPercent:0,
+        oldNewTotalPremChangeInValue: 0
     }
 }
 
