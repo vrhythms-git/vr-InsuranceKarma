@@ -226,8 +226,8 @@ export class InsuranceTilesComponent implements OnInit {
       $(document.getElementsByClassName("carIns")).removeClass("col-md-4 col-md-12 second first third");
 
       $(document.getElementsByClassName("homeIns")).addClass("col-md-12 first fade-in");
-      $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 second fade-in");
-      $(document.getElementsByClassName("carIns")).addClass("col-md-4 third fade-in");
+      $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 second fade-in padtop");
+      $(document.getElementsByClassName("carIns")).addClass("col-md-4 third fade-in padtop");
       $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth");
       $(document.getElementsByClassName("boatIns")).addClass("col-md-4 fifth");
       $(document.getElementsByClassName("rentIns")).addClass("col-md-4 sixth");
@@ -247,8 +247,8 @@ export class InsuranceTilesComponent implements OnInit {
       $(document.getElementsByClassName("carIns")).removeClass("col-md-4 col-md-12 second first third");
 
       $(document.getElementsByClassName("lifeIns")).addClass("col-md-12 first fade-in");
-      $(document.getElementsByClassName("homeIns")).addClass("col-md-4 second");
-      $(document.getElementsByClassName("carIns")).addClass("col-md-4 third");
+      $(document.getElementsByClassName("homeIns")).addClass("col-md-4 second padtop");
+      $(document.getElementsByClassName("carIns")).addClass("col-md-4 third padtop");
       $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth");
       $(document.getElementsByClassName("boatIns")).addClass("col-md-4 fifth");
       $(document.getElementsByClassName("rentIns")).addClass("col-md-4 sixth");
@@ -266,8 +266,8 @@ export class InsuranceTilesComponent implements OnInit {
       $(document.getElementsByClassName("carIns")).removeClass("col-md-4 col-md-12 second first third");
 
       $(document.getElementsByClassName("carIns")).addClass("col-md-12 first fade-in");
-      $(document.getElementsByClassName("homeIns")).addClass("col-md-4 second");
-      $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 third");
+      $(document.getElementsByClassName("homeIns")).addClass("col-md-4 second padtop");
+      $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 third padtop");
       $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth");
       $(document.getElementsByClassName("boatIns")).addClass("col-md-4 fifth");
       $(document.getElementsByClassName("rentIns")).addClass("col-md-4 sixth");
@@ -316,9 +316,9 @@ export class InsuranceTilesComponent implements OnInit {
       this.hideBoatCard = false;
       this.hideRentCard = false;
     }
-    $(document.getElementsByClassName("homeIns")).removeClass("col-md-12 first second third");
-    $(document.getElementsByClassName("lifeIns")).removeClass("col-md-12 first second third");
-    $(document.getElementsByClassName("carIns")).removeClass("col-md-12 second first third");
+    $(document.getElementsByClassName("homeIns")).removeClass("col-md-12 first second third padtop");
+    $(document.getElementsByClassName("lifeIns")).removeClass("col-md-12 first second third padtop");
+    $(document.getElementsByClassName("carIns")).removeClass("col-md-12 second first third padtop");
     $(document.getElementsByClassName("lifeIns")).addClass("col-md-4 first");
     $(document.getElementsByClassName("homeIns")).addClass("col-md-4 second");
     $(document.getElementsByClassName("carIns")).addClass("col-md-4 third");

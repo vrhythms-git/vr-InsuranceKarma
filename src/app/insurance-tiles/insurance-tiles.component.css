@@ -381,7 +381,7 @@ p {
 
 :host ::ng-deep .max .mat-slider-thumb-label-text {
   margin-top: -12px;
-  background: #AC92EC;
+  background: #5D9CEC;
   color: white;
   border-radius: 3.5px;
   margin-left: 12px;
@@ -394,7 +394,7 @@ p {
 
 :host ::ng-deep .max1 .mat-slider-thumb-label-text {
   margin-top: -12px;
-  background: #5D9CEC;
+  background: #AC92EC;
   color: white;
   border-radius: 3.5px;
   margin-left: 12px;
@@ -403,4 +403,8 @@ p {
   /* padding-left: 90%;
   padding-right: 90%; */
   width: 500%;
+}
+
+.padtop{
+  padding-top: 1.5%;
 }
