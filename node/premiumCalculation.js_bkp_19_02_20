@@ -13,15 +13,12 @@ function calculateHomePremium(userData, parametersJSON) {
                 let slots = calculateSlots(userData.data.insuranceData.dwelling_min, userData.data.insuranceData.dwelling, parametersJSON[i].factor2)
                 total = total + (dwellingPre * (slots * parametersJSON[i].factor3))
                 console.log('dwelling:' + total);
-
-                /*
                 total = total + calculateSlotPremium(userData.data.insuranceData.dwelling_min,
                     userData.data.insuranceData.dwelling,
                     100000,
                     10,
                     dwellingPre
                 )
-                */
                 console.log('dwelling:' + total);
                 break;
             }
@@ -32,14 +29,12 @@ function calculateHomePremium(userData, parametersJSON) {
                 total = total + (dwellingPre * slots * parametersJSON[i].factor3)
                 console.log('other structure:' + total)
 
-                /*
                 total = total + calculateSlotPremium(userData.data.insuranceData.otherStructure_min,
                     userData.data.insuranceData.otherStructure,
                     10000,
                     1,
                     dwellingPre
                 )
-                */
 
                 console.log('other structure:' + total)
 
@@ -50,15 +45,12 @@ function calculateHomePremium(userData, parametersJSON) {
                     let slots = calculateSlots(userData.data.insuranceData.personalProperty_min, userData.data.insuranceData.personalProperty, parametersJSON[i].factor2)
                     //total = total + (dwellingPre * parametersJSON[i].factor1 * parametersJSON[i].factor3)
                     total = total + (dwellingPre * slots * parametersJSON[i].factor3)
-
-                    /*
                     total = total + calculateSlotPremium(userData.data.insuranceData.personalProperty_min,
                         userData.data.insuranceData.personalProperty,
                         20000,
                         2,
                         dwellingPre
                     )
-                    */
 
                     console.log('personal property:' + (dwellingPre * parametersJSON[i].factor1 * parametersJSON[i].factor3))
                     console.log('personal property:' + total)
@@ -69,14 +61,12 @@ function calculateHomePremium(userData, parametersJSON) {
 
                 //total = total + (dwellingPre * parametersJSON[i].factor1 * parametersJSON[i].factor3)
                 total = total + (dwellingPre * slots * parametersJSON[i].factor3)
-                /*
                 total = total + calculateSlotPremium(userData.data.insuranceData.lossOfUse_min,
                     userData.data.insuranceData.lossOfUse,
                     10000,
                     1,
                     dwellingPre
                 )
-                */
 
                 console.log('loss of use:' + (dwellingPre * parametersJSON[i].factor1 * parametersJSON[i].factor3))
                 console.log('loss of use:' + total)
@@ -87,13 +77,11 @@ function calculateHomePremium(userData, parametersJSON) {
 
                 //total = total + (parametersJSON[i].factor1 * parametersJSON[i].factor3)
                 total = total + (slots * parametersJSON[i].factor3)
-                /*
                 total = total + calculateSlotPremiumWithoutPercent(userData.data.insuranceData.personalLiability_min,
                     userData.data.insuranceData.personalLiability,
                     100000,
                     5
                 )
-                */
 
                 console.log('personal liability:' + (parametersJSON[i].factor1 * parametersJSON[i].factor3))
                 console.log('personal liability:' + total)
@@ -104,13 +92,11 @@ function calculateHomePremium(userData, parametersJSON) {
 
                 //total = total + (parametersJSON[i].factor1 * parametersJSON[i].factor3)
                 total = total + (slots * parametersJSON[i].factor3)
-                /*
                 total = total + calculateSlotPremiumWithoutPercent(userData.data.insuranceData.medical_min,
                     userData.data.insuranceData.medical,
                     1000,
                     2
                 )
-                */
 
                 console.log('medical:' + (slots * parametersJSON[i].factor3))
                 console.log('medical:' + total)
@@ -139,15 +125,12 @@ function calculateLifePremium(userData, parametersJSON) {
                 let slots = calculateSlots(userData.data.insuranceData.currentDebit_min, userData.data.insuranceData.currentDebit, parametersJSON[i].factor2)
                 //term_insurance = term_insurance + (default_premium + (parametersJSON[i].factor1 * parametersJSON[i].factor2))
                 term_insurance = term_insurance + (default_premium * slots * parametersJSON[i].factor3)
-
-                /*
                 term_insurance = term_insurance + calculateSlotPremium(userData.data.insuranceData.currentDebit_min,
                     userData.data.insuranceData.currentDebit,
                     parametersJSON[i].factor2,
                     10,
                     default_premium
                 );
-                */
 
                 if (userData.data.insuranceData.currentDebit != undefined && userData.data.insuranceData.currentDebit != null) {
                     new_term_benefit = new_term_benefit + userData.data.insuranceData.currentDebit;
@@ -166,15 +149,12 @@ function calculateLifePremium(userData, parametersJSON) {
 
                 //term_insurance = term_insurance + (default_premium + (parametersJSON[i].factor1 * parametersJSON[i].factor2))
                 term_insurance = term_insurance + (default_premium * slots * parametersJSON[i].factor3)
-
-                /*
                 term_insurance = term_insurance + calculateSlotPremium(userData.data.insuranceData.childEducationFund_min,
                     userData.data.insuranceData.childEducationFund,
                     parametersJSON[i].factor2,
                     5,
                     default_premium
                 );
-                */
 
                 if (userData.data.insuranceData.childEducationFund != undefined && userData.data.insuranceData.childEducationFund != null) {
                     new_term_benefit = new_term_benefit + userData.data.insuranceData.childEducationFund;
@@ -192,15 +172,12 @@ function calculateLifePremium(userData, parametersJSON) {
 
                     //term_insurance = term_insurance + (default_premium + (parametersJSON[i].factor1 * parametersJSON[i].factor2))
                     term_insurance = term_insurance + (default_premium * slots * parametersJSON[i].factor3)
-
-                    /*
                     term_insurance = term_insurance + calculateSlotPremium(userData.data.insuranceData.funeralSpend_min,
                         userData.data.insuranceData.funeralSpend,
                         parametersJSON[i].factor2,
                         2,
                         default_premium
                     )
-                    */
 
                     if (userData.data.insuranceData.funeralSpend != undefined && userData.data.insuranceData.funeralSpend != null) {
                         new_term_benefit = new_term_benefit + userData.data.insuranceData.funeralSpend;
@@ -223,15 +200,12 @@ function calculateLifePremium(userData, parametersJSON) {
 
                 //whole_life_insurance = whole_life_insurance + ( default_premium + (parametersJSON[i].factor1 * parametersJSON[i].factor2))
                 whole_life_insurance = whole_life_insurance + (default_premium * slots * parametersJSON[i].factor3)
-
-                /*
                 whole_life_insurance = whole_life_insurance + calculateSlotPremium(userData.data.insuranceData.annualIncome_min,
                     userData.data.insuranceData.annualIncome,
                     parametersJSON[i].factor2,
                     10,
                     default_premium
                 )
-                */
 
                 new_whole_life_benefit = new_whole_life_benefit + userData.data.insuranceData.annualIncome_min;
 
@@ -244,15 +218,12 @@ function calculateLifePremium(userData, parametersJSON) {
 
                 //whole_life_insurance = whole_life_insurance + default_premium
                 whole_life_insurance = whole_life_insurance + (default_premium * slots * parametersJSON[i].factor3)
-
-                /*
                 whole_life_insurance = whole_life_insurance + calculateSlotPremium(userData.data.insuranceData.replacementIncome_min,
                     userData.data.insuranceData.replacementIncome,
                     1, //parametersJSON[i].factor2,
                     5,
                     default_premium
                 )
-                */
 
                 new_whole_life_benefit = new_whole_life_benefit + userData.data.insuranceData.replacementIncome_min;
 

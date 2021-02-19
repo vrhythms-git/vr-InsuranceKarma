@@ -19,11 +19,11 @@ export const userDataInitialState: UserData = {
         cards: [
             {
                 key: 'life',
-                name: 'Life',
+                name: 'Term Life',
                 isEnabled: true,
                 premium: 3200,
                 coverage: 250000,
-                percentOutOfTotPremium: parseInt(((3200 / 5400) * 100).toString()),
+                percentOutOfTotPremium: parseInt(((3200 / 5744) * 100).toString()),
                 color: '#298D74',
                 oldCoverage: 250000,
                 oldPremium: 3200,
@@ -38,7 +38,7 @@ export const userDataInitialState: UserData = {
                 isEnabled: true,
                 premium: 1133,
                 coverage: 100000,
-                percentOutOfTotPremium: parseInt(((1100 / 5400) * 100).toString()),
+                percentOutOfTotPremium: parseInt(((1100 / 5744) * 100).toString()),
                 color: '#3867A5',
                 oldCoverage: 100000,
                 oldPremium: 1133,
@@ -52,7 +52,7 @@ export const userDataInitialState: UserData = {
                 isEnabled: true,
                 premium: 1411,
                 coverage: 50000,
-                percentOutOfTotPremium: parseInt(((1411 / 5400) * 100).toString()),
+                percentOutOfTotPremium: parseInt(((1411 / 5744) * 100).toString()),
                 color: '#BD8C32',
                 oldCoverage: 50000,
                 oldPremium: 1411,
@@ -85,7 +85,7 @@ export const userDataInitialState: UserData = {
             },
             {
                 key: 'renters',
-                name: 'Life',
+                name: 'Term Life',
                 isEnabled: false,
                 premium: 1300,
                 coverage: 50000,
@@ -96,29 +96,29 @@ export const userDataInitialState: UserData = {
         ],
         selectedAgeBracket: [
             {
-              "_id": "6018fc2a57065f3c046d0160",
-              "product": "life",
-              "Age ": "45 - 55",
-              "Death Benefit": 250000,
-              "Premium": 7000
+                "_id": "6018fc2a57065f3c046d015f",
+                "product": "life",
+                "Age ": "35 - 45",
+                "Death Benefit": 250000,
+                "Premium": 3200
             },
             {
-              "_id": "6018fc2a57065f3c046d0162",
-              "product": "life",
-              "Age ": "45 - 55",
-              "Death Benefit": 500000,
-              "Premium": 14000
+                "_id": "6018fc2a57065f3c046d0161",
+                "product": "life",
+                "Age ": "35 - 45",
+                "Death Benefit": 500000,
+                "Premium": 6300
             },
             {
-              "_id": "6018fc2a57065f3c046d0164",
-              "product": "life",
-              "Age ": "45 - 55",
-              "Death Benefit": 1000000,
-              "Premium": 27800
+                "_id": "6018fc2a57065f3c046d0163",
+                "product": "life",
+                "Age ": "35 - 45",
+                "Death Benefit": 1000000,
+                "Premium": 12500
             }
           ],
-        totalPremium: 5400,
-        oldTotalPremium: 5400,
+        totalPremium: 5744,
+        oldTotalPremium: 5744,
         oldNewTotalPremChangeInPercent:0,
         oldNewTotalPremChangeInValue: 0
     }

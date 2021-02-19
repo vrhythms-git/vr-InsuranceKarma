@@ -697,6 +697,8 @@ export class InsuranceTilesComponent implements OnInit {
           prevState.cards[index].isEnabled = true
           prevState = this.reCalculateTotalPremium(prevState)
           prevState = this.reCalculatePercentages(prevState)
+          prevState.oldNewTotalPremChangeInPercent =  parseInt((((prevState.totalPremium - prevState.oldTotalPremium) / prevState.oldTotalPremium) * 100).toString())
+          prevState.oldNewTotalPremChangeInValue = prevState.totalPremium - prevState.oldTotalPremium;
           this.store.dispatch(actions.updateUserDataAct({ data: prevState }));
         
         }
@@ -712,6 +714,8 @@ export class InsuranceTilesComponent implements OnInit {
           prevState.cards[index].isEnabled = false
          prevState = this.reCalculateTotalPremium(prevState)
           prevState = this.reCalculatePercentages(prevState)
+          prevState.oldNewTotalPremChangeInPercent =  parseInt((((prevState.totalPremium - prevState.oldTotalPremium) / prevState.oldTotalPremium) * 100).toString())
+          prevState.oldNewTotalPremChangeInValue = prevState.totalPremium - prevState.oldTotalPremium;
           this.store.dispatch(actions.updateUserDataAct({ data: prevState }));
         
         }
