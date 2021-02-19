@@ -29,7 +29,9 @@ export const userDataInitialState: UserData = {
                 oldPremium: 3200,
                 oldNewPremChangeInPercent: parseInt((((3200 - 3200) / 3200) * 100).toString()),
                 oldNewPremChangeInValue: 3200 - 3200,
-                defaultPremium:3200
+                defaultPremium:3200,
+                risk:undefined,
+                insight:undefined
             },
             {
                 key: 'home',

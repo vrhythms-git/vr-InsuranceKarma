@@ -18,7 +18,7 @@
 } */
 
 :host ::ng-deep .mat-select-value-text {
-    color: rgb(44, 131, 163) !important;
+    color : rgb(44, 131, 163) !important;
     font-family: poppins;
     font-size: 15px;
     letter-spacing: 0.18px;
@@ -77,7 +77,7 @@
     justify-content: center;
     font-weight: bold;
     /* padding: 8%; */
-    color: rgb(44, 131, 163);
+    color : rgb(44, 131, 163);
 }
 
 .buttonsub {
@@ -127,7 +127,7 @@
     font-size: 15px;
     margin-top: 11%;
     margin-bottom: 11%;
-    color: rgb(44, 131, 163);
+    color : rgb(44, 131, 163);
 }
 
 .zip {
@@ -139,7 +139,7 @@
     border-block-end-color: #CCD1D9;
     font-weight: bold;
     font-size: 16px;
-    color: rgb(44, 131, 163);
+    color:rgb(44, 131, 163);
 }
 
 #zipHeaderCard, #incomeHeaderCard, #dependentHeaderCard, #statusHeaderCard, #occupationHeaderCard {

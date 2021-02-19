@@ -1,5 +1,5 @@
 <div class="container-md container-sm">
-    <div class="row" style="justify-content: space-between;margin-left:5px;padding:0;margin-right: 2px">
+    <div class="row" style="justify-content: space-between;margin-left:4px;padding:0;margin-right: -7px">
       <div id="ageHeaderCard" class="col-sm col-md" >
         <mat-card class="mat">
           <div class="p-1 text-center mat-div">
@@ -22,7 +22,8 @@
           <div class="p-1 text-center mat-div">
             <p class="topP">Zip Code</p>
           </div>
-          <input type="text"  class="zip" id="zipCodeInputField" (keypress)="keyPress($event)" >
+          <!-- <input type="text"  class="zip" id="zipCodeInputField" (keypress)="keyPress($event)" > -->
+          <input type="text" maxlength="5" value="63005" class="zip" id="zipCodeInputField" (change)="change($event)" (keydown)="change($event)" (keypress)="keyPress($event)" >
         </mat-card>
 
       </div>

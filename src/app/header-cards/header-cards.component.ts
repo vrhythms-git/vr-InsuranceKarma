@@ -45,7 +45,14 @@ export class HeaderCardsComponent implements OnInit {
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 5 && !pattern.test(inputChar)) {
       event.preventDefault();
-    } else {
+      if (event.keyCode == 13){
+        this.change(event);
+      }
+    } 
+  }
+
+  change(event: any) {
+    this.isStateDataSet = false;
       let currZip = parseInt(($('#zipCodeInputField').val()))
       console.log('User input zip code is:' + currZip);
       if (currZip < 99999 && currZip > 10000) {
@@ -92,8 +99,8 @@ export class HeaderCardsComponent implements OnInit {
               prevState = this.reCalculateTotalPremium(prevState)
               prevState = this.reCalculatePercentages(prevState);
             
-              prevState.oldNewTotalPremChangeInPercent =  parseInt((((prevState.totalPremium - prevState.oldTotalPremium) / prevState.oldTotalPremium) * 100).toString())
-              prevState.oldNewTotalPremChangeInValue = prevState.totalPremium - prevState.oldTotalPremium;
+             // prevState.oldNewTotalPremChangeInPercent =  parseInt((((prevState.totalPremium - prevState.oldTotalPremium) / prevState.oldTotalPremium) * 100).toString())
+              //prevState.oldNewTotalPremChangeInValue = prevState.totalPremium - prevState.oldTotalPremium;
               
               
               prevState.cards[index2].oldNewPremChangeInPercent =  0;
@@ -111,7 +118,7 @@ export class HeaderCardsComponent implements OnInit {
         }
       }
     }
-  }
+  
 
   reCalculateTotalPremium(stateJson) {
 
@@ -171,6 +178,7 @@ export class HeaderCardsComponent implements OnInit {
     this.services.getMasterData().subscribe((resData) => {
       if (resData["status"] == "success") {
         this.masterData = resData;
+        this.change('');
        // let appMasterData= {};
       
           // this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
@@ -285,8 +293,8 @@ export class HeaderCardsComponent implements OnInit {
         ageData = this.reCalculateTotalPremium(ageData)
         ageData = this.reCalculatePercentages(ageData);
 
-        ageData.oldNewTotalPremChangeInPercent =  parseInt((((ageData.totalPremium - ageData.oldTotalPremium) / ageData.oldTotalPremium) * 100).toString())
-        ageData.oldNewTotalPremChangeInValue = ageData.totalPremium - ageData.oldTotalPremium;
+        //ageData.oldNewTotalPremChangeInPercent =  parseInt((((ageData.totalPremium - ageData.oldTotalPremium) / ageData.oldTotalPremium) * 100).toString())
+        //ageData.oldNewTotalPremChangeInValue = ageData.totalPremium - ageData.oldTotalPremium;
 
         ageData.cards[index].oldNewPremChangeInPercent =  0;
         ageData.cards[index].oldNewPremChangeInValue = 0;

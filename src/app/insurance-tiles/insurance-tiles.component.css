@@ -347,24 +347,46 @@ p {
 
 .biglifeCardstyle {
   padding-left: 9.7%;
-  padding-right: 10.2%;
+  padding-right: 9.7%;
 }
 
 .bighomeAutostyle {
-  padding-left: 10.6%;
-  padding-right: 9.4%;
+  padding-left: 10.5%;
+  padding-right: 8.9%;
 }
 
-@media (max-width:1024px) {
+@media only screen and (max-width:1024px) {
   .biglifeCardstyle {
-    padding-left: 5.9%;
-    padding-right: 6.2%;
+    padding-left: 5.7%;
+    padding-right: 5.7%;
   }
   .bighomeAutostyle {
     padding-left: 6.6%;
-    padding-right: 5.4%;
+    padding-right: 4.6%;
   }
 }
+
+@media only screen and (min-width:1600px) {
+.biglifeCardstyle {
+    padding-left: 16.1%;
+    padding-right: 16.1%;
+}
+.bighomeAutostyle {
+  padding-left: 16.7%;
+  padding-right: 15.5%;
+}
+}
+
+/* @media only screen and (min-width:1350px) {
+  .biglifeCardstyle {
+      padding-left: 16.1%;
+      padding-right: 16.1%;
+  }
+  .bighomeAutostyle {
+    padding-left: 16.7%;
+    padding-right: 15.5%;
+  }
+  } */
 
 :host ::ng-deep.mat-slider-thumb-label-text {
   margin-top: -12px;
@@ -444,13 +466,13 @@ z-index: 1000;
 }
 
 .dot {
-  height: 40%;
+  /* height: 40%; */
   width: 322%;
   background-color: rgb(107, 47, 47);
   border-radius: 50%;
   display: inline-block;
   padding-left: 117%;
-  padding-bottom: 100%;
+  padding-bottom: 27%;
   color: white;
   font-family: 'poppins';
 }
