@@ -596,26 +596,29 @@ export class InsuranceTilesComponent implements OnInit {
       if (this.callFlag == false) {
         this.callFlag = true;
         let newState = JSON.parse(JSON.stringify(prevState))
-        if (insuranceType == 'life')
-          newState.cards[index].premium = res.data.newPremium.whole_life_insurance //+ res.data.newPremium.term_insurance
-        else
+        if (insuranceType == 'life'){
+          newState.cards[index].premium = res.data.newPremium.term_insurance //+ res.data.newPremium.term_insurance
+          newState.cards[index].coverage = res.data.newPremium.term_benefit
+        } else{
           newState.cards[index].premium = res.data.newPremium
+          newState.cards[index].coverage = newCoverage
+        }
 
 
         newState.cards[index].insight = res.data.insight
         newState.cards[index].risk = res.data.risk
         //newState.cards[index].oldPremium = prevState.cards[index].premium
         //newState.cards[index].oldCoverage = prevState.cards[index].coverage
-        newState.cards[index].coverage = newCoverage
+      
 
         newState.cards[index].oldNewPremChangeInPercent = parseInt((((newState.cards[index].premium - newState.cards[index].oldPremium) / newState.cards[index].oldPremium) * 100).toString())
 
         newState.cards[index].oldNewPremChangeInValue = newState.cards[index].premium - newState.cards[index].oldPremium;
 
-        if (res.data.risk == 'medium' || res.data.risk == 'high')
-          newState.cards[index].notification = true
-        else
-          newState.cards[index].notification = false
+        // if (res.data.risk == 'medium' || res.data.risk == 'high')
+        //   newState.cards[index].notification = true
+        // else
+        //   newState.cards[index].notification = false
 
         this.insight = res.data.insight;
         newState = this.reCalculateTotalPremium(newState)
