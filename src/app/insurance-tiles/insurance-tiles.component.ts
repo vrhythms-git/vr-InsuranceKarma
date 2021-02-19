@@ -119,17 +119,17 @@ export class InsuranceTilesComponent implements OnInit {
 
   sliderAutoVariableValues = {
 
-    bodilyInjuryLability_min: 50000,
-    bodilyInjuryLability: 20000,
-    bodilyInjuryLability_max: 120000,
+    bodilyInjuryLability_min: 25000,
+    bodilyInjuryLability: 25000,
+    bodilyInjuryLability_max: 100000,
 
-    propertyDamageLiability_min: 20000,
-    propertyDamageLiability: 20000,
-    propertyDamageLiability_max: 120000,
+    propertyDamageLiability_min: 25000,
+    propertyDamageLiability: 25000,
+    propertyDamageLiability_max: 100000,
 
-    comprehensiveAndCollision_min: 750,
-    comprehensiveAndCollision: 750,
-    comprehensiveAndCollision_max: 3250,
+    comprehensiveAndCollision_min: 250,
+    comprehensiveAndCollision: 250,
+    comprehensiveAndCollision_max: 1000,
 
     personalInjuryProtection_min: 2000,
     personalInjuryProtection: 2000,
@@ -553,7 +553,7 @@ export class InsuranceTilesComponent implements OnInit {
             let payloadJSON = {
               data: {
                 'insuranceType': 'auto',
-                'premium': data.cards[index].defaultPremium,
+                'premium': data.cards[index].premium,
                 'stateName' : data.cards[homeIndex].state_name,
                 'insuranceData': this.SliderData
               }

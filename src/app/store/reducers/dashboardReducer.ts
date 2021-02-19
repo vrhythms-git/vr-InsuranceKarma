@@ -53,7 +53,7 @@ export const userDataInitialState: UserData = {
                 premium: 1411,
                 coverage: 50000,
                 percentOutOfTotPremium: parseInt(((1411 / 5744) * 100).toString()),
-                color: '#FCBB42',
+                color: '#967ADC',
                 oldCoverage: 50000,
                 oldPremium: 1411,
                 oldNewPremChangeInPercent: parseInt((((1411 - 1411) / 1411) * 100).toString()),
@@ -89,7 +89,7 @@ export const userDataInitialState: UserData = {
                 isEnabled: false,
                 premium: 1300,
                 coverage: 50000,
-                color: '#967ADC',
+                color: '#FCBB42',
                 oldCoverage: 50000,
                 oldPremium: 1300,
             }

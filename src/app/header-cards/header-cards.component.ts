@@ -164,6 +164,9 @@ export class HeaderCardsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // document.getElementById('loading') 
+    // .style.display = 'none'; 
+
     console.log("In ngOnInit of header-cards.component.")
     this.services.getMasterData().subscribe((resData) => {
       if (resData["status"] == "success") {
