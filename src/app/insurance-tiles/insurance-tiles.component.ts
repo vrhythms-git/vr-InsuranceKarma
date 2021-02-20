@@ -434,6 +434,7 @@ export class InsuranceTilesComponent implements OnInit {
   calculateTotalPremium(cardIndex, premium) {
     this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
       let totalPrem = 0;
+     
       if (this.isTotalPremiumCalculated == false) {
         this.isTotalPremiumCalculated = true;
         for (let i = 0; i < data.cards.length; i++) {
@@ -568,7 +569,7 @@ export class InsuranceTilesComponent implements OnInit {
             let payloadJSON = {
               data: {
                 'insuranceType': 'auto',
-                'premium': data.cards[index].premium,
+                'premium': data.cards[index].oldPremium,
                 'stateName': data.cards[homeIndex].state_name,
                 'insuranceData': this.SliderData
               }
@@ -590,6 +591,7 @@ export class InsuranceTilesComponent implements OnInit {
   reCalculateTotalPremium(stateJson) {
 
     let totalPrem = 0;
+    
 
     for (let i = 0; i < 6; i++) {
       if (stateJson.cards[i].isEnabled == true)
@@ -717,7 +719,7 @@ export class InsuranceTilesComponent implements OnInit {
           prevState.cards[index].isEnabled = true
           prevState = this.reCalculateTotalPremium(prevState)
           prevState = this.reCalculatePercentages(prevState)
-          prevState.oldNewTotalPremChangeInPercent = parseInt((((prevState.totalPremium - prevState.oldTotalPremium) / prevState.oldTotalPremium) * 100).toString())
+          prevState.oldNewTotalPremChangeInPercent = (((prevState.totalPremium - prevState.oldTotalPremium) / prevState.oldTotalPremium) * 100).toFixed(1)
           prevState.oldNewTotalPremChangeInValue = prevState.totalPremium - prevState.oldTotalPremium;
           this.store.dispatch(actions.updateUserDataAct({ data: prevState }));
 
@@ -734,7 +736,7 @@ export class InsuranceTilesComponent implements OnInit {
           prevState.cards[index].isEnabled = false
           prevState = this.reCalculateTotalPremium(prevState)
           prevState = this.reCalculatePercentages(prevState)
-          prevState.oldNewTotalPremChangeInPercent = parseInt((((prevState.totalPremium - prevState.oldTotalPremium) / prevState.oldTotalPremium) * 100).toString())
+          prevState.oldNewTotalPremChangeInPercent = (((prevState.totalPremium - prevState.oldTotalPremium) / prevState.oldTotalPremium) * 100).toFixed(1)
           prevState.oldNewTotalPremChangeInValue = prevState.totalPremium - prevState.oldTotalPremium;
           this.store.dispatch(actions.updateUserDataAct({ data: prevState }));
 

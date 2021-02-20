@@ -96,6 +96,9 @@ export class HeaderCardsComponent implements OnInit {
               prevState.cards[index2].oldPremium = stateData[0].auto_premium
               prevState.cards[index2].oldCoverage = 50000
 
+              
+
+
               prevState = this.reCalculateTotalPremium(prevState)
               prevState = this.reCalculatePercentages(prevState);
             
@@ -123,15 +126,26 @@ export class HeaderCardsComponent implements OnInit {
   reCalculateTotalPremium(stateJson) {
 
     let totalPrem = 0;
+    let oldTotalPremium = 0;
+
+    // for (let i = 0; i < 6; i++) {
+    //   if (stateJson.cards[i].isEnabled == true)
+    //     totalPrem = totalPrem + stateJson.cards[i].premium
+    // }
+
+    // stateJson.totalPremium = totalPrem;
+    // return stateJson;
 
     for (let i = 0; i < 6; i++) {
-      if (stateJson.cards[i].isEnabled == true)
+      if (stateJson.cards[i].isEnabled == true){
         totalPrem = totalPrem + stateJson.cards[i].premium
+        oldTotalPremium = oldTotalPremium + stateJson.cards[i].oldPremium
+      }
     }
 
     stateJson.totalPremium = totalPrem;
+    stateJson.oldTotalPremium = oldTotalPremium;
     return stateJson;
-
   }
   
   isTotalPremiumCalculated = false;
@@ -293,11 +307,17 @@ export class HeaderCardsComponent implements OnInit {
         ageData = this.reCalculateTotalPremium(ageData)
         ageData = this.reCalculatePercentages(ageData);
 
-        //ageData.oldNewTotalPremChangeInPercent =  parseInt((((ageData.totalPremium - ageData.oldTotalPremium) / ageData.oldTotalPremium) * 100).toString())
-        //ageData.oldNewTotalPremChangeInValue = ageData.totalPremium - ageData.oldTotalPremium;
+        ageData.oldNewTotalPremChangeInPercent =  (((ageData.totalPremium - ageData.oldTotalPremium) / ageData.oldTotalPremium) * 100).toFixed(1)
+        ageData.oldNewTotalPremChangeInValue = ageData.totalPremium - ageData.oldTotalPremium;
 
-        ageData.cards[index].oldNewPremChangeInPercent =  0;
-        ageData.cards[index].oldNewPremChangeInValue = 0;
+        // ageData.cards[index].oldNewPremChangeInPercent =  0;
+        // ageData.cards[index].oldNewPremChangeInValue = 0;
+
+        // if(ageData.cards[index].oldNewPremChangeInPercent !=  0){
+
+          //ageData.oldNewTotalPremChangeInPercent =  parseInt((((ageData.totalPremium - ageData.oldTotalPremium) / ageData.oldTotalPremium) * 100).toString())
+        //ageData.oldNewTotalPremChangeInValue = ageData.totalPremium - ageData.oldTotalPremium;
+        // }
 
       this.store.dispatch(actions.updateUserDataAct({ data: ageData }));
 
