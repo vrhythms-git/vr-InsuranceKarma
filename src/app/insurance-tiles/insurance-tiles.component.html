@@ -1,3 +1,4 @@
+<div  [hidden]="showMask" id="mask"></div>
 <div class="container1">
     <div class="biglifeCardstyle">
 
@@ -12,6 +13,7 @@
                 <div class="col-md-12" style="background-color: #48CFAD; height:100%;">
                     <h2 style="margin-top: 10px; margin-bottom: 0px; color: #298D74; font-family: 'poppins';"
                         *ngIf="isDataAvailable">{{stateData$?.cards[0].name}} Insurance &nbsp;
+                        <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[0].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}} class="highriskiconstyle">
                     </h2>
                     <span>NEW</span>
                     <br>
@@ -43,22 +45,23 @@
                 <div class="col-12">
 
                       <!-- Insight card change start-->
-                      <!-- <div *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[0].risk)" class="row st0" style="padding: 10px;top: 35%;left:40%;word-wrap: break-word;height: auto;border-radius: 6px;box-shadow:4px 4px 10px rgb(0 0 0 / 75%);">
+                      <div *ngIf="isDataAvailable" id="insightCardDivID" [hidden]="stateData$?.cards[0].showRiskModel" class="row st0" style={{getBorderColorBasedOnRiskLevel(stateData$?.cards[0].risk)}}>
                       <span class="row">
-                        <div class="col-md-4">
-                            <img class="riskimagespopup" src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}} alt="{{stateData$?.cards[0].risk}} risk" style="width: 70px;height: 37px;">
+                        <div class=" d-flex col-md-4" style="justify-content: center; align-self: center;">
+                            <img class="riskimagespopup" src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}} alt="{{stateData$?.cards[0].risk}} risk" style="width: 113px;height: 58px;">
                         </div>
-                        <div class="col-md-7" style="padding: 0px">
-                            <p *ngIf="isDataAvailable" style="font-stretch: expanded; font-size: 7px; line-height: normal; color: black; font-size: 10px;margin: 0px;">
+                        <div class="col-md-7">
+                            <p *ngIf="isDataAvailable" style="font-stretch: expanded; font-size: 15px; line-height: normal; color: black; font-weight: normal;">
                                 {{stateData$?.cards[0].insight}}
                             </p>
+                            <a style="margin-bottom: 10px;" href="">Learn More &gt;&gt;</a> 
                         </div>
                         <div class="col-md-0" style="padding-left: 3%; padding-bottom: -1%; ">
-                            <span class="dot" style="font-weight: 100;">x</span>
+                            <span (click)="closePopupEvent({type:'life',event : $event})" class="dot" style={{getBackgroundColorBasedOnRiskLevel(stateData$?.cards[0].risk)}}>x</span>
                         </div>
                     </span>
                       
-                    </div> -->
+                    </div>
                     <!-- Insight card change end -->
 
                     <div class="row">
@@ -136,7 +139,9 @@
                     style="margin-left:-75px;height:25px;width:25px;margin-right: 5px">
                 <div class="col-md-12" style="background-color:#5D9CEC ">
                     <h2 style="margin-top: 10px; margin-bottom: 0px; color: #298D74; font-family: 'poppins';"
-                        *ngIf="isDataAvailable">{{stateData$?.cards[1].name}} Owners</h2>
+                        *ngIf="isDataAvailable">{{stateData$?.cards[1].name}} Owners
+                        <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[1].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[1].risk)}} class="highriskiconstyle">
+                    </h2>
                     <span>NEW</span>
                     <br>
                     <span class="largeCardFontStyle" *ngIf="isDataAvailable">Coverage:&nbsp;
@@ -163,6 +168,27 @@
             </div>
             <div class="col-md-7 row">
                 <div class="col-12">
+
+                       <!-- Insight card change start-->
+                       <div *ngIf="isDataAvailable" id="insightCardDivID" [hidden]="stateData$?.cards[1].showRiskModel" class="row st0" style={{getBorderColorBasedOnRiskLevel(stateData$?.cards[1].risk)}}>
+                        <span class="row">
+                          <div class=" d-flex col-md-4" style="justify-content: center; align-self: center;">
+                              <img class="riskimagespopup" src={{getImageToShowBasedOnRisk(stateData$?.cards[1].risk)}} alt="{{stateData$?.cards[1].risk}} risk" style="width: 113px;height: 58px;">
+                          </div>
+                          <div class="col-md-7">
+                              <p *ngIf="isDataAvailable" style="font-stretch: expanded; font-size: 15px; line-height: normal; color: black; font-weight: normal;">
+                                  {{stateData$?.cards[1].insight}}
+                              </p>
+                              <a style="margin-bottom: 10px;" href="">Learn More &gt;&gt;</a> 
+                          </div>
+                          <div class="col-md-0" style="padding-left: 3%; padding-bottom: -1%; ">
+                              <span (click)="closePopupEvent({type:'home',event : $event})" class="dot" style={{getBackgroundColorBasedOnRiskLevel(stateData$?.cards[1].risk)}}>x</span>
+                          </div>
+                      </span>
+                        
+                      </div>
+                      <!-- Insight card change end -->
+
                     <div class="row">
                         <span class="col-4 text-right">Dwelling </span>
                         <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'Dwelling',type:'home'})"
@@ -242,7 +268,9 @@
                     style="margin-left:-75px;height:25px;width:25px;margin-right: 5px">
                 <div class="col-md-12" style="background-color:#AC92EC">
                     <h2 style="margin-top: 10px; margin-bottom: 0px; color: #298D74; font-family: 'poppins';"
-                        *ngIf="isDataAvailable">{{stateData$?.cards[2].name}} Insurance</h2>
+                        *ngIf="isDataAvailable">{{stateData$?.cards[2].name}} Insurance
+                        <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[2].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[2].risk)}} class="highriskiconstyle">
+                    </h2>
                     <span>NEW</span>
                     <br>
                     <span class="largeCardFontStyle" *ngIf="isDataAvailable">Coverage:
@@ -269,6 +297,25 @@
             </div>
             <div class="col-md-7 row">
                 <div class="col-12">
+                       <!-- Insight card change start-->
+                       <div *ngIf="isDataAvailable" id="insightCardDivID" [hidden]="stateData$?.cards[2].showRiskModel" class="row st0" style={{getBorderColorBasedOnRiskLevel(stateData$?.cards[2].risk)}}>
+                        <span class="row">
+                          <div class=" d-flex col-md-4" style="justify-content: center; align-self: center;">
+                              <img class="riskimagespopup" src={{getImageToShowBasedOnRisk(stateData$?.cards[2].risk)}} alt="{{stateData$?.cards[2].risk}} risk" style="width: 113px;height: 58px;">
+                          </div>
+                          <div class="col-md-7">
+                              <p *ngIf="isDataAvailable" style="font-stretch: expanded; font-size: 15px; line-height: normal; color: black; font-weight: normal;">
+                                  {{stateData$?.cards[2].insight}}
+                              </p>
+                              <a style="margin-bottom: 10px;" href="">Learn More &gt;&gt;</a> 
+                          </div>
+                          <div class="col-md-0" style="padding-left: 3%; padding-bottom: -1%; ">
+                              <span (click)="closePopupEvent({type:'auto',event : $event})" class="dot" style={{getBackgroundColorBasedOnRiskLevel(stateData$?.cards[2].risk)}}>x</span>
+                          </div>
+                      </span>
+                        
+                      </div>
+                      <!-- Insight card change end -->
                     <div class="row">
                         <span class="col-4 text-right">Bodily Injury</span>
                         <mat-slider class="col-8 max1"
@@ -329,13 +376,14 @@
                     <div (click)="showCard({id:'lifeInsuranceId', event: $event})">
                         <!-- <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">favorite
                     </mat-icon> -->
-
-                                     
-
                                         
                         <img src="./assets/EXL_LifeInsurance_Icon.png" class="maticonstyle">
                         <mat-card-header>
-                                <mat-card-subtitle *ngIf="isDataAvailable">{{stateData$?.cards[0].name}} Insurance
+                                <mat-card-subtitle *ngIf="isDataAvailable">
+                                    <span class="d-flex" style="align-items: center;">
+
+                                    {{stateData$?.cards[0].name}} Insurance
+                                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[0].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}} class="highriskiconstyle"></span>
                                 </mat-card-subtitle>                      
 
                             <mat-card-title *ngIf="isDataAvailable">Coverage:&nbsp;
@@ -373,7 +421,10 @@
                         <img src="./assets/EXL_HomeInsurance_Icon.png" class="maticonstyle">
 
                         <mat-card-header>
-                            <mat-card-subtitle *ngIf="isDataAvailable">{{stateData$?.cards[1].name}} Insurance
+                            <mat-card-subtitle *ngIf="isDataAvailable">
+                                <span class="d-flex" style="align-items: center;">
+                                    {{stateData$?.cards[1].name}} Insurance
+                                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[1].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[1].risk)}} class="highriskiconstyle"></span>
                             </mat-card-subtitle>
                             <mat-card-title *ngIf="isDataAvailable">Coverage:&nbsp;
                                 <b>${{stateData$?.cards[1].coverage|number:'2.'}}</b>
@@ -409,7 +460,11 @@
                         <img src="./assets/EXL_AutoInsurance_Icon.png" class="maticonstyle">
 
                         <mat-card-header>
-                            <mat-card-subtitle *ngIf="isDataAvailable">{{stateData$?.cards[2].name}} Insurance
+                            <mat-card-subtitle *ngIf="isDataAvailable">
+                                <span class="d-flex" style="align-items: center;">
+
+                                    {{stateData$?.cards[2].name}} Insurance
+                                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[2].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[2].risk)}} class="highriskiconstyle"></span>
                             </mat-card-subtitle>
                             <mat-card-title *ngIf="isDataAvailable">Coverage:&nbsp;
                                 <b>${{stateData$?.cards[2].coverage|number:'2.'}}</b>

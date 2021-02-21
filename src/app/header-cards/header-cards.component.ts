@@ -77,6 +77,7 @@ export class HeaderCardsComponent implements OnInit {
 
               prevState.cards[index].oldNewPremChangeInPercent =  0;
               prevState.cards[index].oldNewPremChangeInValue = 0;
+              prevState.cards[index].risk = "";
               
               // prevState.cards[index].oldPremium = stateData[0].Premium
               // prevState.cards[index].OldCoverage = stateData[0].dwelling_default
@@ -95,17 +96,14 @@ export class HeaderCardsComponent implements OnInit {
               prevState.cards[index2].coverage = 50000
               prevState.cards[index2].oldPremium = stateData[0].auto_premium
               prevState.cards[index2].oldCoverage = 50000
-
-              
-
+              prevState.cards[index2].risk = "";
 
               prevState = this.reCalculateTotalPremium(prevState)
               prevState = this.reCalculatePercentages(prevState);
             
-             // prevState.oldNewTotalPremChangeInPercent =  parseInt((((prevState.totalPremium - prevState.oldTotalPremium) / prevState.oldTotalPremium) * 100).toString())
-              //prevState.oldNewTotalPremChangeInValue = prevState.totalPremium - prevState.oldTotalPremium;
-              
-              
+             prevState.oldNewTotalPremChangeInPercent =  (((prevState.totalPremium - prevState.oldTotalPremium) / prevState.oldTotalPremium) * 100).toFixed(1)
+             prevState.oldNewTotalPremChangeInValue = prevState.totalPremium - prevState.oldTotalPremium;
+                            
               prevState.cards[index2].oldNewPremChangeInPercent =  0;
               prevState.cards[index2].oldNewPremChangeInValue = 0;
                       
@@ -294,6 +292,8 @@ export class HeaderCardsComponent implements OnInit {
         ageData.cards[index].oldPremium = AgeBracketData[0].Premium
         ageData.cards[index].oldCoverage = AgeBracketData[0]["Death Benefit"]
         ageData.cards[index].age = ageBracket
+
+        ageData.cards[index].risk = "";
         // ageData.cards[index].oldPremium = AgeBracketData[0].Premium
         // ageData.cards[index].oldCoverage = AgeBracketData[0]["Death Benefit"]
         ageData.selectedAgeBracket  = this.masterData.data.age.filter((item) => {
@@ -310,8 +310,8 @@ export class HeaderCardsComponent implements OnInit {
         ageData.oldNewTotalPremChangeInPercent =  (((ageData.totalPremium - ageData.oldTotalPremium) / ageData.oldTotalPremium) * 100).toFixed(1)
         ageData.oldNewTotalPremChangeInValue = ageData.totalPremium - ageData.oldTotalPremium;
 
-        // ageData.cards[index].oldNewPremChangeInPercent =  0;
-        // ageData.cards[index].oldNewPremChangeInValue = 0;
+        ageData.cards[index].oldNewPremChangeInPercent =  0;
+        ageData.cards[index].oldNewPremChangeInValue = 0;
 
         // if(ageData.cards[index].oldNewPremChangeInPercent !=  0){
 

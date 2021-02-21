@@ -149,19 +149,77 @@ export class InsuranceTilesComponent implements OnInit {
   // stateData : Observable;
 
 
+  showMask: boolean = false;
+
+  getBorderColorBasedOnRiskLevel(risk) {
+
+    if (risk == "high")
+      return "border-color: rgb(218 68 83)!important;";
+    if (risk == "low")
+      return "border-color: #69913e!important;"
+    if (risk == "medium")
+      return "border-color: #ffce54!important;"
+  }
+
+  getBackgroundColorBasedOnRiskLevel(risk) {
+
+
+    if (risk == "high")
+      return "background-color: rgb(218 68 83)!important;";
+    if (risk == "low")
+      return "background-color: #69913e!important;"
+    if (risk == "medium")
+      return "background-color: #ffce54!important;"
+
+  }
+
+
+
   showHideInsights(risk) {
-    console.log('showHideInsights :: ' + risk)
+    // console.log('showHideInsights :: ' + risk)
     if (risk == "" || risk == undefined) {
       return true;
-    } else return false;
+    } else {
+      if (this.showMask == false) {
+        $("#mask").fadeTo(500, 0.25);
+        this.showMask = false;
+      }
+      return false;
+    }
   }
 
-  getImageToShowBasedOnRisk(risk){
-    console.log(`getImageToShowBasedOnRisk : /assets/${risk}.png`)
+  getImageToShowBasedOnRisk(risk) {
+
+    if (risk == undefined || risk == "") {
+      return ""
+    } else {
+      if (this.showMask == false) {
+        $("#mask").fadeTo(500, 0.25);
+        this.showMask = false;
+      }
       return `/assets/${risk}.png`
+    }
   }
 
+  isFlagSet = false;
+  closePopupEvent({type, event}) {
+    this.isFlagSet = false;
+    // setTimeout(()=>{
+    //$("#mask").hide()
+    // },100)
+    this.showMask = true;
+    let subscribed = this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+      if (this.isFlagSet == false) {
+        this.isFlagSet = true;
+        let currStateData = JSON.parse(JSON.stringify(data));
+        let index = currStateData.cards.findIndex(obj => obj.key == type)
+        currStateData.cards[index].showRiskModel = true;
+        this.store.dispatch(actions.updateUserDataAct({ data: currStateData }));
+      }
+    })
+    subscribed.unsubscribe()
 
+  }
 
   isDataAvailable = false;
 
@@ -434,7 +492,7 @@ export class InsuranceTilesComponent implements OnInit {
   calculateTotalPremium(cardIndex, premium) {
     this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
       let totalPrem = 0;
-     
+
       if (this.isTotalPremiumCalculated == false) {
         this.isTotalPremiumCalculated = true;
         for (let i = 0; i < data.cards.length; i++) {
@@ -591,7 +649,7 @@ export class InsuranceTilesComponent implements OnInit {
   reCalculateTotalPremium(stateJson) {
 
     let totalPrem = 0;
-    
+
 
     for (let i = 0; i < 6; i++) {
       if (stateJson.cards[i].isEnabled == true)
@@ -624,6 +682,10 @@ export class InsuranceTilesComponent implements OnInit {
 
         newState.cards[index].insight = res.data.insight
         newState.cards[index].risk = res.data.risk.toLowerCase()
+        if (res.data.risk.length > 1){
+          newState.cards[index].showRiskModel = false
+          this.showMask = false;
+        }
         //newState.cards[index].oldPremium = prevState.cards[index].premium
         //newState.cards[index].oldCoverage = prevState.cards[index].coverage
 
@@ -640,8 +702,8 @@ export class InsuranceTilesComponent implements OnInit {
 
         this.insight = res.data.insight;
         newState = this.reCalculateTotalPremium(newState)
-      //  newState.oldNewTotalPremChangeInPercent = parseInt((((newState.totalPremium - newState.oldTotalPremium) / newState.oldTotalPremium) * 100).toString())
-      newState.oldNewTotalPremChangeInPercent = (((newState.totalPremium - newState.oldTotalPremium) / newState.oldTotalPremium) * 100).toFixed(1)
+        //  newState.oldNewTotalPremChangeInPercent = parseInt((((newState.totalPremium - newState.oldTotalPremium) / newState.oldTotalPremium) * 100).toString())
+        newState.oldNewTotalPremChangeInPercent = (((newState.totalPremium - newState.oldTotalPremium) / newState.oldTotalPremium) * 100).toFixed(1)
         newState.oldNewTotalPremChangeInValue = newState.totalPremium - newState.oldTotalPremium;
         newState = this.reCalculatePercentages(newState)
         this.store.dispatch(actions.updateUserDataAct({ data: newState }));

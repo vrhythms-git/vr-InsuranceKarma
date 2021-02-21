@@ -19,7 +19,7 @@ export const userDataInitialState: UserData = {
         cards: [
             {
                 key: 'life',
-                name: 'Term Life',
+                name: 'Term',
                 isEnabled: true,
                 premium: 3200,
                 coverage: 250000,
@@ -31,7 +31,8 @@ export const userDataInitialState: UserData = {
                 oldNewPremChangeInValue: 3200 - 3200,
                 defaultPremium:3200,
                 risk:undefined,
-                insight:undefined
+                insight:undefined,
+                showRiskModel:true
             },
             {
                 key: 'home',
@@ -46,7 +47,10 @@ export const userDataInitialState: UserData = {
                 oldPremium: 1133,
                 oldNewPremChangeInPercent: parseInt((((1133 - 1133) / 1133) * 100).toString()),
                 oldNewPremChangeInValue: 1133 - 1133,
-                defaultPremium:1133
+                defaultPremium:1133,
+                risk:undefined,
+                insight:undefined,
+                showRiskModel:true
             },
             {
                 key: 'auto',
@@ -60,7 +64,11 @@ export const userDataInitialState: UserData = {
                 oldPremium: 1411,
                 oldNewPremChangeInPercent: parseInt((((1411 - 1411) / 1411) * 100).toString()),
                 oldNewPremChangeInValue: 1411 - 1411,
-                defaultPremium:1411
+                defaultPremium:1411,
+                risk:undefined,
+                insight:undefined,
+                showRiskModel:true
+                
             },
             {
                 key: 'pet',
