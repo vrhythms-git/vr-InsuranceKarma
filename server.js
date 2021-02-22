@@ -7,9 +7,7 @@ var logger = require("./node/loggerConfig")
 const dbConnection = require("./node/dbConnection")
 const path = require('path');
 
-let port = 8080;
-
-app.listen(port, () => {
+app.listen(process.env.PORT || 8080, () => {
     console.log(`Express server started at port number : ${port}`)
 });
 
@@ -34,15 +32,6 @@ app.get('/', function (req, res) {
 
     res.sendFile(path.join(__dirname + "/dist/insurancekarma/index.html"));
 });
-
-
-// app.get('/', function (req, res) {
-
-//     logger.debug('Printing debugging logs...');
-//     const url = "mongodb+srv://IK_DB:dbpass@cluster0.jdmxs.mongodb.net/IK_DB?retryWrites=true&w=majority";
-// });
-
-
 
 app.get('/getMasterData', function (req, res) {
     console.log("getMasterData called...")
