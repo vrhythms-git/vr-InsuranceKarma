@@ -82,6 +82,8 @@ export class InsuranceTilesComponent implements OnInit {
   toggleSlideAuto: boolean = true;
   @ViewChild("home") home: ElementRef;
 
+  isAPICallComplete:boolean = false;
+
   // formatter = new Intl.NumberFormat('en-US', {
   //   style: 'currency',
   //   currency: 'USD',
@@ -490,6 +492,7 @@ export class InsuranceTilesComponent implements OnInit {
 
   isTotalPremiumCalculated = false;
   calculateTotalPremium(cardIndex, premium) {
+ 
     this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
       let totalPrem = 0;
 
@@ -525,6 +528,7 @@ export class InsuranceTilesComponent implements OnInit {
   tempFlag2 = false;
   tempFlag3 = false;
   calculatePremium({ insuranceType }) {
+    this.isAPICallComplete = true;
     switch (insuranceType) {
 
       case 'home': {
@@ -644,10 +648,10 @@ export class InsuranceTilesComponent implements OnInit {
     }
   }
 
-  insight = '';
+
 
   reCalculateTotalPremium(stateJson) {
-
+    
     let totalPrem = 0;
 
 
@@ -695,12 +699,8 @@ export class InsuranceTilesComponent implements OnInit {
 
         newState.cards[index].oldNewPremChangeInValue = newState.cards[index].premium - newState.cards[index].oldPremium;
 
-        // if (res.data.risk == 'medium' || res.data.risk == 'high')
-        //   newState.cards[index].notification = true
-        // else
-        //   newState.cards[index].notification = false
-
-        this.insight = res.data.insight;
+  
+        this.isAPICallComplete = false;
         newState = this.reCalculateTotalPremium(newState)
         //  newState.oldNewTotalPremChangeInPercent = parseInt((((newState.totalPremium - newState.oldTotalPremium) / newState.oldTotalPremium) * 100).toString())
         newState.oldNewTotalPremChangeInPercent = (((newState.totalPremium - newState.oldTotalPremium) / newState.oldTotalPremium) * 100).toFixed(1)
