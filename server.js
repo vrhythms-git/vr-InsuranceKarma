@@ -5,6 +5,7 @@ var compression = require('compression')
 const MongoClient = require('mongodb').MongoClient;
 var logger = require("./node/loggerConfig")
 const dbConnection = require("./node/dbConnection")
+const path = require('path');
 
 let port = 8081;
 
@@ -23,17 +24,23 @@ var corsOptions = {
     "Access-Control-Allow-Origin": '*',
 }
 
+app.use(express.static(__dirname + '/dist/insurancekarma/'));
 
 app.use(express.json());
 app.use('*', cors())
 
 
-
 app.get('/', function (req, res) {
 
-    logger.debug('Printing debugging logs...');
-    const url = "mongodb+srv://IK_DB:dbpass@cluster0.jdmxs.mongodb.net/IK_DB?retryWrites=true&w=majority";
+    res.sendFile(path.join(__dirname + "/dist/insurancekarma/index.html"));
 });
+
+
+// app.get('/', function (req, res) {
+
+//     logger.debug('Printing debugging logs...');
+//     const url = "mongodb+srv://IK_DB:dbpass@cluster0.jdmxs.mongodb.net/IK_DB?retryWrites=true&w=majority";
+// });
 
 
 

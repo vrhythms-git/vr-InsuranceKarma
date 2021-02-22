@@ -36,7 +36,6 @@ mat-card-title {
   font-size: 18px;
   letter-spacing: 0.32px;
   font-size: large;
-  /* font-weight: bold; */
   color: white;
 }
 
@@ -48,25 +47,12 @@ mat-card-title {
   left: 12px!important;
 }
 
-/* .cardDimentions{
-  
-
-    height: 110%!important;
-    width: 90%!important;
-   
- 
-} */
-
-/* 
-height: 50%;
-    width: 90%; */
 
 .menuicon {
   color: blue;
 }
 
 mat-slide-toggle {
-  /* margin-top: -10px; */
   margin-right: 6%;
 }
 
@@ -94,20 +80,17 @@ p {
 .Row {
   display: table;
   width: 100%;
-  /*Optional*/
+
   table-layout: fixed;
-  /*Optional*/
+
   border-spacing: 10px;
-  /*Optional*/
 }
 
 .Column {
   display: table-cell;
   background-color: red;
-  /*Optional*/
+ 
 }
-
-/* *******************Slider changes********************8 */
 
 :host ::ng-deep .min .mat-slider-thumb {
   background-color: #48CFAD;
@@ -306,11 +289,8 @@ p {
 }
 
 .maticonstyle {
-  /* margin-left: -33px; 
-  color:white;
-  margin-top: 15%; */
+
   margin-left: -36px;
-  /* color: white; */
   z-index: 1;
   overflow: visible;
   position: relative;
@@ -322,20 +302,17 @@ p {
 .container1 {
   display: grid;
   grid-template-columns: 1fr;
-  /* grid-template-rows: 50px 50px;   */
 }
 
 .round {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  /* box-shadow : 2px 2px 3px rgba(191, 191, 191, 0.75); */
   box-shadow: 2px 2px 10px rgb(191 191 191 / 75%);
 }
 
 .roundleft {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  /* box-shadow : 2px 2px 3px rgba(191, 191, 191, 0.75); */
   box-shadow: 2px 2px 10px rgb(191 191 191 / 75%);
 }
 
@@ -377,16 +354,6 @@ p {
   }
 }
 
-/* @media only screen and (min-width:1350px) {
-  .biglifeCardstyle {
-      padding-left: 16.1%;
-      padding-right: 16.1%;
-  }
-  .bighomeAutostyle {
-    padding-left: 16.7%;
-    padding-right: 15.5%;
-  }
-  } */
 
 :host ::ng-deep.mat-slider-thumb-label-text {
   margin-top: -12px;
@@ -396,8 +363,7 @@ p {
   margin-left: 12px;
   position: absolute;
   text-align: center;
-  /* padding-left: 90%;
-  padding-right: 90%; */
+
   width: 500%;
 }
 
@@ -409,8 +375,6 @@ p {
   margin-left: 12px;
   position: absolute;
   text-align: center;
-  /* padding-left: 90%;
-  padding-right: 90%; */
   width: 500%;
 }
 
@@ -422,8 +386,6 @@ p {
   margin-left: 12px;
   position: absolute;
   text-align: center;
-  /* padding-left: 90%;
-  padding-right: 90%; */
   width: 500%;
 }
 
@@ -465,20 +427,10 @@ p {
 }
 
 .dot {
-  /* height: 40%; */
-  /* width: 322%;
-  background-color: rgb(107, 47, 47);
-  border-radius: 50%;
-  display: inline-block;
-  padding-left: 117%;
-  padding-bottom: 27%;
-  color: white;
-  font-family: 'poppins'; */
+ 
   position: absolute;
   cursor: pointer;
-  /* border-color: red; */
-  /* margin-left: 23px; */
-  /* margin-left: 8%; */
+
   left: 98%;
   width: 19px;
   color: white;
