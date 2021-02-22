@@ -7,7 +7,7 @@ var logger = require("./node/loggerConfig")
 const dbConnection = require("./node/dbConnection")
 const path = require('path');
 
-let port = 8081;
+let port = 8080;
 
 app.listen(port, () => {
     console.log(`Express server started at port number : ${port}`)
