@@ -430,7 +430,8 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
     if(event.change != undefined && event.change != 0)
     this.snackBar.open('We noticed that you have changed the profile details. Please sign up by clicking on "Create Account" to save your changes for future reference.', 'Dismiss', {
       duration: 5000,
-      verticalPosition: 'top',
+      verticalPosition:'top',
+      horizontalPosition:'center',
       panelClass: ['snackbarStyle']
   });
   }

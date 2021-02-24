@@ -255,12 +255,12 @@ export class HeaderCardsComponent implements OnInit {
   selectedStatus = this.Stat[0].value;
 
   Incomes: Income[] = [
-    { value: '0', viewValue: '30k-40k' },
-    { value: '1', viewValue: '41k-50k' },
-    { value: '2', viewValue: '51k-60k' },
-    { value: '3', viewValue: '61k-70k' },
-    { value: '4', viewValue: '71k-80k' },
-    { value: '5', viewValue: '81k-90k' }
+    { value: '0', viewValue: '25k-50k' },
+    { value: '1', viewValue: '51k-100k' },
+    { value: '2', viewValue: '101k-125k' },
+    { value: '3', viewValue: '126k-150k' },
+    { value: '4', viewValue: '151k-175k' },
+    { value: '5', viewValue: '176k-200k' }
   ];
   selectedIncome = this.Incomes[0].value;
 

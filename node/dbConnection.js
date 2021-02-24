@@ -134,7 +134,7 @@ async function calculatePremium(inputJson) {
                 resJson.insight = "Suggest to increase whole life benefit to 300k and term plan for 750k for 10 years";
                 resJson.risk = "High"
               }else if (replacementIncome == 10 ){
-                resJson.insight = "Add annuities rider with the current whole life plan";
+                resJson.insight = "Take a Whole Life Insurance along with Annuities Rider for adequate coverage";
                 resJson.risk = "Low"
               }
 

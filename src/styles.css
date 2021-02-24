@@ -44,10 +44,10 @@ body {
 }
 
 .snackbarStyle {
-  background-color: #17a2b8!important;
+  background-color: #bababa!important;
   color: white!important;
   font-family: 'poppins'!important;
-  margin-top: 16% !important;
+  margin-top: 50% !important;
 }
 
 span.mat-button-wrapper {

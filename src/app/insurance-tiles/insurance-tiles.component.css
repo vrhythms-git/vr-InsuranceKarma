@@ -275,14 +275,15 @@ p {
 
 #btnUP {
   margin-top: 3%;
+  background-color: #0e5eb2!important;
 }
 
 #btnUP:active {
-  background: #69913E;
+  background: #69913E!important;
 }
 
 #btnUP:focus {
-  background: #69913E;
+  background: #69913E!important;
 }
 
 /deep/ .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
@@ -377,6 +378,20 @@ p {
     padding-right: 15.5%;
   }
 }
+
+
+@media only screen and (min-width:2048px) {
+  .biglifeCardstyle {
+    padding-left: 23.5%;
+    padding-right: 23.5%;
+  }
+  .bighomeAutostyle {
+    padding-left: 24%;
+    padding-right: 23%;
+  }
+}
+
+
 
 :host ::ng-deep.mat-slider-thumb-label-text {
   margin-top: -12px;
@@ -510,8 +525,58 @@ p {
   }
 }
 
+
+
+
+
+.homecardhiddenfields{
+  padding-bottom:6%;
+}
+.nochange
+{
+  margin-top: 8px;
+  padding-bottom: 7%;
+}
+
+.btnuploadpolicy{
+  margin-top: 1%;
+  margin-bottom: 2%;
+  position: absolute;
+  bottom: 1%;
+  right: 10%;
+}
+
+.btnuploadpolicydiv{
+  padding-bottom: 1%;
+  padding-top:17%;
+}
+
 .btncalculatepremium{
   position: absolute;
-  bottom: 3%;
-  right: 3%;
-  }
+  bottom: 2%;
+  right: 1%;
+  background-color: #0e5eb2!important;
+}
+
+@media only screen and (max-width:1024px) {
+
+.btnuploadpolicy{
+  margin-top: 1%;
+  margin-bottom: 2%;
+  position: absolute;
+  bottom: 1%;
+  right: 10%;
+  width: 83%;
+  font-size: 12px;
+}
+
+.btncalculatepremium{
+position: absolute;
+bottom: 3%;
+right: 1%;
+width: 30%;
+font-size: 12px;
+background-color: #0e5eb2!important;
+}
+
+}
