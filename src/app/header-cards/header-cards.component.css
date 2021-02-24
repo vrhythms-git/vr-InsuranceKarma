@@ -20,7 +20,7 @@
 :host ::ng-deep .mat-select-value-text {
     color : rgb(44, 131, 163) !important;
     font-family: poppins;
-    font-size: 15px;
+    font-size: 1.09vw;
     letter-spacing: 0.18px;
 }
 
@@ -65,13 +65,13 @@
     margin: 0%;
     color: white;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 1.17vw;
     font-family: poppins;
     letter-spacing: 0.18px;
 }
 
 #bottomP {
-    font-size: 15px;
+    font-size: 1.09vw;
     /* margin-left: 13%; */
     /* text-align: center; */
     justify-content: center;
@@ -124,7 +124,7 @@
 #dropdown {
     justify-content: center;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 1.09vw;
     margin-top: 11%;
     margin-bottom: 11%;
     color : rgb(44, 131, 163);
@@ -138,7 +138,7 @@
     outline: none;
     border-block-end-color: #CCD1D9;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 1.17vw;
     color:rgb(44, 131, 163);
 }
 
@@ -177,4 +177,40 @@
     100% {
         transform: rotate(360deg);
     }
+}
+
+.btnTextStyle{
+    font-size: 2vw;
+    /* line-height: 3vw; */
+    background: transparent;
+    color: #CCD1D9;
+    font-weight: 400;
+    /* padding-left: 0.5rem;
+    padding-right: 0.5rem; */
+    /* font-weight: bold; */
+}
+
+.btnStyle{
+    /* border: unset;
+    background: white; */
+}
+
+.selectionStytle{
+    font-size: 1.17vw;
+    color: rgb(44, 131, 163);
+    font-family: poppins;
+    letter-spacing: 0.18px;
+    font-weight: 600;
+    align-self: center;
+    display: block;
+    width: inherit;
+    justify-content: space-evenly;
+}
+
+.cardBottomContentStyle{
+    justify-content:space-between;
+    width: 100%;
+    display: inline-flex;
+    padding: 4%;
+    padding-top: 6px;
 }

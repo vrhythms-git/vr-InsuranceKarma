@@ -89,7 +89,7 @@ export class HeaderCardsComponent implements OnInit {
               prevState.default_home_dwelling = stateData[0].dwelling_default;
               prevState.default_home_premium = stateData[0].Premium;
               prevState.default_home_coverage = stateData[0].dwelling_default;
-
+              prevState.hasStateChanged = "true";
               //Change for auto card
               let index2 = data.cards.findIndex(obj => obj.key == 'auto');
               prevState.cards[index2].premium = stateData[0].auto_premium

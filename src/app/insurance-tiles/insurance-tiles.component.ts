@@ -280,6 +280,17 @@ export class InsuranceTilesComponent implements OnInit {
         this.sliderVariableValues.medical = 2000
         this.sliderVariableValues.medical_max = 7000
 
+        if(data.hasStateChanged == "true"){
+console.log("hasStateChanged:" + data.hasStateChanged);
+
+this.SliderData.dwelling = this.sliderVariableValues.dwelling_min
+this.SliderData.otherStructure = this.sliderVariableValues.otherStructure_min
+this.SliderData.personalProperty = this.sliderVariableValues.personalProperty_min
+this.SliderData.lossOfUse = this.sliderVariableValues.lossOfUse_min
+this.SliderData.personalLiability = this.sliderVariableValues.personalLiability_min
+this.SliderData.medical = this.sliderVariableValues.medical_min
+}
+
         //console.log("Calculated data is : " + JSON.stringify(this.sliderVariableValues));
       }
     });
@@ -673,6 +684,7 @@ export class InsuranceTilesComponent implements OnInit {
     let index = prevState.cards.findIndex(obj => obj.key == insuranceType)
     this.ikservice.postInsuranceData(payloadJSON).subscribe((res) => {
       if (this.callFlag == false) {
+        
         this.callFlag = true;
         let newState = JSON.parse(JSON.stringify(prevState))
         if (insuranceType == 'life') {
@@ -683,7 +695,7 @@ export class InsuranceTilesComponent implements OnInit {
           newState.cards[index].coverage = newCoverage
         }
 
-
+        newState.hasStateChanged = "false";
         newState.cards[index].insight = res.data.insight
         newState.cards[index].risk = res.data.risk.toLowerCase()
         if (res.data.risk.length > 1){
