@@ -25,6 +25,8 @@ import { InsuranceTilesComponent } from './insurance-tiles/insurance-tiles.compo
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { HeaderCardsComponent } from './header-cards/header-cards.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 
 @NgModule({
@@ -53,7 +55,8 @@ import { HeaderCardsComponent } from './header-cards/header-cards.component';
     MatSelectModule,
     MatSliderModule,
     HttpClientModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

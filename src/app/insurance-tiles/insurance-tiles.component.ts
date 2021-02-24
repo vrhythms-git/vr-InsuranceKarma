@@ -6,6 +6,8 @@ import * as actions from '../store/actions/dashboardAction'
 import * as CounterSelector from "../store/selectors/counterSelector";
 import { IKServices } from "../services/app.service";
 import * as $ from "jquery";
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
@@ -29,8 +31,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ]),
     trigger('slideInOutHome', [
       state('expandHomeCard', style({
-        height: '290px',
-        width: '100%'
+        height: '*',
+        width: '*'
       })),
       state('collapseHomeCard', style({
         height: '0px',
@@ -41,8 +43,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ]),
     trigger('slideInOutCar', [
       state('expandCarCard', style({
-        height: '290px',
-        width: '100%'
+        height: '*',
+        width: '*'
       })),
       state('collapseCarCard', style({
         height: '0px',
@@ -82,7 +84,7 @@ export class InsuranceTilesComponent implements OnInit {
   toggleSlideAuto: boolean = true;
   @ViewChild("home") home: ElementRef;
 
-  isAPICallComplete:boolean = false;
+  isAPICallComplete: boolean = false;
 
   // formatter = new Intl.NumberFormat('en-US', {
   //   style: 'currency',
@@ -90,7 +92,19 @@ export class InsuranceTilesComponent implements OnInit {
   //   minimumFractionDigits: 2
   // })
 
+  yrofLastrenovation = '2020';
+  claimsinLastyears = '0';
+  plumingCondition = 'Excellent';
+  roofCondition = 'Excellent';
 
+  lifehiddenfields: boolean = true;
+  homehiddenfields: boolean = true;
+  autohiddenfields: boolean = true;
+
+  yearAuto = '2020';
+  MakeAndModel = 'Hyundai 2020';
+  typeOfPolicyAuto ='Policy 1';
+  additionalDriver ='Driver 1';
 
   sliderVariableValues = {
 
@@ -142,7 +156,7 @@ export class InsuranceTilesComponent implements OnInit {
     uninsuredOrUnderinsuredMotorist_max: 300000
   }
 
-  constructor(private store: Store<UserData>, private ikservice: IKServices) {
+  constructor(private store: Store<UserData>, private ikservice: IKServices, private snackBar: MatSnackBar) {
 
     // this.stateData$ =  this.store.pipe(select(CounterSelector.selectUserData))
     //(this.stateData$ = storeData));
@@ -150,7 +164,7 @@ export class InsuranceTilesComponent implements OnInit {
 
   // stateData : Observable;
 
-
+  isStateDataSet = false;
   showMask: boolean = false;
 
   getBorderColorBasedOnRiskLevel(risk) {
@@ -209,6 +223,7 @@ export class InsuranceTilesComponent implements OnInit {
     // setTimeout(()=>{
     //$("#mask").hide()
     // },100)
+    
     this.showMask = true;
     let subscribed = this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
       if (this.isFlagSet == false) {
@@ -411,6 +426,13 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
     $(document.getElementsByClassName("petIns")).addClass("col-md-4 fourth");
     $(document.getElementsByClassName("boatIns")).addClass("col-md-4 fifth");
     $(document.getElementsByClassName("rentIns")).addClass("col-md-4 sixth");
+
+    if(event.change != undefined && event.change != 0)
+    this.snackBar.open('We noticed that you have changed the profile details. Please sign up by clicking on "Create Account" to save your changes for future reference.', 'Dismiss', {
+      duration: 5000,
+      verticalPosition: 'top',
+      panelClass: ['snackbarStyle']
+  });
   }
 
   onInputChange({ event, id, type }) {
@@ -825,4 +847,32 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
     $(document.getElementsByClassName("homeInsurance")).addClass("col-md-4");
   }
 
+  isPolicyCalled = false;
+  uploadPolicy(event) {
+    this.isPolicyCalled = false;
+    // this.isStateDataSet = false;
+    // let loggedInUser = "Allen Baker";
+    // console.log('loggedIn User is:' + loggedInUser);
+    this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+        let prevState = JSON.parse(JSON.stringify(data));
+        prevState.loggedInUser = "Allen Baker";
+        if(this.isPolicyCalled == false){
+          this.isPolicyCalled =true;
+          this.store.dispatch(actions.updateUserDataAct({ data: prevState }));     
+        }
+    })
+
+    if (event.id == "homeInsuranceId") {
+      this.homehiddenfields = false;
+      $(document.getElementsByClassName("homecardhiddenfields")).addClass("fade-in");
+    }
+    if (event.id == "lifeInsuranceId"){
+      this.lifehiddenfields = false;
+      $(document.getElementsByClassName("lifecardhiddenfields")).addClass("fade-in");
+    }
+    if (event.id == "carInsuranceId"){
+      this.autohiddenfields = false;
+      $(document.getElementsByClassName("autocardhiddenfields")).addClass("fade-in");
+    }
+  }
 }

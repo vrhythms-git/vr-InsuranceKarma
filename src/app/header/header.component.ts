@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { CalculatedPremium, UserData } from '../store/reducers/dashboardReducer';
+import * as selectors from "../store/selectors/counterSelector";
+import * as CounterSelector from "../store/selectors/counterSelector";
 
 
 @Component({
@@ -8,9 +13,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  // UserData$: Observable<any>;
+  stateData$: Observable<any>;
 
-  ngOnInit(): void {
+  isDataAvailable = false;
+  constructor(private store: Store<UserData>) {
+    
+  }
+
+  ngOnInit(): void {  
+    this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => {
+      if (storeData != undefined || storeData != {}) {
+        this.stateData$ = storeData
+        this.isDataAvailable = true;
+      }
+    });
   }
 
 }

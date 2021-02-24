@@ -22,7 +22,7 @@
                     <div class="centered" style="color:white;font-size: 16px"><b>AB</b></div>
                 </div>
                 <!-- <div> -->
-                <span class="align-center ml-2" style="color:white; font-size: 14px;font-weight: 300"> Create Account</span>
+                <span class="align-center ml-2" style="color:white; font-size: 14px;font-weight: 300" *ngIf="isDataAvailable">{{stateData$?.loggedInUser}} </span>
                 <mat-icon class="align-center" style="color:white">keyboard_arrow_down</mat-icon>
             </div>
         </div>

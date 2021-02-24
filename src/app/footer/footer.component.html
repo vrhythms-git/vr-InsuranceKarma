@@ -3,10 +3,10 @@
     <div class="d-flex flex-row" style="margin-top: -3%" >
         <div class="col-md-8" style="margin-top: 25px;" *ngIf="isDataAvailable"> 
             <span style="font-size: 34px;" >Annual Premium:</span>&nbsp;<span  style="font-size: 34px; font-weight: 600;"> ${{stateData$?.totalPremium|number:'2.'}}</span>
-            &nbsp; <span *ngIf="isDataAvailable" style="font-size: 20px; font-weight: 600; opacity: 0.6;">
+            &nbsp; <span *ngIf="isDataAvailable" style="font-size: 20px; font-weight: 600;color: #ff6503;">
                {{totalPremPercentChangeFormatter(stateData$?.oldNewTotalPremChangeInPercent)}}
                  </span>
-            &nbsp; <span *ngIf="isDataAvailable" >
+            &nbsp; <span *ngIf="isDataAvailable" style="color: #ff6503;" >
                 {{totalPremValueChangeFormatter(stateData$?.oldNewTotalPremChangeInValue)}}
             </span>
         </div>

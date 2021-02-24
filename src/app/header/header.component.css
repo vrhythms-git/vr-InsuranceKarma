@@ -1,41 +1,47 @@
 .example-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .brand {
-    color: white;
-    letter-spacing: 1px;
-    font-size: xx-large;
-    text-shadow: 1px 1px gray;
+  color: white;
+  letter-spacing: 1px;
+  font-size: xx-large;
+  /* text-shadow: 1px 1px gray; */
+  text-shadow: none;
 }
+
 .dot {
-    margin-top: 10px;
-    height: 35px;
-    width: 35px;
-    background-color: #2C83A3;
-    border-radius: 50%;
-    display: inline-block;
-  }
+  margin-top: 10px;
+  height: 35px;
+  width: 35px;
+  /* background-color: #2C83A3; */
+  background-color: #ff6503;
+  border-radius: 50%;
+  display: inline-block;
+}
 
 .com-appbar {
-    /* background-color: white; */   
-    background-image: linear-gradient(to right, #2C83A3 , #3BAFDA);      
-    box-shadow: 1px 2px 4px gray;
-    font-family: poppins;
+  /* background-color: white; */
+  /* background-image: linear-gradient(to right, #2C83A3 , #3BAFDA);       */
+  background-image: linear-gradient( 90deg, #0095ff, #84cbff);
+  box-shadow: 1px 2px 4px gray;
+  font-family: poppins;
 }
-.centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-.avatar {
-    vertical-align: middle;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
 
-  .align-center{
-    align-self: center;
-  }
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.align-center {
+  align-self: center;
+}

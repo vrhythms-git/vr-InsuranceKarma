@@ -16,6 +16,7 @@ export interface CalculatedPremium {
 
 export const userDataInitialState: UserData = {
     data: {
+        loggedInUser :"Create Account",
         cards: [
             {
                 key: 'life',
@@ -24,7 +25,8 @@ export const userDataInitialState: UserData = {
                 premium: 3200,
                 coverage: 250000,
                 percentOutOfTotPremium: parseInt(((3200 / 5744) * 100).toString()),
-                color: '#37BC9B',
+                // color: '#37BC9B',
+                color: '#33aaff',
                 oldCoverage: 250000,
                 oldPremium: 3200,
                 oldNewPremChangeInPercent: parseInt((((3200 - 3200) / 3200) * 100).toString()),
@@ -42,7 +44,8 @@ export const userDataInitialState: UserData = {
                 premium: 1133,
                 coverage: 100000,
                 percentOutOfTotPremium: parseInt(((1100 / 5744) * 100).toString()),
-                color: '#4A89DC',
+                // color: '#4A89DC',
+                color:'#99d5ff',
                 oldCoverage: 100000,
                 oldPremium: 1133,
                 oldNewPremChangeInPercent: parseInt((((1133 - 1133) / 1133) * 100).toString()),
@@ -59,7 +62,8 @@ export const userDataInitialState: UserData = {
                 premium: 1411,
                 coverage: 50000,
                 percentOutOfTotPremium: parseInt(((1411 / 5744) * 100).toString()),
-                color: '#967ADC',
+                // color: '#967ADC',
+                color:'#66bfff',
                 oldCoverage: 50000,
                 oldPremium: 1411,
                 oldNewPremChangeInPercent: parseInt((((1411 - 1411) / 1411) * 100).toString()),

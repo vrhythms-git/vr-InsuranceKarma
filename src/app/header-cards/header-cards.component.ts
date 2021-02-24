@@ -281,8 +281,9 @@ export class HeaderCardsComponent implements OnInit {
         let ageBracket = this.age[counter].name
 
         let AgeBracketData = this.masterData.data.age.filter((item) => {
-          return (item["Age "].replaceAll(" ", "") == ageBracket && item["Death Benefit"] == 250000);
-        })
+            return (item["Age "].replace(/ /g,"") == ageBracket && item["Death Benefit"] == 250000);
+          })
+        
         //    ageData.age = AgeBracketData;
         //   this.store.dispatch(actions.updateUserDataAct({data : ageData}));
 
@@ -297,7 +298,7 @@ export class HeaderCardsComponent implements OnInit {
         // ageData.cards[index].oldPremium = AgeBracketData[0].Premium
         // ageData.cards[index].oldCoverage = AgeBracketData[0]["Death Benefit"]
         ageData.selectedAgeBracket  = this.masterData.data.age.filter((item) => {
-          return (item["Age "].replaceAll(" ", "") == ageBracket);
+          return (item["Age "].replace(/ /g,"") == ageBracket);
         })
 
         // Start change (Rahul sir 18-2-20)

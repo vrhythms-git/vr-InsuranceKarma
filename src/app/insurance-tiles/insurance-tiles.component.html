@@ -3,124 +3,169 @@
     <div class="biglifeCardstyle">
 
         <!-- **************************** Life Insurance **************************  -->
-        <div [@slideInOutLife]="mode" class="col-md-12 row largeCardFont lifeIns cardShadow round" id="lifeInsurance"
-            [hidden]="hideLifeCard" style="background-color: white;border-left: 70px solid #37BC9B;">
+        <div [@slideInOutLife]="mode" class="col-md-12 row largeCardFont lifeIns cardShadow round" id="lifeInsurance" [hidden]="hideLifeCard"
+            style="background-color: white;border-left: 70px solid #0e5eb2;">
             <!-- <div class="col-md-12 row justify-content-center" [hidden]="false" style="background-color: red;color:white;">Notification</div> -->
             <div class="col-md-4 row">
                 <!-- <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">favorite</mat-icon> -->
-                <img src="./assets/EXL_LifeInsurance_Icon.png" class="my-auto"
-                    style="margin-left:-75px;height:25px;width:25px;margin-right: 5px">
-                <div class="col-md-12" style="background-color: #48CFAD; height:100%;">
-                    <h2 style="margin-top: 10px; margin-bottom: 0px; color: #298D74; font-family: 'poppins';"
-                        *ngIf="isDataAvailable">{{stateData$?.cards[0].name}} Insurance &nbsp;
-                        <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[0].risk)"
-                            src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}} class="highriskiconstyle">
+                <img src="./assets/EXL_LifeInsurance_Icon.png" class="my-auto" style="margin-left:-75px;height:25px;width:25px;margin-right: 5px;object-fit: contain;">
+                <div class="col-md-12" style="background-color: #33aaff; height:100%;">
+                    <h2 style="margin-top: 10px; margin-bottom: 0px; color: #298D74; font-family: 'poppins';" *ngIf="isDataAvailable">{{stateData$?.cards[0].name}} Insurance &nbsp;
+                        <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[0].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}}
+                            class="highriskiconstyle">
                     </h2>
                     <span>NEW</span>
                     <br>
                     <span class="largeCardFontStyle" *ngIf="isDataAvailable">Coverage: &nbsp;
-                        <b> ${{stateData$?.cards[0].coverage|number: '2.'}}</b></span>
+                        <b> ${{stateData$?.cards[0].coverage|number: '2.'}}</b>
+                    </span>
                     <br>
                     <span class="largeCardFontStyle" *ngIf="isDataAvailable">Premium: &nbsp;
-                        <b> ${{stateData$?.cards[0].premium|number: '2.'}}</b></span>
+                        <b> ${{stateData$?.cards[0].premium|number: '2.'}}</b>
+                    </span>
                     <br>
                     <br>
                     <span>CURRENT</span>
                     <br>
                     <span class="largeCardFontStyle" *ngIf="isDataAvailable"> Coverage: &nbsp;
-                        <b>${{stateData$?.cards[0].oldCoverage|number: '2.'}}</b></span><br>
+                        <b>${{stateData$?.cards[0].oldCoverage|number: '2.'}}</b>
+                    </span>
+                    <br>
                     <span class="largeCardFontStyle" *ngIf="isDataAvailable"> Premium: &nbsp;
-                        <b> ${{stateData$?.cards[0].oldPremium|number: '2.'}}</b></span><br>
-                    <mat-divider style="position: relative;background-color:white;height: 2px;margin-top: 20px;">
+                        <b> ${{stateData$?.cards[0].oldPremium|number: '2.'}}</b>
+                    </span>
+                    <br>
+                    <mat-divider style="position: relative;background-color:white;height: 2px;margin-top: 12px;">
                     </mat-divider>
-                    <div style="margin-top: 15px">
+                    <div style="margin-top: 8px">
                         <span class="pl-3" style="color: white;" *ngIf="isDataAvailable">
                             {{getChangeFormattedText(stateData$?.cards[0].oldNewPremChangeInPercent,stateData$?.cards[0].oldNewPremChangeInValue)}}
                         </span>
                     </div>
                     <!-- <button class="btn btn-danger btn-sm"
                         style="color:white;position: absolute; bottom: 4%;left:40%;">Remove Coverage</button> -->
+                    <button class="btn btn-info" id="btnUP" (click)="uploadPolicy({id:'lifeInsuranceId', event: $event})" style="margin-top: 3%; margin-bottom: 2%">Upload Policy/ Take Picture
+                    </button>
                 </div>
             </div>
-            <div class="col-md-7 row">
+            <div class="col-md-8 row">
                 <div class="col-12">
 
                     <!-- Insight card change start-->
-                    <div *ngIf="isDataAvailable" id="insightCardDivID" [hidden]="stateData$?.cards[0].showRiskModel"
-                        class="row st0" style={{getBorderColorBasedOnRiskLevel(stateData$?.cards[0].risk)}}>
+                    <div *ngIf="isDataAvailable" id="insightCardDivID" [hidden]="stateData$?.cards[0].showRiskModel" class="row st0" style={{getBorderColorBasedOnRiskLevel(stateData$?.cards[0].risk)}}>
                         <span class="row">
                             <div class=" d-flex col-md-4" style="justify-content: center; align-self: center;">
-                                <img class="riskimagespopup"
-                                    src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}}
-                                    alt="{{stateData$?.cards[0].risk}} risk" style="width: 113px;height: 58px;">
+                                <img class="riskimagespopup" src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}} alt="{{stateData$?.cards[0].risk}} risk"
+                                    style="width: 113px;height: 58px;">
                             </div>
                             <div class="col-md-7">
-                                <p *ngIf="isDataAvailable"
-                                    style="font-stretch: expanded; font-size: 15px; line-height: normal; color: black; font-weight: normal;">
+                                <p *ngIf="isDataAvailable" style="font-stretch: expanded; font-size: 15px; line-height: normal; color: black; font-weight: normal;">
                                     {{stateData$?.cards[0].insight}}
                                 </p>
                                 <a style="margin-bottom: 10px;" href="">Learn More &gt;&gt;</a>
                             </div>
                             <div class="col-md-0" style="padding-left: 3%; padding-bottom: -1%; ">
-                                <span (click)="closePopupEvent({type:'life',event : $event})" class="dot"
-                                    style={{getBackgroundColorBasedOnRiskLevel(stateData$?.cards[0].risk)}}>x</span>
+                                <span (click)="closePopupEvent({type:'life',event : $event})" class="dot" style={{getBackgroundColorBasedOnRiskLevel(stateData$?.cards[0].risk)}}>x</span>
                             </div>
                         </span>
 
                     </div>
                     <!-- Insight card change end -->
+                    <div style="position:absolute; margin-top: 1%;margin-left: 100%;">
+                        <button *ngIf="isDataAvailable" class="ml-auto" (click)="closeCard({id:'lifeInsuranceId', event: $event,change: stateData$?.cards[0].oldNewPremChangeInPercent})" style="border:none;background-color: white;color: blue;">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
 
                     <div class="row">
-                        <span class="col-4 text-right">Death Benefit</span>
-                        <mat-slider class="col-8 min"
-                            (input)="onInputChange({event:$event,id:'DeathBenefit', type:'life'})" min="250000"
-                            max="1000000" value="250000" step="250000" thumbLabel tickInterval="1">
+                        <span class="col-4 text-left">Death Benefit</span>
+                        <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'DeathBenefit', type:'life'})" min="250000" max="1000000"
+                            value="250000" step="250000" thumbLabel tickInterval="1">
                         </mat-slider>
                     </div>
                     <div class="row">
-                        <span class="col-4 text-right">Current Debt</span>
-                        <mat-slider class="col-8 min"
-                            (input)="onInputChange({event:$event,id:'CurrentDebit',type:'life'})" min="180000"
-                            max="280000" value="180000" step="20000" thumbLabel tickInterval="1"></mat-slider>
+                        <span class="col-4 text-left">Current Debt</span>
+                        <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'CurrentDebit',type:'life'})" min="180000" max="280000"
+                            value="180000" step="20000" thumbLabel tickInterval="1"></mat-slider>
                     </div>
                     <div class="row">
-                        <span class="col-4 text-right">Child Education Fund</span>
-                        <mat-slider class="col-8 min"
-                            (input)="onInputChange({event:$event,id:'ChildEducationFund',type:'life'})" min="50000"
-                            max="100000" value="50000" step="10000" thumbLabel tickInterval="1"></mat-slider>
+                        <span class="col-4 text-left">Child Education Fund</span>
+                        <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'ChildEducationFund',type:'life'})" min="50000" max="100000"
+                            value="50000" step="10000" thumbLabel tickInterval="1"></mat-slider>
                     </div>
                     <!-- <mat-icon style="color: white;" class="dot">close</mat-icon> -->
 
                     <div class="row">
-                        <span class="col-4 text-right">Funeral Spend </span>
-                        <mat-slider class="col-8 min"
-                            (input)="onInputChange({event:$event,id:'FuneralSpend',type:'life'})" min="2500" max="5000"
+                        <span class="col-4 text-left">Funeral Spend </span>
+                        <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'FuneralSpend',type:'life'})" min="2500" max="5000"
                             value="2500" step="500" thumbLabel tickInterval="1"></mat-slider>
                     </div>
                     <div class="row">
-                        <span class="col-4 text-right">Retirement Age </span>
-                        <mat-slider class="col-8 min"
-                            (input)="onInputChange({event:$event,id:'RetirementAge',type:'life'})" min="50" max="55"
-                            value="50" step="1" thumbLabel tickInterval="1"></mat-slider>
+                        <span class="col-4 text-left">Retirement Age </span>
+                        <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'RetirementAge',type:'life'})" min="50" max="55" value="50"
+                            step="1" thumbLabel tickInterval="1"></mat-slider>
                     </div>
                     <div class="row">
-                        <span class="col-4 text-right">Annual Income </span>
-                        <mat-slider class="col-8 min"
-                            (input)="onInputChange({event:$event,id:'AnnualIncome',type:'life'})" min="50000"
-                            max="300000" value="50000" step="50000" thumbLabel tickInterval="1"></mat-slider>
+                        <span class="col-4 text-left">Annual Income </span>
+                        <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'AnnualIncome',type:'life'})" min="50000" max="300000"
+                            value="50000" step="50000" thumbLabel tickInterval="1"></mat-slider>
                     </div>
 
-                    <div class="row">
-                        <span class="col-4 text-right">Years Of Replacement Income </span>
-                        <mat-slider class="col-8 min"
-                            (input)="onInputChange({event:$event,id:'ReplacementIncome',type:'life'})" min="5" max="10"
+                    <div class="row mb-2">
+                        <span class="col-4 text-left">Years Of Replacement Income </span>
+                        <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'ReplacementIncome',type:'life'})" min="5" max="10"
                             value="5" step="1" thumbLabel tickInterval="1"></mat-slider>
                     </div>
 
-                    <div class="row" style="padding-bottom: 3%;">
-                        <button class="d-flex btn btn-info ml-auto"
-                            (click)="calculatePremium({insuranceType:'life'})">Calculate Premium
-                           <span *ngIf="isAPICallComplete" class="spinner-border" role="status" style="margin-left: 15px;width: 1.5rem;height: 1.5rem;position: relative;margin-top: 0px;">
+                    <div class="row lifecardhiddenfields" [hidden]="lifehiddenfields" style="margin-bottom: 10%">
+
+                        <div class="col-md-4">
+
+                            <div>
+                                <span>Accidental Death Rider</span>
+                                <mat-slide-toggle>
+                                </mat-slide-toggle>
+                            </div>
+
+                            <div >
+                                <span>Accidental disability rider</span>
+                                <mat-slide-toggle>
+                                </mat-slide-toggle>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div>
+                                <span>Critical illness rider </span>
+                                <mat-slide-toggle>
+                                </mat-slide-toggle>       
+                            </div>
+                            <div>
+                                <span>Terminal Illness rider</span>
+                                <mat-slide-toggle>
+                                </mat-slide-toggle>
+                            </div>
+                           
+                        </div>
+
+                        <div class="col-md-4">
+                            <div>
+                                <span>Waiver of premium riders</span>
+                                <mat-slide-toggle>
+                                </mat-slide-toggle>
+                            </div>
+                            <div>
+                                <span>Income benefit rider</span>
+                                <mat-slide-toggle>
+                                </mat-slide-toggle>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" style=" position: absolute; bottom: 3%; right: 3%;">
+                        <button class="d-flex btn btn-info ml-auto" (click)="calculatePremium({insuranceType:'life'})">Calculate Premium
+                            <span *ngIf="isAPICallComplete" class="spinner-border" role="status" style="margin-left: 15px;width: 1.5rem;height: 1.5rem;position: relative;margin-top: 0px;">
                                 <span class="sr-only" id="loading"></span>
                             </span>
                         </button>
@@ -128,254 +173,433 @@
                 </div>
 
             </div>
-            <div class="col-1" style="padding-left: 11%; padding-top: 1%;">
-                <button class="ml-auto" (click)="closeCard({id:'lifeInsuranceId', event: $event})"
-                    style="border:none;background-color: white;color: blue;">
+            <!-- <div class="col-1" style="padding-left: 11%; padding-top: 1%;">
+                <button class="ml-auto" (click)="closeCard({id:'lifeInsuranceId', event: $event})" style="border:none;background-color: white;color: blue;">
                     <mat-icon>close</mat-icon>
                 </button>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="bighomeAutostyle">
 
         <!-- ******************** Home Insurance ********************* -->
-        <div [@slideInOutHome]="mode" class="col-md-12 row largeCardFont homeIns cardDimentions round roundleft"
-            id="homeInsurance" [hidden]="hideHomeCard"
-            style="background-color: white;margin:0;border-left: 70px solid #4A89DC;">
+        <div [@slideInOutHome]="mode" class="col-md-12 row largeCardFont homeIns cardDimentions round roundleft" id="homeInsurance"
+            [hidden]="hideHomeCard" style="background-color: white;margin:0;border-left: 70px solid #4A89DC;">
             <!-- <div class="col-md-12 row justify-content-center border border rounded" style="background-color: white;color:black;">{{insight}}</div> -->
             <div class="col-md-4 row">
                 <!-- <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">home</mat-icon> -->
-                <img src="./assets/EXL_HomeInsurance_Icon.png" class="my-auto"
-                    style="margin-left:-75px;height:25px;width:25px;margin-right: 5px">
-                <div class="col-md-12" style="background-color:#5D9CEC ">
-                    <h2 style="margin-top: 10px; margin-bottom: 0px; color: #298D74; font-family: 'poppins';"
-                        *ngIf="isDataAvailable">{{stateData$?.cards[1].name}} Owners
-                        <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[1].risk)"
-                            src={{getImageToShowBasedOnRisk(stateData$?.cards[1].risk)}} class="highriskiconstyle">
+                <img src="./assets/EXL_HomeInsurance_Icon.png" class="my-auto" style="margin-left:-75px;height:25px;width:25px;margin-right: 5px">
+                <div class="col-md-12" style="background-color:#84cbff; ">
+                    <h2 style="margin-top: 10px; margin-bottom: 0px; color: black; font-family: 'poppins';" *ngIf="isDataAvailable">{{stateData$?.cards[1].name}} Owners
+                        <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[1].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[1].risk)}}
+                            class="highriskiconstyle">
                     </h2>
                     <span>NEW</span>
                     <br>
                     <span class="largeCardFontStyle" *ngIf="isDataAvailable">Coverage:&nbsp;
-                        <b>${{stateData$?.cards[1].coverage|number: '2.'}}</b></span><br>
+                        <b>${{stateData$?.cards[1].coverage|number: '2.'}}</b>
+                    </span>
+                    <br>
                     <span class="largeCardFontStyle" *ngIf="isDataAvailable">Premium:&nbsp;
-                        <b>${{stateData$?.cards[1].premium|number: '2.'}}</b></span><br>
+                        <b>${{stateData$?.cards[1].premium|number: '2.'}}</b>
+                    </span>
+                    <br>
                     <br>
                     <span>CURRENT</span>
                     <br>
                     <span class="largeCardFontStyle" *ngIf="isDataAvailable"> Coverage: &nbsp;
-                        <b>${{stateData$?.cards[1].oldCoverage|number: '2.'}}</b></span><br>
+                        <b>${{stateData$?.cards[1].oldCoverage|number: '2.'}}</b>
+                    </span>
+                    <br>
                     <span class="largeCardFontStyle" *ngIf="isDataAvailable"> Premium: &nbsp;
-                        <b>${{stateData$?.cards[1].oldPremium|number: '2.'}}</b></span><br>
-                    <mat-divider style="position: relative;background-color:white;height: 2px;margin-top: 20px;">
+                        <b>${{stateData$?.cards[1].oldPremium|number: '2.'}}</b>
+                    </span>
+                    <br>
+                    <mat-divider style="position: relative;background-color:white;height: 2px;margin-top: 12px;">
                     </mat-divider>
-                    <div style="margin-top: 15px">
+                    <div style="margin-top: 8px;padding-bottom: 7%;">
                         <span class="pl-3" style="color: white;" *ngIf="isDataAvailable">
                             {{getChangeFormattedText(stateData$?.cards[1].oldNewPremChangeInPercent,stateData$?.cards[1].oldNewPremChangeInValue)}}
                         </span>
                     </div>
+                    <div style="padding-bottom: 1%;">
                     <!-- <button class="btn btn-danger btn-sm"
                         style="color:white; position: absolute; bottom: 4%;left: 40%">Remove Coverage</button> -->
+                    <button class="btn btn-info" id="btnUP" (click)="uploadPolicy({id:'homeInsuranceId', event: $event})" style="margin-top: 1%; margin-bottom: 2%;margin-top: 1%;margin-bottom: 2%;">Upload Policy/ Take Picture
+                    </button>
+                </div>
                 </div>
             </div>
-            <div class="col-md-7 row">
+            <div class="col-md-8 row">
                 <div class="col-12">
 
                     <!-- Insight card change start-->
-                    <div *ngIf="isDataAvailable" id="insightCardDivID" [hidden]="stateData$?.cards[1].showRiskModel"
-                        class="row st0" style={{getBorderColorBasedOnRiskLevel(stateData$?.cards[1].risk)}}>
+                    <div *ngIf="isDataAvailable" id="insightCardDivID" [hidden]="stateData$?.cards[1].showRiskModel" class="row st0" style={{getBorderColorBasedOnRiskLevel(stateData$?.cards[1].risk)}}>
                         <span class="row">
                             <div class=" d-flex col-md-4" style="justify-content: center; align-self: center;">
-                                <img class="riskimagespopup"
-                                    src={{getImageToShowBasedOnRisk(stateData$?.cards[1].risk)}}
-                                    alt="{{stateData$?.cards[1].risk}} risk" style="width: 113px;height: 58px;">
+                                <img class="riskimagespopup" src={{getImageToShowBasedOnRisk(stateData$?.cards[1].risk)}} alt="{{stateData$?.cards[1].risk}} risk"
+                                    style="width: 113px;height: 58px;">
                             </div>
                             <div class="col-md-7">
-                                <p *ngIf="isDataAvailable"
-                                    style="font-stretch: expanded; font-size: 15px; line-height: normal; color: black; font-weight: normal;">
+                                <p *ngIf="isDataAvailable" style="font-stretch: expanded; font-size: 15px; line-height: normal; color: black; font-weight: normal;">
                                     {{stateData$?.cards[1].insight}}
                                 </p>
                                 <a style="margin-bottom: 10px;" href="">Learn More &gt;&gt;</a>
                             </div>
                             <div class="col-md-0" style="padding-left: 3%; padding-bottom: -1%; ">
-                                <span (click)="closePopupEvent({type:'home',event : $event})" class="dot"
-                                    style={{getBackgroundColorBasedOnRiskLevel(stateData$?.cards[1].risk)}}>x</span>
+                                <span *ngIf="isDataAvailable" (click)="closePopupEvent({type:'home',event : $event})" class="dot" style={{getBackgroundColorBasedOnRiskLevel(stateData$?.cards[1].risk)}}>x</span>
                             </div>
                         </span>
 
                     </div>
                     <!-- Insight card change end -->
-
+                    <div style="position:absolute; margin-top: 1%;margin-left: 100%;">
+                    <button ngIf="isDataAvailable" class="ml-auto" (click)="closeCard({id:'homeInsuranceId', event: $event, change: stateData$?.cards[1].oldNewPremChangeInPercent})" style="border:none;background-color: white;color: blue;">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
                     <div class="row">
-                        <span class="col-4 text-right">Dwelling </span>
-                        <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'Dwelling',type:'home'})"
-                            min="{{sliderVariableValues.dwelling_min}}" max="{{sliderVariableValues.dwelling_max}}"
-                            value="{{sliderVariableValues.dwelling}}"
-                            step="{{(sliderVariableValues.personalLiability_max - sliderVariableValues.dwelling_min)/ 5 }}"
+                        <span class="col-4 text-left">Dwelling </span>
+                        <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'Dwelling',type:'home'})" min="{{sliderVariableValues.dwelling_min}}"
+                            max="{{sliderVariableValues.dwelling_max}}" value="{{sliderVariableValues.dwelling}}" step="{{(sliderVariableValues.personalLiability_max - sliderVariableValues.dwelling_min)/ 5 }}"
                             thumbLabel tickInterval="1"></mat-slider>
                     </div>
                     <div class="row">
-                        <span class="col-4 text-right">Other Structure </span>
-                        <mat-slider class="col-8 max"
-                            (input)="onInputChange({event:$event,id:'otherStructure',type:'home'})"
-                            min="{{sliderVariableValues.otherStructure_min}}"
-                            max="{{sliderVariableValues.otherStructure_max}}"
-                            value="{{sliderVariableValues.otherStructure}}"
+                        <span class="col-4 text-left">Other Structure </span>
+                        <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'otherStructure',type:'home'})" min="{{sliderVariableValues.otherStructure_min}}"
+                            max="{{sliderVariableValues.otherStructure_max}}" value="{{sliderVariableValues.otherStructure}}"
                             step="{{(sliderVariableValues.otherStructure_max - sliderVariableValues.otherStructure_min) / 5}}"
                             thumbLabel tickInterval="1"></mat-slider>
                     </div>
                     <div class="row">
-                        <span class="col-4 text-right">Personal Property </span>
-                        <mat-slider class="col-8 max"
-                            (input)="onInputChange({event:$event,id:'PersonalProperty',type:'home'})"
-                            min="{{sliderVariableValues.personalProperty_min}}"
-                            max="{{sliderVariableValues.personalProperty_max}}"
-                            value="{{sliderVariableValues.personalProperty}}"
+                        <span class="col-4 text-left">Personal Property </span>
+                        <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'PersonalProperty',type:'home'})" min="{{sliderVariableValues.personalProperty_min}}"
+                            max="{{sliderVariableValues.personalProperty_max}}" value="{{sliderVariableValues.personalProperty}}"
                             step="{{(sliderVariableValues.personalProperty_max - sliderVariableValues.personalProperty_min)/5}}"
                             thumbLabel tickInterval="1"></mat-slider>
                     </div>
                     <div class="row">
-                        <span class="col-4 text-right">Loss of use </span>
-                        <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'LossOfUse',type:'home'})"
-                            min="{{sliderVariableValues.lossOfUse_min}}" max="{{sliderVariableValues.lossOfUse_max}}"
-                            value={{sliderVariableValues.lossOfUse}}
-                            step="{{(sliderVariableValues.lossOfUse_max - sliderVariableValues.lossOfUse_min)/5}}"
+                        <span class="col-4 text-left">Loss of use </span>
+                        <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'LossOfUse',type:'home'})" min="{{sliderVariableValues.lossOfUse_min}}"
+                            max="{{sliderVariableValues.lossOfUse_max}}" value={{sliderVariableValues.lossOfUse}} step="{{(sliderVariableValues.lossOfUse_max - sliderVariableValues.lossOfUse_min)/5}}"
                             thumbLabel tickInterval="1"></mat-slider>
                     </div>
                     <div class="row">
-                        <span class="col-4 text-right">Personal Liability </span>
-                        <mat-slider class="col-8 max"
-                            (input)="onInputChange({event:$event,id:'PersonalLiability',type:'home'})"
-                            min="{{sliderVariableValues.personalLiability_min}}"
-                            max="{{sliderVariableValues.personalLiability_max}}"
-                            value="{{sliderVariableValues.personalLiability}}"
+                        <span class="col-4 text-left">Personal Liability </span>
+                        <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'PersonalLiability',type:'home'})" min="{{sliderVariableValues.personalLiability_min}}"
+                            max="{{sliderVariableValues.personalLiability_max}}" value="{{sliderVariableValues.personalLiability}}"
                             step="{{(sliderVariableValues.personalLiability_max - sliderVariableValues.personalLiability_min) / 5}}"
                             thumbLabel tickInterval="1"></mat-slider>
                     </div>
                     <div class="row">
-                        <span class="col-4 text-right">Medical </span>
-                        <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'Medical',type:'home'})"
-                            min="{{sliderVariableValues.medical_min}}" max="{{sliderVariableValues.medical_max}}"
-                            step="{{(sliderVariableValues.medical_max - sliderVariableValues.medical_min)/5}}"
+                        <span class="col-4 text-left">Medical </span>
+                        <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'Medical',type:'home'})" min="{{sliderVariableValues.medical_min}}"
+                            max="{{sliderVariableValues.medical_max}}" step="{{(sliderVariableValues.medical_max - sliderVariableValues.medical_min)/5}}"
                             value="{{sliderVariableValues.medical}}" thumbLabel tickInterval="1"></mat-slider>
                     </div>
-                    <div class="row" style="padding-top: 7%;">
-                        <button class="d-flex btn btn-info ml-auto"
-                            (click)="calculatePremium({insuranceType:'home'})">Calculate Premium
-                           <span *ngIf="isAPICallComplete" class="spinner-border" role="status" style="margin-left: 15px;width: 1.5rem;height: 1.5rem;position: relative;margin-top: 0px;">
+    
+                    <div class="row homecardhiddenfields mt-2" [hidden]="homehiddenfields" style="padding-bottom:6%;">
+    
+                        <div class="col-md-4">
+    
+                            <div class="row">
+                                <span style="padding-left: 7%;">Roof Condition</span>
+                            </div>
+                            <mat-form-field>
+                                <mat-select [(value)]="roofCondition" style="font-family: 'poppins';
+                            font-weight: 600;">
+                                    <mat-option value="Excellent" default>Excellent</mat-option>
+                                    <mat-option value="Good">Good</mat-option>
+                                    <mat-option value="Fair">Fair</mat-option>
+                                    <mat-option value="Poor">Poor</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                          
+    
+                            <div class="row">
+                                <span style="padding-left: 7%;">Plumbing Condition</span>
+                            </div>
+                            <mat-form-field>
+                                <mat-select [(value)]="plumingCondition">
+                                    <mat-option value="Excellent">Excellent</mat-option>
+                                    <mat-option value="Good">Good</mat-option>
+                                    <mat-option value="Fair">Fair</mat-option>
+                                    <mat-option value="Poor">Poor</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                                           
+    
+                        </div>
+    
+                        <div class="col-md-4">
+    
+                            <div class="row">
+                                <span style="padding-left: 7%;">Claims in last 5 years</span>
+                            </div>
+                            <mat-form-field>
+                                <mat-select [(value)]="claimsinLastyears">
+                                    <mat-option value="0">0</mat-option>
+                                    <mat-option value="1">1</mat-option>
+                                    <mat-option value="2">2</mat-option>
+                                    <mat-option value="3">3</mat-option>
+                                    <mat-option value="4">4</mat-option>
+                                    <mat-option value="5">5</mat-option>
+                                    <mat-option value="6">6</mat-option>
+                                    <mat-option value="7">7</mat-option>
+                                    <mat-option value="8">8</mat-option>
+                                    <mat-option value="9">9</mat-option>
+                                    <mat-option value="10">10</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+    
+                            <div class="row">
+                                <span style="padding-left: 7%;">Burgler Alarm</span>
+                            </div>
+                            <mat-slide-toggle class="ml-auto">
+                            </mat-slide-toggle>
+    
+                        </div>
+    
+                        <div class="col-md-4">
+    
+                            <div class="row">
+                                <span style="padding-left: 6%;">Year of Last renovation</span>
+                            </div>
+                            <mat-form-field>
+                                <mat-select [(value)]="yrofLastrenovation">
+                                    <mat-option value="2020">2020</mat-option>
+                                    <mat-option value="2019">2019</mat-option>
+                                    <mat-option value="2018">2018</mat-option>
+                                    <mat-option value="2017">2017</mat-option>
+                                    <mat-option value="2016">2016</mat-option>
+                                    <mat-option value="2015">2015</mat-option>
+                                    <mat-option value="2014">2014</mat-option>
+                                    <mat-option value="2013">2013</mat-option>
+                                    <mat-option value="2012">2012</mat-option>
+                                    <mat-option value="2011">2011</mat-option>
+                                    <mat-option value="2010">2010</mat-option>
+    
+                                </mat-select>
+                            </mat-form-field>
+    
+    
+                            <div class="row">
+                                <span style="padding-left: 7%;"> Flood Insurance</span>
+                            </div>
+                            <mat-slide-toggle class="ml-auto">
+                            </mat-slide-toggle>
+    
+    
+                        </div>
+    
+                    </div>
+
+                    <div class="row" style="padding-bottom: 1%;">
+                        <button class="btncalculatepremium d-flex btn btn-info ml-auto" (click)="calculatePremium({insuranceType:'home'})">Calculate Premium
+                            <span *ngIf="isAPICallComplete" class="spinner-border" role="status" style="margin-left: 15px;width: 1.5rem;height: 1.5rem;position: relative;margin-top: 0px;">
                                 <span class="sr-only" id="loading"></span>
                             </span>
                         </button>
                     </div>
                 </div>
             </div>
-            <div class="col-1" style="padding-left: 11%; padding-top: 1%;">
-                <button class="ml-auto" (click)="closeCard({id:'homeInsuranceId', event: $event})"
-                    style="border:none;background-color: white;color: blue;">
-                    <mat-icon>close</mat-icon>
-                </button>
-            </div>
         </div>
 
         <!-- **************************** Auto Insurance ********************** -->
-        <div [@slideInOutCar]="mode" class="col-md-12 row largeCardFont carIns cardDimentions round roundleft"
-            style="padding-left: 1%;" id="autoInsurance" [hidden]="hideAutoCard"
-            style="background-color: white;margin:0;border-left: 70px solid #967ADC;">
+        <div [@slideInOutCar]="mode" class="col-md-12 row largeCardFont carIns cardDimentions round roundleft" style="padding-left: 1%;"
+            id="autoInsurance" [hidden]="hideAutoCard" style="background-color: white;margin:0;border-left: 70px solid #0d5eb3;">
             <!-- <div class="col-md-12 row justify-content-center" style="background-color: red;color:white;">Notification</div>-->
             <div class="col-md-4 row">
                 <!-- <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">directions_car
                 </mat-icon> -->
-                <img src="./assets/EXL_AutoInsurance_Icon.png" class="my-auto"
-                    style="margin-left:-75px;height:25px;width:25px;margin-right: 5px">
-                <div class="col-md-12" style="background-color:#AC92EC">
-                    <h2 style="margin-top: 10px; margin-bottom: 0px; color: #298D74; font-family: 'poppins';"
-                        *ngIf="isDataAvailable">{{stateData$?.cards[2].name}} Insurance
-                        <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[2].risk)"
-                            src={{getImageToShowBasedOnRisk(stateData$?.cards[2].risk)}} class="highriskiconstyle">
+                <img src="./assets/EXL_AutoInsurance_Icon.png" class="my-auto" style="margin-left:-75px;height:25px;width:25px;margin-right: 5px">
+                <div class="col-md-12" style="background-color: #66bfff;">
+                    <h2 style="margin-top: 10px; margin-bottom: 0px; color: #298D74; font-family: 'poppins';" *ngIf="isDataAvailable">{{stateData$?.cards[2].name}} Insurance
+                        <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[2].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[2].risk)}}
+                            class="highriskiconstyle">
                     </h2>
                     <span>NEW</span>
                     <br>
                     <span class="largeCardFontStyle" *ngIf="isDataAvailable">Coverage:
-                        <b>${{stateData$?.cards[2].coverage|number: '2.'}}</b></span><br>
+                        <b>${{stateData$?.cards[2].coverage|number: '2.'}}</b>
+                    </span>
+                    <br>
                     <span class="largeCardFontStyle" *ngIf="isDataAvailable">Premium:
-                        <b>${{stateData$?.cards[2].premium|number: '2.'}}</b></span><br>
+                        <b>${{stateData$?.cards[2].premium|number: '2.'}}</b>
+                    </span>
+                    <br>
                     <br>
                     <span>CURRENT</span>
                     <br>
                     <span class="largeCardFontStyle" *ngIf="isDataAvailable"> Coverage: &nbsp;
-                        <b>${{stateData$?.cards[2].oldCoverage|number: '2.'}}</b></span><br>
+                        <b>${{stateData$?.cards[2].oldCoverage|number: '2.'}}</b>
+                    </span>
+                    <br>
                     <span class="largeCardFontStyle" *ngIf="isDataAvailable"> Premium: &nbsp;
-                        <b>${{stateData$?.cards[2].oldPremium|number: '2.'}}</b></span><br>
-                    <mat-divider style="position: relative;background-color:white;height: 2px;margin-top: 20px;">
+                        <b>${{stateData$?.cards[2].oldPremium|number: '2.'}}</b>
+                    </span>
+                    <br>
+                    <mat-divider style="position: relative;background-color:white;height: 2px;margin-top: 12px;">
                     </mat-divider>
-                    <div style="margin-top: 15px">
+                    <div style="margin-top: 8px">
                         <span class="pl-3" style="color: white;" *ngIf="isDataAvailable">
                             {{getChangeFormattedText(stateData$?.cards[2].oldNewPremChangeInPercent,stateData$?.cards[2].oldNewPremChangeInValue)}}
                         </span>
                     </div>
                     <!-- <button class="btn btn-danger btn-sm"
                         style="color:white ;position: absolute; bottom: 4%;left:50%;">Remove Coverage</button> -->
+                    <button class="btn btn-info" id="btnUP" (click)="uploadPolicy({id:'carInsuranceId', event: $event})" style="margin-top: 1%; margin-bottom: 4%">
+                        Upload Policy/ Take Picture
+                    </button>
                 </div>
             </div>
-            <div class="col-md-7 row">
+            <div class="col-md-8 row">
                 <div class="col-12">
                     <!-- Insight card change start-->
-                    <div *ngIf="isDataAvailable" id="insightCardDivID" [hidden]="stateData$?.cards[2].showRiskModel"
-                        class="row st0" style={{getBorderColorBasedOnRiskLevel(stateData$?.cards[2].risk)}}>
+                    <div *ngIf="isDataAvailable" id="insightCardDivID" [hidden]="stateData$?.cards[2].showRiskModel" class="row st0" style={{getBorderColorBasedOnRiskLevel(stateData$?.cards[2].risk)}}>
                         <span class="row">
                             <div class=" d-flex col-md-4" style="justify-content: center; align-self: center;">
-                                <img class="riskimagespopup"
-                                    src={{getImageToShowBasedOnRisk(stateData$?.cards[2].risk)}}
-                                    alt="{{stateData$?.cards[2].risk}} risk" style="width: 113px;height: 58px;">
+                                <img class="riskimagespopup" src={{getImageToShowBasedOnRisk(stateData$?.cards[2].risk)}} alt="{{stateData$?.cards[2].risk}} risk"
+                                    style="width: 113px;height: 58px;">
                             </div>
                             <div class="col-md-7">
-                                <p *ngIf="isDataAvailable"
-                                    style="font-stretch: expanded; font-size: 15px; line-height: normal; color: black; font-weight: normal;">
+                                <p *ngIf="isDataAvailable" style="font-stretch: expanded; font-size: 15px; line-height: normal; color: black; font-weight: normal;">
                                     {{stateData$?.cards[2].insight}}
                                 </p>
                                 <a style="margin-bottom: 10px;" href="">Learn More &gt;&gt;</a>
                             </div>
                             <div class="col-md-0" style="padding-left: 3%; padding-bottom: -1%; ">
-                                <span (click)="closePopupEvent({type:'auto',event : $event})" class="dot"
-                                    style={{getBackgroundColorBasedOnRiskLevel(stateData$?.cards[2].risk)}}>x</span>
+                                <span (click)="closePopupEvent({type:'auto',event : $event})" class="dot" style={{getBackgroundColorBasedOnRiskLevel(stateData$?.cards[2].risk)}}>x</span>
                             </div>
                         </span>
 
                     </div>
                     <!-- Insight card change end -->
+                    <div style="position:absolute; margin-top: 1%;margin-left: 100%;">
+                        <button *ngIf="isDataAvailable" class="ml-auto" (click)="closeCard({id:'carInsuranceId', event: $event,change: stateData$?.cards[2].oldNewPremChangeInPercent})" style="border:none;background-color: white;color: blue;">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
                     <div class="row">
-                        <span class="col-4 text-right">Bodily Injury</span>
-                        <mat-slider class="col-8 max1"
-                            (input)="onInputChange({event:$event,id:'BodilyInjuryLability',type:'auto'})" min="25000"
+                        <span class="col-4 text-left">Bodily Injury</span>
+                        <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'BodilyInjuryLability',type:'auto'})" min="25000"
                             max="100000" value="25000" step="25000" thumbLabel tickInterval="1"></mat-slider>
                     </div>
                     <div class="row">
-                        <span class="col-4 text-right">Property Damage</span>
-                        <mat-slider class="col-8 max1"
-                            (input)="onInputChange({event:$event,id:'PropertyDamageLiability',type:'auto'})" min="25000"
+                        <span class="col-4 text-left">Property Damage</span>
+                        <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'PropertyDamageLiability',type:'auto'})" min="25000"
                             max="100000" value="25000" step="25000" thumbLabel tickInterval="1"></mat-slider>
                     </div>
                     <div class="row">
-                        <span class="col-4 text-right">Deductible </span>
-                        <mat-slider class="col-8 max1"
-                            (input)="onInputChange({event:$event,id:'ComprehensiveAndCollision',type:'auto'})" min="250"
+                        <span class="col-4 text-left">Deductible </span>
+                        <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'ComprehensiveAndCollision',type:'auto'})" min="250"
                             max="1000" value="250" step="250" thumbLabel tickInterval="1"></mat-slider>
                     </div>
                     <div class="row">
                         <span class="col-4 text-right">Personal Injury Protection </span>
-                        <mat-slider class="col-8 max1"
-                            (input)="onInputChange({event:$event,id:'PersonalInjuryProtection',type:'auto'})" min="2000"
+                        <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'PersonalInjuryProtection',type:'auto'})" min="2000"
                             max="7000" value="2000" step="1000" thumbLabel tickInterval="1"></mat-slider>
                     </div>
                     <div class="row">
-                        <span class="col-4 text-right">Uninsured Motorist </span>
-                        <mat-slider class="col-8 max1"
-                            (input)="onInputChange({event:$event,id:'Uninsured/UnderinsuredMotorist',type:'auto'})"
-                            min="0" max="300000" value="0" step="60000" thumbLabel tickInterval="1"></mat-slider>
+                        <span class="col-4 text-left">Uninsured Motorist </span>
+                        <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'Uninsured/UnderinsuredMotorist',type:'auto'})" min="0"
+                            max="300000" value="0" step="60000" thumbLabel tickInterval="1"></mat-slider>
                     </div>
-                    <div class="row" style="padding-top: 7%;">
-                        <button class="d-flex btn btn-info ml-auto"
-                            (click)="calculatePremium({insuranceType:'auto'})">Calculate Premium
-                           <span *ngIf="isAPICallComplete" class="spinner-border" role="status" style="margin-left: 15px;width: 1.5rem;height: 1.5rem;position: relative;margin-top: 0px;">
+                    <div class="row">
+                        <span class="col-4 text-left">Yearly Miles</span>
+                        <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'NumberOfMilesDrivenPerPear',type:'auto'})" min="10000"
+                            max="25000" value="10000" step="5000" thumbLabel tickInterval="1"></mat-slider>
+                    </div>
+
+
+                    <div class="row autocardhiddenfields" [hidden]="autohiddenfields">
+                        <div class="col-md-4">
+
+                            <div class="row">
+                                <span style="padding-left: 8%;">Year</span>
+                            </div>
+                            <mat-form-field>
+                                <mat-select [(value)]="yearAuto">
+                                    <mat-option value="2020">2020</mat-option>
+                                    <mat-option value="2019">2019</mat-option>
+                                    <mat-option value="2018">2018</mat-option>
+                                    <mat-option value="2017">2017</mat-option>
+                                    <mat-option value="2016">2016</mat-option>
+                                    <mat-option value="2015">2015</mat-option>
+                                    <mat-option value="2014">2014</mat-option>
+                                    <mat-option value="2013">2013</mat-option>
+                                    <mat-option value="2012">2012</mat-option>
+                                    <mat-option value="2011">2011</mat-option>
+                                    <mat-option value="2010">2010</mat-option>
+
+                                </mat-select>
+                            </mat-form-field>
+
+
+                            <div class="row">
+                                <span style="padding-left: 8%;">Make and Model</span>
+                            </div>
+                            <mat-form-field>
+                                <mat-select [(value)]="MakeAndModel">
+                                    <mat-option value="Hyundai2020">Hyundai 2020</mat-option>
+                                    <mat-option value="Hyundai2019">Hyundai 2019</mat-option>
+                                    <mat-option value="Hyundai2018">Hyundai 2018</mat-option>
+                                    <mat-option value="Hyundai2017">Hyundai 2017</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <span style="padding-left: 8%;">Towing & Labour</span>
+                            </div>
+                            <mat-slide-toggle style="margin-top: 6.5%;" class="ml-auto">
+                            </mat-slide-toggle>
+
+                            <div class="row">
+                                <span style="padding-left: 7%;margin-top:6%">Current Milege</span>
+                            </div>
+                            <input style="margin-top: 1%;font-family: 'poppins';
+                            font-weight: 600;" type="text">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <span style="padding-left: 6%;">Type of Policy</span>
+                            </div>
+                            <mat-form-field>
+                                <mat-select [(value)]="typeOfPolicyAuto">
+                                    <mat-option value="policy1">Policy 1</mat-option>
+                                    <mat-option value="policy2">Policy 2</mat-option>
+                                    <mat-option value="policy3">Policy 3</mat-option>
+                                    <mat-option value="policy4">Policy 4</mat-option>
+                                    <mat-option value="policy5">Policy 5</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+
+                            <div class="row">
+                                <span style="padding-left: 7%;">Adding additional driver</span>
+                            </div>
+                            <mat-form-field>
+                                <mat-select [(value)]="additionalDriver">
+                                    <mat-option value="driver1">Driver 1</mat-option>
+                                    <mat-option value="driver2">Driver 2</mat-option>
+                                    <mat-option value="driver3">Driver 3</mat-option>
+                                    <mat-option value="driver4">Driver 4</mat-option>
+                                    <mat-option value="driver5">Driver 5</mat-option>
+
+
+                                </mat-select>
+                            </mat-form-field>
+
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding-top: 6%; padding-bottom: 1%;">
+                        <button class="d-flex btn btn-info ml-auto" (click)="calculatePremium({insuranceType:'auto'})">Calculate Premium
+                            <span *ngIf="isAPICallComplete" class="spinner-border" role="status" style="margin-left: 15px;width: 1.5rem;height: 1.5rem;position: relative;margin-top: 0px;">
                                 <span class="sr-only" id="loading"></span>
                             </span>
                         </button>
@@ -383,26 +607,21 @@
                 </div>
 
             </div>
-            <div class="col-1" style="padding-left: 11%; padding-top: 1%;">
-                <button class="ml-auto" (click)="closeCard({id:'carInsuranceId', event: $event})"
-                    style="border:none;background-color: white; color: blue;">
+            <!-- <div class="col-1" style="padding-left: 11%; padding-top: 1%;">
+                <button class="ml-auto" (click)="closeCard({id:'carInsuranceId', event: $event})" style="border:none;background-color: white; color: blue;">
                     <mat-icon>close</mat-icon>
                 </button>
-            </div>
+            </div> -->
         </div>
     </div>
-
-
-
 
 
 
     <div class="container mt-1 mb-5">
         <!-- **************************** Life Insurance **************************  -->
         <div div class="col-md-4 flex-container mt-1 lifeIns padleft" fxLayout="row">
-            <div [hidden]="showLifeCard" class="roundleft cardDimentions" id="lifeInsurance"
-                style="border-left: 40px solid #37BC9B ;">
-                <mat-card class="matcardstyle round" style="background-color: #48CFAD;">
+            <div [hidden]="showLifeCard" class="roundleft cardDimentions" id="lifeInsurance" style="border-left: 40px solid #0e5eb2 ;">
+                <mat-card class="matcardstyle round" style="background-color: #33aaff;">
                     <div (click)="showCard({id:'lifeInsuranceId', event: $event})">
                         <!-- <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">favorite
                     </mat-icon> -->
@@ -410,12 +629,12 @@
                         <img src="./assets/EXL_LifeInsurance_Icon.png" class="maticonstyle">
                         <mat-card-header>
                             <mat-card-subtitle *ngIf="isDataAvailable">
-                                <span class="d-flex" style="align-items: center;">
+                                <span class="d-flex" style="align-items: center;color: black;">
 
                                     {{stateData$?.cards[0].name}} Insurance
-                                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[0].risk)"
-                                        src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}}
-                                        class="highriskiconstyle"></span>
+                                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[0].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}}
+                                        class="highriskiconstyle">
+                                </span>
                             </mat-card-subtitle>
 
                             <mat-card-title *ngIf="isDataAvailable">Coverage:&nbsp;
@@ -429,11 +648,9 @@
 
                     </div>
                     <mat-card-content>
-                        <span class="pl-3 d-flex" style="color: white;padding-bottom: 5%;margin-top: 5px;"
-                            *ngIf="isDataAvailable">
+                        <span class="pl-3 d-flex" style="color: white;padding-bottom: 5%;margin-top: 5px;" *ngIf="isDataAvailable">
                             {{getChangeFormattedText(stateData$?.cards[0].oldNewPremChangeInPercent,stateData$?.cards[0].oldNewPremChangeInValue)}}
-                            <mat-slide-toggle checked
-                                (change)="OnInsuanceSlideToggle({insuranceType:'life', event: $event})" class="ml-auto">
+                            <mat-slide-toggle checked (change)="OnInsuanceSlideToggle({insuranceType:'life', event: $event})" class="ml-auto">
                             </mat-slide-toggle>
 
                         </span>
@@ -445,20 +662,19 @@
 
         <!-- ******************** Home Insurance ********************* -->
         <div class="col-md-4 flex-container mt-1 homeIns padleft" fxLayout="row">
-            <div [hidden]="showHomeCard" class="roundleft cardDimentions" id="homeInsurance"
-                style="border-left: 40px solid #4A89DC;">
-                <mat-card class="matcardstyle round" style="background-color: #5D9CEC;">
+            <div [hidden]="showHomeCard" class="roundleft cardDimentions" id="homeInsurance" style="border-left: 40px solid #0e5eb2;">
+                <mat-card class="matcardstyle round" style="background-color: #84cbff;">
                     <div (click)="showCard({id:'homeInsuranceId', event: $event})">
                         <!-- <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">home</mat-icon> -->
                         <img src="./assets/EXL_HomeInsurance_Icon.png" class="maticonstyle">
 
                         <mat-card-header>
                             <mat-card-subtitle *ngIf="isDataAvailable">
-                                <span class="d-flex" style="align-items: center;">
+                                <span class="d-flex" style="align-items: center;color:black">
                                     {{stateData$?.cards[1].name}} Insurance
-                                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[1].risk)"
-                                        src={{getImageToShowBasedOnRisk(stateData$?.cards[1].risk)}}
-                                        class="highriskiconstyle"></span>
+                                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[1].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[1].risk)}}
+                                        class="highriskiconstyle">
+                                </span>
                             </mat-card-subtitle>
                             <mat-card-title *ngIf="isDataAvailable">Coverage:&nbsp;
                                 <b>${{stateData$?.cards[1].coverage|number:'2.'}}</b>
@@ -471,11 +687,9 @@
 
                     </div>
                     <mat-card-content>
-                        <span class="pl-3 d-flex" style="color: white;padding-bottom: 5%;margin-top: 5px;"
-                            *ngIf="isDataAvailable">
+                        <span class="pl-3 d-flex" style="color: white;padding-bottom: 5%;margin-top: 5px;" *ngIf="isDataAvailable">
                             {{getChangeFormattedText(stateData$?.cards[1].oldNewPremChangeInPercent,stateData$?.cards[1].oldNewPremChangeInValue)}}
-                            <mat-slide-toggle checked
-                                (change)="OnInsuanceSlideToggle({insuranceType:'home', event: $event})" class="ml-auto">
+                            <mat-slide-toggle checked (change)="OnInsuanceSlideToggle({insuranceType:'home', event: $event})" class="ml-auto">
                             </mat-slide-toggle>
                         </span>
                     </mat-card-content>
@@ -485,9 +699,8 @@
 
         <!-- **************************** Auto Insurance ********************** -->
         <div class="col-md-4 flex-container mt-1 carIns padleft" fxLayout="row">
-            <div [hidden]="showAutoCard" class="roundleft cardDimentions" id="autoInsurance"
-                style="border-left: 40px solid #967ADC;">
-                <mat-card class="matcardstyle round" style="background-color: #AC92EC;">
+            <div [hidden]="showAutoCard" class="roundleft cardDimentions" id="autoInsurance" style="border-left: 40px solid #0d5eb3;">
+                <mat-card class="matcardstyle round" style="background-color:  #66bfff;">
                     <div (click)="showCard({id:'carInsuranceId', event: $event})">
                         <!-- <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">directions_car
                     </mat-icon> -->
@@ -495,12 +708,12 @@
 
                         <mat-card-header>
                             <mat-card-subtitle *ngIf="isDataAvailable">
-                                <span class="d-flex" style="align-items: center;">
+                                <span class="d-flex" style="align-items: center;color: black;">
 
                                     {{stateData$?.cards[2].name}} Insurance
-                                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[2].risk)"
-                                        src={{getImageToShowBasedOnRisk(stateData$?.cards[2].risk)}}
-                                        class="highriskiconstyle"></span>
+                                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[2].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[2].risk)}}
+                                        class="highriskiconstyle">
+                                </span>
                             </mat-card-subtitle>
                             <mat-card-title *ngIf="isDataAvailable">Coverage:&nbsp;
                                 <b>${{stateData$?.cards[2].coverage|number:'2.'}}</b>
@@ -513,11 +726,9 @@
 
                     </div>
                     <mat-card-content>
-                        <span class="pl-3 d-flex" style="color: white;padding-bottom: 5%;margin-top: 5px;"
-                            *ngIf="isDataAvailable">
+                        <span class="pl-3 d-flex" style="color: white;padding-bottom: 5%;margin-top: 5px;" *ngIf="isDataAvailable">
                             {{getChangeFormattedText(stateData$?.cards[2].oldNewPremChangeInPercent,stateData$?.cards[2].oldNewPremChangeInValue)}}
-                            <mat-slide-toggle checked
-                                (change)="OnInsuanceSlideToggle({insuranceType:'auto', event: $event})" class="ml-auto">
+                            <mat-slide-toggle checked (change)="OnInsuanceSlideToggle({insuranceType:'auto', event: $event})" class="ml-auto">
                             </mat-slide-toggle>
                         </span>
                     </mat-card-content>
@@ -529,13 +740,11 @@
 
 
         <!-- ******************* Disabled Cards ************************** -->
-        <div class="col-md-4 flex-container mt-1 petIns" fxLayout="row"
-            style="cursor: pointer; padding-left:2%;padding-top: 1.5%;padding-right: 0%;">
+        <div class="col-md-4 flex-container mt-1 petIns" fxLayout="row" style="cursor: pointer; padding-left:2%;padding-top: 1.5%;padding-right: 0%;">
             <div class="roundleft " [hidden]="hidePetCard" style="border-left: 40px solid #8CC152;">
                 <mat-card class="matcardstyle round" style="background-color: #A0D468;">
                     <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
-                    <mat-icon style="margin-left: -33px; color:white;margin-top: 15%" aria-hidden="false"
-                        aria-label="Example home icon">pets</mat-icon>
+                    <mat-icon style="margin-left: -33px; color:white;margin-top: 15%" aria-hidden="false" aria-label="Example home icon">pets</mat-icon>
                     <!-- <img src="./assets/EXL_LifeInsurance_Icon.png" class="maticonstyle"> -->
 
                     <mat-card-header>
@@ -551,8 +760,7 @@
                     <mat-card-content>
                         <span class="pl-3 d-flex" style="color: white;padding-bottom: 5%;margin-top: 5px;">
                             --no change
-                            <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'pet', event: $event})"
-                                class="ml-auto"></mat-slide-toggle>
+                            <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'pet', event: $event})" class="ml-auto"></mat-slide-toggle>
                         </span>
 
                     </mat-card-content>
@@ -561,13 +769,11 @@
             </div>
         </div>
 
-        <div class="col-md-4  cardDimentions flex-container mt-1 boatIns" fxLayout="row"
-            style="cursor: pointer; padding-left:2%; padding-top: 1.5%;padding-right: 0%;">
+        <div class="col-md-4  cardDimentions flex-container mt-1 boatIns" fxLayout="row" style="cursor: pointer; padding-left:2%; padding-top: 1.5%;padding-right: 0%;">
             <div [hidden]="hideBoatCard" class="roundleft cardDimentions" style="border-left: 40px solid #3BAFDA;">
                 <mat-card class="matcardstyle round" style="background-color: #4FC1E9;">
                     <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
-                    <mat-icon class="" style="margin-left: -33px; color:white;margin-top: 16%" aria-hidden="false"
-                        aria-label="Example home icon">directions_boat</mat-icon>
+                    <mat-icon class="" style="margin-left: -33px; color:white;margin-top: 16%" aria-hidden="false" aria-label="Example home icon">directions_boat</mat-icon>
                     <!-- <img src="./assets/EXL_LifeInsurance_Icon.png" class="maticonstyle"> -->
 
                     <mat-card-header>
@@ -583,8 +789,7 @@
                     <mat-card-content>
                         <span class="pl-3 d-flex" style="color: white;padding-bottom: 5%;margin-top: 5px;">
                             --no change
-                            <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'boat', event: $event})"
-                                class="ml-auto"></mat-slide-toggle>
+                            <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'boat', event: $event})" class="ml-auto"></mat-slide-toggle>
                         </span>
                     </mat-card-content>
 
@@ -592,13 +797,11 @@
             </div>
         </div>
 
-        <div class="col-md-4 cardDimentions flex-container mt-1 rentIns" fxLayout="row"
-            style="cursor: pointer; padding-left:2%; padding-top: 1.5%;padding-right: 0%;">
+        <div class="col-md-4 cardDimentions flex-container mt-1 rentIns" fxLayout="row" style="cursor: pointer; padding-left:2%; padding-top: 1.5%;padding-right: 0%;">
             <div [hidden]="hideRentCard" class="roundleft cardDimentions" style="border-left: 40px solid #FCBB42;">
                 <mat-card class="round" style="background-color: #FFCE54; box-shadow:none; height: 100%;">
                     <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
-                    <mat-icon class="" style="margin-left: -33px; color:white;margin-top: 17.5%" aria-hidden="false"
-                        aria-label="Example home icon">vpn_keys</mat-icon>
+                    <mat-icon class="" style="margin-left: -33px; color:white;margin-top: 17.5%" aria-hidden="false" aria-label="Example home icon">vpn_keys</mat-icon>
                     <!-- <img src="./assets/EXL_LifeInsurance_Icon.png" class="maticonstyle"> -->
 
                     <mat-card-header>
@@ -614,8 +817,7 @@
                     <mat-card-content>
                         <span class="pl-3 d-flex" style="color: white;padding-bottom: 5%;margin-top: 5px;">
                             --no change
-                            <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'renters', event: $event})"
-                                class="ml-auto"></mat-slide-toggle>
+                            <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'renters', event: $event})" class="ml-auto"></mat-slide-toggle>
                         </span>
                     </mat-card-content>
 

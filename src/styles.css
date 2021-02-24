@@ -41,4 +41,21 @@ body {
   border: solid 2px gray;
   bottom: -20px;
   right: -20px;
-  }
+}
+
+.snackbarStyle {
+  background-color: #17a2b8!important;
+  color: white!important;
+  font-family: 'poppins'!important;
+  margin-top: 16% !important;
+}
+
+span.mat-button-wrapper {
+  color: black!important;
+}
+
+.mat-simple-snackbar span {
+  font-family: 'poppins';
+  font-size: 1.19vw;
+  letter-spacing: 0.18px;
+}
