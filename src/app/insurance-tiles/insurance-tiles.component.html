@@ -254,7 +254,7 @@
                     </div>
                     <!-- Insight card change end -->
                     <div style="position:absolute; margin-top: 1%;margin-left: 100%;">
-                    <button ngIf="isDataAvailable" class="ml-auto" (click)="closeCard({id:'homeInsuranceId', event: $event, change: stateData$?.cards[1].oldNewPremChangeInPercent})" style="border:none;background-color: white;color: blue;">
+                    <button *ngIf="isDataAvailable" class="ml-auto" (click)="closeCard({id:'homeInsuranceId', event: $event, change: stateData$?.cards[1].oldNewPremChangeInPercent})" style="border:none;background-color: white;color: blue;">
                         <mat-icon>close</mat-icon>
                     </button>
                 </div>
