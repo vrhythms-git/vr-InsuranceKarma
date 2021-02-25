@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CounterState, UserData } from '../store/reducers/dashboardReducer';
@@ -6,7 +6,8 @@ import * as actions from '../store/actions/dashboardAction'
 import * as CounterSelector from "../store/selectors/counterSelector";
 import { IKServices } from "../services/app.service";
 import * as $ from "jquery";
-import { MatSnackBar } from '@angular/material/snack-bar';
+// import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig,MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
@@ -428,11 +429,11 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
     $(document.getElementsByClassName("rentIns")).addClass("col-md-4 sixth");
 
     if(event.change != undefined && event.change != 0)
-    this.snackBar.open('We noticed that you have changed the profile details. Please sign up by clicking on "Create Account" to save your changes for future reference.', 'Dismiss', {
-      duration: 5000,
-      verticalPosition:'top',
-      horizontalPosition:'center',
-      panelClass: ['snackbarStyle']
+  this.snackBar.openFromComponent(customSnackBar, {
+        duration: 5000,
+        verticalPosition:'top',
+        horizontalPosition:'center',
+        panelClass: ['snackbarStyle']
   });
   }
 
@@ -875,5 +876,24 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
       this.autohiddenfields = false;
       $(document.getElementsByClassName("autocardhiddenfields")).addClass("fade-in");
     }
+
+    this.snackBar.open('Policy has been uploaded successfully. Please verify extracted details below.', 'Dismiss', {
+      duration: 5000,
+      verticalPosition:'top',
+      horizontalPosition:'center',
+      panelClass: ['snackbarStyle']
+  });
   }
+}
+
+
+@Component({
+  selector: 'custom-snackbar.component',
+  templateUrl: 'custom-snackbar.component.html',
+  styles: [],
+})
+export class customSnackBar {
+  constructor( 
+    public snackBarRef: MatSnackBarRef<customSnackBar>,
+    @Inject(MAT_SNACK_BAR_DATA) public data: any) { }
 }
