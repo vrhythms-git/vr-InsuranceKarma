@@ -867,14 +867,17 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
     if (event.id == "homeInsuranceId") {
       this.homehiddenfields = false;
       $(document.getElementsByClassName("homecardhiddenfields")).addClass("fade-in");
+      $(document.getElementsByClassName("homeIndBtnCls")).addClass("changeBgColor");
     }
     if (event.id == "lifeInsuranceId"){
       this.lifehiddenfields = false;
       $(document.getElementsByClassName("lifecardhiddenfields")).addClass("fade-in");
+      $(document.getElementsByClassName("lifeIndBtnCls")).addClass("changeBgColor");
     }
     if (event.id == "carInsuranceId"){
       this.autohiddenfields = false;
       $(document.getElementsByClassName("autocardhiddenfields")).addClass("fade-in");
+      $(document.getElementsByClassName("carIndBtnCls")).addClass("changeBgColor");
     }
 
     this.snackBar.open('Policy has been uploaded successfully. Please verify extracted details below.', 'Dismiss', {

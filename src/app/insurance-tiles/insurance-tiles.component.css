@@ -275,15 +275,19 @@ p {
 
 #btnUP {
   margin-top: 3%;
-  background-color: #0e5eb2!important;
+  background-color: #0e5eb2;
 }
 
-#btnUP:active {
+/* #btnUP:active {
   background: #69913E!important;
 }
 
 #btnUP:focus {
   background: #69913E!important;
+} */
+
+.changeBgColor{
+  background-color: #69913E!important;
 }
 
 /deep/ .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
