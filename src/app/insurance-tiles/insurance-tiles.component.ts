@@ -95,8 +95,9 @@ export class InsuranceTilesComponent implements OnInit {
 
   yrofLastrenovation = '2020';
   claimsinLastyears = '0';
-  plumingCondition = 'Excellent';
-  roofCondition = 'Excellent';
+  plumingCondition = 'Average';
+  roofCondition = 'Average';
+  burglerAlarm:boolean = false;
 
   lifehiddenfields: boolean = true;
   homehiddenfields: boolean = true;
@@ -104,8 +105,8 @@ export class InsuranceTilesComponent implements OnInit {
 
   yearAuto = '2020';
   MakeAndModel = 'Hyundai 2020';
-  typeOfPolicyAuto ='Policy 1';
-  additionalDriver ='Driver 1';
+  typeOfPolicyAuto = 'Policy 1';
+  additionalDriver = 'Driver 1';
 
   sliderVariableValues = {
 
@@ -190,7 +191,9 @@ export class InsuranceTilesComponent implements OnInit {
 
   }
 
-
+  burgleralarm(event){
+    this.burglerAlarm = event.checked
+  }
 
   showHideInsights(risk) {
     // console.log('showHideInsights :: ' + risk)
@@ -553,7 +556,7 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
 
     for (let i = 0; i < prevStateData.cards.length; i++) {
       if (prevStateData.cards[i].isEnabled == true)
-        prevStateData.cards[i].percentOutOfTotPremium = parseInt(((prevStateData.cards[i].premium / totalPremium) * 100).toString())
+        prevStateData.cards[i].percentOutOfTotPremium = ((prevStateData.cards[i].premium / totalPremium) * 100).toFixed(1)
     }
 
     return prevStateData;
@@ -592,8 +595,18 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
                 'insuranceType': 'home',
                 'premium': data.default_home_premium,
                 'stateName': data.cards[index].state_name,
-                'insuranceData': this.SliderData
+                'insuranceData': this.SliderData,
+                'policyData' : undefined         
               }
+            }
+
+            if (this.homehiddenfields == false) {
+              payloadJSON.data.policyData = 
+               {
+              roofCondition : this.roofCondition,
+              plumingCondition : this.plumingCondition,
+              burglerAlarm : this.burglerAlarm
+            }
             }
             this.updateTotalPremiumInStore(payloadJSON, 'home', data, dwelling_default)
           }
@@ -668,7 +681,8 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
                 'insuranceType': 'auto',
                 'premium': data.cards[index].oldPremium,
                 'stateName': data.cards[homeIndex].state_name,
-                'insuranceData': this.SliderData
+                'insuranceData': this.SliderData,
+                'nosOfAutos': data.cards[index].nosOfAutos
               }
             }
 

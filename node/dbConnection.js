@@ -88,7 +88,7 @@ async function calculatePremium(inputJson) {
                 resJson.insight = "Personal Property is much higher than actual dwelling cost. Low chances of claim settlement";
                 resJson.risk = "High"
               }else if (personalLiability < (dwelling/2)){
-                resJson.insight = "Suggest liability to be changed to 300k";
+                resJson.insight = "Suggest liability to be changed to $300k";
                 resJson.risk = "Medium"
               }else if (inputJson.data.stateName == 'North Carolina' && (dwelling == inputJson.data.insuranceData.dwelling_min) ){
                 resJson.insight = "Floods can occur at any time of the year and just about anywhere in North Carolina. They may be caused by large amounts of rain, hurricanes or dam failures. Eastern North Carolina had a very bad, record-setting 500-year flood caused by Hurricane Floyd in 1999. Suggest to add Flood Insurance @ $370 additional premium";
@@ -131,7 +131,7 @@ async function calculatePremium(inputJson) {
               
               //Scenario 1 & 2
               if (deathBenefit < currentDebit) {
-                resJson.insight = "Suggest to increase whole life benefit to 300k and term plan for 750k for 10 years";
+                resJson.insight = "Suggest to take increase whole life benefit to $300k and term plan for $750k for 10 years";
                 resJson.risk = "High"
               }else if (replacementIncome == 10 ){
                 resJson.insight = "Take a Whole Life Insurance along with Annuities Rider for adequate coverage";
@@ -172,7 +172,7 @@ async function calculatePremium(inputJson) {
               let uninsuredOrUnderinsuredMotorist = ifNull(inputJson.data.insuranceData.uninsuredOrUnderinsuredMotorist, inputJson.data.insuranceData.uninsuredOrUnderinsuredMotorist_min);
 
               if (inputJson.data.stateName == 'Ohio' && bodilyInjuryLability <= 50000 && uninsuredOrUnderinsuredMotorist < 100000 ){
-              resJson.insight = "Considering the annual mileage, suggest to add Uninsured / Underinsured motorist Bodily Injury os $ 100,000 / person and $ 300,000 per accident";
+              resJson.insight = "Considering the annual mileage, suggest to add Uninsured / Underinsured motorist Bodily Injury os $100,000 / person and $300,000 per accident";
               resJson.risk = "Medium"
             }
             console.log("Response data: " + JSON.stringify(resJson));

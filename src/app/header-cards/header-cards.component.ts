@@ -173,7 +173,7 @@ export class HeaderCardsComponent implements OnInit {
 
     for (let i = 0; i < prevStateData.cards.length; i++) {
       if (prevStateData.cards[i].isEnabled == true)
-      prevStateData.cards[i].percentOutOfTotPremium =  parseInt(((prevStateData.cards[i].premium / totalPremium) * 100).toString())
+      prevStateData.cards[i].percentOutOfTotPremium =  ((prevStateData.cards[i].premium / totalPremium) * 100).toFixed(1)
     }
 
     return prevStateData;
@@ -345,17 +345,20 @@ export class HeaderCardsComponent implements OnInit {
     })
   }
 
+
+  isincremented = false;
   automobileValueChange(counter) {
+    this.isincremented = false;
+
     let subscription = this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
-
-      var automobileValue = this.automobile[counter].value;
-      console.log("Data is :" + JSON.stringify(data))
-
-      console.log('New automobile value is: ' + JSON.stringify(automobileValue))
-      this.store.dispatch(actions.updateUserDataAct({ data: automobileValue }));
-
-      // subscription.unsubscribe();
+      if (this.isincremented == false) {
+        this.isincremented = true;
+        let previousState = JSON.parse(JSON.stringify(data));
+        previousState.cards[2].nosOfAutos = this.automobile[counter].value;
+        this.store.dispatch(actions.updateUserDataAct({ data: previousState }));
+      }
     })
+    subscription.unsubscribe();
   }
 
   ageincrement(event: any) {
@@ -405,7 +408,7 @@ export class HeaderCardsComponent implements OnInit {
       this.counter2 = 0;
     }
 
-    //this.automobileValueChange(this.counter2);
+    this.automobileValueChange(this.counter2);
   }
 
   automobiledecrement(event: any) {
@@ -415,7 +418,7 @@ export class HeaderCardsComponent implements OnInit {
     }
     this.counter2 -= 1;
 
-    //this.automobileValueChange(this.counter2);
+    this.automobileValueChange(this.counter2);
   }
 
   incomeDropdown(value) {

@@ -117,8 +117,54 @@ function calculateHomePremium(userData, parametersJSON) {
                 break;
             }
         }
+
+    console.log('Policy data : ' + JSON.stringify(userData.data.policyData))
+
+    if (userData.data.policyData) {
+        try {
+            let roofCondition = userData.data.policyData["roofCondition"];
+            let plumingCondition = userData.data.policyData["plumingCondition"];
+            total = calculateByPolicyData(roofCondition, dwellingPre, 'Roof condition', total);
+            total = calculateByPolicyData(plumingCondition, dwellingPre, 'Pluming condition', total);
+        } catch (error) {
+            console.log('Error occured while calculating policy data as : ' + error);
+        }
+
+        if (userData.data.policyData.burglerAlarm == true) {
+            console.log(`Burgler Alarm present in house so reducing 1% which is ${(dwellingPre * 0.01)} from default premium ${dwellingPre} now new total is : ${total - (dwellingPre * 0.01)}`)
+            total = total - (dwellingPre * 0.01);
+        }
+    }
     console.log("total premium is : " + total.toFixed(0));
     return total.toFixed(0)
+}
+
+function calculateByPolicyData(conditionRating, dwelling_default, condition, total) {
+    console.log(`calculateByPolicyData called... for ${condition} = ${conditionRating}`);
+
+    switch (conditionRating) {
+        case 'Good': {
+            console.log(`${condition} is Good, subtracting ${(dwelling_default * 0.005)} from dwelling_default ${dwelling_default} now new calculated is ${total - (dwelling_default * 0.005)}`)
+            total =  total - ( dwelling_default * 0.005)
+            break;
+        }
+        case 'Excellent': {
+            console.log(`${condition} is Excellent, subtracting ${(dwelling_default * 0.01)} from dwelling_default ${dwelling_default} now new dwelling_default is ${total - (dwelling_default * 0.01)}`)
+            total = total - (dwelling_default * 0.01)
+            break;
+        }
+        case 'Average': {
+            total = total;
+            console.log(`${condition} is Average and dwelling_default is ${dwelling_default}`)
+            break;
+        }
+        case 'Poor': {
+            console.log(`${condition} is Excellent, adding ${(dwelling_default * 0.005)} from dwelling_default ${dwelling_default} now new dwelling_default is ${total + (dwelling_default * 0.005)}`)
+            total = total + (dwelling_default * 0.005)
+            break;
+        }
+    }
+    return total;
 }
 
 function calculateLifePremium(userData, parametersJSON) {
@@ -151,7 +197,7 @@ function calculateLifePremium(userData, parametersJSON) {
 
                 if (userData.data.insuranceData.currentDebit != undefined && userData.data.insuranceData.currentDebit != null) {
                     new_term_benefit = new_term_benefit + userData.data.insuranceData.currentDebit;
-                }else {
+                } else {
                     new_term_benefit = new_term_benefit + userData.data.insuranceData.currentDebit_min;
                 }
 
@@ -178,7 +224,7 @@ function calculateLifePremium(userData, parametersJSON) {
 
                 if (userData.data.insuranceData.childEducationFund != undefined && userData.data.insuranceData.childEducationFund != null) {
                     new_term_benefit = new_term_benefit + userData.data.insuranceData.childEducationFund;
-                }else {
+                } else {
                     new_term_benefit = new_term_benefit + userData.data.insuranceData.childEducationFund_min;
                 }
 
@@ -208,7 +254,7 @@ function calculateLifePremium(userData, parametersJSON) {
                     else {
                         new_term_benefit = new_term_benefit + userData.data.insuranceData.funeralSpend_min;
                     }
-    
+
 
                     console.log('funeral spend:' + (default_premium * slots * parametersJSON[i].factor3))
                     break;
@@ -266,8 +312,8 @@ function calculateLifePremium(userData, parametersJSON) {
     return {
         whole_life_insurance: whole_life_insurance,
         term_insurance: term_insurance,
-        whole_life_benefit : new_whole_life_benefit,
-        term_benefit : new_term_benefit
+        whole_life_benefit: new_whole_life_benefit,
+        term_benefit: new_term_benefit
 
     }
 }
@@ -303,8 +349,8 @@ function calculateAutoPremium(userData, parametersJSON) {
 
     console.log('Property damage:' + auto_premium);
 
-       // Comprehensive and collision
-       auto_premium = auto_premium + calculateSlotPremium(userData.data.insuranceData.comprehensiveAndCollision_min,
+    // Comprehensive and collision
+    auto_premium = auto_premium + calculateSlotPremium(userData.data.insuranceData.comprehensiveAndCollision_min,
         userData.data.insuranceData.comprehensiveAndCollision,
         500,
         1,
@@ -313,23 +359,23 @@ function calculateAutoPremium(userData, parametersJSON) {
     console.log('Collision:' + auto_premium);
 
 
-      // Personal injury protection
-      auto_premium = auto_premium + calculateSlotPremium(userData.data.insuranceData.personalInjuryProtection_min,
+    // Personal injury protection
+    auto_premium = auto_premium + calculateSlotPremium(userData.data.insuranceData.personalInjuryProtection_min,
         userData.data.insuranceData.personalInjuryProtection,
         1000,
         1,
         auto_premium
-    );    
+    );
     console.log('Personal injury:' + auto_premium);
 
 
-     // Uninsured/Underinsured motorist bodily injury
-     auto_premium = auto_premium + calculateSlotPremium(userData.data.insuranceData.uninsuredOrUnderinsuredMotorist_min,
+    // Uninsured/Underinsured motorist bodily injury
+    auto_premium = auto_premium + calculateSlotPremium(userData.data.insuranceData.uninsuredOrUnderinsuredMotorist_min,
         userData.data.insuranceData.uninsuredOrUnderinsuredMotorist,
         50000,
         2,
         auto_premium
-    );    
+    );
     console.log('Uninsured motorist:' + auto_premium);
     console.log('Total auto premium: ' + auto_premium)
 

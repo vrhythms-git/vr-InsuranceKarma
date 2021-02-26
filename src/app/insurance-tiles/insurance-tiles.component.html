@@ -1,6 +1,5 @@
 <div [hidden]="showMask" id="mask"></div>
-<div class="container1">
-    <div class="biglifeCardstyle">
+<div class="container" style="padding-left: 2%;padding-right: 2%;">
 
         <!-- **************************** Life Insurance **************************  -->
         <div [@slideInOutLife]="mode" class="col-md-12 row largeCardFont lifeIns cardShadow round" id="lifeInsurance" [hidden]="hideLifeCard"
@@ -180,9 +179,10 @@
                 </button>
             </div> -->
         </div>
+  
     </div>
-    <div class="bighomeAutostyle">
 
+        <div class="container" style="padding-left: 2.7%;padding-right: 1%;">
         <!-- ******************** Home Insurance ********************* -->
         <div [@slideInOutHome]="mode" class="col-md-12 row largeCardFont homeIns cardDimentions round roundleft" id="homeInsurance"
             [hidden]="hideHomeCard" style="background-color: white;margin:0;border-left: 70px solid #4A89DC;">
@@ -311,7 +311,7 @@
                             font-weight: 600;">
                                     <mat-option value="Excellent" default>Excellent</mat-option>
                                     <mat-option value="Good">Good</mat-option>
-                                    <mat-option value="Fair">Fair</mat-option>
+                                    <mat-option value="Average">Average</mat-option>
                                     <mat-option value="Poor">Poor</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -324,7 +324,7 @@
                                 <mat-select [(value)]="plumingCondition">
                                     <mat-option value="Excellent">Excellent</mat-option>
                                     <mat-option value="Good">Good</mat-option>
-                                    <mat-option value="Fair">Fair</mat-option>
+                                    <mat-option value="Average">Average</mat-option>
                                     <mat-option value="Poor">Poor</mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -356,7 +356,7 @@
                             <div class="row">
                                 <span style="padding-left: 7%;">Burgler Alarm</span>
                             </div>
-                            <mat-slide-toggle class="ml-auto">
+                            <mat-slide-toggle (change)="burgleralarm($event)" class="ml-auto">
                             </mat-slide-toggle>
     
                         </div>
@@ -616,7 +616,9 @@
                 </button>
             </div> -->
         </div>
-    </div>
+        
+</div>
+
 
 
 
@@ -829,4 +831,3 @@
         </div>
     </div>
 
-</div>
