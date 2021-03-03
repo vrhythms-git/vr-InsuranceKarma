@@ -90,9 +90,11 @@ async function calculatePremium(inputJson) {
               }else if (personalLiability < (dwelling/2)){
                 resJson.insight = "Suggest liability to be changed to $300k";
                 resJson.risk = "Medium"
-              }else if (inputJson.data.stateName == 'North Carolina' && (dwelling == inputJson.data.insuranceData.dwelling_min) ){
+              }else if (inputJson.data.stateName == 'North Carolina' && (dwelling == inputJson.data.insuranceData.dwelling_min) && inputJson.data.policyData["floodInsurance"] != true ){
                 resJson.insight = "Floods can occur at any time of the year and just about anywhere in North Carolina. They may be caused by large amounts of rain, hurricanes or dam failures. Eastern North Carolina had a very bad, record-setting 500-year flood caused by Hurricane Floyd in 1999. Suggest to add Flood Insurance @ $370 additional premium";
                 resJson.risk = "High"
+              }else if (inputJson.data.stateName == 'North Carolina' && (dwelling == inputJson.data.insuranceData.dwelling_min) && inputJson.data.policyData["floodInsurance"] == true ){
+                resJson.newPremium =  resJson.newPremium + 370;
               }
 
               console.log("Response data: " + JSON.stringify(resJson));
@@ -172,7 +174,7 @@ async function calculatePremium(inputJson) {
               let uninsuredOrUnderinsuredMotorist = ifNull(inputJson.data.insuranceData.uninsuredOrUnderinsuredMotorist, inputJson.data.insuranceData.uninsuredOrUnderinsuredMotorist_min);
 
               if (inputJson.data.stateName == 'Ohio' && bodilyInjuryLability <= 50000 && uninsuredOrUnderinsuredMotorist < 100000 ){
-              resJson.insight = "Considering the annual mileage, suggest to add Uninsured / Underinsured motorist Bodily Injury os $100,000 / person and $300,000 per accident";
+              resJson.insight = "Considering the annual mileage, suggest to add Uninsured / Underinsured motorist Bodily Injury of $100,000 / person and $300,000 per accident";
               resJson.risk = "Medium"
             }
             console.log("Response data: " + JSON.stringify(resJson));

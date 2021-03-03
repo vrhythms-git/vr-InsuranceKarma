@@ -97,6 +97,7 @@ export class HeaderCardsComponent implements OnInit {
               prevState.cards[index2].oldPremium = stateData[0].auto_premium
               prevState.cards[index2].oldCoverage = 50000
               prevState.cards[index2].risk = "";
+              prevState.cards[index2].defaultPremium = stateData[0].auto_premium
 
               prevState = this.reCalculateTotalPremium(prevState)
               prevState = this.reCalculatePercentages(prevState);
@@ -355,6 +356,22 @@ export class HeaderCardsComponent implements OnInit {
         this.isincremented = true;
         let previousState = JSON.parse(JSON.stringify(data));
         previousState.cards[2].nosOfAutos = this.automobile[counter].value;
+
+          let noOfauto = parseInt(this.automobile[counter].value + "");
+          let newPremium = parseInt((( previousState.cards[2].defaultPremium * noOfauto) - (previousState.cards[2].defaultPremium * ((noOfauto - 1) * 0.1))).toFixed(0))
+        
+          previousState.cards[2].premium = newPremium;
+          previousState.cards[2].oldPremium = newPremium;
+          previousState.cards[2].risk = "";
+          previousState = this.reCalculateTotalPremium(previousState)
+          previousState = this.reCalculatePercentages(previousState);
+  
+          previousState.oldNewTotalPremChangeInPercent =  (((previousState.totalPremium - previousState.oldTotalPremium) / previousState.oldTotalPremium) * 100).toFixed(1)
+          previousState.oldNewTotalPremChangeInValue = previousState.totalPremium - previousState.oldTotalPremium;
+  
+          // previousState.cards[index].oldNewPremChangeInPercent =  0;
+          // previousState.cards[index].oldNewPremChangeInValue = 0;
+
         this.store.dispatch(actions.updateUserDataAct({ data: previousState }));
       }
     })

@@ -327,10 +327,7 @@ function calculateAutoPremium(userData, parametersJSON) {
     let default_premium = userData.data.premium
     let auto_premium = default_premium;
 
-    let noOfAutos = userData.data.nosOfAutos
-    console.log("Cars user has : " + noOfAutos)
-    auto_premium = auto_premium - (((auto_premium * (noOfAutos - 1)) * 0.1))
-    console.log("After applying discount new premium is : " + auto_premium);
+  
 
     console.log('****************************** Auto Insurance Premium Calculations ******************************************')
     console.log('Auto default premium is : ' + default_premium);
@@ -388,9 +385,14 @@ function calculateAutoPremium(userData, parametersJSON) {
 
     //Change for No of autos..
 
+    let noOfAutos = userData.data.nosOfAutos
     console.log("Total calculated premium is " + auto_premium + " multiplying it to number of autos now currunt premium is : " +  (auto_premium * noOfAutos));
+    console.log("Cars user has : " + noOfAutos)
+    auto_premium = ((auto_premium * noOfAutos) - (((auto_premium * (noOfAutos - 1)) * 0.1)))
+    console.log("After applying discount new premium is : " + auto_premium);
+   // auto_premium = auto_premium * noOfAutos;
     
-    auto_premium = auto_premium * noOfAutos;
+    
     return auto_premium.toFixed(0)
 }
 

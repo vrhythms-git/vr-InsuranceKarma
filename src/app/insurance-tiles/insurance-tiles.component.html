@@ -433,7 +433,7 @@
                         <div class="row">
                             <span style="padding-left: 7%;"> Flood Insurance</span>
                         </div>
-                        <mat-slide-toggle class="ml-auto">
+                        <mat-slide-toggle (change)="onFloodInsuranceToggle($event)" class="ml-auto">
                         </mat-slide-toggle>
 
 
@@ -770,7 +770,9 @@
                                 <b>${{stateData$?.cards[2].coverage|number:'2.'}}</b>
                             </mat-card-title>
                             <mat-card-title *ngIf="isDataAvailable">Premium:&nbsp;
-                                <b>${{stateData$?.cards[2].premium|number:'2.'}}</b>
+                                <b>
+                                    ${{stateData$?.cards[2].premium|number:'2.'}}
+                                </b>
                             </mat-card-title>
                         </mat-card-header>
                         <mat-divider class="divider"></mat-divider>

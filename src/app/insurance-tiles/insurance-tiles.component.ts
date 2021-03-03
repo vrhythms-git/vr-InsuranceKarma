@@ -98,6 +98,7 @@ export class InsuranceTilesComponent implements OnInit {
   plumingCondition = 'Average';
   roofCondition = 'Average';
   burglerAlarm: boolean = false;
+  floodInsurance: boolean = false;
 
   lifehiddenfields: boolean = true;
   homehiddenfields: boolean = true;
@@ -272,12 +273,12 @@ export class InsuranceTilesComponent implements OnInit {
     this.lifedivId = $(document.getElementById('lifeInsurance'));
     this.autodivId = $(document.getElementById('autoInsurance'));
 
-    
+
     this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
 
       // this.stateData = data
       if (data != undefined && data != {}) {
-        
+
         if (data.hasStateChanged == "true") {
           this.tempFlag4 = false
           $(document.getElementsByClassName("homeIndBtnCls")).removeClass("changeBgColor");
@@ -287,48 +288,52 @@ export class InsuranceTilesComponent implements OnInit {
           this.autohiddenfields = true;
         }
 
-        if(this.tempFlag4 == false){
-        let index = data.cards.findIndex(obj => obj.key == 'home')
-        let dwelling_default = data.default_home_dwelling
-        this.sliderVariableValues.dwelling_min = dwelling_default,
-          this.sliderVariableValues.dwelling = dwelling_default,
-          this.sliderVariableValues.dwelling_max = dwelling_default + 500000,
+        if (this.tempFlag4 == false) {
+          let index = data.cards.findIndex(obj => obj.key == 'home')
+          let dwelling_default = data.default_home_dwelling
+          this.sliderVariableValues.dwelling_min = dwelling_default,
+            this.sliderVariableValues.dwelling = dwelling_default,
+            this.sliderVariableValues.dwelling_max = dwelling_default + 500000,
 
-          this.sliderVariableValues.otherStructure_min = (parseInt(dwelling_default) * 0.10)
-        this.sliderVariableValues.otherStructure = (parseInt(dwelling_default) * 0.10)
-        this.sliderVariableValues.otherStructure_max = (parseInt(dwelling_default) * 0.10) + 50000
+            this.sliderVariableValues.otherStructure_min = (parseInt(dwelling_default) * 0.10)
+          this.sliderVariableValues.otherStructure = (parseInt(dwelling_default) * 0.10)
+          this.sliderVariableValues.otherStructure_max = (parseInt(dwelling_default) * 0.10) + 50000
 
-        this.sliderVariableValues.personalProperty_min = (parseInt(dwelling_default) * 0.70)
-        this.sliderVariableValues.personalProperty = (parseInt(dwelling_default) * 0.70)
-        this.sliderVariableValues.personalProperty_max = (parseInt(dwelling_default) * 0.70) + 100000
+          this.sliderVariableValues.personalProperty_min = (parseInt(dwelling_default) * 0.70)
+          this.sliderVariableValues.personalProperty = (parseInt(dwelling_default) * 0.70)
+          this.sliderVariableValues.personalProperty_max = (parseInt(dwelling_default) * 0.70) + 100000
 
-        this.sliderVariableValues.lossOfUse_min = (parseInt(dwelling_default) * 0.20)
-        this.sliderVariableValues.lossOfUse = (parseInt(dwelling_default) * 0.20)
-        this.sliderVariableValues.lossOfUse_max = (parseInt(dwelling_default) * 0.20) + 50000
+          this.sliderVariableValues.lossOfUse_min = (parseInt(dwelling_default) * 0.20)
+          this.sliderVariableValues.lossOfUse = (parseInt(dwelling_default) * 0.20)
+          this.sliderVariableValues.lossOfUse_max = (parseInt(dwelling_default) * 0.20) + 50000
 
-        this.sliderVariableValues.personalLiability_min = dwelling_default
-        this.sliderVariableValues.personalLiability = dwelling_default
-        this.sliderVariableValues.personalLiability_max = dwelling_default + 500000
+          this.sliderVariableValues.personalLiability_min = dwelling_default
+          this.sliderVariableValues.personalLiability = dwelling_default
+          this.sliderVariableValues.personalLiability_max = dwelling_default + 500000
 
-        this.sliderVariableValues.medical_min = 2000
-        this.sliderVariableValues.medical = 2000
-        this.sliderVariableValues.medical_max = 7000
-      //  this.tempFlag4 = true; 
-        //console.log("Calculated data is : " + JSON.stringify(this.sliderVariableValues));
+          this.sliderVariableValues.medical_min = 2000
+          this.sliderVariableValues.medical = 2000
+          this.sliderVariableValues.medical_max = 7000
+          //  this.tempFlag4 = true; 
+          //console.log("Calculated data is : " + JSON.stringify(this.sliderVariableValues));
+        }
+
+        if (data.hasStateChanged == "true") {
+          console.log("hasStateChanged:" + data.hasStateChanged);
+
+          this.SliderData.dwelling = this.sliderVariableValues.dwelling_min
+          this.SliderData.otherStructure = this.sliderVariableValues.otherStructure_min
+          this.SliderData.personalProperty = this.sliderVariableValues.personalProperty_min
+          this.SliderData.lossOfUse = this.sliderVariableValues.lossOfUse_min
+          this.SliderData.personalLiability = this.sliderVariableValues.personalLiability_min
+          this.SliderData.medical = this.sliderVariableValues.medical_min
+        }
       }
-
-      if (data.hasStateChanged == "true") {
-        console.log("hasStateChanged:" + data.hasStateChanged);
-
-        this.SliderData.dwelling = this.sliderVariableValues.dwelling_min
-        this.SliderData.otherStructure = this.sliderVariableValues.otherStructure_min
-        this.SliderData.personalProperty = this.sliderVariableValues.personalProperty_min
-        this.SliderData.lossOfUse = this.sliderVariableValues.lossOfUse_min
-        this.SliderData.personalLiability = this.sliderVariableValues.personalLiability_min
-        this.SliderData.medical = this.sliderVariableValues.medical_min
-      }
-    }
     });
+  }
+
+  onFloodInsuranceToggle(event) {
+    this.floodInsurance = event.checked
   }
 
   getChangeFormattedText(percentage, value) {
@@ -620,7 +625,8 @@ export class InsuranceTilesComponent implements OnInit {
               {
                 roofCondition: this.roofCondition,
                 plumingCondition: this.plumingCondition,
-                burglerAlarm: this.burglerAlarm
+                burglerAlarm: this.burglerAlarm,
+                floodInsurance: this.floodInsurance
               }
             }
             this.updateTotalPremiumInStore(payloadJSON, 'home', data, dwelling_default)
@@ -694,7 +700,7 @@ export class InsuranceTilesComponent implements OnInit {
             let payloadJSON = {
               data: {
                 'insuranceType': 'auto',
-                'premium': data.cards[index].oldPremium,
+                'premium': data.cards[index].defaultPremium,
                 'stateName': data.cards[homeIndex].state_name,
                 'insuranceData': this.SliderData,
                 'nosOfAutos': parseInt(data.cards[index].nosOfAutos + "")
@@ -965,6 +971,14 @@ export class InsuranceTilesComponent implements OnInit {
 
 
   }
+
+
+  // getAutoPremium(premium, noOfCars) {
+  //   let cars = parseInt(noOfCars + "")
+  //   let newPremium = (premium * ((cars - 1) * 0.1))
+  //   return ((premium * cars)- newPremium).toFixed(0)
+  // }
+
 }
 
 
