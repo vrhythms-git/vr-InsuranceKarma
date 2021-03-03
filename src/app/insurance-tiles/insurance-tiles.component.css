@@ -12,7 +12,7 @@ mat-card {
 mat-card-content {
   margin-left: 10px;
   margin-bottom: 0px;
-  color: white;
+  /* color: white; */
   margin-top: 3%;
 }
 
@@ -26,7 +26,7 @@ mat-card-subtitle {
 mat-card-title {
   position: relative;
   margin-bottom: 0px;
-  color: white;
+  /* color: white; */
   font-size: 1.31vw!important;
   letter-spacing: 0.18px;
 }
@@ -36,12 +36,12 @@ mat-card-title {
   font-size: 1.31vw!important;
   letter-spacing: 0.32px;
   font-size: large;
-  color: white;
+  /* color: white; */
 }
 
 .divider {
   position: relative!important;
-  background-color: white;
+  /* background-color: white; */
   height: 2px;
   width: 90% !important;
   left: 12px!important;
@@ -62,7 +62,7 @@ span {
 p {
   font-size: large;
   font-weight: bold;
-  color: white;
+  /* color: white; */
 }
 
 .largeCardFont {
@@ -89,12 +89,12 @@ p {
 }
 
 :host ::ng-deep .min .mat-slider-thumb {
-  background-color: #33aaff;
+  background-color: #f1f1f1;
   transform: scale(0) !important;
 }
 
 :host ::ng-deep .min .mat-slider-thumb-label {
-  background-color: #48CFAD;
+  background-color: #f1f1f1;
   transform: rotate(45deg) !important;
   border-radius: 50% 50% 0 !important;
   width: 10px;
@@ -110,7 +110,7 @@ p {
 }
 
 :host ::ng-deep .min .mat-slider-track-fill {
-  background-color: #33aaff;
+  background-color: #D3D3D3;
 }
 
 :host ::ng-deep .min .mat-slider-wrapper {
@@ -127,12 +127,12 @@ p {
 }
 
 :host ::ng-deep .max .mat-slider-thumb {
-  background-color: #4A89DC;
+  background-color: #f1f1f1;
   transform: scale(0) !important;
 }
 
 :host ::ng-deep .max .mat-slider-thumb-label {
-  background-color: #4A89DC;
+  background-color: #f1f1f1;
   transform: rotate(45deg) !important;
   border-radius: 50% 50% 0 !important;
   width: 10px;
@@ -148,7 +148,7 @@ p {
 }
 
 :host ::ng-deep .max .mat-slider-track-fill {
-  background-color: #84cbff;
+  background-color: #D3D3D3;
 }
 
 :host ::ng-deep .max .mat-slider-wrapper {
@@ -165,12 +165,12 @@ p {
 }
 
 :host ::ng-deep .max1 .mat-slider-thumb {
-  background-color: #66bfff;
+  background-color: #f1f1f1;
   transform: scale(0) !important;
 }
 
 :host ::ng-deep .max1 .mat-slider-thumb-label {
-  background-color: #66bfff;
+  background-color: #f1f1f1;
   transform: rotate(45deg) !important;
   border-radius: 50% 50% 0 !important;
   width: 10px;
@@ -186,7 +186,7 @@ p {
 }
 
 :host ::ng-deep .max1 .mat-slider-track-fill {
-  background-color: #66bfff;
+  background-color: #D3D3D3;
 }
 
 :host ::ng-deep .max1 .mat-slider-wrapper {
@@ -399,8 +399,8 @@ p {
 
 :host ::ng-deep.mat-slider-thumb-label-text {
   margin-top: -12px;
-  background: #33aaff;
-  color: white;
+  background: #f1f1f1;
+  color: black;
   border-radius: 3.5px;
   margin-left: 12px;
   position: absolute;
@@ -410,8 +410,8 @@ p {
 
 :host ::ng-deep .max .mat-slider-thumb-label-text {
   margin-top: -12px;
-  background: #84cbff;
-  color: white;
+  background: #f1f1f1;
+  color: black;
   border-radius: 3.5px;
   margin-left: 12px;
   position: absolute;
@@ -421,8 +421,8 @@ p {
 
 :host ::ng-deep .max1 .mat-slider-thumb-label-text {
   margin-top: -12px;
-  background: #66bfff;
-  color: white;
+  background: #f1f1f1;
+  color: black;
   border-radius: 3.5px;
   margin-left: 12px;
   position: absolute;

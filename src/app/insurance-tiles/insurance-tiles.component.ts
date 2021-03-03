@@ -7,7 +7,7 @@ import * as CounterSelector from "../store/selectors/counterSelector";
 import { IKServices } from "../services/app.service";
 import * as $ from "jquery";
 // import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatSnackBar, MatSnackBarConfig,MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig, MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar';
 
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
@@ -97,7 +97,7 @@ export class InsuranceTilesComponent implements OnInit {
   claimsinLastyears = '0';
   plumingCondition = 'Average';
   roofCondition = 'Average';
-  burglerAlarm:boolean = false;
+  burglerAlarm: boolean = false;
 
   lifehiddenfields: boolean = true;
   homehiddenfields: boolean = true;
@@ -168,6 +168,7 @@ export class InsuranceTilesComponent implements OnInit {
 
   isStateDataSet = false;
   showMask: boolean = false;
+  showUploadPolicyPopup: boolean = true;
 
   getBorderColorBasedOnRiskLevel(risk) {
 
@@ -191,7 +192,7 @@ export class InsuranceTilesComponent implements OnInit {
 
   }
 
-  burgleralarm(event){
+  burgleralarm(event) {
     this.burglerAlarm = event.checked
   }
 
@@ -222,12 +223,12 @@ export class InsuranceTilesComponent implements OnInit {
   }
 
   isFlagSet = false;
-  closePopupEvent({type, event}) {
+  closePopupEvent({ type, event }) {
     this.isFlagSet = false;
     // setTimeout(()=>{
     //$("#mask").hide()
     // },100)
-    
+
     this.showMask = true;
     let subscribed = this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
       if (this.isFlagSet == false) {
@@ -244,8 +245,11 @@ export class InsuranceTilesComponent implements OnInit {
 
   isDataAvailable = false;
 
+  tempFlag4 = false;
+
   ngOnInit(): void {
 
+    //this.tempFlag4 = false;
     // setTimeout(()=>{
     this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => {
 
@@ -268,11 +272,22 @@ export class InsuranceTilesComponent implements OnInit {
     this.lifedivId = $(document.getElementById('lifeInsurance'));
     this.autodivId = $(document.getElementById('autoInsurance'));
 
+    
     this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
 
       // this.stateData = data
       if (data != undefined && data != {}) {
+        
+        if (data.hasStateChanged == "true") {
+          this.tempFlag4 = false
+          $(document.getElementsByClassName("homeIndBtnCls")).removeClass("changeBgColor");
+          // $(document.getElementsByClassName("lifeIndBtnCls")).removeClass("changeBgColor");
+          $(document.getElementsByClassName("autoIndBtnCls")).removeClass("changeBgColor");
+          this.homehiddenfields = true;
+          this.autohiddenfields = true;
+        }
 
+        if(this.tempFlag4 == false){
         let index = data.cards.findIndex(obj => obj.key == 'home')
         let dwelling_default = data.default_home_dwelling
         this.sliderVariableValues.dwelling_min = dwelling_default,
@@ -298,22 +313,22 @@ export class InsuranceTilesComponent implements OnInit {
         this.sliderVariableValues.medical_min = 2000
         this.sliderVariableValues.medical = 2000
         this.sliderVariableValues.medical_max = 7000
-
-        if(data.hasStateChanged == "true"){
-console.log("hasStateChanged:" + data.hasStateChanged);
-
-this.SliderData.dwelling = this.sliderVariableValues.dwelling_min
-this.SliderData.otherStructure = this.sliderVariableValues.otherStructure_min
-this.SliderData.personalProperty = this.sliderVariableValues.personalProperty_min
-this.SliderData.lossOfUse = this.sliderVariableValues.lossOfUse_min
-this.SliderData.personalLiability = this.sliderVariableValues.personalLiability_min
-this.SliderData.medical = this.sliderVariableValues.medical_min
-}
-
+      //  this.tempFlag4 = true; 
         //console.log("Calculated data is : " + JSON.stringify(this.sliderVariableValues));
       }
-    });
 
+      if (data.hasStateChanged == "true") {
+        console.log("hasStateChanged:" + data.hasStateChanged);
+
+        this.SliderData.dwelling = this.sliderVariableValues.dwelling_min
+        this.SliderData.otherStructure = this.sliderVariableValues.otherStructure_min
+        this.SliderData.personalProperty = this.sliderVariableValues.personalProperty_min
+        this.SliderData.lossOfUse = this.sliderVariableValues.lossOfUse_min
+        this.SliderData.personalLiability = this.sliderVariableValues.personalLiability_min
+        this.SliderData.medical = this.sliderVariableValues.medical_min
+      }
+    }
+    });
   }
 
   getChangeFormattedText(percentage, value) {
@@ -431,13 +446,13 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
     $(document.getElementsByClassName("boatIns")).addClass("col-md-4 fifth");
     $(document.getElementsByClassName("rentIns")).addClass("col-md-4 sixth");
 
-    if(event.change != undefined && event.change != 0)
-  this.snackBar.openFromComponent(customSnackBar, {
+    if (event.change != undefined && event.change != 0)
+      this.snackBar.openFromComponent(customSnackBar, {
         duration: 5000,
-        verticalPosition:'top',
-        horizontalPosition:'center',
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
         panelClass: ['snackbarStyle']
-  });
+      });
   }
 
   onInputChange({ event, id, type }) {
@@ -529,26 +544,26 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
   }
 
   isTotalPremiumCalculated = false;
-  calculateTotalPremium(cardIndex, premium) {
- 
-    this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
-      let totalPrem = 0;
+  // calculateTotalPremium(cardIndex, premium) {
 
-      if (this.isTotalPremiumCalculated == false) {
-        this.isTotalPremiumCalculated = true;
-        for (let i = 0; i < data.cards.length; i++) {
-          if (data.cards[i].isEnabled == true)
-            totalPrem = totalPrem + data.cards[i].premium
-        }
+  //   this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+  //     let totalPrem = 0;
 
-        let prevStateData = JSON.parse(JSON.stringify(data))
-        prevStateData.totalPremium = totalPrem;
-        prevStateData = this.reCalculatePercentages(prevStateData)
-        this.store.dispatch(actions.updateUserDataAct({ data: prevStateData }));
-      }
+  //     if (this.isTotalPremiumCalculated == false) {
+  //       this.isTotalPremiumCalculated = true;
+  //       for (let i = 0; i < data.cards.length; i++) {
+  //         if (data.cards[i].isEnabled == true)
+  //           totalPrem = totalPrem + data.cards[i].premium
+  //       }
 
-    });
-  }
+  //       let prevStateData = JSON.parse(JSON.stringify(data))
+  //       prevStateData.totalPremium = totalPrem;
+  //       prevStateData = this.reCalculatePercentages(prevStateData)
+  //       this.store.dispatch(actions.updateUserDataAct({ data: prevStateData }));
+  //     }
+
+  //   });
+  // }
 
   reCalculatePercentages(prevStateData) {
 
@@ -596,17 +611,17 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
                 'premium': data.default_home_premium,
                 'stateName': data.cards[index].state_name,
                 'insuranceData': this.SliderData,
-                'policyData' : undefined         
+                'policyData': undefined
               }
             }
 
             if (this.homehiddenfields == false) {
-              payloadJSON.data.policyData = 
-               {
-              roofCondition : this.roofCondition,
-              plumingCondition : this.plumingCondition,
-              burglerAlarm : this.burglerAlarm
-            }
+              payloadJSON.data.policyData =
+              {
+                roofCondition: this.roofCondition,
+                plumingCondition: this.plumingCondition,
+                burglerAlarm: this.burglerAlarm
+              }
             }
             this.updateTotalPremiumInStore(payloadJSON, 'home', data, dwelling_default)
           }
@@ -682,7 +697,7 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
                 'premium': data.cards[index].oldPremium,
                 'stateName': data.cards[homeIndex].state_name,
                 'insuranceData': this.SliderData,
-                'nosOfAutos': data.cards[index].nosOfAutos
+                'nosOfAutos': parseInt(data.cards[index].nosOfAutos + "")
               }
             }
 
@@ -700,7 +715,7 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
 
 
   reCalculateTotalPremium(stateJson) {
-    
+
     let totalPrem = 0;
 
 
@@ -720,47 +735,57 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
 
     this.callFlag = false;
     let index = prevState.cards.findIndex(obj => obj.key == insuranceType)
-    this.ikservice.postInsuranceData(payloadJSON).subscribe((res) => {
-      if (this.callFlag == false) {
-        
-        this.callFlag = true;
-        let newState = JSON.parse(JSON.stringify(prevState))
-        if (insuranceType == 'life') {
-          newState.cards[index].premium = res.data.newPremium.term_insurance //+ res.data.newPremium.term_insurance
-          newState.cards[index].coverage = res.data.newPremium.term_benefit
-        } else {
-          newState.cards[index].premium = res.data.newPremium
-          newState.cards[index].coverage = newCoverage
+    try {
+      this.ikservice.postInsuranceData(payloadJSON).subscribe((res) => {
+        try {
+          if (this.callFlag == false) {
+
+            this.callFlag = true;
+            let newState = JSON.parse(JSON.stringify(prevState))
+            if (insuranceType == 'life') {
+              newState.cards[index].premium = res.data.newPremium.term_insurance //+ res.data.newPremium.term_insurance
+              newState.cards[index].coverage = res.data.newPremium.term_benefit
+            } else {
+              newState.cards[index].premium = res.data.newPremium
+              newState.cards[index].coverage = newCoverage
+            }
+
+            newState.hasStateChanged = "false";
+            newState.cards[index].insight = res.data.insight
+            newState.cards[index].risk = res.data.risk.toLowerCase()
+            if (res.data.risk.length > 1) {
+              newState.cards[index].showRiskModel = false
+              this.showMask = false;
+            }
+            //newState.cards[index].oldPremium = prevState.cards[index].premium
+            //newState.cards[index].oldCoverage = prevState.cards[index].coverage
+
+
+            //newState.cards[index].oldNewPremChangeInPercent = parseInt((((newState.cards[index].premium - newState.cards[index].oldPremium) / newState.cards[index].oldPremium) * 100).toString())
+            newState.cards[index].oldNewPremChangeInPercent = (((newState.cards[index].premium - newState.cards[index].oldPremium) / newState.cards[index].oldPremium) * 100).toFixed(1)
+
+            newState.cards[index].oldNewPremChangeInValue = newState.cards[index].premium - newState.cards[index].oldPremium;
+
+
+            this.isAPICallComplete = false;
+            newState = this.reCalculateTotalPremium(newState)
+            //  newState.oldNewTotalPremChangeInPercent = parseInt((((newState.totalPremium - newState.oldTotalPremium) / newState.oldTotalPremium) * 100).toString())
+            newState.oldNewTotalPremChangeInPercent = (((newState.totalPremium - newState.oldTotalPremium) / newState.oldTotalPremium) * 100).toFixed(1)
+            newState.oldNewTotalPremChangeInValue = newState.totalPremium - newState.oldTotalPremium;
+            newState = this.reCalculatePercentages(newState)
+            this.store.dispatch(actions.updateUserDataAct({ data: newState }));
+
+          }
+
+        } catch (err) {
+          throw err;
         }
-
-        newState.hasStateChanged = "false";
-        newState.cards[index].insight = res.data.insight
-        newState.cards[index].risk = res.data.risk.toLowerCase()
-        if (res.data.risk.length > 1){
-          newState.cards[index].showRiskModel = false
-          this.showMask = false;
-        }
-        //newState.cards[index].oldPremium = prevState.cards[index].premium
-        //newState.cards[index].oldCoverage = prevState.cards[index].coverage
+      });
 
 
-        //newState.cards[index].oldNewPremChangeInPercent = parseInt((((newState.cards[index].premium - newState.cards[index].oldPremium) / newState.cards[index].oldPremium) * 100).toString())
-        newState.cards[index].oldNewPremChangeInPercent = (((newState.cards[index].premium - newState.cards[index].oldPremium) / newState.cards[index].oldPremium) * 100).toFixed(1)
-
-        newState.cards[index].oldNewPremChangeInValue = newState.cards[index].premium - newState.cards[index].oldPremium;
-
-  
-        this.isAPICallComplete = false;
-        newState = this.reCalculateTotalPremium(newState)
-        //  newState.oldNewTotalPremChangeInPercent = parseInt((((newState.totalPremium - newState.oldTotalPremium) / newState.oldTotalPremium) * 100).toString())
-        newState.oldNewTotalPremChangeInPercent = (((newState.totalPremium - newState.oldTotalPremium) / newState.oldTotalPremium) * 100).toFixed(1)
-        newState.oldNewTotalPremChangeInValue = newState.totalPremium - newState.oldTotalPremium;
-        newState = this.reCalculatePercentages(newState)
-        this.store.dispatch(actions.updateUserDataAct({ data: newState }));
-
-      }
-    });
-
+    } catch (err) {
+      throw err;
+    }
 
   }
 
@@ -870,36 +895,75 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
     // let loggedInUser = "Allen Baker";
     // console.log('loggedIn User is:' + loggedInUser);
     this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
-        let prevState = JSON.parse(JSON.stringify(data));
-        prevState.loggedInUser = "Allen Baker";
-        if(this.isPolicyCalled == false){
-          this.isPolicyCalled =true;
-          this.store.dispatch(actions.updateUserDataAct({ data: prevState }));     
-        }
+      let prevState = JSON.parse(JSON.stringify(data));
+      prevState.loggedInUser = "Allen Baker";
+      if (this.isPolicyCalled == false) {
+        this.isPolicyCalled = true;
+        this.store.dispatch(actions.updateUserDataAct({ data: prevState }));
+      }
     })
 
     if (event.id == "homeInsuranceId") {
       this.homehiddenfields = false;
       $(document.getElementsByClassName("homecardhiddenfields")).addClass("fade-in");
       $(document.getElementsByClassName("homeIndBtnCls")).addClass("changeBgColor");
+
+      $("#mask").fadeTo(100, 0.1);
+      this.showUploadPolicyPopup = false;
+      this.showMask = false;
+
+
+
     }
-    if (event.id == "lifeInsuranceId"){
+    if (event.id == "lifeInsuranceId") {
       this.lifehiddenfields = false;
       $(document.getElementsByClassName("lifecardhiddenfields")).addClass("fade-in");
       $(document.getElementsByClassName("lifeIndBtnCls")).addClass("changeBgColor");
+      this.snackBar.open('Policy has been uploaded successfully. Please verify extracted details below.', 'Dismiss', {
+        duration: 5000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        panelClass: ['snackbarStyle']
+      });
     }
-    if (event.id == "carInsuranceId"){
+    if (event.id == "carInsuranceId") {
       this.autohiddenfields = false;
       $(document.getElementsByClassName("autocardhiddenfields")).addClass("fade-in");
       $(document.getElementsByClassName("carIndBtnCls")).addClass("changeBgColor");
+      this.snackBar.open('Policy has been uploaded successfully. Please verify extracted details below.', 'Dismiss', {
+        duration: 5000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        panelClass: ['snackbarStyle']
+      });
     }
+  }
 
-    this.snackBar.open('Policy has been uploaded successfully. Please verify extracted details below.', 'Dismiss', {
-      duration: 5000,
-      verticalPosition:'top',
-      horizontalPosition:'center',
-      panelClass: ['snackbarStyle']
-  });
+  handlePopupAcceptBtn() {
+    this.showUploadPolicyPopup = true;
+    this.showMask = true;
+
+    this.sliderVariableValues.dwelling = 200000;
+    this.sliderVariableValues.otherStructure = 20000;
+    this.sliderVariableValues.personalProperty = 150000;
+    this.sliderVariableValues.lossOfUse = 60000;
+    this.sliderVariableValues.personalLiability = 300000;
+    this.sliderVariableValues.medical = 5000;
+
+
+    this.SliderData["dwelling"] = 200000;
+    this.SliderData["otherStructure"] = 20000;
+    this.SliderData["personalProperty"] = 150000;
+    this.SliderData["lossOfUse"] = 60000;
+    this.SliderData["personalLiability"] = 300000;
+    this.SliderData["medical"] = 5000;
+
+
+    this.burglerAlarm = true;
+    this.tempFlag4 = true;
+
+
+
   }
 }
 
@@ -910,7 +974,7 @@ this.SliderData.medical = this.sliderVariableValues.medical_min
   styles: [],
 })
 export class customSnackBar {
-  constructor( 
+  constructor(
     public snackBarRef: MatSnackBarRef<customSnackBar>,
     @Inject(MAT_SNACK_BAR_DATA) public data: any) { }
 }

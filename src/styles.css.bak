@@ -1,10 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; background-color: #ccfffd; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+  background-color: #E6E9ED;
+}
 
+body {
+  margin: 0;
+}
 
 @font-face {
+  font-family: poppins;
+  src: url(assets/Poppins/Poppins-Regular.ttf);
+}
+
+/* @font-face {
     font-family: poppins;
     src: url(assets/Poppins/Poppins-Regular.ttf);
-  }
+  } */
+
+.mat-slider-thumb {
+  transform: scale(0) !important;
+}
+
+.mat-slider-thumb-label-text {
+  opacity: 1 !important;
+  /* margin-bottom: -25px; */
+  background-color: white;
+  color: blue;
+}
+
+.mat-slider-min-value:not(.mat-slider-thumb-label-showing) .mat-slider-thumb {
+  background-color: white;
+}
+
+.mat-accent .mat-slider-thumb {
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  border: solid 2px gray;
+  bottom: -20px;
+  right: -20px;
+}
+
+.snackbarStyle {
+  background-color: #bababa!important;
+  color: white!important;
+  font-family: 'poppins'!important;
+  margin-top: 50% !important;
+}
+
+span.mat-button-wrapper {
+  color: black!important;
+}
+
+.mat-simple-snackbar span {
+  font-family: 'poppins';
+  font-size: 1.19vw;
+  letter-spacing: 0.18px;
+}

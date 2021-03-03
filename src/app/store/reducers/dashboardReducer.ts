@@ -71,7 +71,8 @@ export const userDataInitialState: UserData = {
                 defaultPremium:1411,
                 risk:undefined,
                 insight:undefined,
-                showRiskModel:true
+                showRiskModel:true,
+                nosOfAutos : 1
                 
             },
             {

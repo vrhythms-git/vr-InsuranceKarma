@@ -7,15 +7,16 @@
             <p class="topP">Age</p>
           </div>
           <div class="cardBottomContentStyle">
-            <button class="btnStyle" (click)="agedecrement($event)">
+            <h2 class="" (click)="agedecrement($event)">
               <span class="btnTextStyle" style="font-weight: 500!important;">-</span>
               <!-- <mat-icon> remove</mat-icon> -->
-            </button>
+            </h2>
             <h2 class="selectionStytle" id="">{{age[counter].name}}</h2>
-            <button class="btnStyle" (click)="ageincrement($event)">
+            <h2 class="" (click)="ageincrement($event)">
               <!-- <mat-icon >addition</mat-icon> -->
               <span class="btnTextStyle">+</span>
-            </button>
+          
+            </h2>
           </div>
         </div>
       </mat-card>
@@ -29,7 +30,7 @@
         </div>
         <!-- <input type="text"  class="zip" id="zipCodeInputField" (keypress)="keyPress($event)" > -->
         <input type="text" maxlength="5" value="63005" class="zip" id="zipCodeInputField" (change)="change($event)"
-          (keydown)="change($event)" (keypress)="keyPress($event)">
+          (keydown)="change($event)" (keypress)="keyPress($event)" style="background: none;">
       </mat-card>
 
     </div>
@@ -115,3 +116,6 @@
     </div>
   </div>
 </div>
+<span class="d-flex container mt-1" style="padding: 0%;margin-top: 0%!important;">     
+  <mat-divider  class="container" style="margin-left: 37px!important;margin-right: 16px!important;position: relative; background-color: #0d5eb2; margin-top:0%;height:5px;"></mat-divider>
+  </span>
