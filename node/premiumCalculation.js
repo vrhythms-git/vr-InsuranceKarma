@@ -387,8 +387,10 @@ function calculateAutoPremium(userData, parametersJSON) {
     console.log('Total auto premium: ' + auto_premium)
 
     //Change for No of autos..
-    
 
+    console.log("Total calculated premium is " + auto_premium + " multiplying it to number of autos now currunt premium is : " +  (auto_premium * noOfAutos));
+    
+    auto_premium = auto_premium * noOfAutos;
     return auto_premium.toFixed(0)
 }
 
