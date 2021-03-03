@@ -29,7 +29,7 @@ async function getInsuraceMasterData() {
           response.states = result;
           db.close();
         });
-        let sortQuery = {"Premium" : 1}
+        let sortQuery = { "Premium": 1 }
         dbo.collection("ik_life_ins_master_data").find(query).sort(sortQuery).toArray(function (err, result) {
           if (err) {
             resolve(queryExecuionFailedErrorJSON);
@@ -84,19 +84,22 @@ async function calculatePremium(inputJson) {
 
 
               //Scenario 1 & 2
-              if (personalProperty > dwelling) {
-                resJson.insight = "Personal Property is much higher than actual dwelling cost. Low chances of claim settlement";
-                resJson.risk = "High"
-              }else if (personalLiability < (dwelling/2)){
-                resJson.insight = "Suggest liability to be changed to $300k";
-                resJson.risk = "Medium"
-              }else if (inputJson.data.stateName == 'North Carolina' && (dwelling == inputJson.data.insuranceData.dwelling_min) && inputJson.data.policyData["floodInsurance"] != true ){
-                resJson.insight = "Floods can occur at any time of the year and just about anywhere in North Carolina. They may be caused by large amounts of rain, hurricanes or dam failures. Eastern North Carolina had a very bad, record-setting 500-year flood caused by Hurricane Floyd in 1999. Suggest to add Flood Insurance @ $370 additional premium";
-                resJson.risk = "High"
-              }else if (inputJson.data.stateName == 'North Carolina' && (dwelling == inputJson.data.insuranceData.dwelling_min) && inputJson.data.policyData["floodInsurance"] == true ){
-                resJson.newPremium =  resJson.newPremium + 370;
+              try {
+                if (personalProperty > dwelling) {
+                  resJson.insight = "Personal Property is much higher than actual dwelling cost. Low chances of claim settlement";
+                  resJson.risk = "High"
+                } else if (personalLiability < (dwelling / 2)) {
+                  resJson.insight = "Suggest liability to be changed to $300k";
+                  resJson.risk = "Medium"
+                } else if (inputJson.data.stateName == 'North Carolina' && (dwelling == inputJson.data.insuranceData.dwelling_min) && inputJson.data.policyData.floodInsurance != true) {
+                  resJson.insight = "Floods can occur at any time of the year and just about anywhere in North Carolina. They may be caused by large amounts of rain, hurricanes or dam failures. Eastern North Carolina had a very bad, record-setting 500-year flood caused by Hurricane Floyd in 1999. Suggest to add Flood Insurance @ $370 additional premium";
+                  resJson.risk = "High"
+                } else if (inputJson.data.stateName == 'North Carolina' && (dwelling == inputJson.data.insuranceData.dwelling_min) && inputJson.data.policyData.floodInsurance == true) {
+                  resJson.newPremium = resJson.newPremium + 370;
+                }
+              } catch (error) {
+                console.error('Error occure while handling Home insurance scenario...');
               }
-
               console.log("Response data: " + JSON.stringify(resJson));
 
 
@@ -130,12 +133,12 @@ async function calculatePremium(inputJson) {
               let deathBenefit = ifNull(inputJson.data.insuranceData.deathBenefit, inputJson.data.insuranceData.deathBenefit_min);
               let currentDebit = ifNull(inputJson.data.insuranceData.currentDebit, inputJson.data.insuranceData.currentDebit_min);
               let replacementIncome = ifNull(inputJson.data.insuranceData.replacementIncome, inputJson.data.insuranceData.replacementIncome_min);
-              
+
               //Scenario 1 & 2
               if (deathBenefit < currentDebit) {
                 resJson.insight = "Suggest to take increase whole life benefit to $300k and term plan for $750k for 10 years";
                 resJson.risk = "High"
-              }else if (replacementIncome == 10 ){
+              } else if (replacementIncome == 10) {
                 resJson.insight = "Take a Whole Life Insurance along with Annuities Rider for adequate coverage";
                 resJson.risk = "Low"
               }
@@ -152,7 +155,7 @@ async function calculatePremium(inputJson) {
           break;
         }
 
-        case 'auto':{
+        case 'auto': {
 
           MongoClient.connect(url, function (err, db) {
             if (err) reject(queryExecuionFailedErrorJSON);
@@ -173,11 +176,11 @@ async function calculatePremium(inputJson) {
               let bodilyInjuryLability = ifNull(inputJson.data.insuranceData.bodilyInjuryLability, inputJson.data.insuranceData.bodilyInjuryLability_min);
               let uninsuredOrUnderinsuredMotorist = ifNull(inputJson.data.insuranceData.uninsuredOrUnderinsuredMotorist, inputJson.data.insuranceData.uninsuredOrUnderinsuredMotorist_min);
 
-              if (inputJson.data.stateName == 'Ohio' && bodilyInjuryLability <= 50000 && uninsuredOrUnderinsuredMotorist < 100000 ){
-              resJson.insight = "Considering the annual mileage, suggest to add Uninsured / Underinsured motorist Bodily Injury of $100,000 / person and $300,000 per accident";
-              resJson.risk = "Medium"
-            }
-            console.log("Response data: " + JSON.stringify(resJson));
+              if (inputJson.data.stateName == 'Ohio' && bodilyInjuryLability <= 50000 && uninsuredOrUnderinsuredMotorist < 100000) {
+                resJson.insight = "Considering the annual mileage, suggest to add Uninsured / Underinsured motorist Bodily Injury of $100,000 / person and $300,000 per accident";
+                resJson.risk = "Medium"
+              }
+              console.log("Response data: " + JSON.stringify(resJson));
 
               resolve({
                 status: "success",
@@ -188,7 +191,7 @@ async function calculatePremium(inputJson) {
             });
           });
 
-        } 
+        }
       }
 
     } catch (error) {
@@ -196,10 +199,10 @@ async function calculatePremium(inputJson) {
     }
   });
 
-  function ifNull(value1, value2){
+  function ifNull(value1, value2) {
     if (value1 == undefined || value1 == null)
       return value2;
-    
+
     return value1;
   }
 
