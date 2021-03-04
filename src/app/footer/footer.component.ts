@@ -28,7 +28,8 @@ export class FooterComponent implements OnInit {
 
   totalPremPercentChangeFormatter(percentage){
     if(percentage == 0){
-      return '--no change'
+     // return '--no change'
+     return "";
      
     }else {
      return percentage + '%';
@@ -41,6 +42,16 @@ export class FooterComponent implements OnInit {
     }else{
       let formattedAmount = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
       return `$${formattedAmount}`
+    }
+  }
+
+  showArrowBasedOnChange(value){
+    if(value == 0){
+      return ''
+    }else if(value < 0){
+      return 'arrow_downward'
+    }else if(value > 0){
+      return 'arrow_upward'
     }
   }
 

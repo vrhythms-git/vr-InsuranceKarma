@@ -21,6 +21,14 @@ export class HeaderComponent implements OnInit {
     
   }
 
+  showUserProfilePic(loggedInUser){
+    if(loggedInUser == 'Create Account')
+      return true;
+    else
+      return false;
+    
+  }
+
   ngOnInit(): void {  
     this.store.pipe(select(CounterSelector.selectUserData)).subscribe(storeData => {
       if (storeData != undefined || storeData != {}) {

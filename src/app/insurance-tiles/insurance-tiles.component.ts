@@ -339,7 +339,8 @@ export class InsuranceTilesComponent implements OnInit {
   getChangeFormattedText(percentage, value) {
 
     if (percentage == 0)
-      return "--no change";
+      return "";
+      // return "--no change";
     else return `$${value}  (${percentage}%)`
   }
 
@@ -902,7 +903,7 @@ export class InsuranceTilesComponent implements OnInit {
     // console.log('loggedIn User is:' + loggedInUser);
     this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
       let prevState = JSON.parse(JSON.stringify(data));
-      prevState.loggedInUser = "Allen Baker";
+      prevState.loggedInUser = "Jack Smith";
       if (this.isPolicyCalled == false) {
         this.isPolicyCalled = true;
         this.store.dispatch(actions.updateUserDataAct({ data: prevState }));

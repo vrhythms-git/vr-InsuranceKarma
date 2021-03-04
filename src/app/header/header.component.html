@@ -15,11 +15,13 @@
 
             <div class="d-flex flex-row col-md-4" style="justify-content: space-evenly;">
                 <!-- <mat-icon style="font-size: 150%">account_circle</mat-icon> -->
-                <div style="position: relative;
+                <div *ngIf="isDataAvailable" [hidden]="showUserProfilePic(stateData$?.loggedInUser)" style="position: relative;
                     text-align: center;">
                     <!-- <img src="../../assets/user_account.png" class="avatar align-center" style="height: auto; width: auto;"> -->
                     <div class="dot"></div>
-                    <div class="centered" style="color:white;font-size: 16px"><b>AB</b></div>
+                    <div class="centered" style="color:white;font-size: 16px">
+                        <b>JS</b>
+                    </div>
                 </div>
                 <!-- <div> -->
                 <span class="align-center ml-2" style="color:white; font-size: 14px;font-weight: 300" *ngIf="isDataAvailable">{{stateData$?.loggedInUser}} </span>
