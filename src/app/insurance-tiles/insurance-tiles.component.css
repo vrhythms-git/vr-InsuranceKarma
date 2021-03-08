@@ -286,7 +286,7 @@ p {
   background: #69913E!important;
 } */
 
-.changeBgColor{
+.changeBgColor {
   background-color: #69913E!important;
 }
 
@@ -314,9 +314,11 @@ p {
   background-color: white;
   height: 2px;
 }
-.mat-form-field{
+
+.mat-form-field {
   width: 75%;
 }
+
 .maticonstyle {
   margin-left: -36px;
   z-index: 1;
@@ -383,7 +385,6 @@ p {
   }
 }
 
-
 @media only screen and (min-width:2048px) {
   .biglifeCardstyle {
     padding-left: 23.5%;
@@ -394,8 +395,6 @@ p {
     padding-right: 23%;
   }
 }
-
-
 
 :host ::ng-deep.mat-slider-thumb-label-text {
   margin-top: -12px;
@@ -529,20 +528,16 @@ p {
   }
 }
 
-
-
-
-
-.homecardhiddenfields{
-  padding-bottom:6%;
+.homecardhiddenfields {
+  padding-bottom: 6%;
 }
-.nochange
-{
+
+.nochange {
   margin-top: 8px;
   padding-bottom: 7%;
 }
 
-.btnuploadpolicy{
+.btnuploadpolicy {
   margin-top: 1%;
   margin-bottom: 2%;
   position: absolute;
@@ -550,12 +545,12 @@ p {
   right: 10%;
 }
 
-.btnuploadpolicydiv{
+.btnuploadpolicydiv {
   padding-bottom: 1%;
-  padding-top:17%;
+  padding-top: 17%;
 }
 
-.btncalculatepremium{
+.btncalculatepremium {
   position: absolute;
   bottom: 2%;
   right: 1%;
@@ -563,24 +558,44 @@ p {
 }
 
 @media only screen and (max-width:1024px) {
-
-.btnuploadpolicy{
-  margin-top: 1%;
-  margin-bottom: 2%;
-  position: absolute;
-  bottom: 1%;
-  right: 10%;
-  width: 83%;
-  font-size: 12px;
+  .btnuploadpolicy {
+    margin-top: 1%;
+    margin-bottom: 2%;
+    position: absolute;
+    bottom: 1%;
+    right: 10%;
+    width: 83%;
+    font-size: 12px;
+  }
+  .btncalculatepremium {
+    position: absolute;
+    bottom: 3%;
+    right: 1%;
+    width: 30%;
+    font-size: 12px;
+    background-color: #0e5eb2!important;
+  }
 }
 
-.btncalculatepremium{
-position: absolute;
-bottom: 3%;
-right: 1%;
-width: 30%;
-font-size: 12px;
-background-color: #0e5eb2!important;
+.optimizaPolicyBtn:focus {
+  background-color: #ff6503!important;
+  border-color: #ff6503!important;
 }
 
+.uploadPolicyInp {
+  width: 70%!important;
+  outline: 0!important;
+  background-color: transparent;
+  border-width: 0 0 2px!important;
+  border-color: #0e5eb2!important;
+}
+.uploadPolicyInp:focus {
+  width: 70%!important;
+  outline: 0!important;
+  border-width: 0 0 2px!important;
+  border-color: #ff6503!important;
+}
+
+td{
+  padding-bottom: 5px;
 }

@@ -86,6 +86,7 @@ export class InsuranceTilesComponent implements OnInit {
   @ViewChild("home") home: ElementRef;
 
   isAPICallComplete: boolean = false;
+  showLoadingAnimation: boolean = false;
 
   // formatter = new Intl.NumberFormat('en-US', {
   //   style: 'currency',
@@ -340,7 +341,7 @@ export class InsuranceTilesComponent implements OnInit {
 
     if (percentage == 0)
       return "";
-      // return "--no change";
+    // return "--no change";
     else return `$${value}  (${percentage}%)`
   }
 
@@ -968,18 +969,48 @@ export class InsuranceTilesComponent implements OnInit {
 
     this.burglerAlarm = true;
     this.tempFlag4 = true;
-
-
-
   }
 
 
-  // getAutoPremium(premium, noOfCars) {
-  //   let cars = parseInt(noOfCars + "")
-  //   let newPremium = (premium * ((cars - 1) * 0.1))
-  //   return ((premium * cars)- newPremium).toFixed(0)
-  // }
+  handleOptimizeClick(insuranceType) {
+    switch (insuranceType) {
+      case 'home': {
+        $("#mask").fadeTo(100, 0.1);
+        this.showLoadingAnimation = true;
 
+        this.sliderVariableValues.dwelling = 220000;
+        this.sliderVariableValues.otherStructure = 25000;
+        this.sliderVariableValues.personalProperty = 150000;
+        this.sliderVariableValues.lossOfUse = 40000;
+        this.sliderVariableValues.personalLiability = 300000;
+        this.sliderVariableValues.medical = 3000;
+
+        this.SliderData["dwelling"] = 220000;
+        this.SliderData["otherStructure"] = 20000;
+        this.SliderData["personalProperty"] = 150000;
+        this.SliderData["lossOfUse"] = 40000;
+        this.SliderData["personalLiability"] = 300000;
+        this.SliderData["medical"] = 3000;
+       this.calculatePremium({insuranceType:'home'})
+
+        setTimeout(() => {
+          this.showLoadingAnimation = false;
+          this.showMask = true;
+
+          this.snackBar.openFromComponent(OptimizePolicyCustomSnackBar, {
+            duration: 5000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            panelClass: ['snackbarStyle']
+          });
+
+        }, 3500);
+        this.showMask = false;
+        break;
+      }
+    }
+
+  }
 }
 
 
@@ -989,6 +1020,19 @@ export class InsuranceTilesComponent implements OnInit {
   styles: [],
 })
 export class customSnackBar {
+  constructor(
+    public snackBarRef: MatSnackBarRef<customSnackBar>,
+    @Inject(MAT_SNACK_BAR_DATA) public data: any) { }
+}
+
+
+
+@Component({
+  selector: 'optimize-policy-custom-snackbar',
+  templateUrl: 'optimize-policy-custom-snackbar.component.html',
+  styles: [],
+})
+export class OptimizePolicyCustomSnackBar {
   constructor(
     public snackBarRef: MatSnackBarRef<customSnackBar>,
     @Inject(MAT_SNACK_BAR_DATA) public data: any) { }
