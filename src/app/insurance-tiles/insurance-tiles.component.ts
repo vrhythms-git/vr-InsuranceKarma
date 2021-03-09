@@ -157,7 +157,22 @@ export class InsuranceTilesComponent implements OnInit {
 
     uninsuredOrUnderinsuredMotorist_min: 0,
     uninsuredOrUnderinsuredMotorist: 0,
-    uninsuredOrUnderinsuredMotorist_max: 300000
+    uninsuredOrUnderinsuredMotorist_max: 300000,
+
+    yearlymiles: 10000
+  }
+
+
+  sliderLifeVariableValues = {
+
+    deathBenefit: 250000,
+    currentDebit: 180000,
+    childEducationFund: 50000,
+    funeralSpend: 2500,
+    retirementAge: 50,
+    annualIncome: 50000,
+    replacementIncome: 5
+
   }
 
   constructor(private store: Store<UserData>, private ikservice: IKServices, private snackBar: MatSnackBar) {
@@ -911,6 +926,17 @@ export class InsuranceTilesComponent implements OnInit {
       }
     })
 
+
+    if (event.id == "lifeInsuranceId") {
+      this.lifehiddenfields = false;
+      $(document.getElementsByClassName("lifecardhiddenfields")).addClass("fade-in");
+      $(document.getElementsByClassName("lifeIndBtnCls")).addClass("changeBgColor");
+
+      $("#mask").fadeTo(100, 0.1);
+      this.showUploadPolicyPopup = false;
+      this.showMask = false;
+    }
+
     if (event.id == "homeInsuranceId") {
       this.homehiddenfields = false;
       $(document.getElementsByClassName("homecardhiddenfields")).addClass("fade-in");
@@ -919,56 +945,66 @@ export class InsuranceTilesComponent implements OnInit {
       $("#mask").fadeTo(100, 0.1);
       this.showUploadPolicyPopup = false;
       this.showMask = false;
-
-
-
-    }
-    if (event.id == "lifeInsuranceId") {
-      this.lifehiddenfields = false;
-      $(document.getElementsByClassName("lifecardhiddenfields")).addClass("fade-in");
-      $(document.getElementsByClassName("lifeIndBtnCls")).addClass("changeBgColor");
-      this.snackBar.open('Policy has been uploaded successfully. Please verify extracted details below.', 'Dismiss', {
-        duration: 5000,
-        verticalPosition: 'top',
-        horizontalPosition: 'center',
-        panelClass: ['snackbarStyle']
-      });
     }
     if (event.id == "carInsuranceId") {
       this.autohiddenfields = false;
       $(document.getElementsByClassName("autocardhiddenfields")).addClass("fade-in");
       $(document.getElementsByClassName("carIndBtnCls")).addClass("changeBgColor");
-      this.snackBar.open('Policy has been uploaded successfully. Please verify extracted details below.', 'Dismiss', {
-        duration: 5000,
-        verticalPosition: 'top',
-        horizontalPosition: 'center',
-        panelClass: ['snackbarStyle']
-      });
+
+      $("#mask").fadeTo(100, 0.1);
+      this.showUploadPolicyPopup = false;
+      this.showMask = false;
     }
   }
 
-  handlePopupAcceptBtn() {
+  handlePopupAcceptBtn(insuranceType) {
     this.showUploadPolicyPopup = true;
     this.showMask = true;
+    switch (insuranceType) {
+      case 'home': {
 
-    this.sliderVariableValues.dwelling = 200000;
-    this.sliderVariableValues.otherStructure = 20000;
-    this.sliderVariableValues.personalProperty = 150000;
-    this.sliderVariableValues.lossOfUse = 60000;
-    this.sliderVariableValues.personalLiability = 300000;
-    this.sliderVariableValues.medical = 5000;
-
-
-    this.SliderData["dwelling"] = 200000;
-    this.SliderData["otherStructure"] = 20000;
-    this.SliderData["personalProperty"] = 150000;
-    this.SliderData["lossOfUse"] = 60000;
-    this.SliderData["personalLiability"] = 300000;
-    this.SliderData["medical"] = 5000;
+        this.sliderVariableValues.dwelling = 200000;
+        this.sliderVariableValues.otherStructure = 20000;
+        this.sliderVariableValues.personalProperty = 150000;
+        this.sliderVariableValues.lossOfUse = 60000;
+        this.sliderVariableValues.personalLiability = 300000;
+        this.sliderVariableValues.medical = 5000;
 
 
-    this.burglerAlarm = true;
-    this.tempFlag4 = true;
+        this.SliderData["dwelling"] = 200000;
+        this.SliderData["otherStructure"] = 20000;
+        this.SliderData["personalProperty"] = 150000;
+        this.SliderData["lossOfUse"] = 60000;
+        this.SliderData["personalLiability"] = 300000;
+        this.SliderData["medical"] = 5000;
+
+
+        this.burglerAlarm = true;
+        this.tempFlag4 = true;
+
+
+        break;
+      }
+      case 'auto': {
+
+        this.sliderAutoVariableValues.bodilyInjuryLability = 250000;
+        this.sliderAutoVariableValues.propertyDamageLiability = 100000;
+        this.sliderAutoVariableValues.comprehensiveAndCollision = 250;
+        this.sliderAutoVariableValues.personalInjuryProtection = 2000;
+        this.sliderAutoVariableValues.uninsuredOrUnderinsuredMotorist = 300000;
+        this.sliderAutoVariableValues.yearlymiles = 10000;
+
+        this.SliderData["bodilyInjuryLability"] = 250000;
+        this.SliderData["propertyDamageLiability"] = 100000;
+        this.SliderData["comprehensiveAndCollision"] = 250;
+        this.SliderData["personalInjuryProtection"] = 2000;
+        this.SliderData["uninsuredOrUnderinsuredMotorist"] = 300000;
+        this.SliderData["yearlymiles"] = 10000;
+
+        break;
+      }
+    }
+
   }
 
 
@@ -991,7 +1027,7 @@ export class InsuranceTilesComponent implements OnInit {
         this.SliderData["lossOfUse"] = 40000;
         this.SliderData["personalLiability"] = 300000;
         this.SliderData["medical"] = 3000;
-       this.calculatePremium({insuranceType:'home'})
+        this.calculatePremium({ insuranceType: 'home' })
 
         setTimeout(() => {
           this.showLoadingAnimation = false;
@@ -1008,6 +1044,79 @@ export class InsuranceTilesComponent implements OnInit {
         this.showMask = false;
         break;
       }
+      case 'auto': {
+        $("#mask").fadeTo(100, 0.1);
+        this.showLoadingAnimation = true;
+
+        this.sliderAutoVariableValues.bodilyInjuryLability = 250000;
+        this.sliderAutoVariableValues.propertyDamageLiability = 100000;
+        this.sliderAutoVariableValues.comprehensiveAndCollision = 1000;
+        this.sliderAutoVariableValues.personalInjuryProtection = 5000;
+        this.sliderAutoVariableValues.uninsuredOrUnderinsuredMotorist = 250000;
+        //this.sliderAutoVariableValues.yearlymiles = 10000;
+
+
+
+        this.SliderData["bodilyInjuryLability"] = 250000;
+        this.SliderData["propertyDamageLiability"] = 100000;
+        this.SliderData["comprehensiveAndCollision"] = 1000;
+        this.SliderData["personalInjuryProtection"] = 5000;
+        this.SliderData["uninsuredOrUnderinsuredMotorist"] = 250000;
+        //this.SliderData["yearlymiles"] = 10000;
+        this.calculatePremium({ insuranceType: 'auto' })
+
+        setTimeout(() => {
+          this.showLoadingAnimation = false;
+          this.showMask = true;
+
+          this.snackBar.openFromComponent(OptimizePolicyCustomSnackBar, {
+            duration: 5000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            panelClass: ['snackbarStyle']
+          });
+
+        }, 3500);
+        this.showMask = false;
+        break;
+      }
+      case 'life': {
+        $("#mask").fadeTo(100, 0.1);
+        this.showLoadingAnimation = true;
+
+        this.sliderLifeVariableValues.deathBenefit = 500000;
+        this.sliderLifeVariableValues.currentDebit = 180000;
+        this.sliderLifeVariableValues.childEducationFund = 100000;
+        this.sliderLifeVariableValues.funeralSpend = 2500;
+        //this.sliderLifeVariableValues.retirementAge = 50;
+        this.sliderLifeVariableValues.annualIncome = 100000;
+        this.sliderLifeVariableValues.replacementIncome = 5;
+
+        this.SliderData["deathBenefit"] = 500000;
+        this.SliderData["currentDebit"] = 180000;
+        this.SliderData["childEducationFund"] = 100000;
+        this.SliderData["funeralSpend"] = 2500;
+        //this.SliderData["retirementAge"] = 50;
+        this.SliderData["annualIncome"] = 100000;
+        this.SliderData["replacementIncome"] = 5;
+        this.calculatePremium({ insuranceType: 'life' })
+
+        setTimeout(() => {
+          this.showLoadingAnimation = false;
+          this.showMask = true;
+
+          this.snackBar.openFromComponent(OptimizePolicyCustomSnackBar, {
+            duration: 5000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            panelClass: ['snackbarStyle']
+          });
+
+        }, 3500);
+        this.showMask = false;
+        break;
+      }
+
     }
 
   }
