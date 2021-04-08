@@ -416,7 +416,7 @@
                         </table> -->
                         <table>
                             <tr style="line-height: normal;">
-                                <td>Dwelling </td>
+                                <td>Structural Cost </td>
                                 <td style="width: 50%;">   
                                     <tr>
                                         <td>$</td>
@@ -426,7 +426,7 @@
                                  </td>
                             </tr>
                             <tr style="line-height: normal;">
-                                <td>Other structures </td>
+                                <td>Additional Structures </td>
                                 <td style="width: 50%;">   
                                     <tr>
                                         <td>$</td>
@@ -436,7 +436,7 @@
                                  </td>
                             </tr>
                             <tr style="line-height: normal;">
-                                <td>Personal property </td>
+                                <td>Personal Property </td>
                                 <td style="width: 50%;">   
                                     <tr>
                                         <td>$</td>
@@ -446,7 +446,7 @@
                                  </td>
                             </tr>
                             <tr style="line-height: normal;">
-                                <td>Loss of use </td>
+                                <td>Loss of Use </td>
                                 <td style="width: 50%;">   
                                     <tr>
                                         <td>$</td>
@@ -456,7 +456,7 @@
                                  </td>
                             </tr>
                             <tr style="line-height: normal;">
-                                <td>Personal liability </td>
+                                <td>Personal Liability </td>
                                 <td style="width: 50%;">   
                                     <tr>
                                         <td>$</td>
@@ -466,7 +466,7 @@
                                  </td>
                             </tr>
                             <tr style="line-height: normal;">
-                                <td>Personal liability </td>
+                                <td>Self Paid Amount </td>
                                 <td style="width: 50%;">   
                                     <tr>
                                         <td>$</td>
@@ -491,13 +491,13 @@
                 </button>
             </div>
                 <div class="row">
-                    <span class="col-4 text-left">Dwelling </span>
+                    <span class="col-4 text-left">Structural Cost </span>
                     <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'Dwelling',type:'home'})" min="{{sliderVariableValues.dwelling_min}}"
                         max="{{sliderVariableValues.dwelling_max}}" value="{{sliderVariableValues.dwelling}}" step="{{(sliderVariableValues.personalLiability_max - sliderVariableValues.dwelling_min)/ 5 }}"
                         thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
-                    <span class="col-4 text-left">Other Structure </span>
+                    <span class="col-4 text-left" title="e.g. Garage, Dog house)">Additional Structures  </span>
                     <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'otherStructure',type:'home'})" min="{{sliderVariableValues.otherStructure_min}}"
                         max="{{sliderVariableValues.otherStructure_max}}" value="{{sliderVariableValues.otherStructure}}"
                         step="{{(sliderVariableValues.otherStructure_max - sliderVariableValues.otherStructure_min) / 5}}"
@@ -511,7 +511,7 @@
                         thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
-                    <span class="col-4 text-left">Loss of use </span>
+                    <span class="col-4 text-left">Loss of Use </span>
                     <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'LossOfUse',type:'home'})" min="{{sliderVariableValues.lossOfUse_min}}"
                         max="{{sliderVariableValues.lossOfUse_max}}" value={{sliderVariableValues.lossOfUse}} step="{{(sliderVariableValues.lossOfUse_max - sliderVariableValues.lossOfUse_min)/5}}"
                         thumbLabel tickInterval="1"></mat-slider>
@@ -524,7 +524,7 @@
                         thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
-                    <span class="col-4 text-left">Medical </span>
+                    <span class="col-4 text-left">Self Paid amount </span>
                     <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'Medical',type:'home'})" min="{{sliderVariableValues.medical_min}}"
                         max="{{sliderVariableValues.medical_max}}" step="{{(sliderVariableValues.medical_max - sliderVariableValues.medical_min)/5}}"
                         value="{{sliderVariableValues.medical}}" thumbLabel tickInterval="1"></mat-slider>
@@ -755,7 +755,7 @@
                  </tr>
 
                 <tr style="line-height: normal;">
-                      <td>Uninsured Motorist</td>
+                      <td>Uninsured Self Coverage</td>
                       <td>   
                         <tr>
                             <td>$</td>
@@ -787,27 +787,27 @@
 
 
                 <div class="row">
-                    <span class="col-4 text-left">Bodily Injury</span>
+                    <span class="col-4 text-left" title="Coverage for Injuries caused to others">Bodily Injury</span>
                     <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'BodilyInjuryLability',type:'auto'})" min="50000"
                         max="300000" value="50000" step="50000" thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
-                    <span class="col-4 text-left">Property Damage</span>
+                    <span class="col-4 text-left" title="Coverage for Injuries caused to other's property">Property Damage</span>
                     <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'PropertyDamageLiability',type:'auto'})" min="25000"
                         max="100000" value="25000" step="25000" value="{{sliderAutoVariableValues.propertyDamageLiability}}" thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
-                    <span class="col-4 text-left">Deductible </span>
+                    <span class="col-4 text-left" title="Car's coverage in the event of an accident">Deductible </span>
                     <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'ComprehensiveAndCollision',type:'auto'})" min="250"
                         max="1000" value="250" step="250" value="{{sliderAutoVariableValues.comprehensiveAndCollision}}" thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
-                    <span class="col-4 text-left">Personal Injury Protection </span>
+                    <span class="col-4 text-left" title="Medical bills, lost wages etc">Personal Injury Protection </span>
                     <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'PersonalInjuryProtection',type:'auto'})" min="2000"
                         max="7000" value="2000" step="1000" value="{{sliderAutoVariableValues.personalInjuryProtection}}" thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
-                    <span class="col-4 text-left">Uninsured Motorist </span>
+                    <span class="col-4 text-left" title="If hit by uninsured driver">Uninsured Self Coverage </span>
                     <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'Uninsured/UnderinsuredMotorist',type:'auto'})" min="0"
                         max="300000" value="0" step="60000" value="{{sliderAutoVariableValues.uninsuredOrUnderinsuredMotorist}}" thumbLabel tickInterval="1"></mat-slider>
                 </div>
