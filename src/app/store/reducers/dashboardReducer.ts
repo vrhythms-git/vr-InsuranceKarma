@@ -53,7 +53,8 @@ export const userDataInitialState: UserData = {
                 defaultPremium:1133,
                 risk:undefined,
                 insight:undefined,
-                showRiskModel:true
+                showRiskModel:true,
+                sqft_price: 125
             },
             {
                 key: 'auto',

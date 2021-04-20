@@ -490,6 +490,14 @@
                     <mat-icon>close</mat-icon>
                 </button>
             </div>
+                <div *ngIf="hideSqftField" class="row" style="margin-top: 1%;margin-bottom: 1%;">
+                    <div class="col-md-4 text-left">
+                        <span style="line-height: normal;">Area (sq.ft.)</span>
+                    </div>
+                    <div class="col-md-8 max" style="padding: 0px;margin-left: -12px;">
+                        <input id="areaInSquareFoot" value="1000" class="uploadPolicyInp" (keypress)="keyPress($event)" (change)="change($event)" placeholder="" value="">
+                    </div>
+                </div>
                 <div class="row">
                     <span class="col-4 text-left">Structural Cost </span>
                     <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'Dwelling',type:'home'})" min="{{sliderVariableValues.dwelling_min}}"

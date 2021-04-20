@@ -75,6 +75,8 @@ export class HeaderCardsComponent implements OnInit {
               prevState.cards[index].oldPremium = stateData[0].Premium
               prevState.cards[index].oldCoverage = stateData[0].dwelling_default
 
+              prevState.cards[index].sqft_price = stateData[0].sqft_price
+
               prevState.cards[index].oldNewPremChangeInPercent =  0;
               prevState.cards[index].oldNewPremChangeInValue = 0;
               prevState.cards[index].risk = "";

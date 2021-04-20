@@ -187,6 +187,50 @@ export class InsuranceTilesComponent implements OnInit {
   showMask: boolean = false;
   showUploadPolicyPopup: boolean = true;
 
+  
+  keyPress(event: any) {
+    this.isStateDataSet = false;
+    const pattern = /[0-9]/;
+
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 5 && !pattern.test(inputChar)) {
+      event.preventDefault();
+      if (event.keyCode == 13){
+        this.change(event);
+      }
+    } 
+  }
+  change(event:any){
+    this.isStateDataSet = false;
+    let currArea = parseInt(($('#areaInSquareFoot').val()))
+    // console.log('User input area sq ft is:' + currArea);
+    if(currArea >  0){
+    
+          this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+            if (this.isStateDataSet == false) {
+              this.isStateDataSet = true;
+              let index = data.cards.findIndex(obj => obj.key == 'home');
+              let calculatedDwelling = currArea * data.cards[index].sqft_price;
+              // console.log('Calculated dwelling is : ' + calculatedDwelling);
+              if( calculatedDwelling > this.sliderVariableValues.dwelling_max){
+                    this.sliderVariableValues.dwelling = this.sliderVariableValues.dwelling_max
+                    this.SliderData["dwelling"] = this.sliderVariableValues.dwelling_max;
+                  }
+              else if(calculatedDwelling < this.sliderVariableValues.dwelling_min){
+                    this.sliderVariableValues.dwelling = this.sliderVariableValues.dwelling_min
+                    this.SliderData["dwelling"] = this.sliderVariableValues.dwelling_min;
+                  }
+              else   { 
+                    this.sliderVariableValues.dwelling = calculatedDwelling;
+                    this.SliderData["dwelling"] = calculatedDwelling;
+                  }   
+            }
+          });
+        
+
+    }
+  }
+
   getBorderColorBasedOnRiskLevel(risk) {
 
     if (risk == "high")
@@ -911,6 +955,7 @@ export class InsuranceTilesComponent implements OnInit {
     $(document.getElementsByClassName("homeInsurance")).addClass("col-md-4");
   }
 
+  hideSqftField = true;
   isPolicyCalled = false;
   uploadPolicy(event) {
     this.isPolicyCalled = false;
@@ -939,6 +984,7 @@ export class InsuranceTilesComponent implements OnInit {
 
     if (event.id == "homeInsuranceId") {
       this.homehiddenfields = false;
+      this.hideSqftField = false;
       $(document.getElementsByClassName("homecardhiddenfields")).addClass("fade-in");
       $(document.getElementsByClassName("homeIndBtnCls")).addClass("changeBgColor");
 

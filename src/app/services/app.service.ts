@@ -14,8 +14,8 @@ export class IKServices {
 
     constructor(private http: HttpClient) { }
 
-    private _baseUrl = "https://insurancekarma.herokuapp.com";
-    //private _baseUrl = 'http://localhost:8081';
+    //private _baseUrl = "https://insurancekarma.herokuapp.com";
+    private _baseUrl = 'http://localhost:8081';
 
     getMasterData() {
         console.log(`getMasterData() called`)
