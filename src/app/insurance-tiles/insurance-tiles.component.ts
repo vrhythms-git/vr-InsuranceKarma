@@ -200,6 +200,7 @@ export class InsuranceTilesComponent implements OnInit {
       }
     } 
   }
+tempFlag5 = true; 
   change(event:any){
     this.isStateDataSet = false;
     let currArea = parseInt(($('#areaInSquareFoot').val()))
@@ -224,6 +225,11 @@ export class InsuranceTilesComponent implements OnInit {
                     this.sliderVariableValues.dwelling = calculatedDwelling;
                     this.SliderData["dwelling"] = calculatedDwelling;
                   }   
+                  this.tempFlag5 = false
+                  // let newState = JSON.parse(JSON.stringify(data))
+                  // newState.hasStateChanged = 'false';
+                  // this.store.dispatch(actions.updateUserDataAct({ data: newState }));
+                //  this.tempFlag4 == true;  
             }
           });
         
@@ -341,6 +347,8 @@ export class InsuranceTilesComponent implements OnInit {
 
         if (data.hasStateChanged == "true") {
           this.tempFlag4 = false
+          this.tempFlag5 = true
+          this.hideSqftField = true;
           $(document.getElementsByClassName("homeIndBtnCls")).removeClass("changeBgColor");
           // $(document.getElementsByClassName("lifeIndBtnCls")).removeClass("changeBgColor");
           $(document.getElementsByClassName("autoIndBtnCls")).removeClass("changeBgColor");
@@ -349,6 +357,8 @@ export class InsuranceTilesComponent implements OnInit {
         }
 
         if (this.tempFlag4 == false) {
+          if(this.tempFlag5 == true){
+            $('#areaInSquareFoot').val('');
           let index = data.cards.findIndex(obj => obj.key == 'home')
           let dwelling_default = data.default_home_dwelling
           this.sliderVariableValues.dwelling_min = dwelling_default,
@@ -376,6 +386,7 @@ export class InsuranceTilesComponent implements OnInit {
           this.sliderVariableValues.medical_max = 7000
           //  this.tempFlag4 = true; 
           //console.log("Calculated data is : " + JSON.stringify(this.sliderVariableValues));
+         }
         }
 
         if (data.hasStateChanged == "true") {
