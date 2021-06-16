@@ -7,102 +7,111 @@
 
 <div class="container" style="padding-left: 2%;padding-right: 2%;padding-top: 1%;">
 
-   
-   <!-- **************************** Life Insurance **************************  -->
-   <div [@slideInOutLife]="mode" class="col-md-12 row largeCardFont lifeIns cardShadow round" id="lifeInsurance" [hidden]="hideLifeCard"
-   style="background-color: white;border-left: 70px solid #006ebf;">
-   <!-- <div class="col-md-12 row justify-content-center" [hidden]="false" style="background-color: red;color:white;">Notification</div> -->
-   <div class="col-md-4 row">
-       <!-- <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">favorite</mat-icon> -->
-       <img src="./assets/EXL_LifeInsurance_Icon.png" class="my-auto" style="margin-left:-75px;height:25px;width:25px;margin-right: 5px;object-fit: contain;">
-       <div class="col-md-12" style="background-color: #f1f1f1; height:100%;">
-           <h2 style="margin-top: 10px; margin-bottom: 0px; color: #298D74; font-family: 'poppins';" *ngIf="isDataAvailable">{{stateData$?.cards[0].name}} Insurance &nbsp;
-               <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[0].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}}
-                   class="highriskiconstyle">
-           </h2>
-           <span>NEW</span>
-           <br>
-           <span class="largeCardFontStyle" *ngIf="isDataAvailable">Coverage: &nbsp;
-               <b> ${{stateData$?.cards[0].coverage|number: '2.'}}</b>
-           </span>
-           <br>
-           <span class="largeCardFontStyle" *ngIf="isDataAvailable">Premium: &nbsp;
-               <b> ${{stateData$?.cards[0].premium|number: '2.'}}</b>
-           </span>
-           <br>
-           <br>
-           <span>CURRENT</span>
-           <br>
-           <span class="largeCardFontStyle" *ngIf="isDataAvailable"> Coverage: &nbsp;
-               <b>${{stateData$?.cards[0].oldCoverage|number: '2.'}}</b>
-           </span>
-           <br>
-           <span class="largeCardFontStyle" *ngIf="isDataAvailable"> Premium: &nbsp;
-               <b> ${{stateData$?.cards[0].oldPremium|number: '2.'}}</b>
-           </span>
-           <br>
-           <mat-divider style="position: relative;background-color:white;height: 2px;margin-top: 12px;">
-           </mat-divider>
-           <div style="margin-top: 8px">
-               <span class="pl-3"  *ngIf="isDataAvailable">
-                   {{getChangeFormattedText(stateData$?.cards[0].oldNewPremChangeInPercent,stateData$?.cards[0].oldNewPremChangeInValue)}}
-               </span>
-           </div>
-               <div style="padding-top: 31%;">
-                   <button class="btn btn-info btnuploadpolicy lifeIndBtnCls" id="btnUP" (click)="uploadPolicy({id:'lifeInsuranceId', event: $event})" style="margin-top: 3%; margin-bottom: 2%">Upload Policy/ Take Picture
-                   </button>
-               </div>
-       </div>
-   </div>
-   <div class="col-md-8 row">
-       <div class="col-12">
 
-           
-           <!-- Insight card change start-->
-           <div *ngIf="isDataAvailable" id="insightCardDivID" [hidden]="stateData$?.cards[0].showRiskModel" class="row st0" style={{getBorderColorBasedOnRiskLevel(stateData$?.cards[0].risk)}}>
-               <span class="row">
-                   <div class=" d-flex col-md-4" style="justify-content: center; align-self: center;">
-                       <img class="riskimagespopup" src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}} alt="{{stateData$?.cards[0].risk}} risk"
-                           style="width: 113px;height: 58px;">
-                   </div>
-                   <div class="col-md-7">
-                       <p *ngIf="isDataAvailable" style="font-stretch: expanded; font-size: 15px; line-height: normal; color: black; font-weight: normal;">
-                           {{stateData$?.cards[0].insight}}
-                       </p>
-                       <a style="margin-bottom: 10px;" href="">Learn More &gt;&gt;</a>
-                   </div>
-                   <div class="col-md-0" style="padding-left: 3%; padding-bottom: -1%; ">
-                       <span (click)="closePopupEvent({type:'life',event : $event})" class="dot" style={{getBackgroundColorBasedOnRiskLevel(stateData$?.cards[0].risk)}}>x</span>
-                   </div>
-               </span>
+    <!-- **************************** Life Insurance **************************  -->
+    <div [@slideInOutLife]="mode" class="col-md-12 row largeCardFont lifeIns cardShadow round" id="lifeInsurance"
+        [hidden]="hideLifeCard" style="background-color: white;border-left: 70px solid #006ebf;">
+        <!-- <div class="col-md-12 row justify-content-center" [hidden]="false" style="background-color: red;color:white;">Notification</div> -->
+        <div class="col-md-4 row">
+            <!-- <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">favorite</mat-icon> -->
+            <img src="./assets/EXL_LifeInsurance_Icon.png" class="my-auto"
+                style="margin-left:-75px;height:25px;width:25px;margin-right: 5px;object-fit: contain;">
+            <div class="col-md-12" style="background-color: #f1f1f1; height:100%;">
+                <h2 style="margin-top: 10px; margin-bottom: 0px; color: #298D74; font-family: 'poppins';"
+                    *ngIf="isDataAvailable">{{stateData$?.cards[0].name}} Insurance &nbsp;
+                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[0].risk)"
+                        src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}} class="highriskiconstyle">
+                </h2>
+                <span>NEW</span>
+                <br>
+                <span class="largeCardFontStyle" *ngIf="isDataAvailable">Coverage: &nbsp;
+                    <b> ${{stateData$?.cards[0].coverage|number: '2.'}}</b>
+                </span>
+                <br>
+                <span class="largeCardFontStyle" *ngIf="isDataAvailable">Premium: &nbsp;
+                    <b> ${{stateData$?.cards[0].premium|number: '2.'}}</b>
+                </span>
+                <br>
+                <br>
+                <span>CURRENT</span>
+                <br>
+                <span class="largeCardFontStyle" *ngIf="isDataAvailable"> Coverage: &nbsp;
+                    <b>${{stateData$?.cards[0].oldCoverage|number: '2.'}}</b>
+                </span>
+                <br>
+                <span class="largeCardFontStyle" *ngIf="isDataAvailable"> Premium: &nbsp;
+                    <b> ${{stateData$?.cards[0].oldPremium|number: '2.'}}</b>
+                </span>
+                <br>
+                <mat-divider style="position: relative;background-color:white;height: 2px;margin-top: 12px;">
+                </mat-divider>
+                <div style="margin-top: 8px">
+                    <span class="pl-3" *ngIf="isDataAvailable">
+                        {{getChangeFormattedText(stateData$?.cards[0].oldNewPremChangeInPercent,stateData$?.cards[0].oldNewPremChangeInValue)}}
+                    </span>
+                </div>
+                <div style="padding-top: 31%;">
+                    <button class="btn btn-info btnuploadpolicy lifeIndBtnCls" id="btnUP"
+                        (click)="uploadPolicy({id:'lifeInsuranceId', event: $event})"
+                        style="margin-top: 3%; margin-bottom: 2%">Upload Policy/ Take Picture
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 row">
+            <div class="col-12">
 
-           </div>
 
-           
-           <!-- Insight card change end -->
-           <!-- Upload Policy Dialog change start-->
-           <div [hidden]="showUploadPolicyPopup" class="row st0" style="top: -33%!important;left: -44%!important;right: 12%;width: auto;height: auto;">
-                   <span class="row" style="margin-top:unset!important;padding: 5px;">
-                       <div class=" d-flex col-md-7 ">
-                                 <img src="./assets/lifeInspopup.png" class="my-auto"
-                             style="height: 100%;width: 100%;;object-fit: contain;">
+                <!-- Insight card change start-->
+                <div *ngIf="isDataAvailable" id="insightCardDivID" [hidden]="stateData$?.cards[0].showRiskModel"
+                    class="row st0" style={{getBorderColorBasedOnRiskLevel(stateData$?.cards[0].risk)}}>
+                    <span class="row">
+                        <div class=" d-flex col-md-4" style="justify-content: center; align-self: center;">
+                            <img class="riskimagespopup" src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}}
+                                alt="{{stateData$?.cards[0].risk}} risk" style="width: 113px;height: 58px;">
                         </div>
-           <div class="col-md-5" style="text-align: left; margin-top: 12%;font-size: 1.31vw!important;font-family: 'poppins';">
+                        <div class="col-md-7">
+                            <p *ngIf="isDataAvailable"
+                                style="font-stretch: expanded; font-size: 15px; line-height: normal; color: black; font-weight: normal;">
+                                {{stateData$?.cards[0].insight}}
+                            </p>
+                            <a style="margin-bottom: 10px;" href="">Learn More &gt;&gt;</a>
+                        </div>
+                        <div class="col-md-0" style="padding-left: 3%; padding-bottom: -1%; ">
+                            <span (click)="closePopupEvent({type:'life',event : $event})" class="dot"
+                                style={{getBackgroundColorBasedOnRiskLevel(stateData$?.cards[0].risk)}}>x</span>
+                        </div>
+                    </span>
 
-             <table style="width:100%">
-           <tr style="line-height: normal;">
-               <td style="width: 44%;">Death Benefit</td>
-                 <td style="width: 44%;">   
-                   <tr>
-                       <td>$</td>
-                    <input class="uploadPolicyInp" matInput placeholder="" value="250000">
-                    <td></td>
-                   </tr>
-                </td>
-               </tr>
+                </div>
 
 
-                   <!-- <tr style="line-height: normal;">
+                <!-- Insight card change end -->
+                <!-- Upload Policy Dialog change start-->
+                <div [hidden]="showUploadPolicyPopup" class="row st0"
+                    style="top: -33%!important;left: -44%!important;right: 12%;width: auto;height: auto;">
+                    <span class="row" style="margin-top:unset!important;padding: 5px;">
+                        <div class=" d-flex col-md-7 ">
+                            <img src="./assets/lifeInspopup.png" class="my-auto"
+                                style="height: 100%;width: 100%;;object-fit: contain;">
+                        </div>
+                        <div class="col-md-5"
+                            style="text-align: left; margin-top: 12%;font-size: 1.31vw!important;font-family: 'poppins';">
+
+                            <table style="width:100%">
+                                <tr style="line-height: normal;">
+                                    <td style="width: 44%;">Death Benefit</td>
+                                    <td style="width: 44%;">
+                                <tr>
+                                    <td>$</td>
+                                    <input class="uploadPolicyInp" matInput placeholder="" value="250000">
+                                    <td></td>
+                                </tr>
+                                </td>
+                                </tr>
+
+
+                                <!-- <tr style="line-height: normal;">
                     <td style="width: 50%;">Current Debt</td>
                     <td style="width: 50%;">   
                        <input matInput placeholder="$ Enter Amount" value="">
@@ -140,17 +149,15 @@
             </tr> -->
 
 
-          </table>
+                            </table>
 
-          <div class="col-md-12 d-flex " style="justify-content: center;padding: 10px;margin-top: 10%;">
-           <button class="btn btn-info" (click)="handlePopupAcceptBtn('life')">Validate</button>
-         </div>
-        </div>
-       </span>
-           </div>
-
-
-
+                            <div class="col-md-12 d-flex "
+                                style="justify-content: center;padding: 10px;margin-top: 10%;">
+                                <button class="btn btn-info" (click)="handlePopupAcceptBtn('life')">Validate</button>
+                            </div>
+                        </div>
+                    </span>
+                </div>
 
 
 
@@ -161,12 +168,17 @@
 
 
 
-           <!-- Insight card change end -->
-           <div style="position:absolute; margin-top: 1%;margin-left: 100%;">
-               <button *ngIf="isDataAvailable" class="ml-auto" (click)="closeCard({id:'lifeInsuranceId', event: $event,change: stateData$?.cards[0].oldNewPremChangeInPercent})" style="border:none;background-color: white;color: blue;">
-                   <mat-icon>close</mat-icon>
-               </button>
-           </div>
+
+
+
+                <!-- Insight card change end -->
+                <div style="position:absolute; margin-top: 1%;margin-left: 100%;">
+                    <button *ngIf="isDataAvailable" class="ml-auto"
+                        (click)="closeCard({id:'lifeInsuranceId', event: $event,change: stateData$?.cards[0].oldNewPremChangeInPercent})"
+                        style="border:none;background-color: white;color: blue;">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
 
 
 
@@ -174,148 +186,163 @@
 
 
 
-           <div class="row">
-               <span class="col-4 text-left">Death Benefit</span>
-               <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'DeathBenefit', type:'life'})" min="250000" max="1000000"
-                 step="250000" value="{{sliderLifeVariableValues.deathBenefit}}" thumbLabel tickInterval="1">
-               </mat-slider>
-           </div>
-           <div class="row">
-               <span class="col-4 text-left">Current Debt</span>
-               <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'CurrentDebit',type:'life'})" min="180000" max="280000"
-                   value="{{sliderLifeVariableValues.currentDebit}}" step="20000" thumbLabel tickInterval="1"></mat-slider>
-           </div>
-           <div class="row">
-               <span class="col-4 text-left">Child Education Fund</span>
-               <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'ChildEducationFund',type:'life'})" min="50000" max="100000"
-                   value="{{sliderLifeVariableValues.childEducationFund}}" step="10000" thumbLabel tickInterval="1"></mat-slider>
-           </div>
-           <!-- <mat-icon style="color: white;" class="dot">close</mat-icon> -->
+                <div class="row">
+                    <span class="col-4 text-left">Death Benefit</span>
+                    <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'DeathBenefit', type:'life'})"
+                        min="250000" max="1000000" step="250000" value="{{sliderLifeVariableValues.deathBenefit}}"
+                        thumbLabel tickInterval="1">
+                    </mat-slider>
+                </div>
+                <div class="row">
+                    <span class="col-4 text-left">Current Debt</span>
+                    <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'CurrentDebit',type:'life'})"
+                        min="180000" max="280000" value="{{sliderLifeVariableValues.currentDebit}}" step="20000"
+                        thumbLabel tickInterval="1"></mat-slider>
+                </div>
+                <div class="row">
+                    <span class="col-4 text-left">Child Education Fund</span>
+                    <mat-slider class="col-8 min"
+                        (input)="onInputChange({event:$event,id:'ChildEducationFund',type:'life'})" min="50000"
+                        max="100000" value="{{sliderLifeVariableValues.childEducationFund}}" step="10000" thumbLabel
+                        tickInterval="1"></mat-slider>
+                </div>
+                <!-- <mat-icon style="color: white;" class="dot">close</mat-icon> -->
 
-           <div class="row">
-               <span class="col-4 text-left">Funeral Spend </span>
-               <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'FuneralSpend',type:'life'})" min="2500" max="5000"
-                   value="{{sliderLifeVariableValues.funeralSpend}}" step="500" thumbLabel tickInterval="1"></mat-slider>
-           </div>
-           <div class="row">
-               <span class="col-4 text-left">Retirement Age </span>
-               <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'RetirementAge',type:'life'})" min="50" max="55" 
-               value="{{sliderLifeVariableValues.retirementAge}}" step="1" thumbLabel tickInterval="1"></mat-slider>
-           </div>
-           <div class="row">
-               <span class="col-4 text-left">Annual Income </span>
-               <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'AnnualIncome',type:'life'})" min="50000" max="300000"
-                   value="{{sliderLifeVariableValues.annualIncome}}" step="50000" thumbLabel tickInterval="1"></mat-slider>
-           </div>
+                <div class="row">
+                    <span class="col-4 text-left">Funeral Spend </span>
+                    <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'FuneralSpend',type:'life'})"
+                        min="2500" max="5000" value="{{sliderLifeVariableValues.funeralSpend}}" step="500" thumbLabel
+                        tickInterval="1"></mat-slider>
+                </div>
+                <div class="row">
+                    <span class="col-4 text-left">Retirement Age </span>
+                    <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'RetirementAge',type:'life'})"
+                        min="50" max="55" value="{{sliderLifeVariableValues.retirementAge}}" step="1" thumbLabel
+                        tickInterval="1"></mat-slider>
+                </div>
+                <div class="row">
+                    <span class="col-4 text-left">Annual Income </span>
+                    <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'AnnualIncome',type:'life'})"
+                        min="50000" max="300000" value="{{sliderLifeVariableValues.annualIncome}}" step="50000"
+                        thumbLabel tickInterval="1"></mat-slider>
+                </div>
 
-           <div class="row mb-2">
-               <span class="col-4 text-left">Years Of Replacement Income </span>
-               <mat-slider class="col-8 min" (input)="onInputChange({event:$event,id:'ReplacementIncome',type:'life'})" min="5" max="10"
-                   value="{{sliderLifeVariableValues.replacementIncome}}" step="1" thumbLabel tickInterval="1"></mat-slider>
-           </div>
+                <div class="row mb-2">
+                    <span class="col-4 text-left">Years Of Replacement Income </span>
+                    <mat-slider class="col-8 min"
+                        (input)="onInputChange({event:$event,id:'ReplacementIncome',type:'life'})" min="5" max="10"
+                        value="{{sliderLifeVariableValues.replacementIncome}}" step="1" thumbLabel tickInterval="1">
+                    </mat-slider>
+                </div>
 
-           <div class="row lifecardhiddenfields" [hidden]="lifehiddenfields" style="margin-bottom: 10%">
+                <div class="row lifecardhiddenfields" [hidden]="lifehiddenfields" style="margin-bottom: 10%">
 
-               <div class="col-md-4">
+                    <div class="col-md-4">
 
-                   <div>
-                       <span>Accidental Death Rider</span>
-                       <mat-slide-toggle>
-                       </mat-slide-toggle>
-                   </div>
+                        <div>
+                            <span>Accidental Death Rider</span>
+                            <mat-slide-toggle>
+                            </mat-slide-toggle>
+                        </div>
 
-                   <div>
-                       <span>Accidental disability rider</span>
-                       <mat-slide-toggle>
-                       </mat-slide-toggle>
-                   </div>
-               </div>
+                        <div>
+                            <span>Accidental disability rider</span>
+                            <mat-slide-toggle>
+                            </mat-slide-toggle>
+                        </div>
+                    </div>
 
-               <div class="col-md-4">
+                    <div class="col-md-4">
 
-                   <div>
-                       <span>Critical illness rider </span>
-                       <mat-slide-toggle>
-                       </mat-slide-toggle>       
-                   </div>
-                   <div>
-                       <span>Terminal Illness rider</span>
-                       <mat-slide-toggle>
-                       </mat-slide-toggle>
-                   </div>
-                  
-               </div>
+                        <div>
+                            <span>Critical illness rider </span>
+                            <mat-slide-toggle>
+                            </mat-slide-toggle>
+                        </div>
+                        <div>
+                            <span>Terminal Illness rider</span>
+                            <mat-slide-toggle>
+                            </mat-slide-toggle>
+                        </div>
 
-               <div class="col-md-4">
-                   <div>
-                       <span>Waiver of premium riders</span>
-                       <mat-slide-toggle>
-                       </mat-slide-toggle>
-                   </div>
-                   <div>
-                       <span>Income benefit rider</span>
-                       <mat-slide-toggle>
-                       </mat-slide-toggle>
-                   </div>
-               </div>
+                    </div>
 
-           </div>
+                    <div class="col-md-4">
+                        <div>
+                            <span>Waiver of premium riders</span>
+                            <mat-slide-toggle>
+                            </mat-slide-toggle>
+                        </div>
+                        <div>
+                            <span>Income benefit rider</span>
+                            <mat-slide-toggle>
+                            </mat-slide-toggle>
+                        </div>
+                    </div>
 
-           <div class="calcpremoptimize row">     
-               
-               <table>
-                   <tr>
-                       <td [hidden]="lifehiddenfields">
-                           <button (click)="handleOptimizeClick('life')" class="d-flex btn btn-info ml-auto btnoptimize">Optimize Policy                              
-                           </button>                     
-                       </td>
-                       <td>
-                           <button class="d-flex btn btn-info ml-auto btncalculatepremium" (click)="calculatePremium({insuranceType:'life'})">Calculate Premium
-                               <span *ngIf="isAPICallComplete" class="spinner-border" role="status" style="margin-left: 15px;width: 1.5rem;height: 1.5rem;position: relative;margin-top: 0px;">
-                                   <span class="sr-only" id="loading"></span>
-                               </span>
-                           </button>
-                       </td>
-                   </tr>
-               </table>
-              
-                             
-           </div>
+                </div>
 
+                <div class="calcpremoptimize row">
 
+                    <table>
+                        <tr>
+                            <td [hidden]="lifehiddenfields">
+                                <button (click)="handleOptimizeClick('life')"
+                                    class="d-flex btn btn-info ml-auto btnoptimize">Optimize Policy
+                                </button>
+                            </td>
+                            <td>
+                                <button class="d-flex btn btn-info ml-auto btncalculatepremium"
+                                    (click)="calculatePremium({insuranceType:'life'})">Calculate Premium
+                                    <span *ngIf="isAPICallComplete" class="spinner-border" role="status"
+                                        style="margin-left: 15px;width: 1.5rem;height: 1.5rem;position: relative;margin-top: 0px;">
+                                        <span class="sr-only" id="loading"></span>
+                                    </span>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
 
 
-           <!-- <div class="row">
+                </div>
+
+
+
+
+                <!-- <div class="row">
                <button class="d-flex btn btn-info ml-auto btncalculatepremium" (click)="calculatePremium({insuranceType:'life'})">Calculate Premium
                    <span *ngIf="isAPICallComplete" class="spinner-border" role="status" style="margin-left: 15px;width: 1.5rem;height: 1.5rem;position: relative;margin-top: 0px;">
                        <span class="sr-only" id="loading"></span>
                    </span>
                </button>
            </div> -->
-       </div>
-   </div>
-   <!-- <div class="col-1" style="padding-left: 11%; padding-top: 1%;">
+            </div>
+        </div>
+        <!-- <div class="col-1" style="padding-left: 11%; padding-top: 1%;">
        <button class="ml-auto" (click)="closeCard({id:'lifeInsuranceId', event: $event})" style="border:none;background-color: white;color: blue;">
            <mat-icon>close</mat-icon>
        </button>
    </div> -->
-</div>
+    </div>
 
 </div>
 
 
 <div class="container" style="padding-left: 2.7%;padding-right: 1%;">
     <!-- ******************** Home Insurance ********************* -->
-    <div [@slideInOutHome]="mode" class="col-md-12 row largeCardFont homeIns cardDimentions round roundleft" id="homeInsurance"
-        [hidden]="hideHomeCard" style="background-color: white;margin:0;border-left: 70px solid #769fe8;">
+    <div [@slideInOutHome]="mode" class="col-md-12 row largeCardFont homeIns cardDimentions round roundleft"
+        id="homeInsurance" [hidden]="hideHomeCard"
+        style="background-color: white;margin:0;border-left: 70px solid #769fe8;">
         <!-- <div class="col-md-12 row justify-content-center border border rounded" style="background-color: white;color:black;">{{insight}}</div> -->
         <div class="col-md-4 row">
             <!-- <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">home</mat-icon> -->
-            <img src="./assets/EXL_HomeInsurance_Icon.png" class="my-auto" style="margin-left:-75px;height:25px;width:25px;margin-right: 5px">
+            <img src="./assets/EXL_HomeInsurance_Icon.png" class="my-auto"
+                style="margin-left:-75px;height:25px;width:25px;margin-right: 5px">
             <div class="col-md-12" style="background-color:#f1f1f1; ">
-                <h2 style="margin-top: 10px; margin-bottom: 0px; color: black; font-family: 'poppins';" *ngIf="isDataAvailable">{{stateData$?.cards[1].name}} Owners
-                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[1].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[1].risk)}}
-                        class="highriskiconstyle">
+                <h2 style="margin-top: 10px; margin-bottom: 0px; color: black; font-family: 'poppins';"
+                    *ngIf="isDataAvailable">{{stateData$?.cards[1].name}} Owners
+                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[1].risk)"
+                        src={{getImageToShowBasedOnRisk(stateData$?.cards[1].risk)}} class="highriskiconstyle">
                 </h2>
                 <span>NEW</span>
                 <br>
@@ -341,14 +368,32 @@
                 <mat-divider style="position: relative;background-color:white;height: 2px;margin-top: 12px;">
                 </mat-divider>
                 <div style="margin-top: 8px;padding-bottom: 7%;">
-                    <span class="pl-3"  *ngIf="isDataAvailable">
+                    <span class="pl-3" *ngIf="isDataAvailable">
                         {{getChangeFormattedText(stateData$?.cards[1].oldNewPremChangeInPercent,stateData$?.cards[1].oldNewPremChangeInValue)}}
                     </span>
                 </div>
                 <div class="btnuploadpolicydiv">
-                    <div style=" margin-left: 3%; margin-top: -20%;" [innerHtml]="percentileScore">
-                        </div>
-                    <button class="btn btn-info btnuploadpolicy homeIndBtnCls" id="btnUP" (click)="uploadPolicy({id:'homeInsuranceId', event: $event})">Upload Policy/Take Picture
+                    
+                    <div *ngIf="percentileScore === '60%'" style=" margin-left: 3%; margin-top: -20%;">
+                        <span style="font-size: 1.1vw;color: #ff6503!important;" ><b>“60<sup>th</sup> Percentile”</b></span>&nbsp;
+                        <span style="font-size: 0.9vw;">Your score as compared to other customers with similar
+                            demographics.</span>
+                    </div>
+
+                    <div *ngIf="percentileScore === '75%'" style="margin-left: 3%; margin-top: -20%;">
+                        <span style="font-size: 1.1vw;color: #69913E!important;"><b>“75<sup>th</sup> Percentile”</b></span>&nbsp;
+                        <span style="font-size: 0.9vw;">Your score as compared to other customers with similar
+                            demographics.</span>
+                    </div>
+
+                    <div *ngIf="percentileScore === '90%'" style="margin-left: 3%; margin-top: -20%;">
+                        <span style="font-size: 1.1vw;color: #69913E!important;"><b>“90<sup>th</sup> Percentile”</b></span>&nbsp;
+                        <span style="font-size: 0.9vw;">Your score as compared to other customers with similar
+                            demographics.</span>
+                    </div>
+
+                    <button class="btn btn-info btnuploadpolicy homeIndBtnCls" id="btnUP"
+                        (click)="uploadPolicy({id:'homeInsuranceId', event: $event})">Upload Policy/Take Picture
                     </button>
                 </div>
             </div>
@@ -357,35 +402,41 @@
             <div class="col-12">
 
                 <!-- Insight card change start-->
-                <div *ngIf="isDataAvailable" id="insightCardDivID" [hidden]="stateData$?.cards[1].showRiskModel" class="row st0" style={{getBorderColorBasedOnRiskLevel(stateData$?.cards[1].risk)}}>
+                <div *ngIf="isDataAvailable" id="insightCardDivID" [hidden]="stateData$?.cards[1].showRiskModel"
+                    class="row st0" style={{getBorderColorBasedOnRiskLevel(stateData$?.cards[1].risk)}}>
                     <span class="row">
                         <div class=" d-flex col-md-4" style="justify-content: center; align-self: center;">
-                            <img class="riskimagespopup" src={{getImageToShowBasedOnRisk(stateData$?.cards[1].risk)}} alt="{{stateData$?.cards[1].risk}} risk"
-                                style="width: 113px;height: 58px;">
+                            <img class="riskimagespopup" src={{getImageToShowBasedOnRisk(stateData$?.cards[1].risk)}}
+                                alt="{{stateData$?.cards[1].risk}} risk" style="width: 113px;height: 58px;">
                         </div>
                         <div class="col-md-7">
-                            <p *ngIf="isDataAvailable" style="font-stretch: expanded; font-size: 15px; line-height: normal; color: black; font-weight: normal;">
+                            <p *ngIf="isDataAvailable"
+                                style="font-stretch: expanded; font-size: 15px; line-height: normal; color: black; font-weight: normal;">
                                 {{stateData$?.cards[1].insight}}
                             </p>
                             <a style="margin-bottom: 10px;" href="">Learn More &gt;&gt;</a>
                         </div>
                         <div class="col-md-0" style="padding-left: 3%; padding-bottom: -1%; ">
-                            <span *ngIf="isDataAvailable" (click)="closePopupEvent({type:'home',event : $event})" class="dot" style={{getBackgroundColorBasedOnRiskLevel(stateData$?.cards[1].risk)}}>x</span>
+                            <span *ngIf="isDataAvailable" (click)="closePopupEvent({type:'home',event : $event})"
+                                class="dot"
+                                style={{getBackgroundColorBasedOnRiskLevel(stateData$?.cards[1].risk)}}>x</span>
                         </div>
                     </span>
 
                 </div>
                 <!-- Insight card change end -->
-                   <!-- Upload Policy Dialog change start-->
-            <div [hidden]="showUploadPolicyPopup" class="row st0" style="top: -33%!important;left: -44%!important;right: 12%;width: auto;height: auto;">
-                <span class="row" style="margin-top:unset!important;padding: 5px;">
-                    <div class=" d-flex col-md-7 ">
-                        <img src="./assets/HomePolicyDoc.jpg" class="my-auto"
-                        style="    height: 100%;width: 100%;;object-fit: contain;">
-                    </div>
-                    <div class="col-md-5" style="text-align: left; margin: auto;font-size: 1.31vw!important;font-family: 'poppins';">
-                   
-                        <!-- <table>
+                <!-- Upload Policy Dialog change start-->
+                <div [hidden]="showUploadPolicyPopup" class="row st0"
+                    style="top: -33%!important;left: -44%!important;right: 12%;width: auto;height: auto;">
+                    <span class="row" style="margin-top:unset!important;padding: 5px;">
+                        <div class=" d-flex col-md-7 ">
+                            <img src="./assets/HomePolicyDoc.jpg" class="my-auto"
+                                style="    height: 100%;width: 100%;;object-fit: contain;">
+                        </div>
+                        <div class="col-md-5"
+                            style="text-align: left; margin: auto;font-size: 1.31vw!important;font-family: 'poppins';">
+
+                            <!-- <table>
                             <tr style="line-height: normal;">
                                 <td>Dwelling </td>
                                     
@@ -412,127 +463,145 @@
                                 <td>&nbsp;:$5,000</td>
                             </tr>
                         </table> -->
-                        <table>
-                            <tr style="line-height: normal;">
-                                <td>Structural Cost </td>
-                                <td style="width: 50%;">   
-                                    <tr>
-                                        <td>$</td>
-                                     <input class="uploadPolicyInp" matInput placeholder="" value="200000">
-                                     <td></td>
-                                    </tr>
-                                 </td>
-                            </tr>
-                            <tr style="line-height: normal;">
-                                <td>Additional Structures </td>
-                                <td style="width: 50%;">   
-                                    <tr>
-                                        <td>$</td>
-                                     <input class="uploadPolicyInp" matInput placeholder="" value="20000">
-                                     <td></td>
-                                    </tr>
-                                 </td>
-                            </tr>
-                            <tr style="line-height: normal;">
-                                <td>Personal Property </td>
-                                <td style="width: 50%;">   
-                                    <tr>
-                                        <td>$</td>
-                                     <input class="uploadPolicyInp" matInput placeholder="" value="150000">
-                                     <td></td>
-                                    </tr>
-                                 </td>
-                            </tr>
-                            <tr style="line-height: normal;">
-                                <td>Loss of Use </td>
-                                <td style="width: 50%;">   
-                                    <tr>
-                                        <td>$</td>
-                                     <input class="uploadPolicyInp" matInput placeholder="" value="60000">
-                                     <td></td>
-                                    </tr>
-                                 </td>
-                            </tr>
-                            <tr style="line-height: normal;">
-                                <td>Personal Liability </td>
-                                <td style="width: 50%;">   
-                                    <tr>
-                                        <td>$</td>
-                                     <input class="uploadPolicyInp" matInput placeholder="" value="300000">
-                                     <td></td>
-                                    </tr>
-                                 </td>
-                            </tr>
-                            <tr style="line-height: normal;">
-                                <td>Self Paid Amount </td>
-                                <td style="width: 50%;">   
-                                    <tr>
-                                        <td>$</td>
-                                     <input class="uploadPolicyInp" matInput placeholder="" value="5000">
-                                     <td></td>
-                                    </tr>
-                                 </td>
-                            </tr>
-                        </table>
-                    
-                        <div class="col-md-12 d-flex " style="justify-content: center;padding: 10px;margin-top: 10%;">
-                            <button class="btn btn-info" (click)="handlePopupAcceptBtn('home')">Validate</button>
-                        </div>
-                    </div>
-                </span>
-            </div>
+                            <table>
+                                <tr style="line-height: normal;">
+                                    <td>Structural Cost </td>
+                                    <td style="width: 50%;">
+                                <tr>
+                                    <td>$</td>
+                                    <input class="uploadPolicyInp" matInput placeholder="" value="200000">
+                                    <td></td>
+                                </tr>
+                                </td>
+                                </tr>
+                                <tr style="line-height: normal;">
+                                    <td>Additional Structures </td>
+                                    <td style="width: 50%;">
+                                <tr>
+                                    <td>$</td>
+                                    <input class="uploadPolicyInp" matInput placeholder="" value="20000">
+                                    <td></td>
+                                </tr>
+                                </td>
+                                </tr>
+                                <tr style="line-height: normal;">
+                                    <td>Personal Property </td>
+                                    <td style="width: 50%;">
+                                <tr>
+                                    <td>$</td>
+                                    <input class="uploadPolicyInp" matInput placeholder="" value="150000">
+                                    <td></td>
+                                </tr>
+                                </td>
+                                </tr>
+                                <tr style="line-height: normal;">
+                                    <td>Loss of Use </td>
+                                    <td style="width: 50%;">
+                                <tr>
+                                    <td>$</td>
+                                    <input class="uploadPolicyInp" matInput placeholder="" value="60000">
+                                    <td></td>
+                                </tr>
+                                </td>
+                                </tr>
+                                <tr style="line-height: normal;">
+                                    <td>Personal Liability </td>
+                                    <td style="width: 50%;">
+                                <tr>
+                                    <td>$</td>
+                                    <input class="uploadPolicyInp" matInput placeholder="" value="300000">
+                                    <td></td>
+                                </tr>
+                                </td>
+                                </tr>
+                                <tr style="line-height: normal;">
+                                    <td>Self Paid Amount </td>
+                                    <td style="width: 50%;">
+                                <tr>
+                                    <td>$</td>
+                                    <input class="uploadPolicyInp" matInput placeholder="" value="5000">
+                                    <td></td>
+                                </tr>
+                                </td>
+                                </tr>
+                            </table>
 
-            <!-- Upload Policy Dialog change end-->
+                            <div class="col-md-12 d-flex "
+                                style="justify-content: center;padding: 10px;margin-top: 10%;">
+                                <button class="btn btn-info" (click)="handlePopupAcceptBtn('home')">Validate</button>
+                            </div>
+                        </div>
+                    </span>
+                </div>
+
+                <!-- Upload Policy Dialog change end-->
                 <div style="position:absolute; margin-top: 1%;margin-left: 100%;">
-                <button *ngIf="isDataAvailable" class="ml-auto" (click)="closeCard({id:'homeInsuranceId', event: $event, change: stateData$?.cards[1].oldNewPremChangeInPercent})" style="border:none;background-color: white;color: blue;">
-                    <mat-icon>close</mat-icon>
-                </button>
-            </div>
+                    <button *ngIf="isDataAvailable" class="ml-auto"
+                        (click)="closeCard({id:'homeInsuranceId', event: $event, change: stateData$?.cards[1].oldNewPremChangeInPercent})"
+                        style="border:none;background-color: white;color: blue;">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
                 <div *ngIf="hideSqftField" class="row" style="margin-top: 1%;margin-bottom: 1%;">
                     <div class="col-md-4 text-left">
                         <span style="line-height: normal;">Area (sq.ft.)</span>
                     </div>
                     <div class="col-md-8 max" style="margin-left: -7px;">
-                        <input id="areaInSquareFoot" value="1000" class="uploadPolicyInp" (keypress)="keyPress($event)" (change)="change($event)" placeholder="" value="">
+                        <input id="areaInSquareFoot" value="1000" class="uploadPolicyInp" (keypress)="keyPress($event)"
+                            (change)="change($event)" placeholder="" value="">
                     </div>
                 </div>
                 <div class="row">
                     <span class="col-4 text-left">Structural Cost </span>
-                    <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'Dwelling',type:'home'})" min="{{sliderVariableValues.dwelling_min}}"
-                        max="{{sliderVariableValues.dwelling_max}}" value="{{sliderVariableValues.dwelling}}" step="{{(sliderVariableValues.personalLiability_max - sliderVariableValues.dwelling_min)/ 5 }}"
+                    <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'Dwelling',type:'home'})"
+                        min="{{sliderVariableValues.dwelling_min}}" max="{{sliderVariableValues.dwelling_max}}"
+                        value="{{sliderVariableValues.dwelling}}"
+                        step="{{(sliderVariableValues.personalLiability_max - sliderVariableValues.dwelling_min)/ 5 }}"
                         thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
-                    <span class="col-4 text-left" title="e.g. Garage, Dog house)">Additional Structures  </span>
-                    <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'otherStructure',type:'home'})" min="{{sliderVariableValues.otherStructure_min}}"
-                        max="{{sliderVariableValues.otherStructure_max}}" value="{{sliderVariableValues.otherStructure}}"
+                    <span class="col-4 text-left" title="e.g. Garage, Dog house)">Additional Structures </span>
+                    <mat-slider class="col-8 max"
+                        (input)="onInputChange({event:$event,id:'otherStructure',type:'home'})"
+                        min="{{sliderVariableValues.otherStructure_min}}"
+                        max="{{sliderVariableValues.otherStructure_max}}"
+                        value="{{sliderVariableValues.otherStructure}}"
                         step="{{(sliderVariableValues.otherStructure_max - sliderVariableValues.otherStructure_min) / 5}}"
                         thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-4 text-left">Personal Property </span>
-                    <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'PersonalProperty',type:'home'})" min="{{sliderVariableValues.personalProperty_min}}"
-                        max="{{sliderVariableValues.personalProperty_max}}" value="{{sliderVariableValues.personalProperty}}"
+                    <mat-slider class="col-8 max"
+                        (input)="onInputChange({event:$event,id:'PersonalProperty',type:'home'})"
+                        min="{{sliderVariableValues.personalProperty_min}}"
+                        max="{{sliderVariableValues.personalProperty_max}}"
+                        value="{{sliderVariableValues.personalProperty}}"
                         step="{{(sliderVariableValues.personalProperty_max - sliderVariableValues.personalProperty_min)/5}}"
                         thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-4 text-left">Loss of Use </span>
-                    <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'LossOfUse',type:'home'})" min="{{sliderVariableValues.lossOfUse_min}}"
-                        max="{{sliderVariableValues.lossOfUse_max}}" value={{sliderVariableValues.lossOfUse}} step="{{(sliderVariableValues.lossOfUse_max - sliderVariableValues.lossOfUse_min)/5}}"
+                    <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'LossOfUse',type:'home'})"
+                        min="{{sliderVariableValues.lossOfUse_min}}" max="{{sliderVariableValues.lossOfUse_max}}"
+                        value={{sliderVariableValues.lossOfUse}}
+                        step="{{(sliderVariableValues.lossOfUse_max - sliderVariableValues.lossOfUse_min)/5}}"
                         thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-4 text-left">Personal Liability </span>
-                    <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'PersonalLiability',type:'home'})" min="{{sliderVariableValues.personalLiability_min}}"
-                        max="{{sliderVariableValues.personalLiability_max}}" value="{{sliderVariableValues.personalLiability}}"
+                    <mat-slider class="col-8 max"
+                        (input)="onInputChange({event:$event,id:'PersonalLiability',type:'home'})"
+                        min="{{sliderVariableValues.personalLiability_min}}"
+                        max="{{sliderVariableValues.personalLiability_max}}"
+                        value="{{sliderVariableValues.personalLiability}}"
                         step="{{(sliderVariableValues.personalLiability_max - sliderVariableValues.personalLiability_min) / 5}}"
                         thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-4 text-left">Self Paid amount </span>
-                    <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'Medical',type:'home'})" min="{{sliderVariableValues.medical_min}}"
-                        max="{{sliderVariableValues.medical_max}}" step="{{(sliderVariableValues.medical_max - sliderVariableValues.medical_min)/5}}"
+                    <mat-slider class="col-8 max" (input)="onInputChange({event:$event,id:'Medical',type:'home'})"
+                        min="{{sliderVariableValues.medical_min}}" max="{{sliderVariableValues.medical_max}}"
+                        step="{{(sliderVariableValues.medical_max - sliderVariableValues.medical_min)/5}}"
                         value="{{sliderVariableValues.medical}}" thumbLabel tickInterval="1"></mat-slider>
                 </div>
 
@@ -552,7 +621,7 @@
                                 <mat-option value="Poor">Poor</mat-option>
                             </mat-select>
                         </mat-form-field>
-                      
+
 
                         <div class="row">
                             <span style="padding-left: 7%;">Plumbing Condition</span>
@@ -565,7 +634,7 @@
                                 <mat-option value="Poor">Poor</mat-option>
                             </mat-select>
                         </mat-form-field>
-                                       
+
 
                     </div>
 
@@ -632,32 +701,40 @@
 
                 </div>
 
-                <div class="row d-flex col-md-12" style="position: absolute; bottom: 0; margin-bottom: 1%;padding: 2px;justify-content: flex-end;">
+                <div class="row d-flex col-md-12"
+                    style="position: absolute; bottom: 0; margin-bottom: 1%;padding: 2px;justify-content: flex-end;">
 
-                    <button [hidden]="homehiddenfields" class="optimizaPolicyBtn btn btn-info" style="background-color: #ff6503!important;border-color: #ff6503!important;" (click)="handleOptimizeClick('home')">Optimize Policy</button>
-                    <button class="btn btn-info" style="background-color: #0e5eb2!important;margin-left: 15px;" (click)="calculatePremium({insuranceType:'home'})">Calculate Premium
-                        <span *ngIf="isAPICallComplete" class="spinner-border" role="status" style="margin-left: 15px;width: 1.5rem;height: 1.5rem;position: relative;margin-top: 0px;">
+                    <button [hidden]="homehiddenfields" class="optimizaPolicyBtn btn btn-info"
+                        style="background-color: #ff6503!important;border-color: #ff6503!important;"
+                        (click)="handleOptimizeClick('home')">Optimize Policy</button>
+                    <button class="btn btn-info" style="background-color: #0e5eb2!important;margin-left: 15px;"
+                        (click)="calculatePremium({insuranceType:'home'})">Calculate Premium
+                        <span *ngIf="isAPICallComplete" class="spinner-border" role="status"
+                            style="margin-left: 15px;width: 1.5rem;height: 1.5rem;position: relative;margin-top: 0px;">
                             <span class="sr-only" id="loading"></span>
                         </span>
                     </button>
-                  
+
                 </div>
             </div>
         </div>
     </div>
 
     <!-- **************************** Auto Insurance ********************** -->
-    <div [@slideInOutCar]="mode" class="col-md-12 row largeCardFont carIns cardDimentions round roundleft" style="padding-left: 1%;"
-        id="autoInsurance" [hidden]="hideAutoCard" style="background-color: white;margin:0;border-left: 70px solid #bbcff3;">
+    <div [@slideInOutCar]="mode" class="col-md-12 row largeCardFont carIns cardDimentions round roundleft"
+        style="padding-left: 1%;" id="autoInsurance" [hidden]="hideAutoCard"
+        style="background-color: white;margin:0;border-left: 70px solid #bbcff3;">
         <!-- <div class="col-md-12 row justify-content-center" style="background-color: red;color:white;">Notification</div>-->
         <div class="col-md-4 row">
             <!-- <mat-icon class="col-1" style="margin-left: -62px; color: white;align-self: center;">directions_car
             </mat-icon> -->
-            <img src="./assets/EXL_AutoInsurance_Icon.png" class="my-auto" style="margin-left:-75px;height:25px;width:25px;margin-right: 5px">
+            <img src="./assets/EXL_AutoInsurance_Icon.png" class="my-auto"
+                style="margin-left:-75px;height:25px;width:25px;margin-right: 5px">
             <div class="col-md-12" style="background-color: #f1f1f1;">
-                <h2 style="margin-top: 10px; margin-bottom: 0px; color: #298D74; font-family: 'poppins';" *ngIf="isDataAvailable">{{stateData$?.cards[2].name}} Insurance
-                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[2].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[2].risk)}}
-                        class="highriskiconstyle">
+                <h2 style="margin-top: 10px; margin-bottom: 0px; color: #298D74; font-family: 'poppins';"
+                    *ngIf="isDataAvailable">{{stateData$?.cards[2].name}} Insurance
+                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[2].risk)"
+                        src={{getImageToShowBasedOnRisk(stateData$?.cards[2].risk)}} class="highriskiconstyle">
                 </h2>
                 <span>NEW</span>
                 <br>
@@ -683,150 +760,162 @@
                 <mat-divider style="position: relative;background-color:white;height: 2px;margin-top: 12px;">
                 </mat-divider>
                 <div style="margin-top: 8px">
-                    <span class="pl-3"  *ngIf="isDataAvailable">
+                    <span class="pl-3" *ngIf="isDataAvailable">
                         {{getChangeFormattedText(stateData$?.cards[2].oldNewPremChangeInPercent,stateData$?.cards[2].oldNewPremChangeInValue)}}
                     </span>
                 </div>
                 <!-- <button class="btn btn-danger btn-sm"
                     style="color:white ;position: absolute; bottom: 4%;left:50%;">Remove Coverage</button> -->
-                    <div style="padding-top: 31%;">
-                        <button class="btn btn-info btnuploadpolicy carIndBtnCls" id="btnUP" (click)="uploadPolicy({id:'carInsuranceId', event: $event})" style="margin-top: 1%;">
-                            Upload Policy/ Take Picture
-                        </button>
-                    </div>
+                <div style="padding-top: 31%;">
+                    <button class="btn btn-info btnuploadpolicy carIndBtnCls" id="btnUP"
+                        (click)="uploadPolicy({id:'carInsuranceId', event: $event})" style="margin-top: 1%;">
+                        Upload Policy/ Take Picture
+                    </button>
+                </div>
             </div>
         </div>
         <div class="col-md-8 row">
             <div class="col-12">
                 <!-- Insight card change start-->
-                <div *ngIf="isDataAvailable" id="insightCardDivID" [hidden]="stateData$?.cards[2].showRiskModel" class="row st0" style={{getBorderColorBasedOnRiskLevel(stateData$?.cards[2].risk)}}>
+                <div *ngIf="isDataAvailable" id="insightCardDivID" [hidden]="stateData$?.cards[2].showRiskModel"
+                    class="row st0" style={{getBorderColorBasedOnRiskLevel(stateData$?.cards[2].risk)}}>
                     <span class="row">
                         <div class=" d-flex col-md-4" style="justify-content: center; align-self: center;">
-                            <img class="riskimagespopup" src={{getImageToShowBasedOnRisk(stateData$?.cards[2].risk)}} alt="{{stateData$?.cards[2].risk}} risk"
-                                style="width: 113px;height: 58px;">
+                            <img class="riskimagespopup" src={{getImageToShowBasedOnRisk(stateData$?.cards[2].risk)}}
+                                alt="{{stateData$?.cards[2].risk}} risk" style="width: 113px;height: 58px;">
                         </div>
                         <div class="col-md-7">
-                            <p *ngIf="isDataAvailable" style="font-stretch: expanded; font-size: 15px; line-height: normal; color: black; font-weight: normal;">
+                            <p *ngIf="isDataAvailable"
+                                style="font-stretch: expanded; font-size: 15px; line-height: normal; color: black; font-weight: normal;">
                                 {{stateData$?.cards[2].insight}}
                             </p>
                             <a style="margin-bottom: 10px;" href="">Learn More &gt;&gt;</a>
                         </div>
                         <div class="col-md-0" style="padding-left: 3%; padding-bottom: -1%; ">
-                            <span (click)="closePopupEvent({type:'auto',event : $event})" class="dot" style={{getBackgroundColorBasedOnRiskLevel(stateData$?.cards[2].risk)}}>x</span>
+                            <span (click)="closePopupEvent({type:'auto',event : $event})" class="dot"
+                                style={{getBackgroundColorBasedOnRiskLevel(stateData$?.cards[2].risk)}}>x</span>
                         </div>
                     </span>
 
                 </div>
                 <!-- Insight card change end -->
                 <!-- Upload Policy Dialog change start-->
-                <div [hidden]="showUploadPolicyPopup" class="row st0" style="top: -33%!important;left: -44%!important;right: 12%;width: auto;height: auto;">
-                        <span class="row" style="margin-top:unset!important;padding: 5px;">
-                            <div class=" d-flex col-md-7">
-                                      <img src="./assets/AutoPolicy.jpg" class="my-auto"
-                                  style="height: 100%;width: 100%;;object-fit: contain;">
-                             </div>
-                <div class="col-md-5" style="text-align: left; margin-top: 12%;font-size: 1.31vw!important;font-family: 'poppins';">
-   
-            <table>
-                <tr style="line-height: normal;">
-                    <td >Bodily Injury</td>
-                      <td style="width: 44%;">   
-                        <tr>
-                            <td>$</td>
-                            <td>
-                                <input class="uploadPolicyInp" matInput placeholder="" value="250000">
-                            </td>
-                        </tr>
-                     </td>
-                </tr>
+                <div [hidden]="showUploadPolicyPopup" class="row st0"
+                    style="top: -33%!important;left: -44%!important;right: 12%;width: auto;height: auto;">
+                    <span class="row" style="margin-top:unset!important;padding: 5px;">
+                        <div class=" d-flex col-md-7">
+                            <img src="./assets/AutoPolicy.jpg" class="my-auto"
+                                style="height: 100%;width: 100%;;object-fit: contain;">
+                        </div>
+                        <div class="col-md-5"
+                            style="text-align: left; margin-top: 12%;font-size: 1.31vw!important;font-family: 'poppins';">
 
-                <tr style="line-height: normal;">
-                         <td>Property Damage</td>
-                         <td style="width: 44%;">   
-                            <tr>
-                                <td>$</td>
-                                <td><input class="uploadPolicyInp" matInput placeholder="" value="100000"></td>
-                            </tr>
-                       </td>
-                </tr>
-               
-                <tr style="line-height: normal;">
-                    <td>Medical Coverage</td>
-                    <td>   
-                        <tr>
-                            <td>$</td>
-                            <td><input class="uploadPolicyInp" matInput placeholder="" value="5000"></td>
-                        </tr>
-                   </td>
-                 </tr>
+                            <table>
+                                <tr style="line-height: normal;">
+                                    <td>Bodily Injury</td>
+                                    <td style="width: 44%;">
+                                <tr>
+                                    <td>$</td>
+                                    <td>
+                                        <input class="uploadPolicyInp" matInput placeholder="" value="250000">
+                                    </td>
+                                </tr>
+                                </td>
+                                </tr>
 
-                <tr style="line-height: normal;">
-                      <td>Uninsured Self Coverage</td>
-                      <td>   
-                        <tr>
-                            <td>$</td>
-                            <td><input class="uploadPolicyInp" matInput placeholder="" value="300000"></td>
-                        </tr>
-                   </td>
-                 </tr>
-             
-               </table>
-    
-               <div class="col-md-12 d-flex " style="justify-content: center;padding: 10px;margin-top: 10%;">
-                <button class="btn btn-info" (click)="handlePopupAcceptBtn('auto')">Validate</button>
-              </div>
-             </div>
-            </span>
+                                <tr style="line-height: normal;">
+                                    <td>Property Damage</td>
+                                    <td style="width: 44%;">
+                                <tr>
+                                    <td>$</td>
+                                    <td><input class="uploadPolicyInp" matInput placeholder="" value="100000"></td>
+                                </tr>
+                                </td>
+                                </tr>
+
+                                <tr style="line-height: normal;">
+                                    <td>Medical Coverage</td>
+                                    <td>
+                                <tr>
+                                    <td>$</td>
+                                    <td><input class="uploadPolicyInp" matInput placeholder="" value="5000"></td>
+                                </tr>
+                                </td>
+                                </tr>
+
+                                <tr style="line-height: normal;">
+                                    <td>Uninsured Self Coverage</td>
+                                    <td>
+                                <tr>
+                                    <td>$</td>
+                                    <td><input class="uploadPolicyInp" matInput placeholder="" value="300000"></td>
+                                </tr>
+                                </td>
+                                </tr>
+
+                            </table>
+
+                            <div class="col-md-12 d-flex "
+                                style="justify-content: center;padding: 10px;margin-top: 10%;">
+                                <button class="btn btn-info" (click)="handlePopupAcceptBtn('auto')">Validate</button>
+                            </div>
+                        </div>
+                    </span>
                 </div>
 
 
                 <!-- Usage Based Insurance Pop Up-->
-                <div [hidden]="showUsageBasedInsurance" class="row st0" style="top: -12%!important;left: -44%!important;right: 12%;width: auto;height: auto;">
-                   
-                      
-                    <div class="col-md-12" style="text-align: left; margin-top: 4%;font-size: 1.31vw!important;font-family: 'poppins'; padding-left: 4%;">
+                <div [hidden]="showUsageBasedInsurance" class="row st0"
+                    style="top: -12%!important;left: -44%!important;right: 12%;width: auto;height: auto;">
 
-             <div class="row">
-                <ul>
-                    <li>
-                        It is your car insurance based on your driving 
-                    </li>
-                    <li>
-                        Vehicle usage (how much it was driven, speed, long journeys or short trips) 
-                    </li>
-                    <li>
-                        Hand braking, rapid acceleration, pattern of acceleration and braking, etc. 
-                    </li>
-                    <li>
-                        A Telematics device is installed in the vehicle that tracks above
-                    </li>
-                </ul>
-             </div>
-                       
-                <div class="row">
-                    <span  style="padding-left: 5%; width:70%">How many miles you would be driving in a year ?</span> 
 
-                    <mat-form-field style="width:26%;">
-                            <mat-select [(value)]="yearlymiles">
-                            <mat-option value="Select">Select</mat-option>
-                            <mat-option value="Less than 3000">Less than 3000</mat-option>
-                            <mat-option value="3000 - 7000">3000 - 7000</mat-option>
-                            <mat-option value="7000 - 10000">7000 - 10000</mat-option>
-                            <mat-option value="Greater than 10000">Greater than 10000</mat-option>
-                            </mat-select>
-                    </mat-form-field>
-                </div>
-                       
-                <div class="row">
-                <div class="col-md-12 d-flex " style="justify-content: center;padding: 10px;margin-top: 2%;">
-                     <button class="btn btn-info" (click)="calculatePremium({insuranceType:'auto'})">Calculate Premium</button>
-                 </div>
-                </div>
+                    <div class="col-md-12"
+                        style="text-align: left; margin-top: 4%;font-size: 1.31vw!important;font-family: 'poppins'; padding-left: 4%;">
 
-            
-                
+                        <div class="row">
+                            <ul>
+                                <li>
+                                    It is your car insurance based on your driving
+                                </li>
+                                <li>
+                                    Vehicle usage (how much it was driven, speed, long journeys or short trips)
+                                </li>
+                                <li>
+                                    Hand braking, rapid acceleration, pattern of acceleration and braking, etc.
+                                </li>
+                                <li>
+                                    A Telematics device is installed in the vehicle that tracks above
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="row">
+                            <span style="padding-left: 5%; width:70%">How many miles you would be driving in a year
+                                ?</span>
+
+                            <mat-form-field style="width:26%;">
+                                <mat-select [(value)]="yearlymiles">
+                                    <mat-option value="Select">Select</mat-option>
+                                    <mat-option value="Less than 3000">Less than 3000</mat-option>
+                                    <mat-option value="3000 - 7000">3000 - 7000</mat-option>
+                                    <mat-option value="7000 - 10000">7000 - 10000</mat-option>
+                                    <mat-option value="Greater than 10000">Greater than 10000</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 d-flex "
+                                style="justify-content: center;padding: 10px;margin-top: 2%;">
+                                <button class="btn btn-info"
+                                    (click)="calculatePremium({insuranceType:'auto'})">Calculate Premium</button>
+                            </div>
+                        </div>
+
+
+
                     </div>
-                 
+
                 </div>
 
 
@@ -834,41 +923,57 @@
 
                 <!-- Upload Policy Dialog change end-->
                 <div style="position:absolute; margin-top: 1%;margin-left: 100%;">
-                <button *ngIf="isDataAvailable" class="ml-auto" (click)="closeCard({id:'carInsuranceId', event: $event, change: stateData$?.cards[1].oldNewPremChangeInPercent})" style="border:none;background-color: white;color: blue;">
-                <mat-icon>close</mat-icon>
-                </button>
+                    <button *ngIf="isDataAvailable" class="ml-auto"
+                        (click)="closeCard({id:'carInsuranceId', event: $event, change: stateData$?.cards[1].oldNewPremChangeInPercent})"
+                        style="border:none;background-color: white;color: blue;">
+                        <mat-icon>close</mat-icon>
+                    </button>
                 </div>
 
 
 
 
-              
+
 
 
                 <div class="row">
                     <span class="col-4 text-left" title="Coverage for Injuries caused to others">Bodily Injury</span>
-                    <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'BodilyInjuryLability',type:'auto'})" min="50000"
+                    <mat-slider class="col-8 max1"
+                        (input)="onInputChange({event:$event,id:'BodilyInjuryLability',type:'auto'})" min="50000"
                         max="300000" value="50000" step="50000" thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
-                    <span class="col-4 text-left" title="Coverage for Injuries caused to other's property">Property Damage</span>
-                    <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'PropertyDamageLiability',type:'auto'})" min="25000"
-                        max="100000" value="25000" step="25000" value="{{sliderAutoVariableValues.propertyDamageLiability}}" thumbLabel tickInterval="1"></mat-slider>
+                    <span class="col-4 text-left" title="Coverage for Injuries caused to other's property">Property
+                        Damage</span>
+                    <mat-slider class="col-8 max1"
+                        (input)="onInputChange({event:$event,id:'PropertyDamageLiability',type:'auto'})" min="25000"
+                        max="100000" value="25000" step="25000"
+                        value="{{sliderAutoVariableValues.propertyDamageLiability}}" thumbLabel tickInterval="1">
+                    </mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-4 text-left">Self-Paid Amount </span>
-                    <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'ComprehensiveAndCollision',type:'auto'})" min="250"
-                        max="1000" value="250" step="250" value="{{sliderAutoVariableValues.comprehensiveAndCollision}}" thumbLabel tickInterval="1"></mat-slider>
+                    <mat-slider class="col-8 max1"
+                        (input)="onInputChange({event:$event,id:'ComprehensiveAndCollision',type:'auto'})" min="250"
+                        max="1000" value="250" step="250" value="{{sliderAutoVariableValues.comprehensiveAndCollision}}"
+                        thumbLabel tickInterval="1"></mat-slider>
                 </div>
                 <div class="row">
-                    <span class="col-4 text-left" title="Medical bills, lost wages etc">Personal Injury Protection </span>
-                    <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'PersonalInjuryProtection',type:'auto'})" min="2000"
-                        max="7000" value="2000" step="1000" value="{{sliderAutoVariableValues.personalInjuryProtection}}" thumbLabel tickInterval="1"></mat-slider>
+                    <span class="col-4 text-left" title="Medical bills, lost wages etc">Personal Injury Protection
+                    </span>
+                    <mat-slider class="col-8 max1"
+                        (input)="onInputChange({event:$event,id:'PersonalInjuryProtection',type:'auto'})" min="2000"
+                        max="7000" value="2000" step="1000"
+                        value="{{sliderAutoVariableValues.personalInjuryProtection}}" thumbLabel tickInterval="1">
+                    </mat-slider>
                 </div>
                 <div class="row">
                     <span class="col-4 text-left" title="If hit by uninsured driver">Uninsured Self Coverage </span>
-                    <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'Uninsured/UnderinsuredMotorist',type:'auto'})" min="0"
-                        max="300000" value="0" step="60000" value="{{sliderAutoVariableValues.uninsuredOrUnderinsuredMotorist}}" thumbLabel tickInterval="1"></mat-slider>
+                    <mat-slider class="col-8 max1"
+                        (input)="onInputChange({event:$event,id:'Uninsured/UnderinsuredMotorist',type:'auto'})" min="0"
+                        max="300000" value="0" step="60000"
+                        value="{{sliderAutoVariableValues.uninsuredOrUnderinsuredMotorist}}" thumbLabel
+                        tickInterval="1"></mat-slider>
                 </div>
                 <!-- <div class="row">
                     <div style="padding-top: 1%;" class="col-4 text-left">
@@ -992,36 +1097,41 @@
                     </div>
                 </div>
 
-                
 
-               
-              
-       
-                <div class="calcpremoptimize row">     
-                    
+
+
+
+
+                <div class="calcpremoptimize row">
+
                     <table>
                         <tr>
-                           
+
                             <td>
-                            <button class="d-flex btn btn-info ml-auto btncalculatepremium" (click)="usageBasedInsurancePopUp({id:'carInsuranceId', event: $event})">Usage Based Insurance     
-                            </button>
+                                <button class="d-flex btn btn-info ml-auto btncalculatepremium"
+                                    (click)="usageBasedInsurancePopUp({id:'carInsuranceId', event: $event})">Usage Based
+                                    Insurance
+                                </button>
                             </td>
 
                             <td [hidden]="autohiddenfields">
-                                <button (click)="handleOptimizeClick('auto')" class="d-flex btn btn-info ml-auto btnoptimize">Optimize Policy
-                                </button>                     
+                                <button (click)="handleOptimizeClick('auto')"
+                                    class="d-flex btn btn-info ml-auto btnoptimize">Optimize Policy
+                                </button>
                             </td>
                             <td>
-                                <button class="d-flex btn btn-info ml-auto btncalculatepremium" (click)="calculatePremium({insuranceType:'auto'})">Calculate Premium
-                                    <span *ngIf="isAPICallComplete" class="spinner-border" role="status" style="margin-left: 15px;width: 1.5rem;height: 1.5rem;position: relative;margin-top: 0px;">
+                                <button class="d-flex btn btn-info ml-auto btncalculatepremium"
+                                    (click)="calculatePremium({insuranceType:'auto'})">Calculate Premium
+                                    <span *ngIf="isAPICallComplete" class="spinner-border" role="status"
+                                        style="margin-left: 15px;width: 1.5rem;height: 1.5rem;position: relative;margin-top: 0px;">
                                         <span class="sr-only" id="loading"></span>
                                     </span>
                                 </button>
                             </td>
                         </tr>
                     </table>
-                   
-                                  
+
+
                 </div>
             </div>
         </div>
@@ -1031,223 +1141,237 @@
             </button>
         </div> -->
     </div>
-    
+
 </div>
 
-   
 
-    <div class="container mt-1 mb-5">
-        
-        <!-- **************************** Life Insurance **************************  -->
-        <div div class="col-md-4 flex-container mt-1 lifeIns padleft" fxLayout="row">
-            <div [hidden]="showLifeCard" class="roundleft cardDimentions" id="lifeInsurance" style="border-left: 40px solid #006ebf ;">
-                <mat-card class="matcardstyle round" style="background-color: #f1f1f1;">
-                    <div (click)="showCard({id:'lifeInsuranceId', event: $event})">
-                        <!-- <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">favorite
+
+<div class="container mt-1 mb-5">
+
+    <!-- **************************** Life Insurance **************************  -->
+    <div div class="col-md-4 flex-container mt-1 lifeIns padleft" fxLayout="row">
+        <div [hidden]="showLifeCard" class="roundleft cardDimentions" id="lifeInsurance"
+            style="border-left: 40px solid #006ebf ;">
+            <mat-card class="matcardstyle round" style="background-color: #f1f1f1;">
+                <div (click)="showCard({id:'lifeInsuranceId', event: $event})">
+                    <!-- <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">favorite
                     </mat-icon> -->
 
-                        <img src="./assets/EXL_LifeInsurance_Icon.png" class="maticonstyle">
-                        <mat-card-header>
-                            <mat-card-subtitle *ngIf="isDataAvailable">
-                                <span class="d-flex" style="align-items: center;color: black;">
-
-                                    {{stateData$?.cards[0].name}} Insurance
-                                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[0].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}}
-                                        class="highriskiconstyle">
-                                </span>
-                            </mat-card-subtitle>
-
-                            <mat-card-title *ngIf="isDataAvailable">Coverage:&nbsp;
-                                <b>${{stateData$.cards[0].coverage|number:'2.'}}</b>
-                            </mat-card-title>
-                            <mat-card-title *ngIf="isDataAvailable">Premium:&nbsp;
-                                <b>${{stateData$.cards[0].premium|number:'2.'}}</b>
-                            </mat-card-title>
-                        </mat-card-header>
-                        <mat-divider class="divider"></mat-divider>
-
-                    </div>
-                    <mat-card-content>
-                        <span class="pl-3 d-flex" style="padding-bottom: 5%;margin-top: 5px;" *ngIf="isDataAvailable">
-                            {{getChangeFormattedText(stateData$?.cards[0].oldNewPremChangeInPercent,stateData$?.cards[0].oldNewPremChangeInValue)}}
-                            <mat-slide-toggle checked (change)="OnInsuanceSlideToggle({insuranceType:'life', event: $event})" class="ml-auto">
-                            </mat-slide-toggle>
-
-                        </span>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-        </div>
-
-
-        <!-- ******************** Home Insurance ********************* -->
-        <div class="col-md-4 flex-container mt-1 homeIns padleft" fxLayout="row">
-            <div [hidden]="showHomeCard" class="roundleft cardDimentions" id="homeInsurance" style="border-left: 40px solid #769fe8;">
-                <mat-card class="matcardstyle round" style="background-color: #f1f1f1;">
-                    <div (click)="showCard({id:'homeInsuranceId', event: $event})">
-                        <!-- <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">home</mat-icon> -->
-                        <img src="./assets/EXL_HomeInsurance_Icon.png" class="maticonstyle">
-
-                        <mat-card-header>
-                            <mat-card-subtitle *ngIf="isDataAvailable">
-                                <span class="d-flex" style="align-items: center;color:black">
-                                    {{stateData$?.cards[1].name}} Insurance
-                                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[1].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[1].risk)}}
-                                        class="highriskiconstyle">
-                                </span>
-                            </mat-card-subtitle>
-                            <mat-card-title *ngIf="isDataAvailable">Coverage:&nbsp;
-                                <b>${{stateData$?.cards[1].coverage|number:'2.'}}</b>
-                            </mat-card-title>
-                            <mat-card-title *ngIf="isDataAvailable">Premium:&nbsp;
-                                <b>${{stateData$?.cards[1].premium|number:'2.'}}</b>
-                            </mat-card-title>
-                        </mat-card-header>
-                        <mat-divider class="divider"></mat-divider>
-
-                    </div>
-                    <mat-card-content>
-                        <span class="pl-3 d-flex" style="padding-bottom: 5%;margin-top: 5px;" *ngIf="isDataAvailable">
-                            {{getChangeFormattedText(stateData$?.cards[1].oldNewPremChangeInPercent,stateData$?.cards[1].oldNewPremChangeInValue)}}
-                            <mat-slide-toggle checked (change)="OnInsuanceSlideToggle({insuranceType:'home', event: $event})" class="ml-auto">
-                            </mat-slide-toggle>
-                        </span>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-        </div>
-
-        <!-- **************************** Auto Insurance ********************** -->
-        <div class="col-md-4 flex-container mt-1 carIns padleft" fxLayout="row">
-            <div [hidden]="showAutoCard" class="roundleft cardDimentions" id="autoInsurance" style="border-left: 40px solid #bbcff3;">
-                <mat-card class="matcardstyle round" style="background-color:  #f1f1f1;">
-                    <div (click)="showCard({id:'carInsuranceId', event: $event})">
-                        <!-- <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">directions_car
-                    </mat-icon> -->
-                        <img src="./assets/EXL_AutoInsurance_Icon.png" class="maticonstyle">
-
-                        <mat-card-header>
-                            <mat-card-subtitle *ngIf="isDataAvailable">
-                                <span class="d-flex" style="align-items: center;color: black;">
-
-                                    {{stateData$?.cards[2].name}} Insurance
-                                    <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[2].risk)" src={{getImageToShowBasedOnRisk(stateData$?.cards[2].risk)}}
-                                        class="highriskiconstyle">
-                                </span>
-                            </mat-card-subtitle>
-                            <mat-card-title *ngIf="isDataAvailable">Coverage:&nbsp;
-                                <b>${{stateData$?.cards[2].coverage|number:'2.'}}</b>
-                            </mat-card-title>
-                            <mat-card-title *ngIf="isDataAvailable">Premium:&nbsp;
-                                <b>
-                                    ${{stateData$?.cards[2].premium|number:'2.'}}
-                                </b>
-                            </mat-card-title>
-                        </mat-card-header>
-                        <mat-divider class="divider"></mat-divider>
-
-                    </div>
-                    <mat-card-content>
-                        <span class="pl-3 d-flex" style="padding-bottom: 5%;margin-top: 5px;" *ngIf="isDataAvailable">
-                            {{getChangeFormattedText(stateData$?.cards[2].oldNewPremChangeInPercent,stateData$?.cards[2].oldNewPremChangeInValue)}}
-                            <mat-slide-toggle checked (change)="OnInsuanceSlideToggle({insuranceType:'auto', event: $event})" class="ml-auto">
-                            </mat-slide-toggle>
-                        </span>
-                    </mat-card-content>
-                </mat-card>
-
-
-            </div>
-        </div>
-
-
-        <!-- ******************* Disabled Cards ************************** -->
-        <div class="col-md-4 flex-container mt-1 petIns" fxLayout="row" style="cursor: pointer; padding-left:2%;padding-top: 1.5%;padding-right: 0%;">
-            <div class="roundleft " [hidden]="hidePetCard" style="border-left: 40px solid #ff6503 ;">
-                <mat-card class="matcardstyle round" style="background-color: #f1f1f1;">
-                    <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
-                    <mat-icon style="margin-left: -33px; color:white;margin-top: 15%" aria-hidden="false" aria-label="Example home icon">pets</mat-icon>
-                    <!-- <img src="./assets/EXL_LifeInsurance_Icon.png" class="maticonstyle"> -->
-
+                    <img src="./assets/EXL_LifeInsurance_Icon.png" class="maticonstyle">
                     <mat-card-header>
-                        <mat-card-subtitle style="padding-top: 6%;">Pet Insurance</mat-card-subtitle>
-                        <mat-card-title>Coverage:&nbsp;
-                            <b>$5,000</b>
+                        <mat-card-subtitle *ngIf="isDataAvailable">
+                            <span class="d-flex" style="align-items: center;color: black;">
+
+                                {{stateData$?.cards[0].name}} Insurance
+                                <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[0].risk)"
+                                    src={{getImageToShowBasedOnRisk(stateData$?.cards[0].risk)}}
+                                    class="highriskiconstyle">
+                            </span>
+                        </mat-card-subtitle>
+
+                        <mat-card-title *ngIf="isDataAvailable">Coverage:&nbsp;
+                            <b>${{stateData$.cards[0].coverage|number:'2.'}}</b>
                         </mat-card-title>
-                        <mat-card-title>Premium:&nbsp;
-                            <b>$130</b>
+                        <mat-card-title *ngIf="isDataAvailable">Premium:&nbsp;
+                            <b>${{stateData$.cards[0].premium|number:'2.'}}</b>
                         </mat-card-title>
                     </mat-card-header>
                     <mat-divider class="divider"></mat-divider>
-                    <mat-card-content>
-                        <span class="pl-3 d-flex" style="padding-bottom: 5%;margin-top: 5px;">
-                            <!-- --no change -->
-                            <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'pet', event: $event})" class="ml-auto"></mat-slide-toggle>
-                        </span>
 
-                    </mat-card-content>
+                </div>
+                <mat-card-content>
+                    <span class="pl-3 d-flex" style="padding-bottom: 5%;margin-top: 5px;" *ngIf="isDataAvailable">
+                        {{getChangeFormattedText(stateData$?.cards[0].oldNewPremChangeInPercent,stateData$?.cards[0].oldNewPremChangeInValue)}}
+                        <mat-slide-toggle checked
+                            (change)="OnInsuanceSlideToggle({insuranceType:'life', event: $event})" class="ml-auto">
+                        </mat-slide-toggle>
 
-                </mat-card>
-            </div>
-        </div>
-
-        <div class="col-md-4  cardDimentions flex-container mt-1 boatIns" fxLayout="row" style="cursor: pointer; padding-left:2%; padding-top: 1.5%;padding-right: 0%;">
-            <div [hidden]="hideBoatCard" class="roundleft cardDimentions" style="border-left: 40px solid #ffa368;">
-                <mat-card class="matcardstyle round" style="background-color: #f1f1f1;">
-                    <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
-                    <mat-icon class="" style="margin-left: -33px; color:white;margin-top: 16%" aria-hidden="false" aria-label="Example home icon">directions_boat</mat-icon>
-                    <!-- <img src="./assets/EXL_LifeInsurance_Icon.png" class="maticonstyle"> -->
-
-                    <mat-card-header>
-                        <mat-card-subtitle style="padding-top: 6%;">Boat Insurance</mat-card-subtitle>
-                        <mat-card-title>Coverage:&nbsp;
-                            <b>$50,000</b>
-                        </mat-card-title>
-                        <mat-card-title>Premium:&nbsp;
-                            <b>$1,300</b>
-                        </mat-card-title>
-                    </mat-card-header>
-                    <mat-divider class="divider"></mat-divider>
-                    <mat-card-content>
-                        <span class="pl-3 d-flex" style="padding-bottom: 5%;margin-top: 5px;">
-                            <!-- --no change -->
-                            <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'boat', event: $event})" class="ml-auto"></mat-slide-toggle>
-                        </span>
-                    </mat-card-content>
-
-                </mat-card>
-            </div>
-        </div>
-
-        <div class="col-md-4 cardDimentions flex-container mt-1 rentIns" fxLayout="row" style="cursor: pointer; padding-left:2%; padding-top: 1.5%;padding-right: 0%;">
-            <div [hidden]="hideRentCard" class="roundleft cardDimentions" style="border-left: 40px solid #ffc000;">
-                <mat-card class="round" style="background-color: #f1f1f1; box-shadow:none; height: 100%;">
-                    <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
-                    <mat-icon class="" style="margin-left: -33px; color:white;margin-top: 17.5%" aria-hidden="false" aria-label="Example home icon">vpn_keys</mat-icon>
-                    <!-- <img src="./assets/EXL_LifeInsurance_Icon.png" class="maticonstyle"> -->
-
-                    <mat-card-header>
-                        <mat-card-subtitle style="padding-top: 5%;">Renters Insurance</mat-card-subtitle>
-                        <mat-card-title>Coverage:&nbsp;
-                            <b>$50,000</b>
-                        </mat-card-title>
-                        <mat-card-title>Premium:&nbsp;
-                            <b>$1,300</b>
-                        </mat-card-title>
-                    </mat-card-header>
-                    <mat-divider class="divider"></mat-divider>
-                    <mat-card-content>
-                        <span class="pl-3 d-flex" style="padding-bottom: 5%;margin-top: 5px;">
-                            <!-- --no change -->
-                            <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'renters', event: $event})" class="ml-auto"></mat-slide-toggle>
-                        </span>
-                    </mat-card-content>
-
-                </mat-card>
-            </div>
+                    </span>
+                </mat-card-content>
+            </mat-card>
         </div>
     </div>
 
 
-    
+    <!-- ******************** Home Insurance ********************* -->
+    <div class="col-md-4 flex-container mt-1 homeIns padleft" fxLayout="row">
+        <div [hidden]="showHomeCard" class="roundleft cardDimentions" id="homeInsurance"
+            style="border-left: 40px solid #769fe8;">
+            <mat-card class="matcardstyle round" style="background-color: #f1f1f1;">
+                <div (click)="showCard({id:'homeInsuranceId', event: $event})">
+                    <!-- <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">home</mat-icon> -->
+                    <img src="./assets/EXL_HomeInsurance_Icon.png" class="maticonstyle">
 
+                    <mat-card-header>
+                        <mat-card-subtitle *ngIf="isDataAvailable">
+                            <span class="d-flex" style="align-items: center;color:black">
+                                {{stateData$?.cards[1].name}} Insurance
+                                <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[1].risk)"
+                                    src={{getImageToShowBasedOnRisk(stateData$?.cards[1].risk)}}
+                                    class="highriskiconstyle">
+                            </span>
+                        </mat-card-subtitle>
+                        <mat-card-title *ngIf="isDataAvailable">Coverage:&nbsp;
+                            <b>${{stateData$?.cards[1].coverage|number:'2.'}}</b>
+                        </mat-card-title>
+                        <mat-card-title *ngIf="isDataAvailable">Premium:&nbsp;
+                            <b>${{stateData$?.cards[1].premium|number:'2.'}}</b>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-divider class="divider"></mat-divider>
+
+                </div>
+                <mat-card-content>
+                    <span class="pl-3 d-flex" style="padding-bottom: 5%;margin-top: 5px;" *ngIf="isDataAvailable">
+                        {{getChangeFormattedText(stateData$?.cards[1].oldNewPremChangeInPercent,stateData$?.cards[1].oldNewPremChangeInValue)}}
+                        <mat-slide-toggle checked
+                            (change)="OnInsuanceSlideToggle({insuranceType:'home', event: $event})" class="ml-auto">
+                        </mat-slide-toggle>
+                    </span>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <!-- **************************** Auto Insurance ********************** -->
+    <div class="col-md-4 flex-container mt-1 carIns padleft" fxLayout="row">
+        <div [hidden]="showAutoCard" class="roundleft cardDimentions" id="autoInsurance"
+            style="border-left: 40px solid #bbcff3;">
+            <mat-card class="matcardstyle round" style="background-color:  #f1f1f1;">
+                <div (click)="showCard({id:'carInsuranceId', event: $event})">
+                    <!-- <mat-icon class="maticonstyle" aria-hidden="false" aria-label="Example home icon">directions_car
+                    </mat-icon> -->
+                    <img src="./assets/EXL_AutoInsurance_Icon.png" class="maticonstyle">
+
+                    <mat-card-header>
+                        <mat-card-subtitle *ngIf="isDataAvailable">
+                            <span class="d-flex" style="align-items: center;color: black;">
+
+                                {{stateData$?.cards[2].name}} Insurance
+                                <img *ngIf="isDataAvailable" [hidden]="showHideInsights(stateData$?.cards[2].risk)"
+                                    src={{getImageToShowBasedOnRisk(stateData$?.cards[2].risk)}}
+                                    class="highriskiconstyle">
+                            </span>
+                        </mat-card-subtitle>
+                        <mat-card-title *ngIf="isDataAvailable">Coverage:&nbsp;
+                            <b>${{stateData$?.cards[2].coverage|number:'2.'}}</b>
+                        </mat-card-title>
+                        <mat-card-title *ngIf="isDataAvailable">Premium:&nbsp;
+                            <b>
+                                ${{stateData$?.cards[2].premium|number:'2.'}}
+                            </b>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-divider class="divider"></mat-divider>
+
+                </div>
+                <mat-card-content>
+                    <span class="pl-3 d-flex" style="padding-bottom: 5%;margin-top: 5px;" *ngIf="isDataAvailable">
+                        {{getChangeFormattedText(stateData$?.cards[2].oldNewPremChangeInPercent,stateData$?.cards[2].oldNewPremChangeInValue)}}
+                        <mat-slide-toggle checked
+                            (change)="OnInsuanceSlideToggle({insuranceType:'auto', event: $event})" class="ml-auto">
+                        </mat-slide-toggle>
+                    </span>
+                </mat-card-content>
+            </mat-card>
+
+
+        </div>
+    </div>
+
+
+    <!-- ******************* Disabled Cards ************************** -->
+    <div class="col-md-4 flex-container mt-1 petIns" fxLayout="row"
+        style="cursor: pointer; padding-left:2%;padding-top: 1.5%;padding-right: 0%;">
+        <div class="roundleft " [hidden]="hidePetCard" style="border-left: 40px solid #ff6503 ;">
+            <mat-card class="matcardstyle round" style="background-color: #f1f1f1;">
+                <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
+                <mat-icon style="margin-left: -33px; color:white;margin-top: 15%" aria-hidden="false"
+                    aria-label="Example home icon">pets</mat-icon>
+                <!-- <img src="./assets/EXL_LifeInsurance_Icon.png" class="maticonstyle"> -->
+
+                <mat-card-header>
+                    <mat-card-subtitle style="padding-top: 6%;">Pet Insurance</mat-card-subtitle>
+                    <mat-card-title>Coverage:&nbsp;
+                        <b>$5,000</b>
+                    </mat-card-title>
+                    <mat-card-title>Premium:&nbsp;
+                        <b>$130</b>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-divider class="divider"></mat-divider>
+                <mat-card-content>
+                    <span class="pl-3 d-flex" style="padding-bottom: 5%;margin-top: 5px;">
+                        <!-- --no change -->
+                        <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'pet', event: $event})"
+                            class="ml-auto"></mat-slide-toggle>
+                    </span>
+
+                </mat-card-content>
+
+            </mat-card>
+        </div>
+    </div>
+
+    <div class="col-md-4  cardDimentions flex-container mt-1 boatIns" fxLayout="row"
+        style="cursor: pointer; padding-left:2%; padding-top: 1.5%;padding-right: 0%;">
+        <div [hidden]="hideBoatCard" class="roundleft cardDimentions" style="border-left: 40px solid #ffa368;">
+            <mat-card class="matcardstyle round" style="background-color: #f1f1f1;">
+                <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
+                <mat-icon class="" style="margin-left: -33px; color:white;margin-top: 16%" aria-hidden="false"
+                    aria-label="Example home icon">directions_boat</mat-icon>
+                <!-- <img src="./assets/EXL_LifeInsurance_Icon.png" class="maticonstyle"> -->
+
+                <mat-card-header>
+                    <mat-card-subtitle style="padding-top: 6%;">Boat Insurance</mat-card-subtitle>
+                    <mat-card-title>Coverage:&nbsp;
+                        <b>$50,000</b>
+                    </mat-card-title>
+                    <mat-card-title>Premium:&nbsp;
+                        <b>$1,300</b>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-divider class="divider"></mat-divider>
+                <mat-card-content>
+                    <span class="pl-3 d-flex" style="padding-bottom: 5%;margin-top: 5px;">
+                        <!-- --no change -->
+                        <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'boat', event: $event})"
+                            class="ml-auto"></mat-slide-toggle>
+                    </span>
+                </mat-card-content>
+
+            </mat-card>
+        </div>
+    </div>
+
+    <div class="col-md-4 cardDimentions flex-container mt-1 rentIns" fxLayout="row"
+        style="cursor: pointer; padding-left:2%; padding-top: 1.5%;padding-right: 0%;">
+        <div [hidden]="hideRentCard" class="roundleft cardDimentions" style="border-left: 40px solid #ffc000;">
+            <mat-card class="round" style="background-color: #f1f1f1; box-shadow:none; height: 100%;">
+                <!-- <mat-icon class="ml-auto menuicon">menu</mat-icon> -->
+                <mat-icon class="" style="margin-left: -33px; color:white;margin-top: 17.5%" aria-hidden="false"
+                    aria-label="Example home icon">vpn_keys</mat-icon>
+                <!-- <img src="./assets/EXL_LifeInsurance_Icon.png" class="maticonstyle"> -->
+
+                <mat-card-header>
+                    <mat-card-subtitle style="padding-top: 5%;">Renters Insurance</mat-card-subtitle>
+                    <mat-card-title>Coverage:&nbsp;
+                        <b>$50,000</b>
+                    </mat-card-title>
+                    <mat-card-title>Premium:&nbsp;
+                        <b>$1,300</b>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-divider class="divider"></mat-divider>
+                <mat-card-content>
+                    <span class="pl-3 d-flex" style="padding-bottom: 5%;margin-top: 5px;">
+                        <!-- --no change -->
+                        <mat-slide-toggle (change)="OnInsuanceSlideToggle({insuranceType:'renters', event: $event})"
+                            class="ml-auto"></mat-slide-toggle>
+                    </span>
+                </mat-card-content>
+
+            </mat-card>
+        </div>
+    </div>
+</div>

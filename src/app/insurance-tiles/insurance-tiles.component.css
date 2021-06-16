@@ -2,6 +2,12 @@
   padding: 0px 0 0 0;
 }
 
+span .per-score-amber {
+  font-size: larger!important; 
+  color: #ff6503!important;
+}
+
+
 mat-card {
   display: flex;
   flex-direction: column;

@@ -661,7 +661,7 @@ export class InsuranceTilesComponent implements OnInit {
   tempFlag = false;
   tempFlag2 = false;
   tempFlag3 = false;
-  calculatePremium({ insuranceType }) {
+  calculatePremium({ insuranceType, isOptimizing }) {
     this.isAPICallComplete = true;
     switch (insuranceType) {
 
@@ -696,17 +696,14 @@ export class InsuranceTilesComponent implements OnInit {
               }
             }
 
-            if (this.floodInsurance == true)
-              this.percentileScore = `<span style="font-size: medium;"><b>“75<sup>th</sup> Percentile”</b></span>
-                                      <span style="font-size: 0.9vw;">Your score as compared to other customers with similar demographics.</span>`;
-
             if (this.homehiddenfields == false) {
               payloadJSON.data.policyData =
               {
                 roofCondition: this.roofCondition,
                 plumingCondition: this.plumingCondition,
                 burglerAlarm: this.burglerAlarm,
-                floodInsurance: this.floodInsurance
+                floodInsurance: this.floodInsurance,
+                isOptimizing: isOptimizing
               }
             }
             this.updateTotalPremiumInStore(payloadJSON, 'home', data, dwelling_default)
@@ -776,7 +773,7 @@ export class InsuranceTilesComponent implements OnInit {
 
             let homeIndex = data.cards.findIndex(obj => obj.key == 'home');
 
-            
+
             this.SliderData.yearlyMiles = this.yearlymiles
             let payloadJSON = {
               data: {
@@ -791,8 +788,8 @@ export class InsuranceTilesComponent implements OnInit {
             this.updateTotalPremiumInStore(payloadJSON, 'auto', data, bodilyInjuryLability);
             this.showMask = true;
             this.showUsageBasedInsurance = true;
-           
-           
+
+
           }
 
         });
@@ -803,7 +800,7 @@ export class InsuranceTilesComponent implements OnInit {
     }
   }
 
-  usageBasedInsurancePopUp(event){
+  usageBasedInsurancePopUp(event) {
     this.showUsageBasedInsurance = false;
     $("#mask").fadeTo(100, 0.1);
     this.showMask = false;
@@ -862,6 +859,13 @@ export class InsuranceTilesComponent implements OnInit {
 
             newState.cards[index].oldNewPremChangeInValue = newState.cards[index].premium - newState.cards[index].oldPremium;
 
+            if (this.floodInsurance == true) {
+              this.percentileScore = '75%'
+            }
+
+            if (payloadJSON.data.policyData.isOptimizing == true) {
+              this.percentileScore = '90%';
+            }
 
             this.isAPICallComplete = false;
             newState = this.reCalculateTotalPremium(newState)
@@ -1056,8 +1060,7 @@ export class InsuranceTilesComponent implements OnInit {
 
         this.burglerAlarm = true;
         this.tempFlag4 = true;
-        this.percentileScore = `<span style="font-size: medium;"><b>“60<sup>th</sup> Percentile”</b></span>
-        <span style="font-size: 0.9vw;">Your score as compared to other customers with similar demographics.</span>`;
+        this.percentileScore = '60%';
         break;
       }
       case 'auto': {
@@ -1082,7 +1085,6 @@ export class InsuranceTilesComponent implements OnInit {
 
   }
 
-
   handleOptimizeClick(insuranceType) {
     switch (insuranceType) {
       case 'home': {
@@ -1102,7 +1104,7 @@ export class InsuranceTilesComponent implements OnInit {
         this.SliderData["lossOfUse"] = 40000;
         this.SliderData["personalLiability"] = 300000;
         this.SliderData["medical"] = 3000;
-        this.calculatePremium({ insuranceType: 'home' })
+        this.calculatePremium({ insuranceType: 'home', isOptimizing: true })
 
         setTimeout(() => {
           this.showLoadingAnimation = false;
@@ -1116,8 +1118,7 @@ export class InsuranceTilesComponent implements OnInit {
           });
 
         }, 3500);
-        this.percentileScore = `<span style="font-size: medium;"><b>“90<sup>th</sup> Percentile”</b></span>
-                                <span style="font-size: 0.9vw;">Your score as compared to other customers with similar demographics.</span>`;
+
         this.showMask = false;
         break;
       }
@@ -1140,7 +1141,7 @@ export class InsuranceTilesComponent implements OnInit {
         this.SliderData["personalInjuryProtection"] = 5000;
         this.SliderData["uninsuredOrUnderinsuredMotorist"] = 250000;
         //this.SliderData["yearlymiles"] = 10000;
-        this.calculatePremium({ insuranceType: 'auto' })
+        this.calculatePremium({ insuranceType: 'auto', isOptimizing: false })
 
         setTimeout(() => {
           this.showLoadingAnimation = false;
@@ -1176,7 +1177,7 @@ export class InsuranceTilesComponent implements OnInit {
         //this.SliderData["retirementAge"] = 50;
         this.SliderData["annualIncome"] = 100000;
         this.SliderData["replacementIncome"] = 5;
-        this.calculatePremium({ insuranceType: 'life' })
+        this.calculatePremium({ insuranceType: 'life', isOptimizing: false })
 
         setTimeout(() => {
           this.showLoadingAnimation = false;
