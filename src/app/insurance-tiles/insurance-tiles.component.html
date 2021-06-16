@@ -48,8 +48,6 @@
                    {{getChangeFormattedText(stateData$?.cards[0].oldNewPremChangeInPercent,stateData$?.cards[0].oldNewPremChangeInValue)}}
                </span>
            </div>
-           <!-- <button class="btn btn-danger btn-sm"
-               style="color:white;position: absolute; bottom: 4%;left:40%;">Remove Coverage</button> -->
                <div style="padding-top: 31%;">
                    <button class="btn btn-info btnuploadpolicy lifeIndBtnCls" id="btnUP" (click)="uploadPolicy({id:'lifeInsuranceId', event: $event})" style="margin-top: 3%; margin-bottom: 2%">Upload Policy/ Take Picture
                    </button>
@@ -348,8 +346,8 @@
                     </span>
                 </div>
                 <div class="btnuploadpolicydiv">
-                    <!-- <button class="btn btn-danger btn-sm"
-                        style="color:white; position: absolute; bottom: 4%;left: 40%">Remove Coverage</button> -->
+                    <div style=" margin-left: 3%; margin-top: -20%;" [innerHtml]="percentileScore">
+                        </div>
                     <button class="btn btn-info btnuploadpolicy homeIndBtnCls" id="btnUP" (click)="uploadPolicy({id:'homeInsuranceId', event: $event})">Upload Policy/Take Picture
                     </button>
                 </div>
@@ -781,6 +779,59 @@
             </span>
                 </div>
 
+
+                <!-- Usage Based Insurance Pop Up-->
+                <div [hidden]="showUsageBasedInsurance" class="row st0" style="top: -12%!important;left: -44%!important;right: 12%;width: auto;height: auto;">
+                   
+                      
+                    <div class="col-md-12" style="text-align: left; margin-top: 4%;font-size: 1.31vw!important;font-family: 'poppins'; padding-left: 4%;">
+
+             <div class="row">
+                <ul>
+                    <li>
+                        It is your car insurance based on your driving 
+                    </li>
+                    <li>
+                        Vehicle usage (how much it was driven, speed, long journeys or short trips) 
+                    </li>
+                    <li>
+                        Hand braking, rapid acceleration, pattern of acceleration and braking, etc. 
+                    </li>
+                    <li>
+                        A Telematics device is installed in the vehicle that tracks above
+                    </li>
+                </ul>
+             </div>
+                       
+                <div class="row">
+                    <span  style="padding-left: 5%; width:70%">How many miles you would be driving in a year ?</span> 
+
+                    <mat-form-field style="width:26%;">
+                            <mat-select [(value)]="yearlymiles">
+                            <mat-option value="Select">Select</mat-option>
+                            <mat-option value="Less than 3000">Less than 3000</mat-option>
+                            <mat-option value="3000 - 7000">3000 - 7000</mat-option>
+                            <mat-option value="7000 - 10000">7000 - 10000</mat-option>
+                            <mat-option value="Greater than 10000">Greater than 10000</mat-option>
+                            </mat-select>
+                    </mat-form-field>
+                </div>
+                       
+                <div class="row">
+                <div class="col-md-12 d-flex " style="justify-content: center;padding: 10px;margin-top: 2%;">
+                     <button class="btn btn-info" (click)="calculatePremium({insuranceType:'auto'})">Calculate Premium</button>
+                 </div>
+                </div>
+
+            
+                
+                    </div>
+                 
+                </div>
+
+
+
+
                 <!-- Upload Policy Dialog change end-->
                 <div style="position:absolute; margin-top: 1%;margin-left: 100%;">
                 <button *ngIf="isDataAvailable" class="ml-auto" (click)="closeCard({id:'carInsuranceId', event: $event, change: stateData$?.cards[1].oldNewPremChangeInPercent})" style="border:none;background-color: white;color: blue;">
@@ -819,11 +870,41 @@
                     <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'Uninsured/UnderinsuredMotorist',type:'auto'})" min="0"
                         max="300000" value="0" step="60000" value="{{sliderAutoVariableValues.uninsuredOrUnderinsuredMotorist}}" thumbLabel tickInterval="1"></mat-slider>
                 </div>
-                <div class="row">
-                    <span class="col-4 text-left">Yearly Miles</span>
-                    <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'NumberOfMilesDrivenPerPear',type:'auto'})" min="10000"
-                        max="25000" value="10000" step="5000" value="{{sliderAutoVariableValues.yearlymiles}}" thumbLabel tickInterval="1"></mat-slider>
-                </div>
+                <!-- <div class="row">
+                    <div style="padding-top: 1%;" class="col-4 text-left">
+                    <span>Miles driven in a year</span> 
+                    <button style="margin-left: 7%;" data-toggle="tooltip" data-html="true" [max-width]="440" theme="light" class="unstyled-button text-sm" 
+                    mat-button tooltip="
+                        <ul>
+                            <li>
+                                It is your car insurance based on your driving 
+                            </li>
+                            <li>
+                                Vehicle usage (how much it was driven, speed, long journeys or short trips) 
+                            </li>
+                            <li>
+                                Hand braking, rapid acceleration, pattern of acceleration and braking, etc. 
+                            </li>
+                            <li>
+                                A Telematics device is installed in the vehicle that tracks above
+                            </li>
+                        </ul>" 
+                   
+                    placement="right">
+                    ?</button>
+                    </div>
+                    <mat-form-field class="col-8 max1">
+                    <mat-select [(value)]="yearlymiles">
+                        <mat-option value="Less than 3000">Less than 3000</mat-option>
+                        <mat-option value="3000 - 7000">3000 - 7000</mat-option>
+                        <mat-option value="7000 - 10000">7000 - 10000</mat-option>
+                        <mat-option value="Greater than 10000">Greater than 10000</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+                   
+                    <!-- <mat-slider class="col-8 max1" (input)="onInputChange({event:$event,id:'NumberOfMilesDrivenPerPear',type:'auto'})" min="10000"
+                        max="25000" value="10000" step="5000" value="{{sliderAutoVariableValues.yearlymiles}}" thumbLabel tickInterval="1"></mat-slider> 
+                </div> -->
 
 
                 <div class="row autocardhiddenfields" style="padding-bottom: 7%;" [hidden]="autohiddenfields">
@@ -920,6 +1001,12 @@
                     
                     <table>
                         <tr>
+                           
+                            <td>
+                            <button class="d-flex btn btn-info ml-auto btncalculatepremium" (click)="usageBasedInsurancePopUp({id:'carInsuranceId', event: $event})">Usage Based Insurance     
+                            </button>
+                            </td>
+
                             <td [hidden]="autohiddenfields">
                                 <button (click)="handleOptimizeClick('auto')" class="d-flex btn btn-info ml-auto btnoptimize">Optimize Policy
                                 </button>                     

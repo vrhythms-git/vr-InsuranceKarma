@@ -26,7 +26,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { HeaderCardsComponent } from './header-cards/header-cards.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 
 @NgModule({
@@ -56,7 +56,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSliderModule,
     HttpClientModule,
     MatDividerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    TooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

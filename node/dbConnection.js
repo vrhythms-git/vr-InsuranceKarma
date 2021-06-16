@@ -168,8 +168,40 @@ async function calculatePremium(inputJson) {
               }
 
               let resJson = {};
-              resJson.newPremium = parseInt(premiumCalculation.calculateAutoPremium(inputJson, result));
 
+              // console.log("inputJson :: " + JSON.stringify(inputJson));
+
+              let newPremium = parseInt(premiumCalculation.calculateAutoPremium(inputJson, result));
+              try {
+                let yearlyMiles = inputJson.data.insuranceData.yearlyMiles;
+
+                switch (yearlyMiles) {
+                  case "Less than 3000": {
+                    console.log(`Subtracting  400 from total premium, New premium is ${newPremium - 400}`);
+                    newPremium = newPremium - 400;
+                    break;
+                  }
+                  case "3000 - 7000": {
+                    console.log(`Subtracting  300 from total premium, New premium is ${newPremium - 300}`);
+                    newPremium = newPremium - 300;
+                    break;
+                  }
+                  case "7000 - 10000": {
+                    console.log(`Subtracting  200 from total premium, New premium is ${newPremium - 200}`);
+                    newPremium = newPremium - 200;
+                    break;
+                  }
+                  case "Greater than 10000": {
+                    console.log(`Subtracting  100 from total premium, New premium is ${newPremium - 100}`);
+                    newPremium = newPremium - 100;
+                    break;
+                  }
+                }
+              } catch (error) {
+                console.log("error : " + error)
+              }
+
+              resJson.newPremium = newPremium;
               resJson.insight = "";
               resJson.risk = "";
 

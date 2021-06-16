@@ -87,6 +87,7 @@ export class InsuranceTilesComponent implements OnInit {
 
   isAPICallComplete: boolean = false;
   showLoadingAnimation: boolean = false;
+  percentileScore: string = "";
 
   // formatter = new Intl.NumberFormat('en-US', {
   //   style: 'currency',
@@ -109,6 +110,8 @@ export class InsuranceTilesComponent implements OnInit {
   MakeAndModel = 'Hyundai 2020';
   typeOfPolicyAuto = 'Policy 1';
   additionalDriver = 'Driver 1';
+  yearlymiles: any = "Select";
+  showUsageBasedInsurance: boolean = true;
 
   sliderVariableValues = {
 
@@ -187,7 +190,7 @@ export class InsuranceTilesComponent implements OnInit {
   showMask: boolean = false;
   showUploadPolicyPopup: boolean = true;
 
-  
+
   keyPress(event: any) {
     this.isStateDataSet = false;
     const pattern = /[0-9]/;
@@ -195,44 +198,44 @@ export class InsuranceTilesComponent implements OnInit {
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 5 && !pattern.test(inputChar)) {
       event.preventDefault();
-      if (event.keyCode == 13){
+      if (event.keyCode == 13) {
         this.change(event);
       }
-    } 
+    }
   }
-tempFlag5 = true; 
-  change(event:any){
+  tempFlag5 = true;
+  change(event: any) {
     this.isStateDataSet = false;
     let currArea = parseInt(($('#areaInSquareFoot').val()))
     // console.log('User input area sq ft is:' + currArea);
-    if(currArea >  0){
-    
-          this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
-            if (this.isStateDataSet == false) {
-              this.isStateDataSet = true;
-              let index = data.cards.findIndex(obj => obj.key == 'home');
-              let calculatedDwelling = currArea * data.cards[index].sqft_price;
-              // console.log('Calculated dwelling is : ' + calculatedDwelling);
-              if( calculatedDwelling > this.sliderVariableValues.dwelling_max){
-                    this.sliderVariableValues.dwelling = this.sliderVariableValues.dwelling_max
-                    this.SliderData["dwelling"] = this.sliderVariableValues.dwelling_max;
-                  }
-              else if(calculatedDwelling < this.sliderVariableValues.dwelling_min){
-                    this.sliderVariableValues.dwelling = this.sliderVariableValues.dwelling_min
-                    this.SliderData["dwelling"] = this.sliderVariableValues.dwelling_min;
-                  }
-              else   { 
-                    this.sliderVariableValues.dwelling = calculatedDwelling;
-                    this.SliderData["dwelling"] = calculatedDwelling;
-                  }   
-                  this.tempFlag5 = false
-                  // let newState = JSON.parse(JSON.stringify(data))
-                  // newState.hasStateChanged = 'false';
-                  // this.store.dispatch(actions.updateUserDataAct({ data: newState }));
-                //  this.tempFlag4 == true;  
-            }
-          });
-        
+    if (currArea > 0) {
+
+      this.store.pipe(select(CounterSelector.selectUserData)).subscribe((data) => {
+        if (this.isStateDataSet == false) {
+          this.isStateDataSet = true;
+          let index = data.cards.findIndex(obj => obj.key == 'home');
+          let calculatedDwelling = currArea * data.cards[index].sqft_price;
+          // console.log('Calculated dwelling is : ' + calculatedDwelling);
+          if (calculatedDwelling > this.sliderVariableValues.dwelling_max) {
+            this.sliderVariableValues.dwelling = this.sliderVariableValues.dwelling_max
+            this.SliderData["dwelling"] = this.sliderVariableValues.dwelling_max;
+          }
+          else if (calculatedDwelling < this.sliderVariableValues.dwelling_min) {
+            this.sliderVariableValues.dwelling = this.sliderVariableValues.dwelling_min
+            this.SliderData["dwelling"] = this.sliderVariableValues.dwelling_min;
+          }
+          else {
+            this.sliderVariableValues.dwelling = calculatedDwelling;
+            this.SliderData["dwelling"] = calculatedDwelling;
+          }
+          this.tempFlag5 = false
+          // let newState = JSON.parse(JSON.stringify(data))
+          // newState.hasStateChanged = 'false';
+          // this.store.dispatch(actions.updateUserDataAct({ data: newState }));
+          //  this.tempFlag4 == true;  
+        }
+      });
+
 
     }
   }
@@ -292,6 +295,7 @@ tempFlag5 = true;
   isFlagSet = false;
   closePopupEvent({ type, event }) {
     this.isFlagSet = false;
+    this.percentileScore = "";
     // setTimeout(()=>{
     //$("#mask").hide()
     // },100)
@@ -357,36 +361,36 @@ tempFlag5 = true;
         }
 
         if (this.tempFlag4 == false) {
-          if(this.tempFlag5 == true){
+          if (this.tempFlag5 == true) {
             $('#areaInSquareFoot').val('');
-          let index = data.cards.findIndex(obj => obj.key == 'home')
-          let dwelling_default = data.default_home_dwelling
-          this.sliderVariableValues.dwelling_min = dwelling_default,
-            this.sliderVariableValues.dwelling = dwelling_default,
-            this.sliderVariableValues.dwelling_max = dwelling_default + 500000,
+            let index = data.cards.findIndex(obj => obj.key == 'home')
+            let dwelling_default = data.default_home_dwelling
+            this.sliderVariableValues.dwelling_min = dwelling_default,
+              this.sliderVariableValues.dwelling = dwelling_default,
+              this.sliderVariableValues.dwelling_max = dwelling_default + 500000,
 
-            this.sliderVariableValues.otherStructure_min = (parseInt(dwelling_default) * 0.10)
-          this.sliderVariableValues.otherStructure = (parseInt(dwelling_default) * 0.10)
-          this.sliderVariableValues.otherStructure_max = (parseInt(dwelling_default) * 0.10) + 50000
+              this.sliderVariableValues.otherStructure_min = (parseInt(dwelling_default) * 0.10)
+            this.sliderVariableValues.otherStructure = (parseInt(dwelling_default) * 0.10)
+            this.sliderVariableValues.otherStructure_max = (parseInt(dwelling_default) * 0.10) + 50000
 
-          this.sliderVariableValues.personalProperty_min = (parseInt(dwelling_default) * 0.70)
-          this.sliderVariableValues.personalProperty = (parseInt(dwelling_default) * 0.70)
-          this.sliderVariableValues.personalProperty_max = (parseInt(dwelling_default) * 0.70) + 100000
+            this.sliderVariableValues.personalProperty_min = (parseInt(dwelling_default) * 0.70)
+            this.sliderVariableValues.personalProperty = (parseInt(dwelling_default) * 0.70)
+            this.sliderVariableValues.personalProperty_max = (parseInt(dwelling_default) * 0.70) + 100000
 
-          this.sliderVariableValues.lossOfUse_min = (parseInt(dwelling_default) * 0.20)
-          this.sliderVariableValues.lossOfUse = (parseInt(dwelling_default) * 0.20)
-          this.sliderVariableValues.lossOfUse_max = (parseInt(dwelling_default) * 0.20) + 50000
+            this.sliderVariableValues.lossOfUse_min = (parseInt(dwelling_default) * 0.20)
+            this.sliderVariableValues.lossOfUse = (parseInt(dwelling_default) * 0.20)
+            this.sliderVariableValues.lossOfUse_max = (parseInt(dwelling_default) * 0.20) + 50000
 
-          this.sliderVariableValues.personalLiability_min = dwelling_default
-          this.sliderVariableValues.personalLiability = dwelling_default
-          this.sliderVariableValues.personalLiability_max = dwelling_default + 500000
+            this.sliderVariableValues.personalLiability_min = dwelling_default
+            this.sliderVariableValues.personalLiability = dwelling_default
+            this.sliderVariableValues.personalLiability_max = dwelling_default + 500000
 
-          this.sliderVariableValues.medical_min = 2000
-          this.sliderVariableValues.medical = 2000
-          this.sliderVariableValues.medical_max = 7000
-          //  this.tempFlag4 = true; 
-          //console.log("Calculated data is : " + JSON.stringify(this.sliderVariableValues));
-         }
+            this.sliderVariableValues.medical_min = 2000
+            this.sliderVariableValues.medical = 2000
+            this.sliderVariableValues.medical_max = 7000
+            //  this.tempFlag4 = true; 
+            //console.log("Calculated data is : " + JSON.stringify(this.sliderVariableValues));
+          }
         }
 
         if (data.hasStateChanged == "true") {
@@ -525,7 +529,7 @@ tempFlag5 = true;
 
     if (event.change != undefined && event.change != 0)
       this.snackBar.openFromComponent(customSnackBar, {
-        duration: 5000,
+        duration: 9999999,
         verticalPosition: 'top',
         horizontalPosition: 'center',
         panelClass: ['snackbarStyle']
@@ -692,6 +696,10 @@ tempFlag5 = true;
               }
             }
 
+            if (this.floodInsurance == true)
+              this.percentileScore = `<span style="font-size: medium;"><b>“75<sup>th</sup> Percentile”</b></span>
+                                      <span style="font-size: 0.9vw;">Your score as compared to other customers with similar demographics.</span>`;
+
             if (this.homehiddenfields == false) {
               payloadJSON.data.policyData =
               {
@@ -768,18 +776,23 @@ tempFlag5 = true;
 
             let homeIndex = data.cards.findIndex(obj => obj.key == 'home');
 
-
+            
+            this.SliderData.yearlyMiles = this.yearlymiles
             let payloadJSON = {
               data: {
                 'insuranceType': 'auto',
                 'premium': data.cards[index].defaultPremium,
                 'stateName': data.cards[homeIndex].state_name,
                 'insuranceData': this.SliderData,
-                'nosOfAutos': parseInt(data.cards[index].nosOfAutos + "")
+                'nosOfAutos': parseInt(data.cards[index].nosOfAutos + ""),
               }
             }
 
-            this.updateTotalPremiumInStore(payloadJSON, 'auto', data, bodilyInjuryLability)
+            this.updateTotalPremiumInStore(payloadJSON, 'auto', data, bodilyInjuryLability);
+            this.showMask = true;
+            this.showUsageBasedInsurance = true;
+           
+           
           }
 
         });
@@ -790,6 +803,11 @@ tempFlag5 = true;
     }
   }
 
+  usageBasedInsurancePopUp(event){
+    this.showUsageBasedInsurance = false;
+    $("#mask").fadeTo(100, 0.1);
+    this.showMask = false;
+  }
 
 
   reCalculateTotalPremium(stateJson) {
@@ -1038,8 +1056,8 @@ tempFlag5 = true;
 
         this.burglerAlarm = true;
         this.tempFlag4 = true;
-
-
+        this.percentileScore = `<span style="font-size: medium;"><b>“60<sup>th</sup> Percentile”</b></span>
+        <span style="font-size: 0.9vw;">Your score as compared to other customers with similar demographics.</span>`;
         break;
       }
       case 'auto': {
@@ -1098,6 +1116,8 @@ tempFlag5 = true;
           });
 
         }, 3500);
+        this.percentileScore = `<span style="font-size: medium;"><b>“90<sup>th</sup> Percentile”</b></span>
+                                <span style="font-size: 0.9vw;">Your score as compared to other customers with similar demographics.</span>`;
         this.showMask = false;
         break;
       }

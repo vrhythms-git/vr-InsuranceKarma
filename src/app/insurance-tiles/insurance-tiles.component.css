@@ -642,5 +642,20 @@ background-color: #0e5eb2!important;
   padding-bottom: 3%;
 }
 
+.unstyled-button {
+  border: double;
+  border-radius: 12px;
+  border-color: #0e5eb2!important;
+  border-width: 2px;
+  background: none;
+  color:#0e5eb2!important;
+  padding: 0px 3px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+}
 
+li{
+  margin-bottom: 10px;
+}
 
